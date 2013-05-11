@@ -1,0 +1,79 @@
+<?php
+// Harris Christiansen
+// Created 10-19-12
+// Updated 11-04-12
+
+function displayCPNavItem($navItem, $navLink) {
+	viewHTML('<a class="controlPanelNavItem" href="'.$navLink.'">'.$navItem.'</a>');
+}
+
+function changePasswordForm($siteURL) {
+	viewHTML('<form action="'.$siteURL.'controlPanel/changePassword/" method="POST">');
+	viewHTML('Current Password: <input type="password" name="oldPass" value=""><br>');
+	viewHTML('New Password: <input type="password" name="newPass" value=""><br>');
+	viewHTML('Confirm New Password: <input type="password" name="newPassCon" value=""><br>');
+	viewHTML('<input type="submit" name="cpFormSubmitted" value="Change Password">');
+	viewHTML('</form>');
+}
+
+function editProfileForm($siteURL) {
+	viewHTML('<form action="'.$siteURL.'controlPanel/editProfile/" method="POST">');
+	viewHTML('New Email: <input type="text" name="newEmail" value=""><br>');
+	viewHTML('<input type="submit" name="cpFormSubmitted" value="Change Profile">');
+	viewHTML('</form>');
+}
+
+function changePreferencesForm($siteURL) {
+	viewHTML('Edit Preferences Form');
+}
+
+function editSiteSettingsForm($siteURL,$siteName,$siteMotd,$siteSlogan,$siteDisabled,$reqLogin,$numBlogEntriesPerPage) {
+	viewHTML('<form action="'.$siteURL.'controlPanel/editSiteSettings/" method="POST">');
+	viewHTML('Site Name: <input type="text" name="siteName" value="'.$siteName.'"><br>');
+	viewHTML('Site Banner: <input type="text" name="siteMotd" value="'.$siteMotd.'"><br>');
+	viewHTML('Site Slogan: <input type="text" name="siteSlogan" value="'.$siteSlogan.'"><br>');
+	viewHTML('Site Disabled (Enter Message To Disable): <input type="text" name="siteDisabled" value="'.$siteDisabled.'"><br>');
+	viewHTML('Require Login: <input type="checkbox" name="reqLogin" value="true" '.$reqLogin.'><br>');
+	viewHTML('<br>');
+	viewHTML('Number Blog Entries Per Page: <input type="text" name="numBlogEntriesPerPage" value="'.$numBlogEntriesPerPage.'"><br>');
+	viewHTML('<input type="submit" name="cpFormSubmitted" value="Change Site Settings">');
+	viewHTML('</form>');
+}
+
+function editRanksForm($siteURL,$linkID,$rankName,$editSiteSettingsChecked,$editMemberRankChecked) {
+	viewHTML('<div id="controlPanelNav2">');
+	viewHTML('Ranks:<br>');
+	displayRankNavItems();
+	viewHTML('</div>');
+	viewHTML('<div id="controlPanelContent2">');
+	
+	// If Editing A Specific Rank
+	if($linkID!="") {
+		viewHTML('<form action="'.$siteURL.'controlPanel/editRanks/'.$linkID.'/" method="POST">');
+		viewHTML('Edit Rank:<br>');
+		viewHTML('Rank Name: <input type="text" name="rankName" value="'.$rankName.'"><br>');
+		viewHTML('Edit Site Settings: <input type="checkbox" name="editSiteSettings" value="true" '.$editSiteSettingsChecked.'><br>');
+		viewHTML('Edit Members Rank: <input type="checkbox" name="editMemberRank" value="true" '.$editMemberRankChecked.'><br>');
+		viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Rank">');
+		viewHTML('</form>');
+	} else {
+		addRankForm($siteURL);
+	}
+	
+	viewHTML('</div>');
+}
+
+function displayRankNavItem($navItem, $navLink) {
+	viewHTML('<a class="controlPanelNav2Item" href="'.$navLink.'">'.$navItem.'</a>');
+}
+
+function addRankForm($siteURL) {
+	viewHTML('<form action="'.$siteURL.'controlPanel/addRank/" method="POST">');
+	viewHTML('Add Rank:<br>');
+	viewHTML('Rank Name: <input type="text" name="rankName" value=""><br>');
+	viewHTML('Edit Site Settings: <input type="checkbox" name="editSiteSettings" value="true"><br>');
+	viewHTML('Edit Members Rank: <input type="checkbox" name="editMemberRank" value="true"><br>');
+	viewHTML('<input type="submit" name="cpFormSubmitted" value="Add Rank">');
+	viewHTML('</form>');
+}
+?>

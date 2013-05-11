@@ -1,0 +1,20 @@
+Forumz Version 0.5.2
+Harris Christiansen
+October 31, 2012
+
+Completed:
+-Blog System
+-Blog Home Page
+-Make it so ranks have an order
+-Blog Entires Per Page Option in Settings
+-Fixed Site Disabled Requirements
+-Blog View Post Page
+
+
+To-Do:
+-Alternate Colors of Blog Entires On Home Page
+-Blog Comment System
+-Client Side Blog System
+-Make it so you can not change the rank of yourself, those in your same rank, or those in higher ranks
+-Make it so you can not promote someone any higher than the rank below your rank
+-Pull page url, themeFile, and viewConditions from mysql db

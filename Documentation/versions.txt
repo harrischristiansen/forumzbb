@@ -1,0 +1,62 @@
+Forumz Version Release Notes
+Harris Christiansen
+Current Stable Version: 0.5.0
+Current Beta Version: 0.5.1a
+Current Development Version: 0.5.1
+
+Version 0.5.0: -r37
+-Simple Reference Functions getDate(), getTime(), getUsername(), isSiteDisabled(), getDisabledMessage(), getSiteName(), getSiteMotd(), getSiteSlogan()
+-Login System
+-Registration System
+-Website Settings Database
+-Email Confirmation For Account Creation
+-Account System
+-Account Privileges/Rankings
+-Header Bar
+-Footer Bar
+-Home Page
+-Registration Page (viewRegistration.php -> viewHome.php)
+-Login Page (viewHome.php)
+-Logout Functionality
+-Members List Page (viewMembersList.php)
+-Page Load Statistics (Time and Number Of Queries)
+-Breadcrumbs Viewer (viewFooter.php)
+-Notices Viewer (viewHeader.php)
+
+Version 0.5.1: -r62
+-Control Panel
+-Change Password Settings
+-Login Using Email Address - If Only One User With Existing Email Address
+-Change Profile Settings
+-Edit Site Settings
+-Display Site Motd
+-Site Disabled Msg
+-Restrict Access To Pages Depending On Login Status
+-Control Panel Restriction By Rank
+-Create Ranks
+-Display Rank Name On Members List
+-Edit Ranks Permissions
+-Control Members Ranks (check if user can editMemberRank)
+
+Version 0.5.2:
+-Blog System
+-Blog Home Page
+-Blog View Post Page
+-Blog Comment System
+-Client Side Blog System
+
+Version 0.5.3:
+-Blog Admin Control Panel
+-BB Code Fancy Posts
+-Admin Side Blog System
+
+Version 0.5.4:
+-Security Enhancements
+-Code Cleanup
+
+Future:
+-Member to Member PM/Chat System
+-Forum View System
+-Forum Posting System
+-Members Personal Wall for Posting
+-Members Friends+Privacy System
