@@ -6,8 +6,12 @@
 // Report All Errors
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // Adding comment to line 8 between error_reporting init and ini_set
+<<<<<<< HEAD
 // making this a giant comment - mbp
 /// yep a giant comment - mbp
+=======
+// so where does this go -desk
+>>>>>>> tcs2-desk
 ini_set('display_errors','On');
 
 // Start page load timer
@@ -30,6 +34,8 @@ $mysqliUser = "forumz";
 $mysqliPass = "forumzbb";
 $mysqliDatabase = "forumz";
 //adding comment to line 29 between $mysqliDatabase and $con
+// and does this comment stay -desk
+// and this one -desk
 global $con;
 $con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase) or die ("Site Not Setup");
 // Requires
