@@ -11,6 +11,7 @@ ini_set('display_errors','On');
 // Start page load timer
 global $starttime;
 $m_time = explode(" ",microtime());
+/// Adding comment to line 13 between $m_time dec and m_time defination
 $m_time = $m_time[0] + $m_time[1];
 $starttime = $m_time;
 // Reset queries counter
