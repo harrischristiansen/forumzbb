@@ -1,6 +1,6 @@
 <?php
 // Harris Christiansen
-// Updated 5-11-12
+// Updated 5-12-12
 
 
 // Report All Errors
@@ -18,13 +18,14 @@ $sqlQueries=0;
 // Set timezone
 date_default_timezone_set('America/Denver');
 // Load Session data
-session_name("forumzSingle");
+session_name("forumzDev");
 session_start();
-// mysqli Connection Data 
-$mysqliServer = "localhost";
-$mysqliUser = "forumz";
+echo "displaying website";
+// mysqli Connection Data
+$mysqliServer = $_ENV['DATABASE_SERVER'];
+$mysqliUser = "db166640_forumz";
 $mysqliPass = "forumzbb";
-$mysqliDatabase = "forumz";
+$mysqliDatabase = "db166640_forumzDev";
 global $con;
 $con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase) or die ("Site Not Setup");
 // Requires
@@ -49,7 +50,7 @@ if($pageName=="") $pageName = "home";
 if($pageID=="") $pageID = "none";
 if($pageID2=="") $pageID2 = "none";
 $pagePost = $_POST;
-// Display Website // Starts Everything Up
+// Primary Display Website Call
 displayWebsite();
 // Close Mysql Connection/Save User Info
 mysqli_close($con);
