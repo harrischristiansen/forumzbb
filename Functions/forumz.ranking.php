@@ -19,11 +19,18 @@ function setUserPrivileges() {
 	$sqlQueries++;
 }
 
-function setUserRank($userID, $userRank) {
+function setUserRank($userID, $tarRank) {
+	global $userData;
+	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])||getOrderOfRank($tarRank)==0) {
+		addFailureNotice("Permission Denied");
+	} else {
+	
 	global $con, $sqlQueries;
-	$sql = "UPDATE accounts SET rankID='$userRank' WHERE actID='$userID'";
+	$sql = "UPDATE accounts SET rankID='$tarRank' WHERE actID='$userID'";
 	$result = mysqli_query($con,$sql) or die ("Query failed: setUserRank");
 	$sqlQueries++;
+	addSuccessNotice("Changed ".getMemberName($pageID2)."'s Rank");
+	}
 }
 
 function getChangeRankList($actID) {
@@ -50,5 +57,14 @@ function getChangeRankListOptions($actID) {
 		if($rank['rankID']==$userRank) { $optSelected="selected"; } else { $optSelected=""; }
 		displayChangeRankListOption($rank['rankName'], $rank['rankID'], $optSelected);
 	}
+}
+
+function getOrderOfRank($rankID) {
+	global $con, $sqlQueries;
+	$sql = "SELECT * FROM ranks WHERE rankID='$rankID'";
+	$result = mysqli_query($con, $sql) or die ("Query failed: getOrderOfRank");
+	$sqlQueries++;
+	$resultArray=mysqli_fetch_array($result);
+	return $resultArray['rankOrder'];
 }
 ?>
