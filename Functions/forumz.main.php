@@ -8,7 +8,7 @@ require_once('Functions/forumz.references.php');
 require_once('Functions/forumz.account.php');
 require_once('Functions/forumz.members.php');
 require_once('Functions/forumz.ranking.php');
-require_once('Functions/forumz.viewBlog.php');
+require_once('Functions/forumz.blog.php');
 require_once('Functions/forumz.settings.php');
 require_once('Functions/forumz.breadcrumbs.php');
 require_once('Functions/forumz.siteNotices.php');
