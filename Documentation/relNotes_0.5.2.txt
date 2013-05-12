@@ -9,10 +9,10 @@ Completed:
 -Blog Entires Per Page Option in Settings
 -Fixed Site Disabled Requirements
 -Blog View Post Page
-
+-View Blog Comments
 
 To-Do:
--Blog Comment System
+-Post Comments To Blog
 -Client Side Blog System
 -Make it so you can not change the rank of those in your same rank, or those in higher ranks
 -Make it so you can not promote someone any higher than the rank below your rank
