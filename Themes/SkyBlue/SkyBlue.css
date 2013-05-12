@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 /* Harris Christiansen */
 /* Created 9-15-12 */
-/* Updated 11-09-12 */
+/* Updated 5-12-12 */
 
 
 html, body {
@@ -191,6 +191,7 @@ hr {
 	color: #FFFFFF;
 	overflow: hidden;
 	text-align: left;
+	margin-bottom: 10px;
 }
 
 .TableHeadColumn {
@@ -207,11 +208,11 @@ hr {
 	margin-top: 2px;
 }
 
-.FullWidthTableRow:nth-child(odd) .TableRowColumn, .FullWidthPostRow:nth-child(odd) {
+.FullWidthTableRow:nth-child(odd) .TableRowColumn, .FullWidthPostRow:nth-child(4n+2) {
 	background-color: #0F8BBF;
 }
 
-.FullWidthTableRow:nth-child(even) .TableRowColumn .FullWidthPostRow:nth-child(even) {
+.FullWidthTableRow:nth-child(even) .TableRowColumn, .FullWidthPostRow:nth-child(4n+0) {
 	background-color: #0D78A5;
 }
 
