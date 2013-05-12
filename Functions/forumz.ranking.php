@@ -53,7 +53,7 @@ function getChangeRankListOptions($actID) {
 	$userRank=$resultArray['rankID'];
 	
 	// Display Rank List With Current Rank Selected
-	$sql = "SELECT * FROM ranks";
+	$sql = "SELECT * FROM ranks ORDER BY rankOrder";
 	$result = mysqli_query($con, $sql) or die ("Query failed: getChangeRankListOptions-Ranks");
 	$sqlQueries++;
 	while($rank = mysqli_fetch_array($result)) {
