@@ -4,7 +4,7 @@ Current Stable Version: 0.5.0
 Current Beta Version: 0.5.1a
 Current Development Version: 0.5.1
 
-Version 0.5.0: -r37
+Version 0.5.0:
 -Simple Reference Functions getDate(), getTime(), getUsername(), isSiteDisabled(), getDisabledMessage(), getSiteName(), getSiteMotd(), getSiteSlogan()
 -Login System
 -Registration System
@@ -23,7 +23,7 @@ Version 0.5.0: -r37
 -Breadcrumbs Viewer (viewFooter.php)
 -Notices Viewer (viewHeader.php)
 
-Version 0.5.1: -r62
+Version 0.5.1:
 -Control Panel
 -Change Password Settings
 -Login Using Email Address - If Only One User With Existing Email Address
