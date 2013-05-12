@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 10-27-12
+// Updated 5-12-13
 
 // Account Creation and Login Systems
 // Callable Functions: loginUser(), logoutUser(), registerUser(), sendConfirmationEmail($user, $email)
@@ -179,5 +179,14 @@ function setAccountAsBanned($user) {
 	$sql = "UPDATE accounts SET actStatus='-1' WHERE username='$user'";
 	$result = mysqli_query($con,$sql) or die ("Query failed: setAccountAsBanned");
 	$sqlQueries++;
+}
+
+function getUserRank($actID) {
+	global $con, $sqlQueries;
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = mysqli_query($con,$sql) or die ("Query failed: getUserRank");
+	$sqlQueries++;
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['rankID'];
 }
 ?>
