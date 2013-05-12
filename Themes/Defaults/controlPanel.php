@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-19-12
-// Updated 11-04-12
+// Updated 5-12-13
 
 function displayCPNavItem($navItem, $navLink) {
 	viewHTML('<a class="controlPanelNavItem" href="'.$navLink.'">'.$navItem.'</a>');
@@ -16,9 +16,9 @@ function changePasswordForm($siteURL) {
 	viewHTML('</form>');
 }
 
-function editProfileForm($siteURL) {
+function editProfileForm($currentEmail,$siteURL) {
 	viewHTML('<form action="'.$siteURL.'controlPanel/editProfile/" method="POST">');
-	viewHTML('New Email: <input type="text" name="newEmail" value=""><br>');
+	viewHTML('Email: <input type="text" name="newEmail" value="'.$currentEmail.'"><br>');
 	viewHTML('<input type="submit" name="cpFormSubmitted" value="Change Profile">');
 	viewHTML('</form>');
 }
