@@ -10,10 +10,11 @@ Completed:
 -Fixed Site Disabled Requirements
 -Blog View Post Page
 -View Blog Comments
+-Prohibit promoting into ranks of your same status or above
+-Prohibit demoting those in your rank or above
 
 To-Do:
 -Post Comments To Blog
 -Post Blog To Site
--Make it so you can not change the rank of those in your same rank, or those in higher ranks
 -Make it so you can not promote someone any higher than the rank below your rank
 -Pull page url, themeFile, and viewConditions from mysql db
