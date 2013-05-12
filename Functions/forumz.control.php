@@ -17,11 +17,10 @@ function displayCPNav() {
 function displayCPContent() {
 	global $pageID, $siteSettings, $pagePost, $userData;
 	$siteURL=$siteSettings['siteURLShort'];
-	$pageNotFound=true;
 	if($pageID=="changePassword") { changePasswordForm($siteURL); $pageNotFound=false; }
-	if($pageID=="editProfile") { editProfileForm($userData['email'],$siteURL); $pageNotFound=false; }
-	if($pageID=="changePreferences") { changePreferencesForm($siteURL); $pageNotFound=false; }
-	if($userData['permissions']['editSiteSettings']=="true") {
+	elseif($pageID=="editProfile") { editProfileForm($userData['email'],$siteURL); $pageNotFound=false; }
+	elseif($pageID=="changePreferences") { changePreferencesForm($siteURL); $pageNotFound=false; }
+	elseif($userData['permissions']['editSiteSettings']=="true") {
 		if($pageID=="editSiteSettings") {
 			global $siteSettings;
 			$pageNotFound=false;
@@ -32,7 +31,7 @@ function displayCPContent() {
 		if($pageID=="addRank") { addRankForm($siteURL); $pageNotFound=false; }
 		if($pageID=="editRanks") { editRanksControlPanel(); $pageNotFound=false; }
 	}
-	if($pageNotFound) { viewHTML('Please Select An Item From The Menu On The Left.'); }
+	else { viewHTML('Please Select An Item From The Menu On The Left.'); }
 }
 
 function updateAccountPassword() {
@@ -49,7 +48,7 @@ function updateAccountPassword() {
 		addFailureNotice("Invalid Password: Old Password Did Not Match");
 	}
 	// Check To Make Sure New Passwords match
-	else if($newPass!=$newPassCon) {
+	elseif($newPass!=$newPassCon) {
 		addFailureNotice("Error: New Passwords Did Not Match");
 	}
 	// Change Password
