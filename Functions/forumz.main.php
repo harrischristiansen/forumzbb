@@ -85,7 +85,6 @@ function displayWebsite() {
 			//If Changing Users Rank
 			if($pageID=="changeUserRank"&&$userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true") {
 				setUserRank($pageID2, $pagePost['newRank']);
-				addSuccessNotice("Changed ".getMemberName($pageID2)."'s Rank");
 			}
 			display('viewMembersList');
 			break;
@@ -102,7 +101,7 @@ function displayWebsite() {
 						if($pageID=="addRank") { addSiteRank(); $pageNotFound=false; }
 						if($pageID=="editRanks") { updateRank(); $pageNotFound=false; }
 					}
-					if($pageNotFound) { addFailureNotice('Error: From Submitted To Non Existant Page'); }
+					if($pageNotFound) { addFailureNotice('Error: Form Submitted To Non Existant Page'); }
 				}
 				display('viewControlPanel');
 			} else {
