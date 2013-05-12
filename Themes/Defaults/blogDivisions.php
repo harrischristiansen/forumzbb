@@ -41,4 +41,19 @@ function displayBlogEntry($authorName,$postDate,$postTime,$entryTitle,$entry) {
 	viewHTML('</div>');
 	viewHTML("<br><br>");
 }
+
+function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
+	viewHTML('<div class="FullWidthPostHead">');
+		viewHTML('<div class="floatLeft">');
+			viewHTML("Comment By: ".$userName);
+		viewHTML('</div>');
+		viewHTML('<div class="floatRight">');
+			viewHTML("Reply Posted: ".$commentDate." at ".$commentTime);
+		viewHTML('</div>');
+	viewHTML('</div>');
+	viewHTML('<div class="FullWidthPostRow">');
+		viewHTML($comment);
+	viewHTML('</div>');
+	viewHTML("<br><br>");
+}
 ?>
