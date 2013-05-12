@@ -21,7 +21,10 @@ function setUserPrivileges() {
 
 function setUserRank($userID, $tarRank) {
 	global $userData;
-	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])||getOrderOfRank($tarRank)==0) {
+	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])||getOrderOfRank($tarRank)==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
+		addFailureNotice("Permission Denied");
+	}
+	else if(getOrderOfRank(getUserRank($userID))>=getOrderOfRank($userData['rankID'])) { // Attempting to demote someone of your rank or above
 		addFailureNotice("Permission Denied");
 	} else {
 	
