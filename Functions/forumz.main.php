@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 11-09-12
+// Updated 5-12-12
 
 // Requires
 require_once('Functions/forumz.references.php');
@@ -25,7 +25,7 @@ function displayWebsite() {
 	}
 	
 	addBreadcrumb(getSiteName(),"");
-	if($siteSettings['siteDisabled']&&(!($userData['permissions']['editSiteSettings']=="true")||!$userData['loggedIn'])) {
+	if($siteSettings['siteDisabled']&&($userData['permissions']['editSiteSettings']!="true")) {
 		addBreadcrumb("Site Disabled","");
 		if($pageName=="login") {
 			addBreadcrumb("Login","login/");
