@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-10-12
-// Updated 11-04-12
+// Updated 5-12-13
 
 function displayCPNav() {
 	global $siteSettings, $userData;
@@ -19,7 +19,7 @@ function displayCPContent() {
 	$siteURL=$siteSettings['siteURLShort'];
 	$pageNotFound=true;
 	if($pageID=="changePassword") { changePasswordForm($siteURL); $pageNotFound=false; }
-	if($pageID=="editProfile") { editProfileForm($siteURL); $pageNotFound=false; }
+	if($pageID=="editProfile") { editProfileForm($userData['email'],$siteURL); $pageNotFound=false; }
 	if($pageID=="changePreferences") { changePreferencesForm($siteURL); $pageNotFound=false; }
 	if($userData['permissions']['editSiteSettings']=="true") {
 		if($pageID=="editSiteSettings") {
