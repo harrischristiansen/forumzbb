@@ -22,7 +22,7 @@ function loginUser() {
 	elseif($loginStatus==0) {
 		global $emailActName;
 		if(isset($emailActName)) {
-			$userData['username']=$emailActName;
+			$userData['username']=$emailActName; // For users that use email to login
 		} else {
 			$userData['username'] = $user;
 		}
