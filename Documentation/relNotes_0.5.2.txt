@@ -16,5 +16,4 @@ Completed:
 To-Do:
 -Post Comments To Blog
 -Post Blog To Site
--Make it so you can not promote someone any higher than the rank below your rank
 -Pull page url, themeFile, and viewConditions from mysql db
