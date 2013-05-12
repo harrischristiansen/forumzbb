@@ -1,13 +1,15 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 11-07-12
+// Updated 5-12-12
 
 defaultsInclude('blogDivisions');
 
 display('viewHeader');
 
+viewHTML('<div id="HomePageBlogEntries">');
 viewBlogEntries();
+viewHTML('</div>');
 
 viewHTML('<div class="pageChangeBtns">');
 if(!isLastPage()) {
