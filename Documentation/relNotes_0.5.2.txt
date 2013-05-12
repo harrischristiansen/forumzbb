@@ -13,7 +13,7 @@ Completed:
 
 To-Do:
 -Post Comments To Blog
--Client Side Blog System
+-Post Blog To Site
 -Make it so you can not change the rank of those in your same rank, or those in higher ranks
 -Make it so you can not promote someone any higher than the rank below your rank
 -Pull page url, themeFile, and viewConditions from mysql db
