@@ -64,6 +64,7 @@ function checkLogin($user, $pass) {
 		$actStatus = $userInfo['actStatus'];
 		$userData['actID']=$userInfo['actID'];
 		$userData['rankID']=$userInfo['rankID'];
+		$userData['email']=$userInfo['email'];
 		return $actStatus;
 	} else { 
 		$sql = "SELECT * FROM accounts WHERE email='$user' AND password='$pass'";
@@ -76,6 +77,7 @@ function checkLogin($user, $pass) {
 			global $userData;
 			$userData['actID']=$userInfo['actID'];
 			$userData['rankID']=$userInfo['rankID'];
+			$userData['email']=$userInfo['email'];
 			global $emailActName;
 			$emailActName = $userInfo['username'];
 			return $actStatus;
