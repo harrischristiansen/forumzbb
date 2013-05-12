@@ -10,5 +10,11 @@ viewHTML('<div id="BlogPageBlogEntry">');
 viewBlogPageBlogEntry();
 viewHTML('</div>');
 
+viewHTML('<br><hr><h3>Comments</h3><br>');
+
+viewHTML('<div id="BlogPageComments">');
+viewBlogComments();
+viewHTML('</div>');
+
 display('viewFooter');
 ?>
