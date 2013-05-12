@@ -12,9 +12,8 @@ Completed:
 
 
 To-Do:
--Alternate Colors of Blog Entires On Home Page
 -Blog Comment System
 -Client Side Blog System
--Make it so you can not change the rank of yourself, those in your same rank, or those in higher ranks
+-Make it so you can not change the rank of those in your same rank, or those in higher ranks
 -Make it so you can not promote someone any higher than the rank below your rank
 -Pull page url, themeFile, and viewConditions from mysql db
