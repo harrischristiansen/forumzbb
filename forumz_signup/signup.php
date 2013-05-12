@@ -121,22 +121,22 @@
         }
         
         //Check If Username Is Available
-        else if($usersWithUsername!="0") {
+        elseif($usersWithUsername!="0") {
         	echo '<font size="5" style="color: red;">Username Is Unavailable</font><br>';
         }
         
         //Check If Domain Address Is Available
-        else if($domainsWithDomainName!="0") {
+        elseif($domainsWithDomainName!="0") {
         	echo '<font size="5" style="color: red;">Domain Is Unavailable</font><br>';
         }
         
         //Check If Password and Password Confirmation Match
-        else if($passwordInput!=$passwordConInput) {
+        elseif($passwordInput!=$passwordConInput) {
         	echo '<font size="5" style="color: red;">Passwords Do Not Match</font><br>';
         }
         
         //Check If Invitation Code Is Valid
-        else if($invCodesAvail!="1") {
+        elseif($invCodesAvail!="1") {
         	echo '<font size="5" style="color: red;">Invalid Invitation Code</font><br>';
         }
         
