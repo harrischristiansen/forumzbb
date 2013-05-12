@@ -89,6 +89,7 @@ function logoutUser() {
 	$userData['loggedIn'] = false;
 	$userData['actID']=-1;
 	$userData['rankID']=0;
+	$userData['email']="-";
 	$userData['username']="loggedOut";
 	addSuccessNotice("You are now logged out.");
 }
