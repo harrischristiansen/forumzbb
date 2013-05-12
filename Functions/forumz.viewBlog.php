@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 11-09-12
+// Updated 5-12-12
 
 // Blog Client Side View System
 
@@ -19,14 +19,6 @@ function getBlogEntries($startID, $endID) {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogs WHERE ID>='$startID' AND ID<'$endID' ORDER BY ID DESC";
 	$result = mysqli_query($con, $sql) or die ("Query failed: getBlogEntries");
-	$sqlQueries++;
-	return $result;
-}
-
-function getBlogEntry($blogID) {
-	global $con, $sqlQueries;
-	$sql = "SELECT * FROM blogs WHERE ID='$blogID'";
-	$result = mysqli_query($con, $sql) or die ("Query failed: getBlogEntry");
 	$sqlQueries++;
 	return $result;
 }
@@ -96,9 +88,9 @@ function getPreviousPageLink() {
 	return $siteSettings['siteURLShort']."home/".($pageID-1);
 }
 
-function viewBlogPage() {
+function viewBlogPageBlogEntry() {
 	global $pageID;
 	$blogEntry = getBlogEntry($pageID);
-	displayBlogEntry(getMemberName($entry['Author']),$entry['AuthorDate'],$entry['AuthorTime'],$entry['Title'],$entry['Post']);
+	displayBlogEntry(getMemberName($blogEntry['Author']),$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post']);
 }
 ?>
