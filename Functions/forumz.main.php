@@ -111,6 +111,7 @@ function displayWebsite() {
 			break;
 		case "devOutput":
 			writeSessionData();
+			display('viewBlank');
 			break;
 		default:
 			addBreadcrumb("Error",$pageName."/");
