@@ -14,7 +14,7 @@ viewHTML('<br><hr><h3>Comments</h3><br>');
 
 viewHTML('<div id="BlogPageComments">');
 viewBlogComments();
-displayAddCommentField();
+if(isLoggedIn()) { displayAddCommentField(); }
 viewHTML('</div>');
 
 display('viewFooter');
