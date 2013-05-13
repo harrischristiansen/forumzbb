@@ -50,6 +50,9 @@ function displayWebsite() {
 			}
 			break;
 		case "blog":
+			if($pageID2=="reply"&&$pagePost['commentSubmitted']=="Reply") {
+				addBlogComment();
+			}
 			if($siteSettings['reqLogin']&&!$userData['loggedIn']) {
 				addFailureNotice("You Must Login To View This Page");
 				display('viewBlank');

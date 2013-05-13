@@ -105,7 +105,7 @@ function getBlogComments($blogID) {
 }
 
 function viewBlogComments() {
-	global$pageID;
+	global $pageID;
 	$blogComments=getBlogComments($pageID);
 
 	while($comment = mysqli_fetch_array($blogComments)) {
@@ -113,7 +113,30 @@ function viewBlogComments() {
 	}
 }
 
-// Blog Comment Post System
+function numBlogComments() {
+	global $con, $sqlQueries;
+	$sql = "SELECT * FROM blogComments";
+	$result = mysqli_query($con, $sql) or die ("Query failed: numBlogComments");
+	$sqlQueries++;
+	return mysqli_num_rows($result);
+}
 
+// Blog Comment Post System
+function addBlogComment() {
+	global $con, $sqlQueries, $pageID, $userData, $pagePost;
+	if($userData['permissions']['postBlogComments']=="true") {
+		$commentID=numBlogComments();
+		$postClean=mysqli_real_escape_string($con, $pagePost['blogCommentText']);
+		$date=returnDateShort();
+		$time=returnTime();
+		$userID=$userData['actID'];
+		$sql = "INSERT INTO blogComments (idNum, blogID, posterID, date, time, comment) VALUES ('$commentID','$pageID','$userID','$date', '$time', '$postClean')";
+		$result = mysqli_query($con, $sql) or die ("Query failed: addBlogComment");
+		$sqlQueries++;
+		addSuccessNotice("Comment Added");
+	} else {
+		addFailureNotice("Permission Denied To Add Comment");
+	}
+}
 
 ?>

@@ -39,7 +39,6 @@ function displayBlogEntry($authorName,$postDate,$postTime,$entryTitle,$entry) {
 		viewHTML('<hr>');
 		viewHTML($entry);
 	viewHTML('</div>');
-	viewHTML("<br><br>");
 }
 
 function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
@@ -48,12 +47,26 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
 			viewHTML("Comment By: ".$userName);
 		viewHTML('</div>');
 		viewHTML('<div class="floatRight">');
-			viewHTML("Reply Posted: ".$commentDate." at ".$commentTime);
+			viewHTML("Comment Posted: ".$commentDate." at ".$commentTime);
 		viewHTML('</div>');
 	viewHTML('</div>');
 	viewHTML('<div class="FullWidthPostRow">');
 		viewHTML($comment);
 	viewHTML('</div>');
-	viewHTML("<br><br>");
+}
+
+function displayAddCommentField() {
+	global $siteSettings, $pageID;
+	viewHTML('<div class="FullWidthPostHead">');
+		viewHTML('<div class="floatLeft">');
+			viewHTML("Reply:");
+		viewHTML('</div>');
+	viewHTML('</div>');
+	viewHTML('<div class="FullWidthPostRow" style="text-align: center;">');
+		viewHTML('<form action="'.$siteSettings['siteURLShort'].'blog/'.$pageID.'/reply" method="POST">');
+			viewHTML('<textarea class="blogCommentTextArea" name="blogCommentText"></textarea><br>');
+			viewHTML('<input type="submit" name="commentSubmitted" value="Reply">');
+		viewHtml('</form>');
+	viewHTML('</div>');
 }
 ?>

@@ -310,3 +310,8 @@ hr {
 .nextPageButton:hover, .backPageButton:hover {
 	background-color: #0D78A5;
 }
+
+.blogCommentTextArea {
+	width: 90%;
+	height: 100px;
+}
