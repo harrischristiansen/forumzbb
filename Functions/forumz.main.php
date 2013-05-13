@@ -31,6 +31,7 @@ function displayWebsite() {
 			addBreadcrumb("Login","login/");
 			if(isset($pagePost['loginSubmitted'])) {
 				loginUser();
+				setCookie("userDataCookie",serialize($userData),time()+3600);
 			}
 		}
 		addFailureNotice($siteSettings['disabledMessage']);
@@ -74,6 +75,7 @@ function displayWebsite() {
 			addBreadcrumb("Login","login/");
 			if(isset($pagePost['loginSubmitted'])) {
 				loginUser();
+				setCookie("userDataCookie",serialize($userData),time()+3600);
 				display('viewHome');
 			} else {
 				addImportantNotice("Please Login Above");
