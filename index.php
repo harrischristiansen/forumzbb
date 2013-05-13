@@ -31,10 +31,6 @@ $con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase)
 require_once('Functions/forumz.main.php');
 // Get user info
 global $userData;
-if(isset($_COOKIE['userDataCookie'])&&!isset($_SESSION['userData'])) {
-	echo "setting to cookie";
-	$_SESSION['userData']=unserialize($_COOKIE['userDataCookie']);
-}
 $userData=$_SESSION['userData'];
 // Set default rank
 if($userData['rankID']=="") {
