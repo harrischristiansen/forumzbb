@@ -18,7 +18,6 @@ defaultsInclude(siteNotices);
 
 <header id="navBar">
 <?php //// Navigation Bar ////
-global $siteSettings;
 // Left Side
 viewHTML('<div class="headFootLeftSide">');
 if($userData['loggedIn']) {
