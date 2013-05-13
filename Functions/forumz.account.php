@@ -86,7 +86,6 @@ function checkLogin($user, $pass) {
 }
 function logoutUser() {
 	global $userData;
-	setCookie("userDataCookie","",time()-3600);
 	$userData="";
 	addSuccessNotice("You are now logged out.");
 }
