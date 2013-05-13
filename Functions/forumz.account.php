@@ -16,7 +16,7 @@ function loginUser() {
 	$loginStatus=checkLogin($user, $pass);
 	
 	// User Not Found
-	if($loginStatus==-1) { addFailureNotice("Error: Invalid Username Or Password"); }
+	if($loginStatus==-1) { addFailureNotice("Error: Invalid Username Or Password"); unset($userData); }
 	
 	// User Found, Allowed To Login
 	elseif($loginStatus==0) {
@@ -32,16 +32,16 @@ function loginUser() {
 	}
 	
 	// User Has Not Verified Login
-	elseif($loginStatus==1) { addFailureNotice("Error: You Must Verify Your Email Before You Can Login"); }
+	elseif($loginStatus==1) { addFailureNotice("Error: You Must Verify Your Email Before You Can Login"); unset($userData); }
 	
 	// Admin Has Not Verified Login
-	elseif($loginStatus==2) { addFailureNotice("Error: An Admin Must Verify Your Account Before You Can Login"); }
+	elseif($loginStatus==2) { addFailureNotice("Error: An Admin Must Verify Your Account Before You Can Login"); unset($userData); }
 	
 	// Admin Has Not Verified Login
-	elseif($loginStatus==12) { addFailureNotice("Error: You Must Both Verify Your Email And Be Approved By An Admin"); }
+	elseif($loginStatus==12) { addFailureNotice("Error: You Must Both Verify Your Email And Be Approved By An Admin"); unset($userData); }
 	
 	// Account Banned
-	elseif($loginStatus==3) { addFailureNotice("Error: The Account Is Currently Banned From The System"); }
+	elseif($loginStatus==3) { addFailureNotice("Error: The Account Is Currently Banned From The System"); unset($userData); }
 	
 }
 function checkLogin($user, $pass) {
@@ -86,11 +86,8 @@ function checkLogin($user, $pass) {
 }
 function logoutUser() {
 	global $userData;
-	$userData['loggedIn'] = false;
-	$userData['actID']=-1;
-	$userData['rankID']=0;
-	$userData['email']="-";
-	$userData['username']="loggedOut";
+	setCookie("userDataCookie","",time()-3600);
+	$userData="";
 	addSuccessNotice("You are now logged out.");
 }
 function registerUser() {
