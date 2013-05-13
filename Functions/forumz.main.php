@@ -50,6 +50,7 @@ function displayWebsite() {
 			}
 			break;
 		case "blog":
+			addBreadcrumb("Blog Post","blog/".$pageID);
 			if($pageID2=="reply"&&$pagePost['commentSubmitted']=="Reply") {
 				addBlogComment();
 			}
@@ -73,15 +74,16 @@ function displayWebsite() {
 			addBreadcrumb("Login","login/");
 			if(isset($pagePost['loginSubmitted'])) {
 				loginUser();
+				display('viewHome');
 			} else {
 				addImportantNotice("Please Login Above");
+				display('viewBlank');
 			}
-			display('viewBlank');
 			break;
 		case "logout":
 			addBreadcrumb("Logout","logout/");
 			logoutUser();
-			display('viewBlank');
+			display('viewHome');
 			break;
 		case "membersList":
 			addBreadcrumb("Members","membersList/");
