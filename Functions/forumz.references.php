@@ -1,14 +1,14 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 10-2-12
+// Updated 5-12-13
 
 // Forumz Sitewide References
 
 
 function returnDateShort() {
 	// Return Date in form MO-DA-YR
-	return date('m-d-y');
+	return date('n-d-y');
 }
 function returnDateLong() {
 	// Return Date in form Month Day, Year
