@@ -20,7 +20,6 @@ date_default_timezone_set('America/Denver');
 // Load Session data
 session_name("forumzDev");
 session_start();
-echo "displaying website";
 // mysqli Connection Data
 $mysqliServer = $_ENV['DATABASE_SERVER'];
 $mysqliUser = "db166640_forumz";
@@ -32,6 +31,10 @@ $con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase)
 require_once('Functions/forumz.main.php');
 // Get user info
 global $userData;
+if(isset($_COOKIE['userDataCookie'])&&!isset($_SESSION['userData'])) {
+	echo "setting to cookie";
+	$_SESSION['userData']=unserialize($_COOKIE['userDataCookie']);
+}
 $userData=$_SESSION['userData'];
 // Set default rank
 if($userData['rankID']=="") {
@@ -56,4 +59,5 @@ displayWebsite();
 mysqli_close($con);
 $con="end";
 $_SESSION['userData']=$userData;
+unset($userData);
 ?>
