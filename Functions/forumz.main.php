@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-12-13
+// Updated 5-15-13
 
 // Requires
 require_once('Functions/forumz.references.php');
@@ -14,6 +14,7 @@ require_once('Functions/forumz.breadcrumbs.php');
 require_once('Functions/forumz.siteNotices.php');
 require_once('Functions/forumz.control.php');
 require_once('Functions/forumz.devTools.php');
+require_once('Functions/forumz.databaseTools.php');
 
 function displayWebsite() {
 	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData;

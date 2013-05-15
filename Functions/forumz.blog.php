@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-12-13
+// Updated 5-15-13
 
 // Blog View System
 
@@ -9,7 +9,7 @@
 function getBlogEntry($entryID) {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogs WHERE ID='$entryID'";
-	$result = mysqli_query($con, $sql) or die ("Query failed: getBlogEntry");
+	$result = dbQuery($con, $sql) or die ("Query failed: getBlogEntry");
 	$sqlQueries++;
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray;
@@ -18,7 +18,7 @@ function getBlogEntry($entryID) {
 function getBlogEntries($startID, $endID) {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogs WHERE ID>='$startID' AND ID<'$endID' ORDER BY ID DESC";
-	$result = mysqli_query($con, $sql) or die ("Query failed: getBlogEntries");
+	$result = dbQuery($con, $sql) or die ("Query failed: getBlogEntries");
 	$sqlQueries++;
 	return $result;
 }
@@ -56,7 +56,7 @@ function viewBlogPageBlogEntry() {
 function getNumBlogEntries() {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogs";
-	$result = mysqli_query($con, $sql) or die ("Query failed: getNumBlogEntries");
+	$result = dbQuery($con, $sql) or die ("Query failed: getNumBlogEntries");
 	$sqlQueries++;
 	return mysqli_num_rows($result);
 }
@@ -99,7 +99,7 @@ function getPreviousPageLink() {
 function getBlogComments($blogID) {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogComments WHERE blogID='$blogID' ORDER BY idNum";
-	$result = mysqli_query($con, $sql) or die ("Query failed: getBlogComments");
+	$result = dbQuery($con, $sql) or die ("Query failed: getBlogComments");
 	$sqlQueries++;
 	return $result;
 }
@@ -116,7 +116,7 @@ function viewBlogComments() {
 function numBlogComments() {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogComments";
-	$result = mysqli_query($con, $sql) or die ("Query failed: numBlogComments");
+	$result = dbQuery($con, $sql) or die ("Query failed: numBlogComments");
 	$sqlQueries++;
 	return mysqli_num_rows($result);
 }
@@ -131,7 +131,7 @@ function addBlogComment() {
 		$time=returnTime();
 		$userID=$userData['actID'];
 		$sql = "INSERT INTO blogComments (idNum, blogID, posterID, date, time, comment) VALUES ('$commentID','$pageID','$userID','$date', '$time', '$postClean')";
-		$result = mysqli_query($con, $sql) or die ("Query failed: addBlogComment");
+		$result = dbQuery($con, $sql) or die ("Query failed: addBlogComment");
 		$sqlQueries++;
 		addSuccessNotice("Comment Added");
 	} else {

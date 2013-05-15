@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-10-12
-// Updated 5-12-13
+// Updated 5-15-13
 
 function displayCPNav() {
 	global $siteSettings, $userData;
@@ -54,7 +54,7 @@ function updateAccountPassword() {
 	// Change Password
 	else {
 		$sql = "UPDATE accounts SET password='$newPassEncrypted' WHERE actID='$accountID'";
-		$result = mysqli_query($con,$sql) or die ("Query failed: updateAccountPassword");
+		$result = dbQuery($con,$sql) or die ("Query failed: updateAccountPassword");
 		$sqlQueries++;
 		addSuccessNotice("Success: Password Changed");
 	}
@@ -65,7 +65,7 @@ function updateAccountProfile() {
 	$accountID=$userData['actID'];
 	$newEmail=mysqli_real_escape_string($con, $pagePost['newEmail']);
 	$sql = "UPDATE accounts SET email='$newEmail' WHERE actID='$accountID'";
-	$result = mysqli_query($con,$sql) or die ("Query failed: updateAccountProfile");
+	$result = dbQuery($con,$sql) or die ("Query failed: updateAccountProfile");
 	$sqlQueries++;
 	addSuccessNotice("Success: Profile Updated");
 }
@@ -80,7 +80,7 @@ function updateSiteSettings() {
 	$numBlogEntriesPerPage=mysqli_real_escape_string($con, $pagePost['numBlogEntriesPerPage']);
 	
 	$sql = "UPDATE siteSettings SET siteName='$siteName',siteMotd='$siteMotd',siteSlogan='$siteSlogan',siteDisabled='$siteDisabled',reqLogin='$reqLogin',blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
-	$result = mysqli_query($con,$sql) or die ("Query failed: updateSiteSettings");
+	$result = dbQuery($con,$sql) or die ("Query failed: updateSiteSettings");
 	$sqlQueries++;
 	addSuccessNotice("Success: Site Settings Updated");
 }
@@ -92,7 +92,7 @@ function addSiteRank() {
 	$rankID=getNumSiteRanks();
 	
 	$sql = "INSERT INTO ranks (rankID, rankName, editSiteSettings) VALUES ('$rankID','$rankName','$editSiteSettings')";
-	$result = mysqli_query($con,$sql) or die ("Query failed: addSiteRank");
+	$result = dbQuery($con,$sql) or die ("Query failed: addSiteRank");
 	$sqlQueries++;
 	addSuccessNotice("Success: Rank Added");
 }
@@ -100,7 +100,7 @@ function addSiteRank() {
 function getNumSiteRanks() {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM ranks";
-	$result = mysqli_query($con,$sql) or die ("Query failed: getNumSiteRanks");
+	$result = dbQuery($con,$sql) or die ("Query failed: getNumSiteRanks");
 	$sqlQueries++;
 	return mysqli_num_rows($result);
 }
@@ -111,7 +111,7 @@ function editRanksControlPanel() {
 	if($pageID2!="none") {
 		global $con, $sqlQueries;
 		$sql = "SELECT * FROM ranks WHERE rankID='$pageID2'";
-		$result = mysqli_query($con,$sql) or die ("Query failed: editRanksControlPanel");
+		$result = dbQuery($con,$sql) or die ("Query failed: editRanksControlPanel");
 		$sqlQueries++;
 		$rankArray = mysqli_fetch_array($result);
 		if($rankArray['editSiteSettings']=="true") { $editSiteSettingsChecked="checked"; } else { $editSiteSettingsChecked=""; }
@@ -125,7 +125,7 @@ function editRanksControlPanel() {
 function displayRankNavItems() {
 	global $con, $sqlQueries, $siteSettings;
 	$sql = "SELECT * FROM ranks";
-	$result = mysqli_query($con,$sql) or die ("Query failed: displayRankNavItems");
+	$result = dbQuery($con,$sql) or die ("Query failed: displayRankNavItems");
 	$sqlQueries++;
 	while($rank = mysqli_fetch_array($result)) {
 		$rankLink=$siteSettings['siteURLShort']."controlPanel/editRanks/".$rank['rankID']."/";
@@ -146,7 +146,7 @@ function updateRank() {
 	$editMemberRank=mysqli_real_escape_string($con, $pagePost['editMemberRank']);
 	
 	$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank' WHERE rankID='$pageID2'";
-	$result = mysqli_query($con,$sql) or die ("Query failed: updateRank");
+	$result = dbQuery($con,$sql) or die ("Query failed: updateRank");
 	$sqlQueries++;
 	addSuccessNotice("Success: Rank Updated");
 }

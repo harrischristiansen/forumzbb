@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-12-13
+// Updated 5-15-13
 
 // Forumz Sitewide References
 
@@ -59,7 +59,7 @@ function getSiteSlogan() {
 function getSiteNumMembers() {
 	global $con, $sqlQueries;
 	$sql = "SELECT * FROM accounts";
-	$result = mysqli_query($con,$sql) or die ("Query failed: getSiteNumMembers");
+	$result = dbQuery($con,$sql) or die ("Query failed: getSiteNumMembers");
 	$sqlQueries++;
 	return mysqli_num_rows($result);
 }
