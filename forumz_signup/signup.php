@@ -77,10 +77,11 @@
     <div id="r3"><br>
         <?php
         //Connect To Mysqli
-        $mysqliServer = "localhost";
-        $mysqliUser = "forumzPublic";
-        $mysqliPass = "forumzbb";
-        $mysqliDatabase = "forumzPublicActs";
+        $mysqliServer = $_ENV['DATABASE_SERVER'];
+		$mysqliUser = "db166640_forumz";
+		$mysqliPass = "forumzbb";
+		$mysqliDatabase = "db166640_forumzPublicActs";
+		$mysqliForumzDatabase = "db166640_forumzPublic";
         $con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase) or die ("Site Not Setup");
         
         //Load Data From Form
@@ -91,7 +92,7 @@
         $emailInput=mysqli_real_escape_string($con,$_POST['email']);
         $domainInput=mysqli_real_escape_string($con,$_POST['domainAddress']);
         $invCodeInput=mysqli_real_escape_string($con,$_POST['invCode']);
-        $newDatabaseName="forumzPublic_".$domainInput;
+        $newDatabaseName=$domainInput;
         
         //Load Misc Data
         $ipAddress=$_SERVER['REMOTE_ADDR'];
@@ -150,15 +151,11 @@
        		$sql = "UPDATE invCodes SET used='1', usedBy='$usernameInput' WHERE invitationCode='$invCodeInput'";
        		$result = mysqli_query($con,$sql) or die ("Query failed: updateInvitationCodeTable");
        		
-        	//Create New Forum Database
-        	$sql = "Create Database $newDatabaseName";
-        	$result = mysqli_query($con,$sql) or die ("Query failed: createNewDatabase");
-       		
         	//Fill New Forum Database
         	mysqli_close($con);
-        	$con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $newDatabaseName) or die ("Connection Failed: New Database Not Created");
+        	$con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliForumzDatabase) or die ("Connection Failed: Forumz Public DB");
         	require_once('setupNewDatabase.php');
-        	fillDatabase($con,$usernameInput,$passwordEncrypted,$emailInput,$ipAddress,$joinDate,$domainInput);
+        	fillDatabase($con,$newDatabaseName,$usernameInput,$passwordEncrypted,$emailInput,$ipAddress,$joinDate,$domainInput);
        		
         	//Confirm Site Creation, Print Site Address
         	echo '<font size="5" style="color: green;">Site Created</font><br>';

@@ -1,8 +1,9 @@
 <?php 
-$mysqliServer="localhost";
-$mysqliUser="forumzPublic";
-$mysqliPass="forumzbb";
-$mysqliDatabase="forumzPublicActs";
+// Invitation Code Generator, url= signup.forumzbb.com/invCodeGen.php?secret=harriscforumz
+$mysqliServer = $_ENV['DATABASE_SERVER'];
+$mysqliUser = "db166640_forumz";
+$mysqliPass = "forumzbb";
+$mysqliDatabase = "db166640_forumzPublicActs";
 $con=@mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase) or die ("Site Not Setup");
 
 $chars = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9));
