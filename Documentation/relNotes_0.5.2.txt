@@ -16,5 +16,5 @@ Completed:
 
 To-Do:
 -Post Blog Entries To Site
--Pull page url, themeFile, and viewConditions from mysql db
--Get Signup System Back Online
+-Pull page url, themeFile, and viewConditions from mysql db - Partially Setup DB
+-Get Signup System Back Online - Needs ForumzPublicActs DB
