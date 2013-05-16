@@ -57,10 +57,24 @@ function loadPage() {
 	$sqlQueries++;
 	$numPages=mysqli_num_rows($result);
 	if($numPages>=2) {
-		$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID' OR idDependant='$pageID2')";
+		if($pageID!="") {
+			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID')";
+		}
+		if($pageID2!="") {
+			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID2')";
+		}
+		if($pageID!=""&&$pageID2!="") {
+			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID' OR idDependant='$pageID2')";
+		}
 		$result = dbQuery($con, $sql) or die ("Query failed: loadPageByNameAndID");
 		$sqlQueries++;
 		$numPages=mysqli_num_rows($result);
+		if($numPages==0) {
+			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='')";
+			$result = dbQuery($con, $sql) or die ("Query failed: loadPageByNameAndBlankID");
+			$sqlQueries++;
+			$numPages=mysqli_num_rows($result);
+		}
 	}
 	if($numPages==0) {
 		addFailureNotice("Page Not Found");
@@ -68,28 +82,24 @@ function loadPage() {
 		$pageData=mysqli_fetch_array($result);
 		if($pageData['requireLogin']=="true"&&!$userData['loggedIn']) {
 			if($pageName!="login") { addFailureNotice("You Must Login To View This Page"); }
-			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
-			$pageToDisplay=$pageData['falseDisplayFile'];
+			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 		} elseif($pageData['siteRequireLoginApplies']=="true"&&$siteSettings['reqLogin']&&!$userData['loggedIn']) {
 			addFailureNotice("You Must Login To View This Page");
-			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
-			$pageToDisplay=$pageData['falseDisplayFile'];
+			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 		} elseif($pageData['requireAdmin']&&$userData['permissions']['adminStatus']!="true") {
 			addFailureNotice("You Do Not Have Permission To View This Page");
-			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
-			$pageToDisplay=$pageData['falseDisplayFile'];
+			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 		} elseif($pageData['requireFormSubmitted']&&!isset($pagePost[$pageData['requireFormSubmitted']])) {
-			addFailureNotice("Error: Required Form Not Submitted");
-			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
+			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 			$pageToDisplay=$pageData['falseDisplayFile'];
 		} else {
 			if($pageData['breadcrumbTitle']!="") {
-				if(isset($pageID2)) {
-					addBreadcrumb($pageData['breadcrumbTitle'],$pageURL."/".$pageID."/".$pageID2);
-				} elseif(isset($pageID)) {
-					addBreadcrumb($pageData['breadcrumbTitle'],$pageURL."/".$pageID);
+				if($pageID2!="") {
+					addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID."/".$pageID2);
+				} elseif($pageID!="") {
+					addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID);
 				} else {
-					addBreadcrumb($pageData['breadcrumbTitle'],$pageURL);
+					addBreadcrumb($pageData['breadcrumbTitle'],$pageName);
 				}
 			}
 			$pageToDisplay=$pageData['displayFile'];
@@ -111,6 +121,7 @@ function loadPage() {
 	}
 	elseif(!$pageDisplayed) {
 		if($userData['loggedIn']) {
+			$pageID=1; // To Display Correct Home Page
 			display('viewHome');
 		} else {
 			display('viewBlank');
