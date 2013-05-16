@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-12-13
+// Updated 5-16-13
 
 defaultsInclude('blogDivisions');
 
@@ -17,6 +17,9 @@ if(!isLastPage()) {
 }
 if(!isFirstPage()) {
 	viewHTML('<a class="backPageButton" href="'.getPreviousPageLink().'">Newer Entries &rarr;</a>');
+}
+if(canMakeBlogPosts()) {
+	viewHTML('<a class="midButton" href="'.getNewBlogPageLink().'">Add Entry</a>');
 }
 viewHTML('</div>');
 

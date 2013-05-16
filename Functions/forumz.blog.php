@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-15-13
+// Updated 5-16-13
 
 // Blog View System
 
@@ -119,6 +119,22 @@ function numBlogComments() {
 	$result = dbQuery($con, $sql) or die ("Query failed: numBlogComments");
 	$sqlQueries++;
 	return mysqli_num_rows($result);
+}
+
+// New Blog Entry System
+function addBlogEntry() {
+	
+}
+function canMakeBlogPosts() {
+	global $userData;
+	if($userData['permissions']['postBlogEntries']=="true") {
+		return true;
+	}
+	return false;
+}
+function getNewBlogPageLink() {
+	global $siteSettings;
+	return $siteSettings['siteURLShort']."newBlogEntry/";
 }
 
 // Blog Comment Post System

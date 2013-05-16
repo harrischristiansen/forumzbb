@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 /* Harris Christiansen */
 /* Created 9-15-12 */
-/* Updated 5-12-12 */
+/* Updated 5-16-12 */
 
 
 html, body {
@@ -282,32 +282,45 @@ hr {
 .pageChangeBtns {
 	color: #FFFFFF;
 	font-size: 14px;
-	padding: 10px;
+	margin-top: 20px;
 	width: 98%;
-	height: 28px;
+	height: 52px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .nextPageButton {
+	display: block;
 	background-color: #0F8BBF;
 	float: left;
 	width: 100px;
 	height: 25px;
-	padding: 10px;
+	padding: 10px 10px 15px 10px;
+	border: 1px solid #000000;
+}
+
+.midButton {
+	display: block;
+	background-color: #0F8BBF;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100px;
+	height: 25px;
+	padding: 17px 10px 8px 10px;
 	border: 1px solid #000000;
 }
 
 .backPageButton {
+	display: block;
 	background-color: #0F8BBF;
 	float: right;
 	width: 100px;
 	height: 25px;
-	padding: 10px;
+	padding: 10px 10px 15px 10px;
 	border: 1px solid #000000;
 }
 
-.nextPageButton:hover, .backPageButton:hover {
+.pageChangeBtns a:hover{
 	background-color: #0D78A5;
 }
 
