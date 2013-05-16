@@ -1,7 +1,7 @@
 Forumz Version Release Notes
 Harris Christiansen
-Current Stable Version: -
-Current Beta Version: -
+Current Stable Released Version: -
+Current Beta Version: 0.5.1
 Current Development Version: 0.5.2
 
 Version 0.5.0:
@@ -52,6 +52,11 @@ Version 0.5.3:
 
 Version 0.5.4:
 -Security Enhancements
+-Account Creation Validation
+-Bot Checking
+-Spam Protection
+-Check for clean mysql inputs
+-Numerous failed logins locks account and sends activation email to account owner
 -Code Cleanup
 
 Future:

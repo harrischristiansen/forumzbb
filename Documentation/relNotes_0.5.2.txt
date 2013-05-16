@@ -18,4 +18,4 @@ Completed:
 
 To-Do:
 -Post Blog Entries To Site
--Get Signup System Back Online
+-Get Signup System Back Online - Release 0.5.2
