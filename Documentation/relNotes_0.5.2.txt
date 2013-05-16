@@ -13,6 +13,7 @@ Completed:
 -Prohibit promoting into ranks of your same status or above
 -Prohibit demoting those in your rank or above
 -Post Comments To Blog
+-Store Accounts Last Login Date and IP
 
 To-Do:
 -Post Blog Entries To Site

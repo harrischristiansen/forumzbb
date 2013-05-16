@@ -52,6 +52,9 @@ function checkLogin($user, $pass) {
 	$pass = mysqli_real_escape_string($con, $pass);
 	$pass = md5($pass);
 	
+	// Store Login Date and IP-Address
+	updateLoginReport($user);
+	
 	// Check to see if login information is valid
 	$sql = "SELECT * FROM accounts WHERE username='$user' AND password='$pass'";
 	$result = dbQuery($con, $sql) or die ("Query failed: checkUserLogin");
@@ -84,6 +87,17 @@ function checkLogin($user, $pass) {
 		} else { return -1; }
 	}
 }
+function updateLoginReport($user) {
+	global $con, $sqlQueries;
+	$lastLoginDate=returnDateShort();
+	$lastLoginIP=returnRemoteIP();
+	$sql = "UPDATE accounts SET lastLogin='$lastLoginDate',lastLoginIP='$lastLoginIP' WHERE username='$user' OR email='$user'";
+	$result = dbQuery($con,$sql) or die ("Query failed: updateLoginReport");
+	$sqlQueries++;
+}
+
+
+
 function logoutUser() {
 	global $userData;
 	$userData="";
@@ -130,7 +144,7 @@ function addUserToDatabase($user, $pass, $email) {
 		$actStatus=getDefaultAccountStatus();
 		$userID = getSiteNumMembers();
 		$joinDate = returnDateShort();
-		$ipAddress = $_SERVER['REMOTE_ADDR'];
+		$ipAddress = returnRemoteIP();
 		
 		// Add Username To Database
 		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, ipAddress) VALUES ('$userID','$user','$pass','$email', '$actStatus', '1', '$joinDate', '$ipAddress')";

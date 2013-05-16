@@ -27,6 +27,9 @@ function returnUsername() {
 		return "Anonymous";
 	}
 }
+function returnRemoteIP() {
+	return $_SERVER['REMOTE_ADDR'];
+}
 function isLoggedIn() {
 	// Returns true if user is logged in.
 	global $userData;
