@@ -8,9 +8,11 @@
 	function dbQuery($con, $sql) {
 		// Get Table Title
 		$tableTitle=session_name();
-		$tableTitle="FROM ".$tableTitle."_";
+		$tableTitle_from="FROM ".$tableTitle."_";
+		$tableTitle_upd="UPDATE ".$tableTitle."_";
 		// Append Table Title
-		$sql = str_replace("FROM ",$tableTitle,$sql);
+		$sql = str_replace("FROM ",$tableTitle_from,$sql);
+		$sql = str_replace("UPDATE ",$tableTitle_upd,$sql);
 		// Execute Query and Return Result
 		return mysqli_query($con, $sql);
 	}
