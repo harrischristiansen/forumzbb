@@ -14,8 +14,8 @@ Completed:
 -Prohibit demoting those in your rank or above
 -Post Comments To Blog
 -Store Accounts Last Login Date and IP
+-Pull page url, themeFile, and viewConditions from mysql db
 
 To-Do:
 -Post Blog Entries To Site
--Pull page url, themeFile, and viewConditions from mysql db - Partially Setup DB
--Get Signup System Back Online - Needs ForumzPublicActs DB
+-Get Signup System Back Online

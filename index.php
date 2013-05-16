@@ -1,6 +1,6 @@
 <?php
 // Harris Christiansen
-// Updated 5-12-12
+// Updated 5-15-12
 
 
 // Report All Errors
@@ -46,8 +46,6 @@ $pageName = mysqli_real_escape_string($con,$_GET['page']);
 $pageID = mysqli_real_escape_string($con,$_GET['pageID']);
 $pageID2 = mysqli_real_escape_string($con,$_GET['pageID2']);
 if($pageName=="") $pageName = "home";
-if($pageID=="") $pageID = "none";
-if($pageID2=="") $pageID2 = "none";
 $pagePost = $_POST;
 // Primary Display Website Call
 displayWebsite();

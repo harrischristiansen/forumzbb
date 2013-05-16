@@ -17,7 +17,7 @@ require_once('Functions/forumz.devTools.php');
 require_once('Functions/forumz.databaseTools.php');
 
 function displayWebsite() {
-	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData;
+	global $pageName, $pageID, $pagePost, $siteSettings, $userData;
 	loadSettings();
 	// Check if pageName is Numerical, if so set pageName to home, pageID to num.
 	if(is_numeric($pageName)){
@@ -37,93 +37,85 @@ function displayWebsite() {
 		addFailureNotice($siteSettings['disabledMessage']);
 		display('viewBlank');
 	} else {
-	if($siteSettings['siteMotd']!="") {
-		addImportantNotice($siteSettings['siteMotd']);
+		if($siteSettings['siteMotd']!="") {
+			addImportantNotice($siteSettings['siteMotd']);
+		}
+		// Page Loader
+		loadPage();
 	}
-	////// Write to take page names, view conditions, and display files from MySQL DB
-	switch ($pageName) {
-		case "home":
-			if($siteSettings['reqLogin']&&!$userData['loggedIn']) {
-				addFailureNotice("You Must Login To View This Page");
-				display('viewBlank');
-			} else {
-				display('viewHome');
-			}
-			break;
-		case "blog":
-			addBreadcrumb("Blog Post","blog/".$pageID);
-			if($pageID2=="reply"&&$pagePost['commentSubmitted']=="Reply") {
-				addBlogComment();
-			}
-			if($siteSettings['reqLogin']&&!$userData['loggedIn']) {
-				addFailureNotice("You Must Login To View This Page");
-				display('viewBlank');
-			} else {
-				display('viewBlog');
-			}
-			break;
-		case "register":
-			addBreadcrumb("Register","register/");
-			if(isset($pagePost['registerSubmitted'])) {
-				registerUser();
-				display('viewHome');
-			} else {
-				display('viewRegistration');
-			}
-			break;
-		case "login":
-			addBreadcrumb("Login","login/");
-			if(isset($pagePost['loginSubmitted'])) {
-				loginUser();
-				display('viewHome');
-			} else {
-				addImportantNotice("Please Login Above");
-				display('viewBlank');
-			}
-			break;
-		case "logout":
-			addBreadcrumb("Logout","logout/");
-			logoutUser();
-			display('viewHome');
-			break;
-		case "membersList":
-			addBreadcrumb("Members","membersList/");
-			//If Changing Users Rank
-			if($pageID=="changeUserRank"&&$userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true") {
-				setUserRank($pageID2, $pagePost['newRank']);
-			}
-			display('viewMembersList');
-			break;
-		case "controlPanel":
-			addBreadcrumb("Control Panel","controlPanel/");
-			if($userData['loggedIn']) {
-				if(isset($pagePost['cpFormSubmitted'])) {
-					$pageNotFound=true;
-					if($pageID=="changePassword") { updateAccountPassword(); $pageNotFound=false; }
-					if($pageID=="editProfile") { updateAccountProfile(); $pageNotFound=false; }
-					if($pageID=="changePreferences") {  $pageNotFound=false; }
-					if($userData['permissions']['editSiteSettings']=="true") {
-						if($pageID=="editSiteSettings") { updateSiteSettings(); $pageNotFound=false; }
-						if($pageID=="addRank") { addSiteRank(); $pageNotFound=false; }
-						if($pageID=="editRanks") { updateRank(); $pageNotFound=false; }
-					}
-					if($pageNotFound) { addFailureNotice('Error: Form Submitted To Non Existant Page'); }
+}
+function loadPage() {
+	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData, $con, $sql;
+	$pageDisplayed=false;
+	$pageToDisplay="";
+	
+	///////////////////////////////
+	
+	// Load Page
+	$sql = "SELECT * FROM pages WHERE pageURL='$pageName'";
+	$result = dbQuery($con, $sql) or die ("Query failed: loadPageByName");
+	$sqlQueries++;
+	$numPages=mysqli_num_rows($result);
+	if($numPages>=2) {
+		$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID' OR idDependant='$pageID2')";
+		$result = dbQuery($con, $sql) or die ("Query failed: loadPageByNameAndID");
+		$sqlQueries++;
+		$numPages=mysqli_num_rows($result);
+	}
+	if($numPages==0) {
+		addFailureNotice("Page Not Found");
+	} else {
+		$pageData=mysqli_fetch_array($result);
+		if($pageData['requireLogin']=="true"&&!$userData['loggedIn']) {
+			if($pageName!="login") { addFailureNotice("You Must Login To View This Page"); }
+			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
+			$pageToDisplay=$pageData['falseDisplayFile'];
+		} elseif($pageData['siteRequireLoginApplies']=="true"&&$siteSettings['reqLogin']&&!$userData['loggedIn']) {
+			addFailureNotice("You Must Login To View This Page");
+			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
+			$pageToDisplay=$pageData['falseDisplayFile'];
+		} elseif($pageData['requireAdmin']&&$userData['permissions']['adminStatus']!="true") {
+			addFailureNotice("You Do Not Have Permission To View This Page");
+			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
+			$pageToDisplay=$pageData['falseDisplayFile'];
+		} elseif($pageData['requireFormSubmitted']&&!isset($pagePost[$pageData['requireFormSubmitted']])) {
+			addFailureNotice("Error: Required Form Not Submitted");
+			if(isset($pageData['falseMsg'])) { addFailureNotice($pageData['falseMsg']); }
+			$pageToDisplay=$pageData['falseDisplayFile'];
+		} else {
+			if($pageData['breadcrumbTitle']!="") {
+				if(isset($pageID2)) {
+					addBreadcrumb($pageData['breadcrumbTitle'],$pageURL."/".$pageID."/".$pageID2);
+				} elseif(isset($pageID)) {
+					addBreadcrumb($pageData['breadcrumbTitle'],$pageURL."/".$pageID);
+				} else {
+					addBreadcrumb($pageData['breadcrumbTitle'],$pageURL);
 				}
-				display('viewControlPanel');
-			} else {
-				addFailureNotice("You Must Login To View This Page");
-				display('viewBlank');
 			}
-			break;
-		case "devOutput":
-			writeSessionData();
+			$pageToDisplay=$pageData['displayFile'];
+			if($pageData['trueMsg']!="") {
+				addSuccessNotice($pageData['trueMsg']);
+			}
+			if($pageData['functionCall']!="") {
+				$pageData['functionCall']();
+			}
+		}
+	}
+	
+	///////////////////////////////
+	
+	// Display Page
+	if($pageToDisplay!="") {
+		display($pageToDisplay);
+		$pageDisplayed=true;
+	}
+	elseif(!$pageDisplayed) {
+		if($userData['loggedIn']) {
+			display('viewHome');
+		} else {
 			display('viewBlank');
-			break;
-		default:
-			addBreadcrumb("Error",$pageName."/");
-			addFailureNotice('Page Not Found');
-			display('viewBlank');
-	}}
+		}
+	}
 }
 function loadSettings() {
 	loadMysqlSettings();
