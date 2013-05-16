@@ -1,6 +1,6 @@
 Forumz Version 0.5.2
 Harris Christiansen
-October 31, 2012
+May 15, 2013
 
 Completed:
 -Blog System
