@@ -147,7 +147,7 @@ function addUserToDatabase($user, $pass, $email) {
 		$ipAddress = returnRemoteIP();
 		
 		// Add Username To Database
-		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, ipAddress) VALUES ('$userID','$user','$pass','$email', '$actStatus', '1', '$joinDate', '$ipAddress')";
+		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, joinIP) VALUES ('$userID','$user','$pass','$email', '$actStatus', '1', '$joinDate', '$ipAddress')";
 		$result = dbQuery($con, $sql) or die ("Query failed: addUserToDatabase");
 		$sqlQueries++;
 	} else {
