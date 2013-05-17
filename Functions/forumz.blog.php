@@ -7,19 +7,15 @@
 
 
 function getBlogEntry($entryID) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogs WHERE ID='$entryID'";
-	$result = dbQuery($con, $sql) or die ("Query failed: getBlogEntry");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getBlogEntry");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray;
 }
 
 function getBlogEntries($startID, $endID) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogs WHERE ID>='$startID' AND ID<'$endID' ORDER BY ID DESC";
-	$result = dbQuery($con, $sql) or die ("Query failed: getBlogEntries");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getBlogEntries");
 	return $result;
 }
 
@@ -54,10 +50,8 @@ function viewBlogPageBlogEntry() {
 
 
 function getNumBlogEntries() {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogs";
-	$result = dbQuery($con, $sql) or die ("Query failed: getNumBlogEntries");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getNumBlogEntries");
 	return mysqli_num_rows($result);
 }
 
@@ -69,7 +63,7 @@ function isFirstPage() {
 }
 
 function isLastPage() {
-	global $pageID,$siteSettings;
+	global $pageID, $siteSettings;
 	$lastPage = ceil(getNumBlogEntries()/$siteSettings['blogEntriesPerPage']);
 	if($pageID>=$lastPage) {
 		return true;
@@ -77,7 +71,7 @@ function isLastPage() {
 }
 
 function getNextPageLink() {
-	global $pageID,$siteSettings;
+	global $pageID, $siteSettings;
 	if($pageID<=1) {
 		$pageID=1;
 	}
@@ -85,7 +79,7 @@ function getNextPageLink() {
 }
 
 function getPreviousPageLink() {
-	global $pageID,$siteSettings;
+	global $pageID, $siteSettings;
 	$lastPage = ceil(getNumBlogEntries()/$siteSettings['blogEntriesPerPage']);
 	// Setup to return to latest page upon clicking newer entries button
 	if($pageID>$lastPage) {
@@ -98,10 +92,8 @@ function getPreviousPageLink() {
 // Blog Comment View System
 
 function getBlogComments($blogID) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogComments WHERE blogID='$blogID' ORDER BY idNum";
-	$result = dbQuery($con, $sql) or die ("Query failed: getBlogComments");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getBlogComments");
 	return $result;
 }
 
@@ -115,16 +107,14 @@ function viewBlogComments() {
 }
 
 function numBlogComments() {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM blogComments";
-	$result = dbQuery($con, $sql) or die ("Query failed: numBlogComments");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: numBlogComments");
 	return mysqli_num_rows($result);
 }
 
 // New Blog Entry System
 function addBlogEntry() {
-	global $con, $sqlQueries, $userData, $pagePost, $pageID;
+	global $userData, $pagePost, $pageID, $con;
 	$newEntryTitle=mysqli_real_escape_string($con, $pagePost['blogEntryTitle']);
 	$newEntryText=mysqli_real_escape_string($con, $pagePost['blogEntryText']);
 	if($userData['permissions']['postBlogEntries']!="true") {
@@ -138,8 +128,7 @@ function addBlogEntry() {
 		$date=returnDateShort();
 		$time=returnTime();
 		$sql = "INSERT INTO blogs (ID, Title, Author, AuthorDate, AuthorTime, Post) VALUES ('$blogID','$newEntryTitle','$author','$date', '$time', '$newEntryText')";
-		$result = dbQuery($con, $sql) or die ("Query failed: addBlogEntry");
-		$sqlQueries++;
+		$result = dbQuery($sql) or die ("Query failed: addBlogEntry");
 		addSuccessNotice("Blog Entry Created");
 	}
 }
@@ -157,7 +146,7 @@ function getNewBlogPageLink() {
 
 // Blog Comment Post System
 function addBlogComment() {
-	global $con, $sqlQueries, $pageID, $userData, $pagePost;
+	global $pageID, $userData, $pagePost, $con;
 	if($userData['permissions']['postBlogComments']=="true") {
 		$commentID=numBlogComments();
 		$postClean=mysqli_real_escape_string($con, $pagePost['blogCommentText']);
@@ -165,8 +154,7 @@ function addBlogComment() {
 		$time=returnTime();
 		$userID=$userData['actID'];
 		$sql = "INSERT INTO blogComments (idNum, blogID, posterID, date, time, comment) VALUES ('$commentID','$pageID','$userID','$date', '$time', '$postClean')";
-		$result = dbQuery($con, $sql) or die ("Query failed: addBlogComment");
-		$sqlQueries++;
+		$result = dbQuery($sql) or die ("Query failed: addBlogComment");
 		addSuccessNotice("Comment Added");
 	} else {
 		addFailureNotice("Permission Denied To Add Comment");

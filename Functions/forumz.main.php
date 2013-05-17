@@ -45,7 +45,7 @@ function displayWebsite() {
 	}
 }
 function loadPage() {
-	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData, $con, $sql;
+	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData;
 	$pageDisplayed=false;
 	$pageToDisplay="";
 	
@@ -53,8 +53,7 @@ function loadPage() {
 	
 	// Load Page
 	$sql = "SELECT * FROM pages WHERE pageURL='$pageName'";
-	$result = dbQuery($con, $sql) or die ("Query failed: loadPageByName");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: loadPageByName");
 	$numPages=mysqli_num_rows($result);
 	if($numPages>=2) {
 		if($pageID!="") {
@@ -66,13 +65,11 @@ function loadPage() {
 		if($pageID!=""&&$pageID2!="") {
 			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID' OR idDependant='$pageID2')";
 		}
-		$result = dbQuery($con, $sql) or die ("Query failed: loadPageByNameAndID");
-		$sqlQueries++;
+		$result = dbQuery($sql) or die ("Query failed: loadPageByNameAndID");
 		$numPages=mysqli_num_rows($result);
 		if($numPages==0) {
 			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='')";
-			$result = dbQuery($con, $sql) or die ("Query failed: loadPageByNameAndBlankID");
-			$sqlQueries++;
+			$result = dbQuery($sql) or die ("Query failed: loadPageByNameAndBlankID");
 			$numPages=mysqli_num_rows($result);
 		}
 	}

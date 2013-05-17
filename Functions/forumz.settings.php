@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-15-13
+// Updated 5-16-13
 
 // Loads Forumz Settings from Database
 // Callable Functions: getDefaultAccountStatus()
@@ -9,10 +9,8 @@
 
 function loadMysqlSettings() {
 	// Get Settings Array From Database
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM siteSettings WHERE settingsProfile='1'";
-	$result = dbQuery($con, $sql) or die ("Query failed: getSiteSettings");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getSiteSettings");
 	$setting=mysqli_fetch_array($result);
 	
 	// Set Site Settings

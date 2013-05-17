@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-15-13
+// Updated 5-16-13
 
 // Forumz Sitewide References
 
@@ -60,10 +60,8 @@ function getSiteSlogan() {
 	return $siteSettings['siteSlogan'];
 }
 function getSiteNumMembers() {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM accounts";
-	$result = dbQuery($con,$sql) or die ("Query failed: getSiteNumMembers");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getSiteNumMembers");
 	return mysqli_num_rows($result);
 }
 function display($fileName) {

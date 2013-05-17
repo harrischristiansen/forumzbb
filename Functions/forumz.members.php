@@ -1,24 +1,20 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-15-13
+// Updated 5-16-13
 
 // Members List and Member Info Systems
 
 
 function getListActiveMembers() {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM accounts WHERE actStatus='0' ORDER BY username";
-	$result = dbQuery($con,$sql) or die ("Query failed: getListActiveMembers");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getListActiveMembers");
 	return $result;
 }
 
 function getRankName($rankID) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM ranks WHERE rankID='$rankID'";
-	$result = dbQuery($con,$sql) or die ("Query failed: getRankName");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getRankName");
 	$resultArray=mysqli_fetch_array($result);
 	if($resultArray['rankName']!="") {
 		return $resultArray['rankName'];
@@ -45,10 +41,8 @@ function displayMembersList() {
 }
 
 function getMemberName($actID) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($con,$sql) or die ("Query failed: getMemberName");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getMemberName");
 	$resultArray=mysqli_fetch_array($result);
 	return $resultArray['username'];
 }

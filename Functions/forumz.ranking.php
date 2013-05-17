@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-15-13
+// Updated 5-16-13
 
 // Rank Permissions + Control Systems
 
@@ -12,11 +12,9 @@ function setUserPrivileges() {
 	$userRank=$userData['rankID'];
 	
 	// Set User Data Privledges
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM ranks WHERE rankID='$userRank'";
-	$result = dbQuery($con, $sql) or die ("Query failed: setUserPrivileges");
+	$result = dbQuery($sql) or die ("Query failed: setUserPrivileges");
 	$userData['permissions']=mysqli_fetch_array($result);
-	$sqlQueries++;
 }
 
 function setUserRank($userID, $tarRank) {
@@ -28,10 +26,8 @@ function setUserRank($userID, $tarRank) {
 		addFailureNotice("Permission Denied");
 	} else {
 	
-	global $con, $sqlQueries;
 	$sql = "UPDATE accounts SET rankID='$tarRank' WHERE actID='$userID'";
-	$result = dbQuery($con,$sql) or die ("Query failed: setUserRank");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: setUserRank");
 	addSuccessNotice("Changed ".getMemberName($pageID2)."'s Rank");
 	}
 }
@@ -43,19 +39,16 @@ function getChangeRankList($actID) {
 }
 
 function getChangeRankListOptions($actID) {
-	global $con, $sqlQueries; // User ID
 	
 	// Get Users Rank ID
 	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($con, $sql) or die ("Query failed: getChangeRankListOptions-Account");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getChangeRankListOptions-Account");
 	$resultArray=mysqli_fetch_array($result);
 	$userRank=$resultArray['rankID'];
 	
 	// Display Rank List With Current Rank Selected
 	$sql = "SELECT * FROM ranks ORDER BY rankOrder";
-	$result = dbQuery($con, $sql) or die ("Query failed: getChangeRankListOptions-Ranks");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getChangeRankListOptions-Ranks");
 	while($rank = mysqli_fetch_array($result)) {
 		if($rank['rankID']==$userRank) { $optSelected="selected"; } else { $optSelected=""; }
 		displayChangeRankListOption($rank['rankName'], $rank['rankID'], $optSelected);
@@ -63,10 +56,8 @@ function getChangeRankListOptions($actID) {
 }
 
 function getOrderOfRank($rankID) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM ranks WHERE rankID='$rankID'";
-	$result = dbQuery($con, $sql) or die ("Query failed: getOrderOfRank");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getOrderOfRank");
 	$resultArray=mysqli_fetch_array($result);
 	return $resultArray['rankOrder'];
 }

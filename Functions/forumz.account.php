@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-15-13
+// Updated 5-16-13
 
 // Account Creation and Login Systems
 // Callable Functions: loginUser(), logoutUser(), registerUser(), sendConfirmationEmail($user, $email)
@@ -45,7 +45,7 @@ function loginUser() {
 	
 }
 function checkLogin($user, $pass) {
-	global $con, $sqlQueries, $userData;
+	global $userData, $con;
 	
 	// Clean User Inputed Data
 	$user = mysqli_real_escape_string($con, $user);
@@ -57,8 +57,7 @@ function checkLogin($user, $pass) {
 	
 	// Check to see if login information is valid
 	$sql = "SELECT * FROM accounts WHERE username='$user' AND password='$pass'";
-	$result = dbQuery($con, $sql) or die ("Query failed: checkUserLogin");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: checkUserLogin");
 	$users=mysqli_num_rows($result);
 	
 	// Login Was Correct
@@ -71,8 +70,7 @@ function checkLogin($user, $pass) {
 		return $actStatus;
 	} else { 
 		$sql = "SELECT * FROM accounts WHERE email='$user' AND password='$pass'";
-		$result = dbQuery($con, $sql) or die ("Query failed: checkEmailLogin");
-		$sqlQueries++;
+		$result = dbQuery($sql) or die ("Query failed: checkEmailLogin");
 		$users=mysqli_num_rows($result);
 		if($users==1) {
 			$userInfo=mysqli_fetch_array($result);
@@ -88,12 +86,10 @@ function checkLogin($user, $pass) {
 	}
 }
 function updateLoginReport($user) {
-	global $con, $sqlQueries;
 	$lastLoginDate=returnDateShort();
 	$lastLoginIP=returnRemoteIP();
 	$sql = "UPDATE accounts SET lastLogin='$lastLoginDate',lastLoginIP='$lastLoginIP' WHERE username='$user' OR email='$user'";
-	$result = dbQuery($con,$sql) or die ("Query failed: updateLoginReport");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: updateLoginReport");
 }
 
 
@@ -130,7 +126,7 @@ function registerUser() {
 	}
 }
 function addUserToDatabase($user, $pass, $email) {
-	global $con, $sqlQueries, $siteSettings;
+	global $siteSettings, $con;
 	
 	// Clean User Inputed Data
 	$user = mysqli_real_escape_string($con, $user);
@@ -148,18 +144,15 @@ function addUserToDatabase($user, $pass, $email) {
 		
 		// Add Username To Database
 		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, joinIP) VALUES ('$userID','$user','$pass','$email', '$actStatus', '1', '$joinDate', '$ipAddress')";
-		$result = dbQuery($con, $sql) or die ("Query failed: addUserToDatabase");
-		$sqlQueries++;
+		$result = dbQuery($sql) or die ("Query failed: addUserToDatabase");
 	} else {
 		addFailureNotice("ERROR: Username Is Unavailable.");
 	}
 }
 // Checks if user with specified name exists
 function checkUsernameAvailable($user) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM accounts WHERE username='$user'";
-	$result = dbQuery($con, $sql) or die ("Query failed: checkUsernameAvailable");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: checkUsernameAvailable");
 	$users=mysqli_num_rows($result);
 	if($users=="0") {
 		return true;
@@ -182,23 +175,17 @@ function setAccountAsConfirmedByAdmin($user) {
 	setAccountAsActive($user);
 }
 function setAccountAsActive($user) {
-	global $con, $sqlQueries;
 	$sql = "UPDATE accounts SET actStatus='0' WHERE username='$user'";
-	$result = dbQuery($con,$sql) or die ("Query failed: setAccountAsActive");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive");
 }
 function setAccountAsBanned($user) {
-	global $con, $sqlQueries;
 	$sql = "UPDATE accounts SET actStatus='-1' WHERE username='$user'";
-	$result = dbQuery($con,$sql) or die ("Query failed: setAccountAsBanned");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsBanned");
 }
 
 function getUserRank($actID) {
-	global $con, $sqlQueries;
 	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($con,$sql) or die ("Query failed: getUserRank");
-	$sqlQueries++;
+	$result = dbQuery($sql) or die ("Query failed: getUserRank");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['rankID'];
 }

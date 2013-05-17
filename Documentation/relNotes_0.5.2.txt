@@ -1,6 +1,6 @@
 Forumz Version 0.5.2
 Harris Christiansen
-May 15, 2013
+May 19, 2013
 
 Completed:
 -Blog System
@@ -19,5 +19,5 @@ Completed:
 
 To-Do:
 -Get Signup System Back Online - Release 0.5.2
--Provide Error when visiting unexistant blog post
--Update Control Panel for All Rank Permissions
+-Make Sure Accounts Are Always Refered to by ID
+-Provide Error when visiting unexistant blog post-Update Control Panel for All Rank Permissions
