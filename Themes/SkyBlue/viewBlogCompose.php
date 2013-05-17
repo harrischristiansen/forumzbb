@@ -7,11 +7,13 @@ defaultsInclude('blogDivisions');
 display('viewHeader');
 ?>
 
-
-<div class="FullWidthContentDivision centerInnerContent">
-Compose Blog Post:<br>
-<br>
+<div id="composeBlogDiv">
+<div class="FullWidthPostHead">
+	<div class="floatLeft">Compost Blog Post:</div>
+</div>
+<div class="FullWidthPostRow" style="text-align: center;">
 <?php displayBlogComposeField(); ?>
+</div>
 </div>
 
 <?php

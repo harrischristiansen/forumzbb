@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-03-12
-// Updated 5-12-13
+// Updated 5-16-13
 
 function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$blogLink) {
 	viewHTML('<div class="FullWidthPostHead">');
@@ -59,7 +59,7 @@ function displayBlogComposeField() {
 	global $siteSettings;
 	viewHTML('<form action="'.$siteSettings['siteURLShort'].'composeEntry/" method="POST">');
 	viewHTML('<input type="text" name="blogEntryTitle" value="Blog Entry Title" placeholder="Blog Entry Title" onfocus="this.value=\'\';"><br>');
-	viewHTML('Entry:<textarea name="blogEntryText" onfocus="this.value=\'\';"></textarea><br>');
+	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea" onfocus="this.value=\'\';"></textarea><br>');
 	viewHTML('<input type="submit" name="blogComposeSubmitted" value="Post">');
 	viewHtml('</form>');
 }
