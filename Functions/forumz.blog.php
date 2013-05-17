@@ -123,7 +123,23 @@ function numBlogComments() {
 
 // New Blog Entry System
 function addBlogEntry() {
-	
+	global $con, $sqlQueries, $userData, $pagePost;
+	$newEntryTitle=mysqli_real_escape_string($con, $pagePost['blogEntryTitle']);
+	$newEntryText=mysqli_real_escape_string($con, $pagePost['blogEntryText']);
+	if($userData['permissions']['postBlogEntries']!="true") {
+		addFailureNotice("Permission Denied");
+	} elseif($newEntryTitle==""||$newEntryText=="") {
+		addFailureNotice("Please Type An Entry Before Submitting");
+	} else {
+		$blogID=getNumBlogEntries();
+		$author=$userData['actID'];
+		$date=returnDateShort();
+		$time=returnTime();
+		$sql = "INSERT INTO blogs (ID, Title, Author, AuthorDate, AuthorTime, Post) VALUES ('$blogID','$newEntryTitle','$author','$date', '$time', '$newEntryText')";
+		$result = dbQuery($con, $sql) or die ("Query failed: addBlogEntry");
+		$sqlQueries++;
+		addSuccessNotice("Blog Entry Created");
+	}
 }
 function canMakeBlogPosts() {
 	global $userData;
