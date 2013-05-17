@@ -86,8 +86,8 @@ function loadPage() {
 		} elseif($pageData['siteRequireLoginApplies']=="true"&&$siteSettings['reqLogin']&&!$userData['loggedIn']) {
 			addFailureNotice("You Must Login To View This Site");
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
-		} elseif($pageData['requireAdmin']&&$userData['permissions']['adminStatus']!="true") {
-			addFailureNotice("You Do Not Have Permission To View This Page. Admin Privileges Required.");
+		} elseif($pageData['requirePermission']!=""&&$userData['permissions'][$pageData['requirePermission']]!="true") {
+			addFailureNotice("You Do Not Have Permission To View This Page");
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 		} elseif($pageData['requireFormSubmitted']&&!isset($pagePost[$pageData['requireFormSubmitted']])) {
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }

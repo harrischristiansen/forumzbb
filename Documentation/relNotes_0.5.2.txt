@@ -19,3 +19,4 @@ Completed:
 
 To-Do:
 -Get Signup System Back Online - Release 0.5.2
+-Provide Error when visiting unexistant blog post
