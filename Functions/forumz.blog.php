@@ -87,6 +87,7 @@ function getNextPageLink() {
 function getPreviousPageLink() {
 	global $pageID,$siteSettings;
 	$lastPage = ceil(getNumBlogEntries()/$siteSettings['blogEntriesPerPage']);
+	// Setup to return to latest page upon clicking newer entries button
 	if($pageID>$lastPage) {
 		$pageID=$lastPage+1;
 	}
@@ -123,7 +124,7 @@ function numBlogComments() {
 
 // New Blog Entry System
 function addBlogEntry() {
-	global $con, $sqlQueries, $userData, $pagePost;
+	global $con, $sqlQueries, $userData, $pagePost, $pageID;
 	$newEntryTitle=mysqli_real_escape_string($con, $pagePost['blogEntryTitle']);
 	$newEntryText=mysqli_real_escape_string($con, $pagePost['blogEntryText']);
 	if($userData['permissions']['postBlogEntries']!="true") {
@@ -132,6 +133,7 @@ function addBlogEntry() {
 		addFailureNotice("Please Type An Entry Before Submitting");
 	} else {
 		$blogID=getNumBlogEntries();
+		$pageID=$blogID; // To Display Blog Once Added
 		$author=$userData['actID'];
 		$date=returnDateShort();
 		$time=returnTime();
@@ -150,7 +152,7 @@ function canMakeBlogPosts() {
 }
 function getNewBlogPageLink() {
 	global $siteSettings;
-	return $siteSettings['siteURLShort']."newBlogEntry/";
+	return $siteSettings['siteURLShort']."composeEntry/";
 }
 
 // Blog Comment Post System

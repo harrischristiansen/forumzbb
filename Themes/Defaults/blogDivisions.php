@@ -55,6 +55,15 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
 	viewHTML('</div>');
 }
 
+function displayBlogComposeField() {
+	global $siteSettings;
+	viewHTML('<form action="'.$siteSettings['siteURLShort'].'composeEntry/" method="POST">');
+	viewHTML('<input type="text" name="blogEntryTitle" value="Blog Entry Title" placeholder="Blog Entry Title" onfocus="this.value=\'\';"><br>');
+	viewHTML('Entry:<textarea name="blogEntryText" onfocus="this.value=\'\';"></textarea><br>');
+	viewHTML('<input type="submit" name="blogComposeSubmitted" value="Post">');
+	viewHtml('</form>');
+}
+
 function displayAddCommentField() {
 	global $siteSettings, $pageID;
 	viewHTML('<div class="FullWidthPostHead">');

@@ -17,5 +17,5 @@ Completed:
 -Pull page url, themeFile, and viewConditions from mysql db
 
 To-Do:
--Post Blog Entries To Site
+-Post Blog Entries To Site - Needs Page added to Database (page=composeEntry, if(!blogComposeSubmitted)display(viewBlogCompose) else execute addBlogEntry() and display(viewBlog)
 -Get Signup System Back Online - Release 0.5.2
