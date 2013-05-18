@@ -20,4 +20,5 @@ Completed:
 To-Do:
 -Get Signup System Back Online - Release 0.5.2
 -Make Sure Accounts Are Always Refered to by ID
--Provide Error when visiting unexistant blog post-Update Control Panel for All Rank Permissions
+-Provide Error when visiting unexistant blog post
+-Update Control Panel for All Rank Permissions
