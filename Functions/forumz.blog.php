@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-16-13
+// Updated 5-17-13
 
 // Blog View System
 
@@ -88,6 +88,11 @@ function getPreviousPageLink() {
 	return $siteSettings['siteURLShort']."home/".($pageID-1);
 }
 
+function formatPost($post) {
+	$post=str_replace("\\r\\n", "<br>", $post);
+	return $post;
+}
+
 
 // Blog Comment View System
 
@@ -117,6 +122,7 @@ function addBlogEntry() {
 	global $userData, $pagePost, $pageID, $con;
 	$newEntryTitle=mysqli_real_escape_string($con, $pagePost['blogEntryTitle']);
 	$newEntryText=mysqli_real_escape_string($con, $pagePost['blogEntryText']);
+	$newEntryText=formatPost($newEntryText);
 	if($userData['permissions']['postBlogEntries']!="true") {
 		addFailureNotice("Permission Denied");
 	} elseif($newEntryTitle==""||$newEntryText=="") {
@@ -150,6 +156,7 @@ function addBlogComment() {
 	if($userData['permissions']['postBlogComments']=="true") {
 		$commentID=numBlogComments();
 		$postClean=mysqli_real_escape_string($con, $pagePost['blogCommentText']);
+		$postClean=formatPost($postClean);
 		$date=returnDateShort();
 		$time=returnTime();
 		$userID=$userData['actID'];
