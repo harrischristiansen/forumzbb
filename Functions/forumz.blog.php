@@ -1,24 +1,14 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-17-13
+// Updated 5-19-13
 
-// Blog View System
-
-
-function getBlogEntry($entryID) {
-	$sql = "SELECT * FROM blogs WHERE ID='$entryID'";
-	$result = dbQuery($sql) or die ("Query failed: getBlogEntry");
-	$resultArray = mysqli_fetch_array($result);
-	return $resultArray;
-}
-
+////////// Home Blog View System //////////
 function getBlogEntries($startID, $endID) {
 	$sql = "SELECT * FROM blogs WHERE ID>='$startID' AND ID<'$endID' ORDER BY ID DESC";
 	$result = dbQuery($sql) or die ("Query failed: getBlogEntries");
 	return $result;
 }
-
 function viewBlogEntries() {
 	global $siteSettings, $pageID;
 	$blogEntriesPerPage=$siteSettings['blogEntriesPerPage'];
@@ -29,10 +19,10 @@ function viewBlogEntries() {
 		$startID-=$numToSubtract;
 		$endID-=$numToSubtract;
 	}
-	
-	
+
+
 	$blogEntries=getBlogEntries($startID,$endID);
-	
+
 	while($entry = mysqli_fetch_array($blogEntries)) {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
 		displayHomePageBlogEntry(getMemberName($entry['Author']),$entry['AuthorDate'],$entry['Title'],$entry['Post'],$blogLink);
@@ -41,14 +31,6 @@ function viewBlogEntries() {
 		viewFailure("No Entries Were Found On This Page");
 	}
 }
-
-function viewBlogPageBlogEntry() {
-	global $pageID;
-	$blogEntry = getBlogEntry($pageID);
-	displayBlogEntry(getMemberName($blogEntry['Author']),$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post']);
-}
-
-
 function getNumBlogEntries() {
 	$sql = "SELECT * FROM blogs";
 	$result = dbQuery($sql) or die ("Query failed: getNumBlogEntries");
@@ -59,7 +41,8 @@ function isFirstPage() {
 	global $pageID;
 	if($pageID=="none"||$pageID==0||$pageID==1) {
 		return true;
-	} else { return false; }
+	} else { return false;
+	}
 }
 
 function isLastPage() {
@@ -67,7 +50,8 @@ function isLastPage() {
 	$lastPage = ceil(getNumBlogEntries()/$siteSettings['blogEntriesPerPage']);
 	if($pageID>=$lastPage) {
 		return true;
-	} else { return false; }
+	} else { return false;
+	}
 }
 
 function getNextPageLink() {
@@ -88,13 +72,37 @@ function getPreviousPageLink() {
 	return $siteSettings['siteURLShort']."home/".($pageID-1);
 }
 
+
+////////// Select Blog View System //////////
+function getBlogEntry($entryID) {
+	$sql = "SELECT * FROM blogs WHERE ID='$entryID'";
+	$result = dbQuery($sql) or die ("Query failed: getBlogEntry");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray;
+}
+function viewBlogPageBlogEntry() {
+	global $pageID;
+	$blogEntry = getBlogEntry($pageID);
+	displayBlogEntry(getMemberName($blogEntry['Author']),$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post']);
+}
+function checkBlogEntryExists() {
+	global $pageID;
+	$sql = "SELECT * FROM blogs WHERE ID='$pageID'";
+	$result = dbQuery($sql) or die ("Query failed: checkBlogEntryExists");
+	if(mysqli_num_rows($result)==0) {
+		addFailureNotice("ERROR: No Entry Was Found On This Page");
+		return false;
+	}
+	return true;
+}
+
 function formatPost($post) {
 	$post=str_replace("\\r\\n", "<br>", $post);
 	return $post;
 }
 
 
-// Blog Comment View System
+////////// Blog Comment View System //////////
 
 function getBlogComments($blogID) {
 	$sql = "SELECT * FROM blogComments WHERE blogID='$blogID' ORDER BY idNum";
@@ -117,7 +125,7 @@ function numBlogComments() {
 	return mysqli_num_rows($result);
 }
 
-// New Blog Entry System
+//////////// New Blog Entry System //////////
 function addBlogEntry() {
 	global $userData, $pagePost, $pageID, $con;
 	$newEntryTitle=mysqli_real_escape_string($con, $pagePost['blogEntryTitle']);
@@ -150,7 +158,7 @@ function getNewBlogPageLink() {
 	return $siteSettings['siteURLShort']."composeEntry/";
 }
 
-// Blog Comment Post System
+////////// Blog Comment Post System //////////
 function addBlogComment() {
 	global $pageID, $userData, $pagePost, $con;
 	if($userData['permissions']['postBlogComments']=="true") {
@@ -166,6 +174,13 @@ function addBlogComment() {
 	} else {
 		addFailureNotice("Permission Denied To Add Comment");
 	}
+}
+function canPostBlogComments() {
+	global $userData;
+	if($userData['permissions']['postBlogComments']=="true") {
+		return true;
+	}
+	return false;
 }
 
 ?>

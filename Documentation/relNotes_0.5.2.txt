@@ -16,9 +16,8 @@ Completed:
 -Store Accounts Last Login Date and IP
 -Pull page url, themeFile, and viewConditions from mysql db
 -Post Blog Entries To Site
+-Provide Error when visiting unexistant blog post
 
 To-Do:
 -Get Signup System Back Online - Release 0.5.2
--Make Sure Accounts Are Always Refered to by ID
--Provide Error when visiting unexistant blog post
 -Update Control Panel for All Rank Permissions
