@@ -39,26 +39,24 @@ function getNumBlogEntries() {
 
 function isFirstPage() {
 	global $pageID;
-	if($pageID=="none"||$pageID==0||$pageID==1) {
+	if($pageID==1) {
 		return true;
-	} else { return false;
-	}
+	} else { return false; }
 }
 
 function isLastPage() {
 	global $pageID, $siteSettings;
 	$lastPage = ceil(getNumBlogEntries()/$siteSettings['blogEntriesPerPage']);
+	if($pageID=="none"||$pageID==0) {
+		$pageID=1;
+	}
 	if($pageID>=$lastPage) {
 		return true;
-	} else { return false;
-	}
+	} else { return false; }
 }
 
 function getNextPageLink() {
 	global $pageID, $siteSettings;
-	if($pageID<=1) {
-		$pageID=1;
-	}
 	return $siteSettings['siteURLShort']."home/".($pageID+1);
 }
 
