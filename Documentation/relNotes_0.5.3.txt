@@ -11,4 +11,4 @@ To-Do:
 -Admin Side Blog System
 -Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
 -Allow to order ranks
--Provide Error upon incorrect login
+-Only Able to View 1 Success Notice (May not be isolated to success notices)
