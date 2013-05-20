@@ -54,12 +54,12 @@
             	<tr width="100%"><td width="50%">
                 	Description:<br><br>
                 	-Start of CMS<br>
-                	-Release of Blog System
+                	-Basic Blog System
                 </td><td width="50%">
                 	Features:<br><br>
                 	-Blog System<br>
                     -Accounts<br>
-                    -Full Site<br>
+                    -Ranks<br>
                     -Free For Use ATM
                 </td></tr></table>
                 <a href="http://beta.forumzbb.com" class="link">View the Demo</a><br>
@@ -186,5 +186,7 @@
             <br><font color="#666666" size="5">More themes coming soon...</font>
         </center>
     </div>
+    
+    <div style="font-size: 10px; text-align: center; margin-top: -5px;">Copyright 2013 Forumzbb</div>
 </div></body>
 </html>

@@ -21,7 +21,7 @@ function fillDatabase($con,$tableTitle,$user,$pass,$email,$ipAddr,$joinDate,$sit
 	// Site Settings Table
 	$sql = "CREATE TABLE `".$tableTitle."_siteSettings` (`settingsProfile` text NOT NULL,`siteName` text NOT NULL,`siteMotd` text NOT NULL,`siteSlogan` text NOT NULL,`defaultTheme` text NOT NULL,`siteDisabled` text NOT NULL,`reqLogin` text NOT NULL,`verifyRegisterEmail` text NOT NULL,`verifyRegisterAdmin` text NOT NULL,`htmlAllowed` text NOT NULL,`blogEntriesPerPage` int(11) NOT NULL)";
 	$result = mysqli_query($con,$sql) or die ("Query failed: line6");
-	$sql = "insert into `".$tableTitle."_siteSettings` values('1','$siteName','','Powered By <a href=\"http://www.forumzbb.com/\">Forumzbb</a>&copy; 2012 Forumzbb','SkyBlue','','false','false','false','false','4')";
+	$sql = "insert into `".$tableTitle."_siteSettings` values('1','$siteName','','Powered By <a href=\"http://www.forumzbb.com/\">Forumzbb</a>&copy; 2013 Forumzbb','SkyBlue','','false','false','false','false','4')";
 	$result = mysqli_query($con,$sql) or die ("Query failed: line7");
 	
 	// Blog Comments Table
