@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-10-12
-// Updated 5-16-13
+// Updated 5-19-13
 
 function displayCPNav() {
 	global $siteSettings, $userData;
@@ -82,17 +82,6 @@ function updateSiteSettings() {
 	addSuccessNotice("Success: Site Settings Updated");
 }
 
-function addSiteRank() {
-	global $pagePost, $con;
-	$rankName=mysqli_real_escape_string($con, $pagePost['rankName']);
-	$editSiteSettings=mysqli_real_escape_string($con, $pagePost['editSiteSettings']);
-	$rankID=getNumSiteRanks();
-	
-	$sql = "INSERT INTO ranks (rankID, rankName, editSiteSettings) VALUES ('$rankID','$rankName','$editSiteSettings')";
-	$result = dbQuery($sql) or die ("Query failed: addSiteRank");
-	addSuccessNotice("Success: Rank Added");
-}
-
 function getNumSiteRanks() {
 	$sql = "SELECT * FROM ranks";
 	$result = dbQuery($sql) or die ("Query failed: getNumSiteRanks");
@@ -102,21 +91,22 @@ function getNumSiteRanks() {
 function editRanksControlPanel() {
 	global $siteSettings, $pageID2;
 	$siteURL=$siteSettings['siteURLShort'];
-	if($pageID2!="none") {
-		$sql = "SELECT * FROM ranks WHERE rankID='$pageID2'";
-		$result = dbQuery($sql) or die ("Query failed: editRanksControlPanel");
-		$rankArray = mysqli_fetch_array($result);
-		if($rankArray['editSiteSettings']=="true") { $editSiteSettingsChecked="checked"; } else { $editSiteSettingsChecked=""; }
-		if($rankArray['editMemberRank']=="true") { $editMemberRankChecked="checked"; } else { $editMemberRankChecked=""; }
-		editRanksForm($siteURL,$rankArray['rankID'],$rankArray['rankName'],$editSiteSettingsChecked,$editMemberRankChecked);
-	} else {
-		editRanksForm($siteURL,"","","","");
-	}
+	$sql = "SELECT * FROM ranks WHERE rankID='$pageID2'";
+	$result = dbQuery($sql) or die ("Query failed: editRanksControlPanel");
+	$rankArray = mysqli_fetch_array($result);
+	// Get Checked Items
+	if($rankArray['editSiteSettings']=="true") { $settingChecked['editSiteSettings']="checked"; } else { $settingChecked['editSiteSettings']=""; }
+	if($rankArray['editMemberRank']=="true") { $settingChecked['editMemberRank']="checked"; } else { $settingChecked['editMemberRank']=""; }
+	if($rankArray['editRanks']=="true") { $settingChecked['editRanks']="checked"; } else { $settingChecked['editRanks']=""; }
+	if($rankArray['postBlogEntries']=="true") { $settingChecked['postBlogEntries']="checked"; } else { $settingChecked['postBlogEntries']=""; }
+	if($rankArray['postBlogComments']=="true") { $settingChecked['postBlogComments']="checked"; } else { $settingChecked['postBlogComments']=""; }
+	// Display Form
+	editRanksForm($siteURL,$rankArray['rankID'],$rankArray['rankName'],$settingChecked);
 }
 
 function displayRankNavItems() {
 	global $siteSettings;
-	$sql = "SELECT * FROM ranks";
+	$sql = "SELECT * FROM ranks ORDER BY rankOrder";
 	$result = dbQuery($sql) or die ("Query failed: displayRankNavItems");
 	while($rank = mysqli_fetch_array($result)) {
 		$rankLink=$siteSettings['siteURLShort']."controlPanel/editRanks/".$rank['rankID']."/";
@@ -130,13 +120,31 @@ function displayRankNavItems() {
 	displayRankNavItem("Add Rank",$rankLink);
 }
 
+function addSiteRank() {
+	global $pagePost, $con;
+	$rankName=mysqli_real_escape_string($con, $pagePost['rankName']);
+	$editSiteSettings=mysqli_real_escape_string($con, $pagePost['editSiteSettings']);
+	$editMemberRank=mysqli_real_escape_string($con, $pagePost['editMemberRank']);
+	$editRanks=mysqli_real_escape_string($con, $pagePost['editRanks']);
+	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
+	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
+	$rankID=getNumSiteRanks();
+	
+	$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments) VALUES ('$rankID','$rankID','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments')";
+	$result = dbQuery($sql) or die ("Query failed: addSiteRank");
+	addSuccessNotice("Success: Rank Added");
+}
+
 function updateRank() {
 	global $pagePost, $pageID2, $con;
 	$rankName=mysqli_real_escape_string($con, $pagePost['rankName']);
 	$editSiteSettings=mysqli_real_escape_string($con, $pagePost['editSiteSettings']);
 	$editMemberRank=mysqli_real_escape_string($con, $pagePost['editMemberRank']);
+	$editRanks=mysqli_real_escape_string($con, $pagePost['editRanks']);
+	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
+	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
 	
-	$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank' WHERE rankID='$pageID2'";
+	$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank',editRanks='$editRanks',postBlogEntries='$postBlogEntries',postBlogComments='$postBlogComments' WHERE rankID='$pageID2'";
 	$result = dbQuery($sql) or die ("Query failed: updateRank");
 	addSuccessNotice("Success: Rank Updated");
 }
