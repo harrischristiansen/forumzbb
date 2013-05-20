@@ -3,6 +3,7 @@ Harris Christiansen
 June 2, 2013
 
 Completed:
+-Fixed issue with permission to change members ranks
 
 To-Do:
 -Blog Admin Control Panel

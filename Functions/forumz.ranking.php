@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-16-13
+// Updated 5-19-13
 
 // Rank Permissions + Control Systems
 
@@ -17,8 +17,10 @@ function setUserPrivileges() {
 	$userData['permissions']=mysqli_fetch_array($result);
 }
 
-function setUserRank($userID, $tarRank) {
-	global $userData;
+function setUserRank() {
+	global $userData, $pageID2, $pagePost, $con;
+	$userID=$pageID2;
+	$tarRank=mysqli_real_escape_string($con, $pagePost['newRank']);
 	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])||getOrderOfRank($tarRank)==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
 		addFailureNotice("Permission Denied");
 	}
