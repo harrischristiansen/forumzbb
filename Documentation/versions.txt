@@ -49,6 +49,8 @@ Version 0.5.3:
 -Blog Admin Control Panel
 -BB Code Fancy Posts
 -Admin Side Blog System
+-Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
+-Allow to order ranks
 
 Version 0.5.4:
 -Security Enhancements
