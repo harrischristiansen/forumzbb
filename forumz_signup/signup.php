@@ -53,13 +53,13 @@
             	<center><font size="5">Forumz Public Signup</font></center>
             	<tr width="100%"><td width="50%">
                 	Description:<br><br>
-                	-Signup to host your own forumz site.<br>
-                	-Includes easy to setup and use CMS and forum system.
+                	-Start of CMS<br>
+                	-Release of Blog System
                 </td><td width="50%">
                 	Features:<br><br>
-                	-Customizable Themes<br>
-                    -Forum System<br>
-                    -Blog System<br>
+                	-Blog System<br>
+                    -Accounts<br>
+                    -Full Site<br>
                     -Free For Use ATM
                 </td></tr></table>
                 <a href="http://beta.forumzbb.com" class="link">View the Demo</a><br>
@@ -71,7 +71,7 @@
     </div>
     
     <div id="r2">
-    	<div class="left"><b>Released Version</b> | Forumz 0.5.1</div>
+    	<div class="left"><b>Released Version</b> | Forumz 0.5.2</div>
     </div>
     
     <div id="r3"><br>
