@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-16-13
+// Updated 5-19-13
 
 // Forumz Sitewide References
 
@@ -60,7 +60,7 @@ function getSiteSlogan() {
 	return $siteSettings['siteSlogan'];
 }
 function getSiteNumMembers() {
-	$sql = "SELECT * FROM accounts";
+	$sql = "SELECT * FROM accounts WHERE actID<>'Anonymous'";
 	$result = dbQuery($sql) or die ("Query failed: getSiteNumMembers");
 	return mysqli_num_rows($result);
 }
