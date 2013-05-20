@@ -19,6 +19,6 @@ Completed:
 -Provide Error when visiting unexistant blog post
 -Added Anonymous User and support for Anonymous actions if rank permits
 -Update Control Panel for All Rank Permissions
+-Get Signup System Back Online - Release 0.5.2
 
 To-Do:
--Get Signup System Back Online - Release 0.5.2
