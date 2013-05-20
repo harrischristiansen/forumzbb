@@ -41,9 +41,21 @@ Version 0.5.1:
 Version 0.5.2:
 -Blog System
 -Blog Home Page
+-Make it so ranks have an order
+-Blog Entires Per Page Option in Settings
+-Fixed Site Disabled Requirements
 -Blog View Post Page
--Blog Comment System
--Client Side Blog System
+-View Blog Comments
+-Prohibit promoting into ranks of your same status or above
+-Prohibit demoting those in your rank or above
+-Post Comments To Blog
+-Store Accounts Last Login Date and IP
+-Pull page url, themeFile, and viewConditions from mysql db
+-Post Blog Entries To Site
+-Provide Error when visiting unexistant blog post
+-Added Anonymous User and support for Anonymous actions if rank permits
+-Update Control Panel for All Rank Permissions
+-Get Signup System Back Online - Release 0.5.2
 
 Version 0.5.3:
 -Blog Admin Control Panel

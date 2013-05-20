@@ -1,0 +1,13 @@
+Forumz Version 0.5.3
+Harris Christiansen
+June 2, 2013
+
+Completed:
+
+To-Do:
+-Blog Admin Control Panel
+-BB Code Fancy Posts
+-Admin Side Blog System
+-Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
+-Allow to order ranks
+-Provide Error upon incorrect login
