@@ -1,13 +1,13 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-16-13
+// Updated 5-19-13
 
 // Members List and Member Info Systems
 
 
 function getListActiveMembers() {
-	$sql = "SELECT * FROM accounts WHERE actStatus='0' ORDER BY username";
+	$sql = "SELECT * FROM accounts WHERE actStatus='0' AND actID<>'Anonymous' ORDER BY username";
 	$result = dbQuery($sql) or die ("Query failed: getListActiveMembers");
 	return $result;
 }
