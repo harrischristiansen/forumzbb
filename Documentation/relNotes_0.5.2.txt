@@ -17,7 +17,8 @@ Completed:
 -Pull page url, themeFile, and viewConditions from mysql db
 -Post Blog Entries To Site
 -Provide Error when visiting unexistant blog post
+-Added Anonymous User and support for Anonymous actions if rank permits
+-Update Control Panel for All Rank Permissions
 
 To-Do:
 -Get Signup System Back Online - Release 0.5.2
--Update Control Panel for All Rank Permissions
