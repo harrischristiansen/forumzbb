@@ -1,12 +1,19 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-16-13
+// Updated 5-19-13
 
 // Account Creation and Login Systems
 // Callable Functions: loginUser(), logoutUser(), registerUser(), sendConfirmationEmail($user, $email)
 
-
+function setAccountToDefault() {
+	global $userData;
+	$userData['username']="Anonymous";
+	$userData['loggedIn']=false;
+		$userData['actID']="Anonymous";
+		$userData['rankID']=0;
+		$userData['email']="-";
+}
 function loginUser() {
 	global $userData, $pagePost;
 	$user=$pagePost['username'];
@@ -96,7 +103,7 @@ function updateLoginReport($user) {
 
 function logoutUser() {
 	global $userData;
-	$userData="";
+	setAccountToDefault();
 	addSuccessNotice("You are now logged out.");
 }
 function registerUser() {
