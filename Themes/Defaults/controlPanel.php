@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-19-12
-// Updated 5-12-13
+// Updated 5-19-13
 
 function displayCPNavItem($navItem, $navLink) {
 	viewHTML('<a class="controlPanelNavItem" href="'.$navLink.'">'.$navItem.'</a>');
@@ -40,7 +40,7 @@ function editSiteSettingsForm($siteURL,$siteName,$siteMotd,$siteSlogan,$siteDisa
 	viewHTML('</form>');
 }
 
-function editRanksForm($siteURL,$linkID,$rankName,$editSiteSettingsChecked,$editMemberRankChecked) {
+function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 	viewHTML('<div id="controlPanelNav2">');
 	viewHTML('Ranks:<br>');
 	displayRankNavItems();
@@ -51,29 +51,27 @@ function editRanksForm($siteURL,$linkID,$rankName,$editSiteSettingsChecked,$edit
 	if($linkID!="") {
 		viewHTML('<form action="'.$siteURL.'controlPanel/editRanks/'.$linkID.'/" method="POST">');
 		viewHTML('Edit Rank:<br>');
-		viewHTML('Rank Name: <input type="text" name="rankName" value="'.$rankName.'"><br>');
-		viewHTML('Edit Site Settings: <input type="checkbox" name="editSiteSettings" value="true" '.$editSiteSettingsChecked.'><br>');
-		viewHTML('Edit Members Rank: <input type="checkbox" name="editMemberRank" value="true" '.$editMemberRankChecked.'><br>');
-		viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Rank">');
-		viewHTML('</form>');
 	} else {
-		addRankForm($siteURL);
+		viewHTML('<form action="'.$siteURL.'controlPanel/addRank/" method="POST">');
+		viewHTML('Add Rank:<br>');
 	}
+		viewHTML('Rank Name: <input type="text" name="rankName" value="'.$rankName.'"><br>');
+		viewHTML('Edit Site Settings: <input type="checkbox" name="editSiteSettings" value="true" '.$settingChecked['editSiteSettings'].'><br>');
+		viewHTML('Edit Members Rank: <input type="checkbox" name="editMemberRank" value="true" '.$settingChecked['editMemberRank'].'><br>');
+		viewHTML('Edit Ranks: <input type="checkbox" name="editRanks" value="true" '.$settingChecked['editRanks'].'><br>');
+		viewHTML('Post Blog Entries: <input type="checkbox" name="postBlogEntries" value="true" '.$settingChecked['postBlogEntries'].'><br>');
+		viewHTML('Post Blog Comments: <input type="checkbox" name="postBlogComments" value="true" '.$settingChecked['postBlogComments'].'><br>');
+		if($linkID!="") {
+			viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Rank">');
+		} else {
+			viewHTML('<input type="submit" name="cpFormSubmitted" value="Add Rank">');
+		}
+		viewHTML('</form>');
 	
 	viewHTML('</div>');
 }
 
 function displayRankNavItem($navItem, $navLink) {
 	viewHTML('<a class="controlPanelNav2Item" href="'.$navLink.'">'.$navItem.'</a>');
-}
-
-function addRankForm($siteURL) {
-	viewHTML('<form action="'.$siteURL.'controlPanel/addRank/" method="POST">');
-	viewHTML('Add Rank:<br>');
-	viewHTML('Rank Name: <input type="text" name="rankName" value=""><br>');
-	viewHTML('Edit Site Settings: <input type="checkbox" name="editSiteSettings" value="true"><br>');
-	viewHTML('Edit Members Rank: <input type="checkbox" name="editMemberRank" value="true"><br>');
-	viewHTML('<input type="submit" name="cpFormSubmitted" value="Add Rank">');
-	viewHTML('</form>');
 }
 ?>
