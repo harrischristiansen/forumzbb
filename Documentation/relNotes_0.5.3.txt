@@ -4,11 +4,10 @@ June 2, 2013
 
 Completed:
 -Fixed issue with permission to change members ranks
+-Fixed issue where only one notice of each kind would be displayed
 
 To-Do:
--Blog Admin Control Panel
--BB Code Fancy Posts
--Admin Side Blog System
+-BB Code Posts
+-Admin Blog System
 -Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
 -Allow to order ranks
--Only Able to View 1 Success Notice (May not be isolated to success notices)

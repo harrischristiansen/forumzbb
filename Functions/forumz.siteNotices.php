@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-3-12
-// Updated 10-9-12
+// Updated 5-22-13
 
 // Collection and Display of Site Notices
 
@@ -9,7 +9,7 @@
 
 function addFailureNotice($msg) {
 	global $notices_failures;
-	if(!isset($noices_failures)) {
+	if(!isset($notices_failures)) {
 		$notices_failures=array($msg);
 	} else {
 		array_push($notices_failures, $msg);
@@ -37,7 +37,7 @@ function displayFailures() {
 
 function addSuccessNotice($msg) {
 	global $notices_successes;
-	if(!isset($noices_successes)) {
+	if(!isset($notices_successes)) {
 		$notices_successes=array($msg);
 	} else {
 		array_push($notices_successes, $msg);
