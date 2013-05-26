@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-10-12
-// Updated 5-19-13
+// Updated 5-26-13
 
 function displayCPNav() {
 	global $siteSettings, $userData;
@@ -120,8 +120,9 @@ function displayRankNavItems() {
 	displayRankNavItem("Add Rank",$rankLink);
 }
 
+// Both need to confirm that only highest ranking member can edit ranks permissions
 function addSiteRank() {
-	global $pagePost, $con;
+	global $pagePost, $con, $userData;
 	$rankName=mysqli_real_escape_string($con, $pagePost['rankName']);
 	$editSiteSettings=mysqli_real_escape_string($con, $pagePost['editSiteSettings']);
 	$editMemberRank=mysqli_real_escape_string($con, $pagePost['editMemberRank']);
@@ -129,14 +130,18 @@ function addSiteRank() {
 	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
 	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
 	$rankID=getNumSiteRanks();
-	
-	$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments) VALUES ('$rankID','$rankID','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments')";
-	$result = dbQuery($sql) or die ("Query failed: addSiteRank");
-	addSuccessNotice("Success: Rank Added");
+	if(getHighestRankID()!=$userData['rankID']) {
+		addFailureNotice("Permission Denied");
+	} else {
+		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments) VALUES ('$rankID','$rankID','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments')";
+		$result = dbQuery($sql) or die ("Query failed: addSiteRank");
+		addSuccessNotice("Success: Rank Added");
+	}
 }
 
 function updateRank() {
-	global $pagePost, $pageID2, $con;
+	global $pagePost, $pageID2, $con, $userData;
+	$tarRank=$pageID2;
 	$rankName=mysqli_real_escape_string($con, $pagePost['rankName']);
 	$editSiteSettings=mysqli_real_escape_string($con, $pagePost['editSiteSettings']);
 	$editMemberRank=mysqli_real_escape_string($con, $pagePost['editMemberRank']);
@@ -144,8 +149,16 @@ function updateRank() {
 	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
 	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
 	
-	$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank',editRanks='$editRanks',postBlogEntries='$postBlogEntries',postBlogComments='$postBlogComments' WHERE rankID='$pageID2'";
-	$result = dbQuery($sql) or die ("Query failed: updateRank");
-	addSuccessNotice("Success: Rank Updated");
+	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])) { // Attempting to Edit Rank Greater Than Own
+		addFailureNotice("Permission Denied");
+	} else if(getHighestRankID()!=$userData['rankID']) {
+		$sql = "UPDATE ranks SET rankName='$rankName' WHERE rankID='$tarRank'";
+		$result = dbQuery($sql) or die ("Query failed: updateRank");
+		addSuccessNotice("Success: Rank Updated");
+	} else {
+		$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank',editRanks='$editRanks',postBlogEntries='$postBlogEntries',postBlogComments='$postBlogComments' WHERE rankID='$tarRank'";
+		$result = dbQuery($sql) or die ("Query failed: updateRank");
+		addSuccessNotice("Success: Rank Updated");
+	}
 }
 ?>

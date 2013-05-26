@@ -1,12 +1,12 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-19-13
+// Updated 5-26-13
 
 // Rank Permissions + Control Systems
 
 
-function setUserPrivileges() {
+function setUserPrivileges() { // Sets a users permissions based on their rank - Stored in UserData
 	// Get Rank ID
 	global $userData;
 	$userRank=$userData['rankID'];
@@ -62,5 +62,15 @@ function getOrderOfRank($rankID) {
 	$result = dbQuery($sql) or die ("Query failed: getOrderOfRank");
 	$resultArray=mysqli_fetch_array($result);
 	return $resultArray['rankOrder'];
+}
+
+
+// Misc
+function getHighestRankID() {
+	$sql = "SELECT * FROM ranks ORDER BY rankOrder DESC";
+	$result = dbQuery($sql) or die ("Query failed: getHighestRankID");
+	$resultArray=mysqli_fetch_array($result);
+	return $resultArray['rankID'];
+	
 }
 ?>

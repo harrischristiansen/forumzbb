@@ -10,9 +10,9 @@ function setAccountToDefault() {
 	global $userData;
 	$userData['username']="Anonymous";
 	$userData['loggedIn']=false;
-		$userData['actID']="Anonymous";
-		$userData['rankID']=0;
-		$userData['email']="-";
+	$userData['actID']="Anonymous";
+	$userData['rankID']=0;
+	$userData['email']="-";
 }
 function loginUser() {
 	global $userData, $pagePost;
