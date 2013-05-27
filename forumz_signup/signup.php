@@ -49,20 +49,9 @@
     
     <div id="r1">
     	<div class="left">
-        	<table border="0" id="r1c1" cellpadding="0">
-            	<center><font size="5">Forumz Public Signup</font></center>
-            	<tr width="100%"><td width="50%">
-                	Description:<br><br>
-                	-Start of CMS<br>
-                	-Basic Blog System
-                </td><td width="50%">
-                	Features:<br><br>
-                	-Blog System<br>
-                    -Accounts<br>
-                    -Ranks<br>
-                    -Free For Use ATM
-                </td></tr></table>
+            	<center><font size="5">Forumz Public Signup</font></center><br><br>
                 <a href="http://beta.forumzbb.com" class="link">View the Demo</a><br>
+                <a href="http://signup.forumzbb.com/relNotes.txt" class="link">View Release Notes</a><br>
 				Contact Email: <a href="mailTo:cloudy243@me.com" style="color: #000000;">cloudy243@me.com</a>
         </div>
         <div class="right">

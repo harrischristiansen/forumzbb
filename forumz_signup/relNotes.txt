@@ -1,0 +1,55 @@
+Forumz Release Notes
+Harris Christiansen
+Current Stable Released Version: 0.5.2
+
+Version 0.5.0:
+-Simple Reference Functions getDate(), getTime(), getUsername(), isSiteDisabled(), getDisabledMessage(), getSiteName(), getSiteMotd(), getSiteSlogan()
+-Login System
+-Registration System
+-Website Settings Database
+-Email Confirmation For Account Creation
+-Account System
+-Account Privileges/Rankings
+-Header Bar
+-Footer Bar
+-Home Page
+-Registration Page (viewRegistration.php -> viewHome.php)
+-Login Page (viewHome.php)
+-Logout Functionality
+-Members List Page (viewMembersList.php)
+-Page Load Statistics (Time and Number Of Queries)
+-Breadcrumbs Viewer (viewFooter.php)
+-Notices Viewer (viewHeader.php)
+
+Version 0.5.1:
+-Control Panel
+-Change Password Settings
+-Login Using Email Address - If Only One User With Existing Email Address
+-Change Profile Settings
+-Edit Site Settings
+-Display Site Motd
+-Site Disabled Msg
+-Restrict Access To Pages Depending On Login Status
+-Control Panel Restriction By Rank
+-Create Ranks
+-Display Rank Name On Members List
+-Edit Ranks Permissions
+-Control Members Ranks (check if user can editMemberRank)
+
+Version 0.5.2:
+-Blog System
+-Blog Home Page
+-Make it so ranks have an order
+-Blog Entires Per Page Option in Settings
+-Fixed Site Disabled Requirements
+-Blog View Post Page
+-View Blog Comments
+-Prohibit promoting into ranks of your same status or above
+-Prohibit demoting those in your rank or above
+-Post Comments To Blog
+-Store Accounts Last Login Date and IP
+-Pull page url, themeFile, and viewConditions from mysql db
+-Post Blog Entries To Site
+-Provide Error when visiting unexistant blog post
+-Added Anonymous User and support for Anonymous actions if rank permits
+-Update Control Panel for All Rank Permissions
