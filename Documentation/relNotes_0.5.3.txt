@@ -12,3 +12,4 @@ To-Do:
 -BB Code Posts
 -Admin Blog Features - Edit, Delete
 -Allow to order ranks
+-Edit Ranks CP Not Displaying
