@@ -1,8 +1,8 @@
 Forumz Version Release Notes
 Harris Christiansen
-Current Stable Released Version: -
-Current Beta Version: 0.5.1
-Current Development Version: 0.5.2
+Current Stable Released Version: 0.5.2
+Current Beta Version: 0.5.2
+Current Development Version: 0.5.3
 
 Version 0.5.0:
 -Simple Reference Functions getDate(), getTime(), getUsername(), isSiteDisabled(), getDisabledMessage(), getSiteName(), getSiteMotd(), getSiteSlogan()

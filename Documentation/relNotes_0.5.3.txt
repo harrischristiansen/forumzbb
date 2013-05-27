@@ -6,9 +6,9 @@ Completed:
 -Fixed issue with permission to change members ranks
 -Fixed issue where only one notice of each kind would be displayed
 -Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
+-Fixed Issue where Edit Ranks CP Nav Item would not display
 
 To-Do:
 -BB Code Posts
--Admin Blog System
+-Admin Blog Features - Edit, Delete
 -Allow to order ranks
--Once Permissions Granted, Unable to see access based control panel menu items

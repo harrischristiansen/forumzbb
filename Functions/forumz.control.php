@@ -10,6 +10,8 @@ function displayCPNav() {
 	displayCPNavItem("Change Preferences",$siteSettings['siteURLShort']."controlPanel/changePreferences/");
 	if($userData['permissions']['editSiteSettings']=="true") {
 		displayCPNavItem("Edit Site Settings",$siteSettings['siteURLShort']."controlPanel/editSiteSettings/");
+	}
+	if($userData['permissions']['editRanks']=="true") {
 		displayCPNavItem("Edit Ranks",$siteSettings['siteURLShort']."controlPanel/editRanks/");
 	}
 }
