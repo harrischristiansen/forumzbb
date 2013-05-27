@@ -116,19 +116,30 @@ function editRanksControlPanel() {
 }
 
 function displayRankNavItems() {
-	global $siteSettings;
+	global $siteSettings,$userData;
 	$sql = "SELECT * FROM ranks ORDER BY rankOrder";
 	$result = dbQuery($sql) or die ("Query failed: displayRankNavItems");
+	
 	while($rank = mysqli_fetch_array($result)) {
 		$rankLink=$siteSettings['siteURLShort']."controlPanel/editRanks/".$rank['rankID']."/";
 		if($rank['rankID']=="0") {
-			displayRankNavItem("Unregistered User",$rankLink);
+			displayRankNavItem("Unregistered User",$rankLink,"","");
 		} else {
-			displayRankNavItem($rank['rankName'],$rankLink);
+			// When To Show Up Arrow
+			$upArrLink="";
+			if($rank['rankOrder']>1&&$userData['permissions']['rankOrder']>$rank['rankOrder']) {
+				$upArrLink="#";
+			}
+			// When To Show Dn Arrow
+			$dnArrLink="";
+			if($rank['rankOrder']>0&&$userData['permissions']['rankOrder']>($rank['rankOrder']+1)) {
+				$dnArrLink="#";
+			}
+			displayRankNavItem($rank['rankName'],$rankLink,$upArrLink,$dnArrLink);
 		}
 	}
 	$rankLink=$siteSettings['siteURLShort']."controlPanel/addRank/";
-	displayRankNavItem("Add Rank",$rankLink);
+	displayRankNavItem("Add Rank",$rankLink,"","");
 }
 
 // Both need to confirm that only highest ranking member can edit ranks permissions

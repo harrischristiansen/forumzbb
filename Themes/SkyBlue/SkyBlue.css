@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 /* Harris Christiansen */
 /* Created 9-15-12 */
-/* Updated 5-16-12 */
+/* Updated 5-27-12 */
 
 
 html, body {
@@ -256,7 +256,7 @@ hr {
 	position: relative;
 }
 
-.controlPanelNavItem, .controlPanelNav2Item {
+.controlPanelNavItem {
 	width: 95%;
 	height: 25px;
 	display: block;
@@ -267,6 +267,36 @@ hr {
 	background-color: #003366;
 	color: #FFFFFF;
 	padding-top: 3px;
+}
+
+.controlPanelNav2Item {
+	width: 85%;
+	float: left;
+	height: 25px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #003366;
+	color: #FFFFFF;
+	padding-top: 3px;
+}
+
+.CPNav2Funcs {
+	width: 15px;
+	height: 25px;
+	float: left;
+}
+.CPNav2Func {
+	width: 15px;
+	height: 12px;
+	display: block;
+}
+
+.CPNav2Cont {
+	width: 95%;
+	height: 25px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 .floatLeft {

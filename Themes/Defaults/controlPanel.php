@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-19-12
-// Updated 5-19-13
+// Updated 5-27-13
 
 function displayCPNavItem($navItem, $navLink) {
 	viewHTML('<a class="controlPanelNavItem" href="'.$navLink.'">'.$navItem.'</a>');
@@ -71,7 +71,25 @@ function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 	viewHTML('</div>');
 }
 
-function displayRankNavItem($navItem, $navLink) {
-	viewHTML('<a class="controlPanelNav2Item" href="'.$navLink.'">'.$navItem.'</a>');
+function displayRankNavItem($navItem, $navLink, $upArrLink, $dnArrLink) {
+	viewHTML('<div class="CPNav2Cont">');
+		viewHTML('<a class="controlPanelNav2Item" href="'.$navLink.'">'.$navItem.'</a>');
+		viewHTML('<div class="CPNav2Funcs">');
+			if($upArrLink!="") {
+				viewHTML('<a class="CPNav2Func" href="'.$upArrLink.'">');
+					viewHTML('<img src="/Resources/images/upArrowSm.jpg" height="12" width="15">');
+				viewHTML('</a>');
+			} else {
+				viewHTML('<div class="CPNav2Func"></div>');
+			}
+			if($dnArrLink!="") {
+				viewHTML('<a class="CPNav2Func" href="'.$dnArrLink.'">');
+					viewHTML('<img src="/Resources/images/dnArrowSm.jpg" height="12" width="15">');
+				viewHTML('</a>');
+			} else {
+				viewHTML('<div class="CPNav2Func"></div>');
+			}
+		viewHTML('</div>');
+	viewHTML('</div>');
 }
 ?>
