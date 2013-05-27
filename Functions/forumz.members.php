@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-19-13
+// Updated 5-27-13
 
 // Members List and Member Info Systems
 
@@ -32,10 +32,7 @@ function displayMembersList() {
 	
 	// Run While Statement For Each Member
 	while($member = mysqli_fetch_array($activeMembers)) {
-		if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true") {
-			$cngRankFormDisplay=true;
-		} else { $cngRankFormDisplay=false; }
-		displayMembersListRow($member['username'], getRankName($member['rankID']), $member['joinDate'], $member['actID'], $rowID, $cngRankFormDisplay);
+		displayMembersListRow($member['username'], getRankName($member['rankID']), $member['joinDate'], $member['actID'], $rowID, hasPermissionToEditRank($member['rankID']));
 		$rowID++;
 	}
 }

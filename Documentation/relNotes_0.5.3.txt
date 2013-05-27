@@ -8,6 +8,7 @@ Completed:
 -Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
 -Fixed Issue where Edit Ranks CP Nav Item would not display
 -Fixed Issue where Edit Ranks CP Content would not display
+-Cleaned Up Members List Change Rank Dropdown
 
 To-Do:
 -BB Code Posts

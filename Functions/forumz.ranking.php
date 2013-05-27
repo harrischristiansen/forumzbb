@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-26-13
+// Updated 5-27-13
 
 // Rank Permissions + Control Systems
 
@@ -21,10 +21,10 @@ function setUserRank() {
 	global $userData, $pageID2, $pagePost, $con;
 	$userID=$pageID2;
 	$tarRank=mysqli_real_escape_string($con, $pagePost['newRank']);
-	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])||getOrderOfRank($tarRank)==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
+	if(!hasPermissionToEditRank($tarRank)||$tarRank==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
 		addFailureNotice("Permission Denied");
 	}
-	elseif(getOrderOfRank(getUserRank($userID))>=getOrderOfRank($userData['rankID'])) { // Attempting to demote someone of your rank or above
+	elseif(!hasPermissionToEditRank(getUserRank($userID))) { // Attempting to demote someone of your rank or above
 		addFailureNotice("Permission Denied");
 	} else {
 	
@@ -53,7 +53,9 @@ function getChangeRankListOptions($actID) {
 	$result = dbQuery($sql) or die ("Query failed: getChangeRankListOptions-Ranks");
 	while($rank = mysqli_fetch_array($result)) {
 		if($rank['rankID']==$userRank) { $optSelected="selected"; } else { $optSelected=""; }
-		displayChangeRankListOption($rank['rankName'], $rank['rankID'], $optSelected);
+		if(hasPermissionToEditRank($rank['rankID'])&&$rank['rankID']!=0) { // Limits Options Displayed To Only Those Allowed
+			displayChangeRankListOption($rank['rankName'], $rank['rankID'], $optSelected);
+		}
 	}
 }
 
@@ -72,5 +74,12 @@ function getHighestRankID() {
 	$resultArray=mysqli_fetch_array($result);
 	return $resultArray['rankID'];
 	
+}
+function hasPermissionToEditRank($rankID) {
+	global $userData;
+	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&getOrderOfRank($rankID)<getOrderOfRank($userData['rankID'])) {
+		return true;
+	}
+	return false;
 }
 ?>
