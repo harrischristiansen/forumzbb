@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-10-12
-// Updated 5-26-13
+// Updated 5-27-13
 
 function displayCPNav() {
 	global $siteSettings, $userData;
@@ -19,10 +19,15 @@ function displayCPNav() {
 function displayCPContent() {
 	global $pageID, $siteSettings, $pagePost, $userData;
 	$siteURL=$siteSettings['siteURLShort'];
+	$pageNotFound=true;
+	
+	// Common Pages
 	if($pageID=="changePassword") { changePasswordForm($siteURL); $pageNotFound=false; }
 	elseif($pageID=="editProfile") { editProfileForm($userData['email'],$siteURL); $pageNotFound=false; }
 	elseif($pageID=="changePreferences") { changePreferencesForm($siteURL); $pageNotFound=false; }
-	elseif($userData['permissions']['editSiteSettings']=="true") {
+	
+	// Permission Restricted Pages
+	if($userData['permissions']['editSiteSettings']=="true") {
 		if($pageID=="editSiteSettings") {
 			global $siteSettings;
 			$pageNotFound=false;
@@ -30,10 +35,14 @@ function displayCPContent() {
 			else { $reqLoginChecked=""; }
 			editSiteSettingsForm($siteURL,$siteSettings['siteName'],$siteSettings['siteMotd'],$siteSettings['siteSlogan'],$siteSettings['disabledMessage'],$reqLoginChecked,$siteSettings['blogEntriesPerPage']);
 		}
+	}
+	if($userData['permissions']['editRanks']=="true") {
 		if($pageID=="addRank") { addRankForm($siteURL); $pageNotFound=false; }
 		if($pageID=="editRanks") { editRanksControlPanel(); $pageNotFound=false; }
 	}
-	else { viewHTML('Please Select An Item From The Menu On The Left.'); }
+	
+	// Page Not Found
+	if($pageNotFound) { viewHTML('Please Select An Item From The Menu On The Left.'); }
 }
 
 function updateAccountPassword() {
