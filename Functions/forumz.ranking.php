@@ -77,7 +77,7 @@ function getHighestRankID() {
 }
 function hasPermissionToEditRank($rankID) {
 	global $userData;
-	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&getOrderOfRank($rankID)<getOrderOfRank($userData['rankID'])) {
+	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&getOrderOfRank($rankID)<$userData['permissions']['rankOrder']) {
 		return true;
 	}
 	return false;

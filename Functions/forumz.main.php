@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-19-13
+// Updated 5-27-13
 
 // Requires
 require_once('Functions/forumz.references.php');
@@ -19,10 +19,10 @@ require_once('Functions/forumz.databaseTools.php');
 function displayWebsite() {
 	global $pageName, $pageID, $pagePost, $siteSettings, $userData;
 	loadSettings();
-	setUserPrivileges();
-	if(!isset($userData['username'])) {
+	if(!isset($userData['username'])) { // Logged Out, Anonymous Act
 		setAccountToDefault();
 	}
+	setUserPrivileges(); // Updates Permissions On Each Page Load
 	// Check if pageName is Numerical, if so set pageName to home, pageID to num.
 	if(is_numeric($pageName)){
 		$pageID=$pageName;
