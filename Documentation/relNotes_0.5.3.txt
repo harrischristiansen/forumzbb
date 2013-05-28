@@ -10,6 +10,7 @@ Completed:
 -Fixed Issue where Edit Ranks CP Content would not display
 -Cleaned Up Members List Change Rank Dropdown
 -New Accounts Join Lowest Rank
+-Fixed Issue where Deleted Blog Posts influenced blogPostsPerPage
 
 To-Do:
 -BB Code Posts

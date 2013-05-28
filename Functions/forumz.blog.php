@@ -4,24 +4,18 @@
 // Updated 5-27-13
 
 ////////// Home Blog View System //////////
-function getBlogEntries($startID, $endID) {
-	$sql = "SELECT * FROM blogs WHERE ID>='$startID' AND ID<'$endID' ORDER BY ID DESC";
+function getBlogEntries($startID, $entriesPerPage) {
+	$sql = "SELECT * FROM blogs WHERE ID>0 ORDER BY ID DESC LIMIT $startID,$entriesPerPage";
+	echo $sql;
 	$result = dbQuery($sql) or die ("Query failed: getBlogEntries");
 	return $result;
 }
 function viewBlogEntries() {
 	global $siteSettings, $pageID;
+	if($pageID<1) { $pageID=1; }
 	$blogEntriesPerPage=$siteSettings['blogEntriesPerPage'];
-	$startID=getNumBlogEntries()-$blogEntriesPerPage;
-	$endID=getNumBlogEntries();
-	if($pageID!="none"&&$pageID>=2) {
-		$numToSubtract=($pageID-1)*$blogEntriesPerPage;
-		$startID-=$numToSubtract;
-		$endID-=$numToSubtract;
-	}
-
-
-	$blogEntries=getBlogEntries($startID,$endID);
+	$startID=$blogEntriesPerPage*($pageID-1);
+	$blogEntries=getBlogEntries($startID,$blogEntriesPerPage);
 
 	while($entry = mysqli_fetch_array($blogEntries)) {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
@@ -134,7 +128,7 @@ function addBlogEntry() {
 	} elseif($newEntryTitle==""||$newEntryText=="") {
 		addFailureNotice("Please Type An Entry Before Submitting");
 	} else {
-		$blogID=getNumBlogEntries();
+		$blogID=getNumBlogEntries()+1;
 		$pageID=$blogID; // To Display Blog Once Added
 		$author=$userData['actID'];
 		$date=returnDateShort();
