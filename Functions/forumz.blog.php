@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-19-13
+// Updated 5-27-13
 
 ////////// Home Blog View System //////////
 function getBlogEntries($startID, $endID) {
@@ -32,7 +32,7 @@ function viewBlogEntries() {
 	}
 }
 function getNumBlogEntries() {
-	$sql = "SELECT * FROM blogs";
+	$sql = "SELECT * FROM blogs WHERE ID>=0";
 	$result = dbQuery($sql) or die ("Query failed: getNumBlogEntries");
 	return mysqli_num_rows($result);
 }
