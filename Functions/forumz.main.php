@@ -81,6 +81,18 @@ function loadPage() {
 		addFailureNotice("Page Not Found");
 	} else {
 		$pageData=mysqli_fetch_array($result);
+		// Breadcrumbs
+		if($pageData['breadcrumbTitle']!="") {
+			if($pageID2!="") {
+				addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID."/".$pageID2);
+			} elseif($pageID!="") {
+				addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID);
+			} else {
+				addBreadcrumb($pageData['breadcrumbTitle'],$pageName);
+			}
+		}
+		
+		// Page
 		if($pageData['requireLogin']=="true"&&!$userData['loggedIn']) {
 			if($pageName!="login") { addFailureNotice("You Must Login To View This Page"); }
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
@@ -94,15 +106,7 @@ function loadPage() {
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 			$pageToDisplay=$pageData['falseDisplayFile'];
 		} else {
-			if($pageData['breadcrumbTitle']!="") {
-				if($pageID2!="") {
-					addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID."/".$pageID2);
-				} elseif($pageID!="") {
-					addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID);
-				} else {
-					addBreadcrumb($pageData['breadcrumbTitle'],$pageName);
-				}
-			}
+			
 			$pageToDisplay=$pageData['displayFile'];
 			if($pageData['trueMsg']!="") {
 				addSuccessNotice($pageData['trueMsg']);

@@ -11,6 +11,7 @@ Completed:
 -Cleaned Up Members List Change Rank Dropdown
 -New Accounts Join Lowest Rank
 -Fixed Issue where Deleted Blog Posts influenced blogPostsPerPage
+-Fixed Issue with breadcrumbs not displaying
 
 To-Do:
 -BB Code Posts
