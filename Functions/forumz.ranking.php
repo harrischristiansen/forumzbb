@@ -72,9 +72,24 @@ function getHighestRankID() {
 	return $resultArray['rankID'];
 	
 }
+function getHighestRankOrder() {
+	$sql = "SELECT * FROM ranks ORDER BY rankOrder DESC";
+	$result = dbQuery($sql) or die ("Query failed: getHighestRankID");
+	$resultArray=mysqli_fetch_array($result);
+	return $resultArray['rankOrder'];
+	
+}
 function hasPermissionToEditRank($rankID) {
 	global $userData;
-	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&getOrderOfRank($rankID)<$userData['permissions']['rankOrder']) {
+	$rankOrder=getOrderOfRank($rankID);
+	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&$rankOrder<$userData['permissions']['rankOrder']) {
+		return true;
+	}
+	return false;
+}
+function hasPermissionToEditRankOrder($rankOrder) {
+	global $userData;
+	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&$rankOrder<$userData['permissions']['rankOrder']&&$rankOrder!=0) { // Used For Determining Swaping Ranks
 		return true;
 	}
 	return false;

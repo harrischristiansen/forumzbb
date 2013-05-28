@@ -37,8 +37,8 @@ function displayCPContent() {
 		}
 	}
 	if($userData['permissions']['editRanks']=="true") {
-		if($pageID=="addRank") { addRankForm($siteURL); $pageNotFound=false; }
-		if($pageID=="editRanks") { editRanksControlPanel(); $pageNotFound=false; }
+		if($pageID=="addRank") { editRanksForm($siteURL,"","",""); $pageNotFound=false; }
+		if($pageID=="editRanks"||$pageID=="swapRanks") { editRanksControlPanel(); $pageNotFound=false; }
 	}
 	
 	// Page Not Found
@@ -117,6 +117,7 @@ function editRanksControlPanel() {
 
 function displayRankNavItems() {
 	global $siteSettings,$userData;
+	$siteURL=$siteSettings['siteURLShort'];
 	$sql = "SELECT * FROM ranks ORDER BY rankOrder";
 	$result = dbQuery($sql) or die ("Query failed: displayRankNavItems");
 	
@@ -128,12 +129,12 @@ function displayRankNavItems() {
 			// When To Show Up Arrow
 			$upArrLink="";
 			if($rank['rankOrder']>1&&$userData['permissions']['rankOrder']>$rank['rankOrder']) {
-				$upArrLink="#";
+				$upArrLink=$siteURL."controlPanel/swapRanks/".$rank['rankID']."u";
 			}
 			// When To Show Dn Arrow
 			$dnArrLink="";
 			if($rank['rankOrder']>0&&$userData['permissions']['rankOrder']>($rank['rankOrder']+1)) {
-				$dnArrLink="#";
+				$dnArrLink=$siteURL."controlPanel/swapRanks/".$rank['rankID']."d";
 			}
 			displayRankNavItem($rank['rankName'],$rankLink,$upArrLink,$dnArrLink);
 		}
@@ -152,11 +153,15 @@ function addSiteRank() {
 	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
 	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
 	$rankID=getNumSiteRanks();
+	$highestRankOrder=getHighestRankOrder();
+	$newHighestRankOrder=$highestRankOrder+1;
 	if(getHighestRankID()!=$userData['rankID']) {
 		addFailureNotice("Permission Denied");
 	} else {
-		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments) VALUES ('$rankID','$rankID','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments')";
-		$result = dbQuery($sql) or die ("Query failed: addSiteRank");
+		$sql = "UPDATE ranks SET rankOrder='$newHighestRankOrder' WHERE rankOrder='$highestRankOrder'";
+		$result = dbQuery($sql) or die ("Query failed: addSiteRank-moveAdminRank");
+		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments) VALUES ('$rankID','$highestRankOrder','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments')";
+		$result = dbQuery($sql) or die ("Query failed: addSiteRank-addRank");
 		addSuccessNotice("Success: Rank Added");
 	}
 }
@@ -181,6 +186,26 @@ function updateRank() {
 		$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank',editRanks='$editRanks',postBlogEntries='$postBlogEntries',postBlogComments='$postBlogComments' WHERE rankID='$tarRank'";
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		addSuccessNotice("Success: Rank Updated");
+	}
+}
+
+function swapRanks() { // For Ordering Ranks
+	global $pageID2;
+	$origRankID=preg_replace("/[^1-9]/","", $pageID2);
+	$rankDir=preg_replace("/[^a-zA-Z]/","", $pageID2);
+	
+	$origRankOrder=getOrderOfRank($origRankID);
+	$tarRankOrder="";
+	if($rankDir=="u") { $tarRankOrder=$origRankOrder-1; }
+	if($rankDir=="d") { $tarRankOrder=$origRankOrder+1; }
+	if(hasPermissionToEditRankOrder($origRankOrder)&&hasPermissionToEditRankOrder($tarRankOrder)&&$tarRankOrder!="") {
+		$sql = "UPDATE ranks SET rankOrder='$origRankOrder' WHERE rankOrder='$tarRankOrder'";
+		$result = dbQuery($sql) or die ("Query failed: swapRanks1");
+		$sql = "UPDATE ranks SET rankOrder='$tarRankOrder' WHERE rankID='$origRankID'";
+		$result = dbQuery($sql) or die ("Query failed: swapRanks2");
+		addSuccessNotice("Success: Rank Order Updated");
+	} else {
+		addFailureNotice("Permission Denied");
 	}
 }
 ?>

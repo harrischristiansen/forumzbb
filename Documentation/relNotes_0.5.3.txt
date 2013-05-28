@@ -12,8 +12,9 @@ Completed:
 -New Accounts Join Lowest Rank
 -Fixed Issue where Deleted Blog Posts influenced blogPostsPerPage
 -Fixed Issue with breadcrumbs not displaying
+-Addition of Rank Ordering System
+-New Ranks Start At Highest Rank (1 below admin)
 
 To-Do:
 -BB Code Posts
 -Admin Blog Features - Edit, Delete
--Allow to order ranks - needs to swap two ranks on button push, or swap newRank and admin upon making newRank
