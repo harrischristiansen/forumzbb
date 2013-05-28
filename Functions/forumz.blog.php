@@ -6,7 +6,6 @@
 ////////// Home Blog View System //////////
 function getBlogEntries($startID, $entriesPerPage) {
 	$sql = "SELECT * FROM blogs WHERE ID>0 ORDER BY ID DESC LIMIT $startID,$entriesPerPage";
-	echo $sql;
 	$result = dbQuery($sql) or die ("Query failed: getBlogEntries");
 	return $result;
 }
