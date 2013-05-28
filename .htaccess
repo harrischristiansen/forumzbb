@@ -1,3 +1,13 @@
+RewriteEngine On
+
+RewriteRule ^(\w+)$ /index.php?page=$1
+RewriteRule ^(\w+)/$ /index.php?page=$1
+RewriteRule ^(\w+)/(\w+)$ /index.php?page=$1&pageID=$2
+RewriteRule ^(\w+)/(\w+)/$ /index.php?page=$1&pageID=$2
+RewriteRule ^(\w+)/(\w+)/(\w+)$ /index.php?page=$1&pageID=$2&pageID2=$3
+RewriteRule ^(\w+)/(\w+)/(\w+)/$ /index.php?page=$1&pageID=$2&pageID2=$3
+
+
 # ----------------------------------------------------------------------
 # Gzip compression
 # ----------------------------------------------------------------------
@@ -95,3 +105,14 @@
   ExpiresByType application/javascript    "access plus 1 year"
 
 </IfModule>
+
+
+# Add www. to start of address.
+<IfModule mod_rewrite.c>
+#   RewriteCond %{HTTPS} !=on
+#   RewriteCond %{HTTP_HOST} !^www\..+$ [NC]
+#   RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# </IfModule>
+
+
+ErrorDocument 404 /404.php
