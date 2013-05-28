@@ -9,9 +9,9 @@ Completed:
 -Fixed Issue where Edit Ranks CP Nav Item would not display
 -Fixed Issue where Edit Ranks CP Content would not display
 -Cleaned Up Members List Change Rank Dropdown
+-New Accounts Join Lowest Rank
 
 To-Do:
 -BB Code Posts
 -Admin Blog Features - Edit, Delete
 -Allow to order ranks - needs to swap two ranks on button push, or swap newRank and admin upon making newRank
--Make Accounts Join Lowest Rank Upon Joining, not preprogrammed rank

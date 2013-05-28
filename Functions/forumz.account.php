@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-22-13
+// Updated 5-27-13
 
 // Account Creation and Login Systems
 // Callable Functions: loginUser(), logoutUser(), registerUser(), sendConfirmationEmail($user, $email)
@@ -148,9 +148,10 @@ function addUserToDatabase($user, $pass, $email) {
 		$userID = getSiteNumMembers();
 		$joinDate = returnDateShort();
 		$ipAddress = returnRemoteIP();
+		$rankID = getRankByOrder(1);
 		
 		// Add Username To Database
-		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, joinIP) VALUES ('$userID','$user','$pass','$email', '$actStatus', '1', '$joinDate', '$ipAddress')";
+		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, joinIP) VALUES ('$userID','$user','$pass','$email', '$actStatus', '$rankID', '$joinDate', '$ipAddress')";
 		$result = dbQuery($sql) or die ("Query failed: addUserToDatabase");
 	} else {
 		addFailureNotice("ERROR: Username Is Unavailable.");
@@ -193,6 +194,13 @@ function setAccountAsBanned($user) {
 function getUserRank($actID) {
 	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: getUserRank");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['rankID'];
+}
+
+function getRankByOrder($orderID) {
+	$sql = "SELECT * FROM ranks WHERE rankOrder='$orderID'";
+	$result = dbQuery($sql) or die ("Query failed: getRankByOrder");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['rankID'];
 }
