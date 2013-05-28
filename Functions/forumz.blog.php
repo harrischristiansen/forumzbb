@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-27-13
+// Updated 5-28-13
 
 ////////// Home Blog View System //////////
 function getBlogEntries($startID, $entriesPerPage) {
@@ -72,9 +72,13 @@ function getBlogEntry($entryID) {
 	return $resultArray;
 }
 function viewBlogPageBlogEntry() {
-	global $pageID;
+	global $pageID, $userData, $siteSettings;
 	$blogEntry = getBlogEntry($pageID);
-	displayBlogEntry(getMemberName($blogEntry['Author']),$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post']);
+	$canEdit=$userData['permissions']['editBlogEntries'];
+	$canDelete=$userData['permissions']['deleteBlogEntries'];
+	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
+	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }
+	displayBlogEntry(getMemberName($blogEntry['Author']),$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$editEntryLink,$deleteEntryLink);
 }
 function checkBlogEntryExists() {
 	global $pageID;

@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-03-12
-// Updated 5-16-13
+// Updated 5-28-13
 
 function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$blogLink) {
 	viewHTML('<div class="FullWidthPostHead">');
@@ -23,8 +23,8 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 	viewHTML('</div>');
 }
 
-function displayBlogEntry($authorName,$postDate,$postTime,$entryTitle,$entry) {
-	viewHTML('<div class="FullWidthPostHead">');
+function displayBlogEntry($authorName,$postDate,$postTime,$entryTitle,$entry,$editEntryLink,$deleteEntryLink) {
+	viewHTML('<div class="FullWidthPostHead">'); // Blog Entry Head
 		viewHTML('<div class="floatLeft">');
 			viewHTML("By: ".$authorName);
 		viewHTML('</div>');
@@ -32,12 +32,20 @@ function displayBlogEntry($authorName,$postDate,$postTime,$entryTitle,$entry) {
 			viewHTML("Posted: ".$postDate." at ".$postTime);
 		viewHTML('</div>');
 	viewHTML('</div>');
-	viewHTML('<div class="FullWidthPostRow">');
+	viewHTML('<div class="FullWidthPostRow">'); // Blog Entry Content
 		viewHTML('<div class="hpBlogTitleLine">');
 			viewHTML($entryTitle);
 		viewHTML('</div>');
 		viewHTML('<hr>');
 		viewHTML($entry);
+		// Admin Functions
+		if($editEntryLink!=""||$deleteEntryLink!="") {
+			viewHTML('<hr>');
+			viewHTML('<div class="floatRight">');
+				if($editEntryLink!="") { viewHTML('<a href="'.$editEntryLink.'"><button>Edit</button></a>'); }
+				if($deleteEntryLink!="") { viewHTML('<a href="'.$deleteEntryLink.'"><button>Delete</button></a>'); }
+			viewHTML('</div>');
+		}
 	viewHTML('</div>');
 }
 
