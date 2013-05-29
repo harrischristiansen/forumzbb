@@ -4,6 +4,6 @@
 // Updated 5-29-13
 
 function displayNavItem($link, $title) {
-	viewHTML('<a href="'.$link.'">'.$title.'</a>');
+	viewHTML('<a class="navItemLink" href="'.$link.'">'.$title.'</a>');
 }
 ?>
