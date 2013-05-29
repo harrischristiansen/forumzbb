@@ -63,12 +63,17 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
 	viewHTML('</div>');
 }
 
-function displayBlogComposeField() {
-	global $siteSettings;
-	viewHTML('<form action="'.$siteSettings['siteURLShort'].'composeEntry/" method="POST">');
-	viewHTML('<input type="text" name="blogEntryTitle" value="Blog Entry Title" placeholder="Blog Entry Title" onfocus="this.value=\'\';"><br>');
-	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea" onfocus="this.value=\'\';"></textarea><br>');
-	viewHTML('<input type="submit" name="blogComposeSubmitted" value="Post">');
+function displayBlogComposeField($formLink, $updatingPost, $currentEntry) {
+	viewHTML('<form action="'.$formLink.'" method="POST">');
+	if(!$updatingPost) {
+		viewHTML('<input type="text" name="blogEntryTitle" value="Blog Entry Title" placeholder="Blog Entry Title" onfocus="this.value=\'\';"><br>');
+	}
+	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea">'.$currentEntry.'</textarea><br>');
+	if($updatingPost) {
+		viewHTML('<input type="submit" name="blogUpdateSubmitted" value="Update">');
+	} else {
+		viewHTML('<input type="submit" name="blogComposeSubmitted" value="Post">');
+	}
 	viewHtml('</form>');
 }
 

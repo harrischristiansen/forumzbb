@@ -102,6 +102,8 @@ function checkBlogEntryExists() { // Used in viewBlog.php
 }
 
 function formatPost($post) {
+	global $con;
+	$post = mysqli_real_escape_string($con, $post);
 	$post=str_replace("\\r\\n", "<br>", $post);
 	return $post;
 }
@@ -134,8 +136,7 @@ function numBlogComments() {
 function addBlogEntry() {
 	global $userData, $pagePost, $pageID, $con;
 	$newEntryTitle=mysqli_real_escape_string($con, $pagePost['blogEntryTitle']);
-	$newEntryText=mysqli_real_escape_string($con, $pagePost['blogEntryText']);
-	$newEntryText=formatPost($newEntryText);
+	$newEntryText=formatPost($pagePost['blogEntryText']);
 	if($userData['permissions']['postBlogEntries']!="true") {
 		addFailureNotice("Permission Denied");
 	} elseif($newEntryTitle==""||$newEntryText=="") {
@@ -168,8 +169,7 @@ function addBlogComment() {
 	global $pageID, $userData, $pagePost, $con;
 	if($userData['permissions']['postBlogComments']=="true") {
 		$commentID=numBlogComments();
-		$postClean=mysqli_real_escape_string($con, $pagePost['blogCommentText']);
-		$postClean=formatPost($postClean);
+		$postClean=formatPost($pagePost['blogCommentText']);
 		$date=returnDateShort();
 		$time=returnTime();
 		$userID=$userData['actID'];
@@ -190,7 +190,33 @@ function canPostBlogComments() {
 
 
 ////////// Edit Blog System //////////
-
+function editBlogPost() {
+	global $pageID, $userData, $pagePost, $con;
+	if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
+		$newBlogEntry=formatPost($pagePost['blogEntryText']);
+		$udpateAuthor=$userData['actID'];
+		$updateDate=returnDateShort();
+		$sql = "UPDATE blogs SET Post='$newBlogEntry',updateAuthor='$updateAuthor',updateDate='$updateDate' WHERE ID='$pageID'";
+		$result = dbQuery($sql) or die ("Query failed: editBlogPost");
+		addSuccessNotice("Blog Entry Updated");
+	} else {
+		addFailureNotice("Permission Denied");
+	}
+}
+function getBlogComposeField() {
+	global $pageID, $siteSettings, $userData;
+	if($pageID!="") { // Updating Entry
+		if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
+			$formLink=$siteSettings['siteURLShort'].'editBlog/'.$pageID;
+			$blogEntry=getBlogEntry($pageID);
+			$currentEntry=$blogEntry['Post'];
+			displayBlogComposeField($formLink, true, $currentEntry);
+		}
+	} else { // Creating New Entry
+		$formLink=$siteSettings['siteURLShort'].'composeEntry/';
+		displayBlogComposeField($formLink, false, "");
+	}
+}
 
 ////////// Delete Blog System /////////
 function deleteBlogPost() {
@@ -200,6 +226,7 @@ function deleteBlogPost() {
 		$sql = "UPDATE blogs SET ID='$newBlogID' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: deleteBlogPost");
 		addSuccessNotice("Blog Entry Deleted");
+		$pageID=1; // For Displaying Website Home
 	} else {
 		addFailureNotice("Permission Denied");
 	}

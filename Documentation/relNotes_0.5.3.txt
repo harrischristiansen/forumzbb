@@ -16,7 +16,7 @@ Completed:
 -New Ranks Start At Highest Rank (1 below admin)
 -Added CP Rank Options for Edit/Delete blogEntries
 -Displays Post Time For BlogEntries Posted That Day
+-Admin Blog Features - Edit, Delete
 
 To-Do:
 -BB Code Posts
--Admin Blog Features - Edit, Delete - use requireFormSubmitted
