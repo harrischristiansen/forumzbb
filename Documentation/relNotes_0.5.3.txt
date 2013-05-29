@@ -18,9 +18,9 @@ Completed:
 -Displays Post Time For BlogEntries Posted That Day
 -Admin Blog Features - Edit, Delete
 -Pull NavBar From DB
+-Ban Execution System
 
 To-Do:
 -BB Code Posts
--Add Forum Page
+-Forum Home Page
 -Mobile CSS
--Ability To Ban IP Addresses
