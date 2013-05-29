@@ -1,31 +1,37 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-27-13
+// Updated 5-29-13
 
 // Members List and Member Info Systems
 
 
 function getListActiveMembers() {
-	$sql = "SELECT * FROM accounts WHERE actStatus='0' AND actID<>'Anonymous' ORDER BY username";
+	$sql = "SELECT * FROM accounts WHERE actStatus='0' ORDER BY username";
 	$result = dbQuery($sql) or die ("Query failed: getListActiveMembers");
 	return $result;
 }
 
 function getRankName($rankID) {
-	$sql = "SELECT * FROM ranks WHERE rankID='$rankID'";
-	$result = dbQuery($sql) or die ("Query failed: getRankName");
-	$resultArray=mysqli_fetch_array($result);
-	if($resultArray['rankName']!="") {
-		return $resultArray['rankName'];
+	global $rankNameList;
+	if(isset($rankNameList[$rankID])) {
+		return $rankNameList[$rankID];
 	} else {
-		return "Error: Unknown Rank";
+		$sql = "SELECT * FROM ranks WHERE rankID='$rankID'";
+		$result = dbQuery($sql) or die ("Query failed: getRankName");
+		$resultArray=mysqli_fetch_array($result);
+		if($resultArray['rankName']!="") {
+			$rankNameList[$rankID]=$resultArray['rankName'];
+			return $resultArray['rankName'];
+		} else {
+			$rankNameList[$rankID]="Error: Unknown Rank";
+			return "Error: Unknown Rank";
+		}
 	}
 }
 
 function displayMembersList() {
 	global $userData;
-	
 	// Get List Of Members
 	$rowID=1;
 	$activeMembers=getListActiveMembers();

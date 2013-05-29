@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-27-13
+// Updated 5-29-13
 
 // Rank Permissions + Control Systems
 
@@ -81,8 +81,7 @@ function getHighestRankOrder() {
 }
 function hasPermissionToEditRank($rankID) {
 	global $userData;
-	$rankOrder=getOrderOfRank($rankID);
-	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&$rankOrder<$userData['permissions']['rankOrder']) {
+	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&getOrderOfRank($rankID)<$userData['permissions']['rankOrder']) {
 		return true;
 	}
 	return false;
