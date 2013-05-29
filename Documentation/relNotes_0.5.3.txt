@@ -19,4 +19,3 @@ Completed:
 To-Do:
 -BB Code Posts
 -Admin Blog Features - Edit, Delete - use requireFormSubmitted
--Only Admin Can Make New Ranks

@@ -24,8 +24,13 @@ function viewBlogEntries() {
 		viewFailure("No Entries Were Found On This Page");
 	}
 }
-function getNumBlogEntries() {
+function getNumPosBlogEntries() {
 	$sql = "SELECT * FROM blogs WHERE ID>=0";
+	$result = dbQuery($sql) or die ("Query failed: getNumPosBlogEntries");
+	return mysqli_num_rows($result);
+}
+function getNumBlogEntries() {
+	$sql = "SELECT * FROM blogs";
 	$result = dbQuery($sql) or die ("Query failed: getNumBlogEntries");
 	return mysqli_num_rows($result);
 }
@@ -39,7 +44,7 @@ function isFirstPage() {
 
 function isLastPage() {
 	global $pageID, $siteSettings;
-	$lastPage = ceil(getNumBlogEntries()/$siteSettings['blogEntriesPerPage']);
+	$lastPage = ceil(getNumPosBlogEntries()/$siteSettings['blogEntriesPerPage']);
 	if($pageID=="none"||$pageID==0) {
 		$pageID=1;
 	}
@@ -55,7 +60,7 @@ function getNextPageLink() {
 
 function getPreviousPageLink() {
 	global $pageID, $siteSettings;
-	$lastPage = ceil(getNumBlogEntries()/$siteSettings['blogEntriesPerPage']);
+	$lastPage = ceil(getNumPosBlogEntries()/$siteSettings['blogEntriesPerPage']);
 	// Setup to return to latest page upon clicking newer entries button
 	if($pageID>$lastPage) {
 		$pageID=$lastPage+1;
@@ -178,4 +183,20 @@ function canPostBlogComments() {
 	return false;
 }
 
+
+////////// Edit Blog System //////////
+
+
+////////// Delete Blog System /////////
+function deleteBlogPost() {
+	global $pageID, $userData;
+	if($userData['permissions']['deleteBlogEntries']=="true") {
+		$newBlogID=-$pageID;
+		$sql = "UPDATE blogs SET ID='$newBlogID' WHERE ID='$pageID'";
+		$result = dbQuery($sql) or die ("Query failed: deleteBlogPost");
+		addSuccessNotice("Blog Entry Deleted");
+	} else {
+		addFailureNotice("Permission Denied");
+	}
+}
 ?>
