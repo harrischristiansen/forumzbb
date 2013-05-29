@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-27-13
+// Updated 5-29-13
 
 // Requires
 require_once('Functions/forumz.references.php');
@@ -49,7 +49,7 @@ function displayWebsite() {
 	}
 }
 function loadPage() {
-	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData;
+	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData, $specPageTitle;
 	$pageDisplayed=false;
 	$pageToDisplay="";
 	
@@ -79,6 +79,7 @@ function loadPage() {
 	}
 	if($numPages==0) {
 		addFailureNotice("Page Not Found");
+		$specPageTitle="Page Not Found";
 	} else {
 		$pageData=mysqli_fetch_array($result);
 		// Breadcrumbs
@@ -90,6 +91,9 @@ function loadPage() {
 			} else {
 				addBreadcrumb($pageData['breadcrumbTitle'],$pageName);
 			}
+		}
+		if($pageData['pageName']!="") {
+			$specPageTitle=$pageData['pageName'];
 		}
 		
 		// Page

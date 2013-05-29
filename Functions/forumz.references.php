@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-19-13
+// Updated 5-29-13
 
 // Forumz Sitewide References
 
@@ -13,6 +13,11 @@ function returnDateShort() {
 function returnDateLong() {
 	// Return Date in form Month Day, Year
 	return date('F j, Y');
+}
+function returnDayCount() {
+	// Return Days since Jan 1, 2010
+	$days=date('z')+(365*(date('y')-13));
+	return $days;
 }
 function returnTime() {
 	// Returns Time in 24 Hour Time
@@ -50,6 +55,14 @@ function siteDisabledMessage() {
 function getSiteName() {
 	global $siteSettings;
 	return $siteSettings['siteName'];
+}
+function getPageTitle() {
+	global $specPageTitle;
+	$pageTitle=getSiteName();
+	if(isset($specPageTitle)) {
+		$pageTitle=$pageTitle." - ".$specPageTitle;
+	}
+	return $pageTitle;
 }
 function getSiteMotd() {
 	global $siteSettings;
