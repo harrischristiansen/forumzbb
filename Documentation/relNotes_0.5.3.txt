@@ -14,7 +14,9 @@ Completed:
 -Fixed Issue with breadcrumbs not displaying
 -Addition of Rank Ordering System
 -New Ranks Start At Highest Rank (1 below admin)
+-Added CP Rank Options for Edit/Delete blogEntries
 
 To-Do:
 -BB Code Posts
--Admin Blog Features - Edit, Delete
+-Admin Blog Features - Edit, Delete - use requireFormSubmitted
+-Only Admin Can Make New Ranks

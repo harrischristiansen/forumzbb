@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-19-12
-// Updated 5-27-13
+// Updated 5-28-13
 
 function displayCPNavItem($navItem, $navLink) {
 	viewHTML('<a class="controlPanelNavItem" href="'.$navLink.'">'.$navItem.'</a>');
@@ -61,6 +61,8 @@ function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 		viewHTML('Edit Ranks: <input type="checkbox" name="editRanks" value="true" '.$settingChecked['editRanks'].'><br>');
 		viewHTML('Post Blog Entries: <input type="checkbox" name="postBlogEntries" value="true" '.$settingChecked['postBlogEntries'].'><br>');
 		viewHTML('Post Blog Comments: <input type="checkbox" name="postBlogComments" value="true" '.$settingChecked['postBlogComments'].'><br>');
+		viewHTML('Edit Blog Entries: <input type="checkbox" name="editBlogEntries" value="true" '.$settingChecked['editBlogEntries'].'><br>');
+		viewHTML('Delete Blog Entries: <input type="checkbox" name="deleteBlogEntries" value="true" '.$settingChecked['deleteBlogEntries'].'><br>');
 		if($linkID!="") {
 			viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Rank">');
 		} else {

@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 10-10-12
-// Updated 5-27-13
+// Updated 5-28-13
 
 function displayCPNav() {
 	global $siteSettings, $userData;
@@ -111,6 +111,8 @@ function editRanksControlPanel() {
 	if($rankArray['editRanks']=="true") { $settingChecked['editRanks']="checked"; } else { $settingChecked['editRanks']=""; }
 	if($rankArray['postBlogEntries']=="true") { $settingChecked['postBlogEntries']="checked"; } else { $settingChecked['postBlogEntries']=""; }
 	if($rankArray['postBlogComments']=="true") { $settingChecked['postBlogComments']="checked"; } else { $settingChecked['postBlogComments']=""; }
+	if($rankArray['editBlogEntries']=="true") { $settingChecked['editBlogEntries']="checked"; } else { $settingChecked['editBlogEntries']=""; }
+	if($rankArray['deleteBlogEntries']=="true") { $settingChecked['deleteBlogEntries']="checked"; } else { $settingChecked['deleteBlogEntries']=""; }
 	// Display Form
 	editRanksForm($siteURL,$rankArray['rankID'],$rankArray['rankName'],$settingChecked);
 }
@@ -152,15 +154,17 @@ function addSiteRank() {
 	$editRanks=mysqli_real_escape_string($con, $pagePost['editRanks']);
 	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
 	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
+	$editBlogEntries=mysqli_real_escape_string($con, $pagePost['editBlogEntries']);
+	$deleteBlogEntries=mysqli_real_escape_string($con, $pagePost['deleteBlogEntries']);
 	$rankID=getNumSiteRanks();
 	$highestRankOrder=getHighestRankOrder();
 	$newHighestRankOrder=$highestRankOrder+1;
 	if(getHighestRankID()!=$userData['rankID']) {
 		addFailureNotice("Permission Denied");
 	} else {
-		$sql = "UPDATE ranks SET rankOrder='$newHighestRankOrder' WHERE rankOrder='$highestRankOrder'";
+		$sql = "UPDATE ranks SET rankOrder='$newHighestRankOrder' WHERE rankOrder='$highestRankOrder'"; // Move Admin Rank Forward One Position
 		$result = dbQuery($sql) or die ("Query failed: addSiteRank-moveAdminRank");
-		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments) VALUES ('$rankID','$highestRankOrder','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments')";
+		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments, editBlogEntries, deleteBlogEntries) VALUES ('$rankID','$highestRankOrder','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments','$editBlogEntries','$deleteBlogEntries')";
 		$result = dbQuery($sql) or die ("Query failed: addSiteRank-addRank");
 		addSuccessNotice("Success: Rank Added");
 	}
@@ -175,6 +179,8 @@ function updateRank() {
 	$editRanks=mysqli_real_escape_string($con, $pagePost['editRanks']);
 	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
 	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
+	$editBlogEntries=mysqli_real_escape_string($con, $pagePost['editBlogEntries']);
+	$deleteBlogEntries=mysqli_real_escape_string($con, $pagePost['deleteBlogEntries']);
 	
 	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])) { // Attempting to Edit Rank Greater Than Own
 		addFailureNotice("Permission Denied");
@@ -183,7 +189,7 @@ function updateRank() {
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		addSuccessNotice("Success: Rank Updated");
 	} else {
-		$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank',editRanks='$editRanks',postBlogEntries='$postBlogEntries',postBlogComments='$postBlogComments' WHERE rankID='$tarRank'";
+		$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank',editRanks='$editRanks',postBlogEntries='$postBlogEntries',postBlogComments='$postBlogComments',editBlogEntries='$editBlogEntries',deleteBlogEntries='$deleteBlogEntries' WHERE rankID='$tarRank'";
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		addSuccessNotice("Success: Rank Updated");
 	}
