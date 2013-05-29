@@ -15,6 +15,7 @@ Completed:
 -Addition of Rank Ordering System
 -New Ranks Start At Highest Rank (1 below admin)
 -Added CP Rank Options for Edit/Delete blogEntries
+-Displays Post Time For BlogEntries Posted That Day
 
 To-Do:
 -BB Code Posts

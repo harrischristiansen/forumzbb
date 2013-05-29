@@ -18,7 +18,11 @@ function viewBlogEntries() {
 
 	while($entry = mysqli_fetch_array($blogEntries)) {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
-		displayHomePageBlogEntry(getMemberName($entry['Author']),$entry['AuthorDate'],$entry['Title'],$entry['Post'],$blogLink);
+		$postDateOrTime=$entry['AuthorDate'];
+		if($postDateOrTime=returnDateShort()) {
+			$postDateOrTime=$entry['AuthorTime'];
+		}
+		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDateOrTime,$entry['Title'],$entry['Post'],$blogLink);
 	}
 	if(mysqli_num_rows($blogEntries)==0) {
 		viewFailure("No Entries Were Found On This Page");
@@ -79,13 +83,14 @@ function getBlogEntry($entryID) {
 function viewBlogPageBlogEntry() {
 	global $pageID, $userData, $siteSettings;
 	$blogEntry = getBlogEntry($pageID);
-	$canEdit=$userData['permissions']['editBlogEntries'];
-	$canDelete=$userData['permissions']['deleteBlogEntries'];
+	$canEdit=$userData['permissions']['editBlogEntries']; // User Has Admin Access
+	$canDelete=$userData['permissions']['deleteBlogEntries']; // User Has Admin Access
+	if($userData['actID']==$blogEntry['Author']) { $canEdit=true;$canDelete=true; } // User Posted Entry
 	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
 	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }
 	displayBlogEntry(getMemberName($blogEntry['Author']),$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$editEntryLink,$deleteEntryLink);
 }
-function checkBlogEntryExists() {
+function checkBlogEntryExists() { // Used in viewBlog.php
 	global $pageID;
 	$sql = "SELECT * FROM blogs WHERE ID='$pageID'";
 	$result = dbQuery($sql) or die ("Query failed: checkBlogEntryExists");
@@ -190,7 +195,7 @@ function canPostBlogComments() {
 ////////// Delete Blog System /////////
 function deleteBlogPost() {
 	global $pageID, $userData;
-	if($userData['permissions']['deleteBlogEntries']=="true") {
+	if($userData['permissions']['deleteBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
 		$newBlogID=-$pageID;
 		$sql = "UPDATE blogs SET ID='$newBlogID' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: deleteBlogPost");
@@ -198,5 +203,12 @@ function deleteBlogPost() {
 	} else {
 		addFailureNotice("Permission Denied");
 	}
+}
+
+function getBlogAuthorID($blogID) {
+	$sql = "SELECT * FROM blogs WHERE ID='$blogID'";
+	$result = dbQuery($sql) or die ("Query failed: getBlogAuthorID");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['Author'];
 }
 ?>
