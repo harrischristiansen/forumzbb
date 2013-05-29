@@ -194,7 +194,7 @@ function editBlogPost() {
 	global $pageID, $userData, $pagePost, $con;
 	if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
 		$newBlogEntry=formatPost($pagePost['blogEntryText']);
-		$udpateAuthor=$userData['actID'];
+		$updateAuthor=$userData['actID'];
 		$updateDate=returnDateShort();
 		$sql = "UPDATE blogs SET Post='$newBlogEntry',updateAuthor='$updateAuthor',updateDate='$updateDate' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: editBlogPost");
