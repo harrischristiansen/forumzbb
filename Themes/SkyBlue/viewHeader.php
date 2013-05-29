@@ -1,18 +1,19 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 10-15-12
+// Updated 5-29-13
 
 global $userData, $siteSettings;
-defaultsInclude(registerLoginFields);
-defaultsInclude(siteNotices);
+defaultsInclude('registerLoginFields');
+defaultsInclude('siteNotices');
+defaultsInclude('navBar');
 //// HTML Head ////
 ?>
 <!DOCTYPE HTML>
 <html><head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 	<link REL="SHORTCUT ICON" HREF="/Resources/images/f.png">
-	<title><?php echo getSiteName(); ?></title>
+	<title><?php echo getPageTitle(); ?></title>
 	<link rel="stylesheet" href="/Themes/SkyBlue/SkyBlue.css" type="text/css">
 </head><body>
 
@@ -21,11 +22,7 @@ defaultsInclude(siteNotices);
 // Left Side
 viewHTML('<div class="headFootLeftSide">');
 if($userData['loggedIn']) {
-	// Navigation (Home, Members List, Control Panel, Logout)
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'home/">Home</a>');
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'membersList/">Members List</a>');
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'controlPanel/">Control Panel</a>');
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'logout/">Logout</a>');
+	displayNavBar();
 } else {
 	// Login Bar
 	viewHTML('Login: ');
@@ -39,11 +36,7 @@ if($userData['loggedIn']) {
 	// Search Bar
 	viewHTML('<b>Search Here</b>');
 } else {
-	// Navigation (Home, Members List, Login, Register)
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'home/">Home</a>');
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'membersList/">Members List</a>');
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'login/">Login</a>');
-	viewHTML('<a href="'.$siteSettings['siteURLShort'].'register/">Register</a>');
+	displayNavBar();
 }
 
 viewHTML('</div><div class="headFootCenter">');

@@ -17,6 +17,10 @@ Completed:
 -Added CP Rank Options for Edit/Delete blogEntries
 -Displays Post Time For BlogEntries Posted That Day
 -Admin Blog Features - Edit, Delete
+-Pull NavBar From DB
 
 To-Do:
 -BB Code Posts
+-Add Forum Page
+-Mobile CSS
+-Ability To Ban IP Addresses

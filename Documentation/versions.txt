@@ -72,7 +72,6 @@ Version 0.5.4:
 -Check for clean mysql inputs
 -Numerous failed logins locks account and sends activation email to account owner
 -Code Cleanup
--Mobile CSS
 
 Future:
 -Member to Member PM/Chat System
