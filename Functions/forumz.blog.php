@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-28-13
+// Updated 5-29-13
 
 ////////// Home Blog View System //////////
 function getBlogEntries($startID, $entriesPerPage) {
