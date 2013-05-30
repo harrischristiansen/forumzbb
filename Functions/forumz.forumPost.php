@@ -17,4 +17,10 @@ function getNumForumPostsInThread($threadID) {
 	$result = dbQuery($sql) or die ("Query failed: getNumForumPostsInThread");
 	return mysqli_num_rows($result);
 }
+
+function getNumForumPostsInForum($forumID) {
+	$sql = "SELECT * FROM forumPosts WHERE forumID='$forumID'";
+	$result = dbQuery($sql) or die ("Query failed: getNumForumPostsInForum");
+	return mysqli_num_rows($result);
+}
 ?>

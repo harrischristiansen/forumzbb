@@ -19,6 +19,6 @@ Completed:
 -Admin Blog Features - Edit, Delete
 -Pull NavBar From DB
 -Added Ban Execution System
+-Forum Home Page
 
 To-Do:
--Forum Home Page

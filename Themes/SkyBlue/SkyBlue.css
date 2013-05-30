@@ -162,6 +162,7 @@ hr {
 	width: 98%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 15px;
 	height: 20px;
 	color: #FFFFFF;
 	background-color: #FFFFFF;
@@ -241,6 +242,42 @@ hr {
 	width: 25%;
 }
 
+.forumHomeColumn1 {
+	width: 60%;
+}
+
+.FullWidthTableRow .forumHomeColumn1 {
+	padding-top: 1px;
+}
+
+.forumHomeColumn2 {
+	width: 5%;
+}
+
+.FullWidthTableRow .forumHomeColumn2 {
+	padding-top: 8px;
+}
+
+.forumHomeColumn3 {
+	width: 5%;
+}
+
+.FullWidthTableRow .forumHomeColumn3 {
+	padding-top: 8px;
+}
+
+.forumHomeColumn4 {
+	width: 29%;
+}
+
+.FullWidthTableRow .forumHomeColumn4 {
+	padding-top: 1px;
+}
+
+.forumHomeMultilineText {
+	font-size: 12px;
+}
+
 #controlPanelNav, #controlPanelNav2 {
 	display: inline-block;
 	width: 14%;
@@ -311,11 +348,13 @@ hr {
 .floatLeft {
 	float:left;
 	text-align: left;
+	padding-left: 5px;
 }
 
 .floatRight {
 	float:right;
 	text-align: right;
+	padding-right: 5px;
 }
 
 .pageChangeBtns {
