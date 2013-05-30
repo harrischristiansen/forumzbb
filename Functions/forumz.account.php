@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-27-13
+// Updated 5-29-13
 
 // Account Creation and Login Systems
 // Callable Functions: loginUser(), logoutUser(), registerUser(), sendConfirmationEmail($user, $email)
@@ -104,6 +104,7 @@ function updateLoginReport($user) {
 function logoutUser() {
 	global $userData;
 	setAccountToDefault();
+	setUserPrivileges();
 	addSuccessNotice("You are now logged out.");
 }
 function registerUser() {
