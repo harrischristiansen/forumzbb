@@ -22,3 +22,4 @@ Completed:
 -Forum Home Page
 
 To-Do:
+-Hover Color When Hovering Over Table Row
