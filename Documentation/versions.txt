@@ -59,7 +59,6 @@ Version 0.5.2:
 
 Version 0.5.3:
 -Blog Admin Control Panel
--BB Code Fancy Posts
 -Admin Side Blog System
 -Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
 -Allow to order ranks
@@ -73,6 +72,10 @@ Version 0.5.4:
 -Numerous failed logins locks account and sends activation email to account owner
 -Code Cleanup
 -BB Code Posts
+
+Version 0.5.5:
+-New Theme
+-Mobile Theme
 
 Future:
 -Member to Member PM/Chat System

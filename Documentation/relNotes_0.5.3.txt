@@ -22,4 +22,3 @@ Completed:
 
 To-Do:
 -Forum Home Page
--Mobile CSS

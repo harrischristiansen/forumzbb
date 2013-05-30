@@ -10,6 +10,9 @@ require_once('Functions/forumz.breadcrumbs.php');
 require_once('Functions/forumz.control.php');
 require_once('Functions/forumz.databaseTools.php');
 require_once('Functions/forumz.devTools.php');
+require_once('Functions/forumz.forum.php');
+require_once('Functions/forumz.forumPost.php');
+require_once('Functions/forumz.forumThread.php');
 require_once('Functions/forumz.members.php');
 require_once('Functions/forumz.ranking.php');
 require_once('Functions/forumz.references.php');
@@ -134,7 +137,7 @@ function loadPage() {
 	elseif(!$pageDisplayed) {
 		if($userData['loggedIn']) {
 			$pageID=1; // To Display Correct Home Page
-			display('viewHome');
+			display('viewBlogHome');
 		} else {
 			display('viewBlank');
 		}
