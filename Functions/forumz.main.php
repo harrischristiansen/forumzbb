@@ -135,7 +135,7 @@ function loadPage() {
 		$pageDisplayed=true;
 	}
 	elseif(!$pageDisplayed) {
-		if($userData['loggedIn']) {
+		if($userData['loggedIn']||!$siteSettings['reqLogin']) {
 			$pageID=1; // To Display Correct Home Page
 			display('viewBlogHome');
 		} else {
