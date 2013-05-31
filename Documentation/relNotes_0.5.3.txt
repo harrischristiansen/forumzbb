@@ -20,6 +20,7 @@ Completed:
 -Pull NavBar From DB
 -Added Ban Execution System
 -Forum Home Page
+-Hover Color When Hovering Over Table Row
 
 To-Do:
--Hover Color When Hovering Over Table Row
+-Pick new hovor color for when hovering over row

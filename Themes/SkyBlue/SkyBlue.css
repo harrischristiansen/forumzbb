@@ -226,6 +226,9 @@ hr {
 	background-color: #0D78A5;
 }
 
+.FullWidthTableRow:hover .TableRowColumn {
+	background-color: #1083B4; /* I do not like hovor color */
+}
 .TableHeadColumn:first-child, .TableRowColumn:first-child {
 	margin-left: -4px;
 }
