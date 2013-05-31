@@ -23,4 +23,3 @@ Completed:
 -Hover Color When Hovering Over Table Row
 
 To-Do:
--Pick new hovor color for when hovering over row

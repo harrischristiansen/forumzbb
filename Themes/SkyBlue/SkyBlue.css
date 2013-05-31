@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 /* Harris Christiansen */
 /* Created 9-15-12 */
-/* Updated 5-29-12 */
+/* Updated 5-31-12 */
 
 
 html, body {
@@ -227,7 +227,7 @@ hr {
 }
 
 .FullWidthTableRow:hover .TableRowColumn {
-	background-color: #1083B4; /* I do not like hovor color */
+	background-color: #45B0DF;
 }
 .TableHeadColumn:first-child, .TableRowColumn:first-child {
 	margin-left: -4px;
