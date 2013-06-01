@@ -27,7 +27,7 @@ $con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase)
 // Requires And Load Settings
 require_once('loadSiteSettings.php');
 loadSiteSettings();
-require_once('Functions/forumz.main.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.main.php');
 // Get user info
 $userData=$_SESSION['userData'];
 // Set default rank

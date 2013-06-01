@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-29-13
+// Updated 6-1-13
 
 global $userData, $siteSettings;
 defaultsInclude('registerLoginFields');
@@ -14,7 +14,7 @@ defaultsInclude('navBar');
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 	<link REL="SHORTCUT ICON" HREF="/Resources/images/f.png">
 	<title><?php echo getPageTitle(); ?></title>
-	<link rel="stylesheet" href="/Themes/SkyBlue/SkyBlue.css" type="text/css">
+	<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/SkyBlue/SkyBlue.css" type="text/css">
 </head><body>
 
 <header id="navBar">

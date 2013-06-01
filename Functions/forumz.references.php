@@ -78,9 +78,11 @@ function getSiteNumMembers() {
 	return mysqli_num_rows($result);
 }
 function display($fileName) {
+	global $siteSettings;
 	require_once($siteSettings['siteVersionAddress'].'Themes/SkyBlue/'.$fileName.'.php');
 }
 function defaultsInclude($fileName) {
+	global $siteSettings;
 	require_once($siteSettings['siteVersionAddress'].'Themes/Defaults/'.$fileName.'.php');
 }
 function viewHTML($HTMLtxt) {

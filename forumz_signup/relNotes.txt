@@ -1,6 +1,6 @@
 Forumz Release Notes
 Harris Christiansen
-Current Stable Released Version: 0.5.2
+Current Stable Released Version: 0.5.3
 
 Features:
 -Account System with ranks and privileges
