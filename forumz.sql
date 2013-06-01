@@ -15,8 +15,7 @@ CREATE TABLE `forumzDev_accounts` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 insert into `forumzDev_accounts` values('0','Harris','7af4896825dfc7e94f8a1d6846a5a2d4','cloudy243@me.com','0','2','10-03-12','205.124.117.24','6-01-13','67.161.245.43'),
- ('Anonymous','Anonymous','-','Anonymous','-1','0','-','-','-','-'),
- ('1','TestUser','7a95dec218ffaaf8992bb48b4bd94367','testUser@forumzbb.com','0','1','05-12-13','67.161.245.43','5-29-13','67.161.245.43');
+ ('Anonymous','Anonymous','-','Anonymous','-1','0','-','-','-','-');
 
 CREATE TABLE `forumzDev_bannedClients` (
   `ipAdr` text NOT NULL,
@@ -36,7 +35,6 @@ CREATE TABLE `forumzDev_blogComments` (
   `comment` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_blogComments` values('0','2','Anonymous','5-29-13','23:11','Posting Blog Comment as Anonymous');
 
 CREATE TABLE `forumzDev_blogs` (
   `ID` int(11) NOT NULL,
@@ -49,10 +47,6 @@ CREATE TABLE `forumzDev_blogs` (
   `updateDate` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_blogs` values('2','Forumz Version 0.5.3 - Development','0','5-28-13','19:59','Development and Testing Site For Forumz Version 0.5.3','',''),
- ('-3','test','1','5-28-13','20:26','test','',''),
- ('-1','Forumz 0.5.3 Dev','0','5-17-13','23:03','Development Site For ForumzBB - Version 0.5.3','',''),
- ('-4','test','0','5-28-13','22:44','test2','','5-28-13');
 
 CREATE TABLE `forumzDev_forumCats` (
   `id` int(11) NOT NULL,
@@ -60,8 +54,6 @@ CREATE TABLE `forumzDev_forumCats` (
   `title` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_forumCats` values('0','0','General'),
- ('1','1','General 2');
 
 CREATE TABLE `forumzDev_forumPosts` (
   `id` int(11) NOT NULL,
@@ -96,9 +88,6 @@ CREATE TABLE `forumzDev_forums` (
   `latestPost` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_forums` values('0','0','General Forum','For Dev And Testing Of Forumz','0','0','a:4:{s:5:\"title\";s:15:\"The Latest Post\";s:6:\"author\";s:6:\"Harris\";s:4:\"date\";s:7:\"5-29-13\";s:8:\"threadID\";s:1:\"2\";}'),
- ('1','0','General Forum 2','A Second Forum','0','0','a:4:{s:5:\"title\";s:15:\"The Latest Post\";s:6:\"author\";s:6:\"Harris\";s:4:\"date\";s:7:\"5-29-13\";s:8:\"threadID\";s:1:\"2\";}'),
- ('2','1','General Forum 3','A Third Forum','0','0','a:4:{s:5:\"title\";s:15:\"The Latest Post\";s:6:\"author\";s:6:\"Harris\";s:4:\"date\";s:7:\"5-29-13\";s:8:\"threadID\";s:1:\"2\";}');
 
 CREATE TABLE `forumzDev_navBar` (
   `navItemName` text NOT NULL,
@@ -112,7 +101,6 @@ insert into `forumzDev_navBar` values('Home','home','1','loggedOut'),
  ('Login','login','3','loggedOut'),
  ('Register','register','4','loggedOut'),
  ('Home','home','1','loggedIn'),
- ('Forum','forums','2','loggedIn'),
  ('Members List','membersList','3','loggedIn'),
  ('Control Panel','controlPanel','4','loggedIn'),
  ('Logout','logout','5','loggedIn');
@@ -152,8 +140,7 @@ insert into `forumzDev_pages` values('home','','viewBlogHome','','','Home','',''
  ('controlPanel','swapRanks','viewControlPanel','viewControlPanel','swapRanks','Control Panel - Edit Rank Order','Control Panel Edit Rank Order','','','true','','editRanks',''),
  ('composeEntry','','viewBlog','viewBlogCompose','addBlogEntry','Compose Blog Entry','New Entry','','','true','','postBlogEntries','blogComposeSubmitted'),
  ('editBlog','','viewBlog','viewBlogCompose','editBlogPost','Edit Blog Entry','Edit Blog','','','true','','','blogUpdateSubmitted'),
- ('deleteBlog','','viewBlogHome','','deleteBlogPost','Delete Blog Entry','Delete Blog','','','true','','',''),
- ('forums','','viewForumHome','','','Forums Home','Forums Home','','','','true','','');
+ ('deleteBlog','','viewBlogHome','','deleteBlogPost','Delete Blog Entry','Delete Blog','','','true','','','');
 
 CREATE TABLE `forumzDev_ranks` (
   `rankID` int(11) NOT NULL,
@@ -188,6 +175,6 @@ CREATE TABLE `forumzDev_siteSettings` (
   `blogEntriesPerPage` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_siteSettings` values('1','','Forumz','','Dev Version 0.5.3 © 2013 Forumzbb','SkyBlue','','','false','false','false','4');
+insert into `forumzDev_siteSettings` values('1','','Forumz','','Release Version 0.5.3 © 2013 Forumzbb','SkyBlue','','','false','false','false','4');
 
 SET FOREIGN_KEY_CHECKS = 1;
