@@ -1,8 +1,8 @@
 Forumz Version Release Notes
 Harris Christiansen
-Current Stable Released Version: 0.5.2
-Current Beta Version: 0.5.2
-Current Development Version: 0.5.3
+Current Stable Released Version: 0.5.3
+Current Beta Version: 0.5.3
+Current Development Version: 0.5.4
 
 Version 0.5.0:
 -Simple Reference Functions getDate(), getTime(), getUsername(), isSiteDisabled(), getDisabledMessage(), getSiteName(), getSiteMotd(), getSiteSlogan()
@@ -58,10 +58,25 @@ Version 0.5.2:
 -Get Signup System Back Online - Release 0.5.2
 
 Version 0.5.3:
--Blog Admin Control Panel
--Admin Side Blog System
+-Fixed issue with permission to change members ranks
+-Fixed issue where only one notice of each kind would be displayed
 -Limit Who Can Edit Ranks - Can Not Change Own Rank or Greater
--Allow to order ranks
+-Fixed Issue where Edit Ranks CP Nav Item would not display
+-Fixed Issue where Edit Ranks CP Content would not display
+-Cleaned Up Members List Change Rank Dropdown
+-New Accounts Join Lowest Rank
+-Fixed Issue where Deleted Blog Posts influenced blogPostsPerPage
+-Fixed Issue with breadcrumbs not displaying
+-Addition of Rank Ordering System
+-New Ranks Start At Highest Rank (1 below admin)
+-Added CP Rank Options for Edit/Delete blogEntries
+-Displays Post Time For BlogEntries Posted That Day
+-Admin Blog Features - Edit, Delete
+-Pull NavBar From DB
+-Added Ban Execution System
+-Forum Home Page
+-Hover Color When Hovering Over Table Row
+-Pulls Version # From SiteSettings and loads folder for that version
 
 Version 0.5.4:
 -Security Enhancements

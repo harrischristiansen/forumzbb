@@ -1,24 +1,23 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-29-13
+// Updated 6-1-13
 
 // Requires
-require_once('Functions/forumz.account.php');
-require_once('Functions/forumz.blog.php');
-require_once('Functions/forumz.breadcrumbs.php');
-require_once('Functions/forumz.control.php');
-require_once('Functions/forumz.databaseTools.php');
-require_once('Functions/forumz.devTools.php');
-require_once('Functions/forumz.forum.php');
-require_once('Functions/forumz.forumPost.php');
-require_once('Functions/forumz.forumThread.php');
-require_once('Functions/forumz.members.php');
-require_once('Functions/forumz.ranking.php');
-require_once('Functions/forumz.references.php');
-require_once('Functions/forumz.security.php');
-require_once('Functions/forumz.settings.php');
-require_once('Functions/forumz.siteNotices.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.account.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.blog.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.breadcrumbs.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.control.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.devTools.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forum.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumPost.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumThread.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.members.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.ranking.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.security.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.settings.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.siteNotices.php');
 
 function displayWebsite() {
 	global $pageName, $pageID, $pagePost, $siteSettings, $userData;
@@ -144,7 +143,7 @@ function loadPage() {
 	}
 }
 function loadSettings() {
-	loadMysqlSettings();
+	// Site Settings Loaded in index.php
 	setupSiteURLs();
 }
 ?>

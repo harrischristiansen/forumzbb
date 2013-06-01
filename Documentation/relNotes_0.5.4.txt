@@ -1,0 +1,15 @@
+Forumz Version 0.5.3
+Harris Christiansen
+-No Due Date Set
+
+Completed:
+
+To-Do:
+-Security Enhancements
+-Account Creation Validation
+-Bot Checking
+-Spam Protection
+-Check for clean mysql inputs
+-Numerous failed logins locks account and sends activation email to account owner
+-Code Cleanup
+-BB Code Posts

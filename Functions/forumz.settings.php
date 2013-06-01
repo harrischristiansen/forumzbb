@@ -1,42 +1,9 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-29-13
+// Updated 5-1-13
 
-// Loads Forumz Settings from Database
-// Callable Functions: getDefaultAccountStatus()
-
-
-function loadMysqlSettings() {
-	// Get Settings Array From Database
-	$sql = "SELECT * FROM siteSettings WHERE settingsProfile='1'";
-	$result = dbQuery($sql) or die ("Query failed: getSiteSettings");
-	$setting=mysqli_fetch_array($result);
-	
-	// Set Site Settings
-	global $siteSettings;
-	if($setting['siteDisabled']!="") {
-		$siteSettings['siteDisabled']=true;
-		$siteSettings['disabledMessage']=$setting['siteDisabled'];
-	} else { $siteSettings['siteDisabled']=false; }
-	$siteSettings['siteName'] = $setting['siteName'];
-	$siteSettings['siteMotd'] = $setting['siteMotd'];
-	$siteSettings['siteSlogan'] = $setting['siteSlogan'];
-	$siteSettings['defaultTheme'] = $setting['defaultTheme'];
-	$siteSettings['blogEntriesPerPage'] = $setting['blogEntriesPerPage'];
-	if($setting['reqLogin']=="true") {
-		$siteSettings['reqLogin'] = true;
-	} else { $siteSettings['reqLogin'] = false; }
-	if($setting['verifyRegisterEmail']=="true") {
-		$siteSettings['verifyRegisterEmail'] = true;
-	} else { $siteSettings['verifyRegisterEmail'] = false; }
-	if($setting['verifyRegisterAdmin']=="true") {
-		$siteSettings['verifyRegisterAdmin'] = true;
-	} else { $siteSettings['verifyRegisterAdmin'] = false; }
-	if($setting['htmlAllowed']=="true") {
-		$siteSettings['htmlAllowed'] = true;
-	} else { $siteSettings['htmlAllowed'] = false; }
-}
+// Loads Settings And NavBar
 function getDefaultAccountStatus() {
 	global $siteSettings;
 	if($siteSettings['verifyRegisterAdmin']&&$siteSettings['verifyRegisterEmail']) {

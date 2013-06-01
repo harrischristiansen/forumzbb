@@ -1,6 +1,6 @@
 <?php
 // Harris Christiansen
-// Updated 5-19-13
+// Updated 6-1-13
 
 
 // Report All Errors
@@ -8,12 +8,10 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set('display_errors','On');
 
 // Start page load timer
-global $starttime;
 $m_time = explode(" ",microtime());
 $m_time = $m_time[0] + $m_time[1];
 $starttime = $m_time;
 // Reset queries counter
-global $sqlQueries;
 $sqlQueries=0;
 // Set timezone
 date_default_timezone_set('America/Denver');
@@ -25,12 +23,12 @@ $mysqliServer = $_ENV['DATABASE_SERVER'];
 $mysqliUser = "db166640_forumz";
 $mysqliPass = "forumzbb";
 $mysqliDatabase = "db166640_forumzDev";
-global $con;
 $con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliDatabase) or die ("Site Not Setup");
-// Requires
+// Requires And Load Settings
+require_once('loadSiteSettings.php');
+loadSiteSettings();
 require_once('Functions/forumz.main.php');
 // Get user info
-global $userData;
 $userData=$_SESSION['userData'];
 // Set default rank
 if($userData['rankID']=="") {
@@ -41,7 +39,6 @@ if($userData['siteTheme']=="") {
 	$userData['siteTheme']="SkyBlue";
 }
 // Get Page
-global $pageName, $pageID, $pageID2, $pagePost;
 $pageName = mysqli_real_escape_string($con,$_GET['page']);
 $pageID = mysqli_real_escape_string($con,$_GET['pageID']);
 $pageID2 = mysqli_real_escape_string($con,$_GET['pageID2']);

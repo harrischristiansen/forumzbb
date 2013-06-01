@@ -1,7 +1,7 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 5-29-13
+// Updated 6-1-13
 
 // Forumz Sitewide References
 
@@ -78,10 +78,10 @@ function getSiteNumMembers() {
 	return mysqli_num_rows($result);
 }
 function display($fileName) {
-	require_once('Themes/SkyBlue/'.$fileName.'.php');
+	require_once($siteSettings['siteVersionAddress'].'Themes/SkyBlue/'.$fileName.'.php');
 }
 function defaultsInclude($fileName) {
-	require_once('Themes/Defaults/'.$fileName.'.php');
+	require_once($siteSettings['siteVersionAddress'].'Themes/Defaults/'.$fileName.'.php');
 }
 function viewHTML($HTMLtxt) {
 	echo "	".$HTMLtxt."\n";
