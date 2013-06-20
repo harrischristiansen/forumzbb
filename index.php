@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Updated 6-1-13
-// Testing git
 
 
 // Report All Errors
