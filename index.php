@@ -1,11 +1,12 @@
 <?php
 // Harris Christiansen
-// Updated 6-1-13
+// Updated 11-3-13
 
 
 // Report All Errors
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set('display_errors','On');
+ini_set('session.gc_maxlifetime',36000);
 
 // Start page load timer
 $m_time = explode(" ",microtime());
@@ -17,6 +18,7 @@ $sqlQueries=0;
 date_default_timezone_set('America/Denver');
 // Load Session data
 session_name("forumzDev");
+session_set_cookie_params(36000);
 session_start();
 // mysqli Connection Data
 $mysqliServer = $_ENV['DATABASE_SERVER'];
@@ -50,5 +52,6 @@ displayWebsite();
 mysqli_close($con);
 $con="end";
 $_SESSION['userData']=$userData;
+$_SESSION['lastLoadTime'] = time();
 unset($userData);
 ?>
