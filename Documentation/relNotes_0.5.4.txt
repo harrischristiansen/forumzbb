@@ -12,4 +12,12 @@ To-Do:
 -Check for clean mysql inputs
 -Numerous failed logins locks account and sends activation email to account owner
 -Code Cleanup
--BB Code Posts
+-Site BB Code
+-Forum
+	-Topics
+	-Posts
+	-Comments
+	-Editable
+-Pages
+	-Editable
+-Migrate Signup System to <mt> - Test
