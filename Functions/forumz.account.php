@@ -51,7 +51,7 @@ function loginUser() {
 	
 }
 function checkLogin($user, $pass) {
-	global $userData,;
+	global $userData;
 	
 	// Clean User Inputed Data
 	$user = cleanInput($user);
