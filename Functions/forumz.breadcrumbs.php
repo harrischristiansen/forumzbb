@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-1-12
-// Updated 10-8-12
 
 function getNumBreadcrumbs() {
 	global $breadcrumbs;

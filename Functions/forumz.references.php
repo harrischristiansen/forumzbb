@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 6-1-13
 
 // Forumz Sitewide References
 
@@ -9,6 +8,9 @@
 function returnDateShort() {
 	// Return Date in form MO-DA-YR
 	return date('n-d-y');
+}
+function returnDateOfficial() {
+	return date('Y-m-d');
 }
 function returnDateLong() {
 	// Return Date in form Month Day, Year
@@ -87,5 +89,16 @@ function defaultsInclude($fileName) {
 }
 function viewHTML($HTMLtxt) {
 	echo "	".$HTMLtxt."\n";
+}
+
+function isEmailValid($emailAdr) {
+	$emailAdr = str_replace(' ', '', $emailAdr);
+	$emailAdrs = split(',', $emailAdr);
+	for($i=0;$i<count($emailAdrs);$i++) {
+		if(!filter_var($emailAdrs[$i], FILTER_VALIDATE_EMAIL)) {
+			return false;
+		}
+	}
+	return true;
 }
 ?>

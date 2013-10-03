@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-29-13
 
 // Rank Permissions + Control Systems
 

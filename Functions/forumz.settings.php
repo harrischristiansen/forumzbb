@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-1-13
 
 // Loads Settings And NavBar
 function getDefaultAccountStatus() {

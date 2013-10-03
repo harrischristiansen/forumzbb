@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-3-12
-// Updated 5-22-13
 
 // Collection and Display of Site Notices
 

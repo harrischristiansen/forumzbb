@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 9-14-12
-// Updated 6-1-13
 
 // Requires
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.account.php');

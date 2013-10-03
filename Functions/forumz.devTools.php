@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-26-12
-// Updated 5-12-13
 
 function writeSessionData() {
 	global $userData;

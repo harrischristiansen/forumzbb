@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 5-29-13
 
 // Account Creation and Login Systems
 // Callable Functions: loginUser(), logoutUser(), registerUser(), sendConfirmationEmail($user, $email)
@@ -52,11 +51,11 @@ function loginUser() {
 	
 }
 function checkLogin($user, $pass) {
-	global $userData, $con;
+	global $userData,;
 	
 	// Clean User Inputed Data
-	$user = mysqli_real_escape_string($con, $user);
-	$pass = mysqli_real_escape_string($con, $pass);
+	$user = cleanInput($user);
+	$pass = cleanInput($pass);
 	$pass = md5($pass);
 	
 	// Store Login Date and IP-Address
@@ -93,7 +92,7 @@ function checkLogin($user, $pass) {
 	}
 }
 function updateLoginReport($user) {
-	$lastLoginDate=returnDateShort();
+	$lastLoginDate=returnDateOfficial();
 	$lastLoginIP=returnRemoteIP();
 	$sql = "UPDATE accounts SET lastLogin='$lastLoginDate',lastLoginIP='$lastLoginIP' WHERE username='$user' OR email='$user'";
 	$result = dbQuery($sql) or die ("Query failed: updateLoginReport");
@@ -134,12 +133,12 @@ function registerUser() {
 	}
 }
 function addUserToDatabase($user, $pass, $email) {
-	global $siteSettings, $con;
+	global $siteSettings;
 	
 	// Clean User Inputed Data
-	$user = mysqli_real_escape_string($con, $user);
-	$pass = mysqli_real_escape_string($con, $pass);
-	$email = mysqli_real_escape_string($con, $email);
+	$user = cleanInput($user);
+	$pass = cleanInput($pass);
+	$email = cleanInput($email);
 	$pass = md5($pass);
 	
 	// Check Username
@@ -147,7 +146,7 @@ function addUserToDatabase($user, $pass, $email) {
 		// Get Default User Account Status
 		$actStatus=getDefaultAccountStatus();
 		$userID = getSiteNumMembers();
-		$joinDate = returnDateShort();
+		$joinDate = returnDateOfficial();
 		$ipAddress = returnRemoteIP();
 		$rankID = getRankByOrder(1);
 		

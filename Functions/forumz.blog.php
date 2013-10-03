@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 11-02-12
-// Updated 5-29-13
 
 ////////// Home Blog View System //////////
 function getBlogEntries($startID, $entriesPerPage) {
@@ -19,7 +18,7 @@ function viewBlogEntries() {
 	while($entry = mysqli_fetch_array($blogEntries)) {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
 		$postDateOrTime=$entry['AuthorDate'];
-		if($postDateOrTime==returnDateShort()) {
+		if($postDateOrTime==returnDateOfficial()) {
 			$postDateOrTime=$entry['AuthorTime'];
 		}
 		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDateOrTime,$entry['Title'],$entry['Post'],$blogLink);
@@ -145,7 +144,7 @@ function addBlogEntry() {
 		$blogID=getNumBlogEntries()+1;
 		$pageID=$blogID; // To Display Blog Once Added
 		$author=$userData['actID'];
-		$date=returnDateShort();
+		$date=returnDateOfficial();
 		$time=returnTime();
 		$sql = "INSERT INTO blogs (ID, Title, Author, AuthorDate, AuthorTime, Post) VALUES ('$blogID','$newEntryTitle','$author','$date', '$time', '$newEntryText')";
 		$result = dbQuery($sql) or die ("Query failed: addBlogEntry");
@@ -170,7 +169,7 @@ function addBlogComment() {
 	if($userData['permissions']['postBlogComments']=="true") {
 		$commentID=numBlogComments();
 		$postClean=formatPost($pagePost['blogCommentText']);
-		$date=returnDateShort();
+		$date=returnDateOfficial();
 		$time=returnTime();
 		$userID=$userData['actID'];
 		$sql = "INSERT INTO blogComments (idNum, blogID, posterID, date, time, comment) VALUES ('$commentID','$pageID','$userID','$date', '$time', '$postClean')";
@@ -195,7 +194,7 @@ function editBlogPost() {
 	if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
 		$newBlogEntry=formatPost($pagePost['blogEntryText']);
 		$updateAuthor=$userData['actID'];
-		$updateDate=returnDateShort();
+		$updateDate=returnDateOfficial();
 		$sql = "UPDATE blogs SET Post='$newBlogEntry',updateAuthor='$updateAuthor',updateDate='$updateDate' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: editBlogPost");
 		addSuccessNotice("Blog Entry Updated");

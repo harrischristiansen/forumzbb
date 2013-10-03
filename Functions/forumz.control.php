@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-10-12
-// Updated 5-28-13
 
 function displayCPNav() {
 	global $siteSettings, $userData;

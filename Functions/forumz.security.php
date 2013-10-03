@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 5-29-13
-// Updated 5-29-13
 
 // Account Security Functions
 
@@ -29,5 +28,10 @@ function userIsBanned() {
 			return false;
 		}
 	}
+}
+
+function cleanInput($input) {
+	global $con;
+	return mysqli_real_escape_string($con, $input);
 }
 ?>
