@@ -102,8 +102,8 @@ function checkBlogEntryExists() { // Used in viewBlog.php
 
 function formatPost($post) {
 	global $con;
-	$post = mysqli_real_escape_string($con, $post);
-	$post=str_replace("\\r\\n", "<br>", $post);
+	$post = cleanInput($con, $post);
+	$post=nl2br($post, false);
 	return $post;
 }
 
@@ -134,7 +134,7 @@ function numBlogComments() {
 //////////// New Blog Entry System //////////
 function addBlogEntry() {
 	global $userData, $pagePost, $pageID, $con;
-	$newEntryTitle=mysqli_real_escape_string($con, $pagePost['blogEntryTitle']);
+	$newEntryTitle=cleanInput($pagePost['blogEntryTitle']);
 	$newEntryText=formatPost($pagePost['blogEntryText']);
 	if($userData['permissions']['postBlogEntries']!="true") {
 		addFailureNotice("Permission Denied");

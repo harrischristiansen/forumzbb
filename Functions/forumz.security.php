@@ -34,4 +34,15 @@ function cleanInput($input) {
 	global $con;
 	return mysqli_real_escape_string($con, $input);
 }
+
+function isEmailValid($emailAdr) {
+	$emailAdr = str_replace(' ', '', $emailAdr);
+	$emailAdrs = split(',', $emailAdr);
+	for($i=0;$i<count($emailAdrs);$i++) {
+		if(!filter_var($emailAdrs[$i], FILTER_VALIDATE_EMAIL)) {
+			return false;
+		}
+	}
+	return true;
+}
 ?>

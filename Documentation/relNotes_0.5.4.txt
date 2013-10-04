@@ -9,7 +9,6 @@ To-Do:
 -Account Creation Validation
 -Bot Checking
 -Spam Protection
--Check for clean mysql inputs
 -Numerous failed logins locks account and sends activation email to account owner
 -Code Cleanup
 -Site BB Code
@@ -20,4 +19,5 @@ To-Do:
 	-Editable
 -Pages
 	-Editable
--Migrate Signup System to <mt> - Test
+-Site Signup System
+	-Send Out Email when you create a site

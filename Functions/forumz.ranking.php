@@ -19,7 +19,7 @@ function setUserPrivileges() { // Sets a users permissions based on their rank -
 function setUserRank() {
 	global $userData, $pageID2, $pagePost, $con;
 	$userID=$pageID2;
-	$tarRank=mysqli_real_escape_string($con, $pagePost['newRank']);
+	$tarRank=cleanInput($pagePost['newRank']);
 	if(!hasPermissionToEditRank($tarRank)||$tarRank==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
 		addFailureNotice("Permission Denied");
 	}

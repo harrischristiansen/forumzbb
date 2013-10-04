@@ -60,7 +60,7 @@
     </div>
     
     <div id="r2">
-    	<div class="left"><b>Released Version</b> | Forumz 0.5.2</div>
+    	<div class="left"><b>Released Version</b> | Forumz 0.5.3</div>
     </div>
     
     <div id="r3"><br>

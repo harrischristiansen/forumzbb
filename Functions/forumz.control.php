@@ -72,7 +72,7 @@ function updateAccountPassword() {
 function updateAccountProfile() {
 	global $userData, $pagePost, $con;
 	$accountID=$userData['actID'];
-	$newEmail=mysqli_real_escape_string($con, $pagePost['newEmail']);
+	$newEmail=cleanInput($pagePost['newEmail']);
 	$sql = "UPDATE accounts SET email='$newEmail' WHERE actID='$accountID'";
 	$result = dbQuery($sql) or die ("Query failed: updateAccountProfile");
 	addSuccessNotice("Success: Profile Updated");
@@ -80,12 +80,12 @@ function updateAccountProfile() {
 
 function updateSiteSettings() {
 	global $pagePost, $con;
-	$siteName=mysqli_real_escape_string($con, $pagePost['siteName']);
-	$siteMotd=mysqli_real_escape_string($con, $pagePost['siteMotd']);
-	$siteSlogan=mysqli_real_escape_string($con, $pagePost['siteSlogan']);
-	$siteDisabled=mysqli_real_escape_string($con, $pagePost['siteDisabled']);
-	$reqLogin=mysqli_real_escape_string($con, $pagePost['reqLogin']);
-	$numBlogEntriesPerPage=mysqli_real_escape_string($con, $pagePost['numBlogEntriesPerPage']);
+	$siteName=cleanInput($pagePost['siteName']);
+	$siteMotd=cleanInput($pagePost['siteMotd']);
+	$siteSlogan=cleanInput($pagePost['siteSlogan']);
+	$siteDisabled=cleanInput($pagePost['siteDisabled']);
+	$reqLogin=cleanInput($pagePost['reqLogin']);
+	$numBlogEntriesPerPage=cleanInput($pagePost['numBlogEntriesPerPage']);
 	
 	$sql = "UPDATE siteSettings SET siteName='$siteName',siteMotd='$siteMotd',siteSlogan='$siteSlogan',siteDisabled='$siteDisabled',reqLogin='$reqLogin',blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
@@ -147,14 +147,14 @@ function displayRankNavItems() {
 // Both need to confirm that only highest ranking member can edit ranks permissions
 function addSiteRank() {
 	global $pagePost, $con, $userData;
-	$rankName=mysqli_real_escape_string($con, $pagePost['rankName']);
-	$editSiteSettings=mysqli_real_escape_string($con, $pagePost['editSiteSettings']);
-	$editMemberRank=mysqli_real_escape_string($con, $pagePost['editMemberRank']);
-	$editRanks=mysqli_real_escape_string($con, $pagePost['editRanks']);
-	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
-	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
-	$editBlogEntries=mysqli_real_escape_string($con, $pagePost['editBlogEntries']);
-	$deleteBlogEntries=mysqli_real_escape_string($con, $pagePost['deleteBlogEntries']);
+	$rankName=cleanInput($pagePost['rankName']);
+	$editSiteSettings=cleanInput($pagePost['editSiteSettings']);
+	$editMemberRank=cleanInput($pagePost['editMemberRank']);
+	$editRanks=cleanInput($pagePost['editRanks']);
+	$postBlogEntries=cleanInput($pagePost['postBlogEntries']);
+	$postBlogComments=cleanInput($pagePost['postBlogComments']);
+	$editBlogEntries=cleanInput($pagePost['editBlogEntries']);
+	$deleteBlogEntries=cleanInput($pagePost['deleteBlogEntries']);
 	$rankID=getNumSiteRanks();
 	$highestRankOrder=getHighestRankOrder();
 	$newHighestRankOrder=$highestRankOrder+1;
@@ -172,14 +172,14 @@ function addSiteRank() {
 function updateRank() {
 	global $pagePost, $pageID2, $con, $userData;
 	$tarRank=$pageID2;
-	$rankName=mysqli_real_escape_string($con, $pagePost['rankName']);
-	$editSiteSettings=mysqli_real_escape_string($con, $pagePost['editSiteSettings']);
-	$editMemberRank=mysqli_real_escape_string($con, $pagePost['editMemberRank']);
-	$editRanks=mysqli_real_escape_string($con, $pagePost['editRanks']);
-	$postBlogEntries=mysqli_real_escape_string($con, $pagePost['postBlogEntries']);
-	$postBlogComments=mysqli_real_escape_string($con, $pagePost['postBlogComments']);
-	$editBlogEntries=mysqli_real_escape_string($con, $pagePost['editBlogEntries']);
-	$deleteBlogEntries=mysqli_real_escape_string($con, $pagePost['deleteBlogEntries']);
+	$rankName=cleanInput($pagePost['rankName']);
+	$editSiteSettings=cleanInput($pagePost['editSiteSettings']);
+	$editMemberRank=cleanInput($pagePost['editMemberRank']);
+	$editRanks=cleanInput($pagePost['editRanks']);
+	$postBlogEntries=cleanInput($pagePost['postBlogEntries']);
+	$postBlogComments=cleanInput($pagePost['postBlogComments']);
+	$editBlogEntries=cleanInput($pagePost['editBlogEntries']);
+	$deleteBlogEntries=cleanInput($pagePost['deleteBlogEntries']);
 	
 	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])) { // Attempting to Edit Rank Greater Than Own
 		addFailureNotice("Permission Denied");
