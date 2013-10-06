@@ -2,6 +2,9 @@
 // Harris Christiansen
 // Created 5-29-13
 
+function viewForumThreads() {
+	global $pageID;
+}
 
 // General Functions
 

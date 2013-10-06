@@ -9,9 +9,9 @@ require_once($siteSettings['siteVersionAddress'].'Functions/forumz.breadcrumbs.p
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.control.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.devTools.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.email.php');
-require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forum.php');
-require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumPost.php');
-require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumThread.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forums.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumPosts.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumThreads.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.members.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.ranking.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references.php');
