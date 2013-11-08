@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 11-03-12
-// Updated 5-28-13
 
 function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$blogLink) {
 	viewHTML('<div class="FullWidthPostHead">');

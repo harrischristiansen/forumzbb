@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-1-12
-// Updated 10-20-12
 
 
 function viewSingleLineLoginField() {

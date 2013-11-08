@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-29-12
-// Updated 10-29-12
 
 function displayChangeRankList($formURL,$actID) {
 	viewHTML('<form action="'.$formURL.'" method="POST">');

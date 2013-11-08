@@ -4,6 +4,13 @@
 
 function viewForumThreads() {
 	global $pageID;
+	$threads=getForumThreadsInForum($pageID);
+	$rowID=0;
+	displayForumHead();
+	while($thread=mysqli_fetch_array($threads)) {
+		displayThreadLine($rowID,$subject,$startBy,$latestBy,$replies,$views);
+		$rowID++;
+	}
 }
 
 // General Functions

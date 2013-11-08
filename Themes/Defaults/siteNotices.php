@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-3-12
-// Updated 10-9-12
 
 function viewSuccess($msg) {
 	viewHTML('<div class="FullWidthSuccessDivision">');

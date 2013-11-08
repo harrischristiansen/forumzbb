@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-2-12
-// Updated 10-2-12
 
 function getPageLoadInfo() {
 	global $starttime, $sqlQueries;

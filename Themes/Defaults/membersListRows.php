@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-3-12
-// Updated 10-29-12
 
 function displayMembersListHead() {
 	viewHTML('<div class="FullWidthTableHead">');

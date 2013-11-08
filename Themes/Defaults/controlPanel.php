@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 10-19-12
-// Updated 5-28-13
 
 function displayCPNavItem($navItem, $navLink) {
 	viewHTML('<a class="controlPanelNavItem" href="'.$navLink.'">'.$navItem.'</a>');
