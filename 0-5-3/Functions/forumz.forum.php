@@ -1,0 +1,42 @@
+<?php
+// Harris Christiansen
+// Created 5-29-13
+// Updated 5-29-13
+
+function viewForumHome() {
+	global $siteSettings;
+	$categories=getForumCategories();
+	while($category = mysqli_fetch_array($categories)) {
+		displayForumCatHead($category['title']);
+		$catForums = getForumsInCat($category['id']);
+		$rowID=0;
+		while($forum = mysqli_fetch_array($catForums)) {
+			$latestPost=unserialize($forum['latestPost']);
+			$forumLink=$siteSettings['siteURLShort'].'forum/'.$forum['id'];
+			$latestPostLink=$siteSettings['siteURLShort'].'thread/'.$latestPost['threadID'];
+			displayForumLine($rowID, $forum['title'], $forum['desc'], getNumForumThreadsInForum($forum['id']), getNumForumPostsInForum($forum['id']), $latestPost['title'], $latestPost['author'], $latestPost['date'], $forumLink, $latestPostLink);
+			$rowID++;
+		}
+	}
+}
+
+
+// General Functions
+function getForumCategories() {
+	$sql = "SELECT * FROM forumCats ORDER BY orderID";
+	$result = dbQuery($sql) or die ("Query failed: getForumCategories");
+	return $result;
+}
+
+function getForumsInCat($catID) {
+	$sql = "SELECT * FROM forums WHERE catID='$catID' ORDER BY title";
+	$result = dbQuery($sql) or die ("Query failed: getForumsInCat");
+	return $result;
+}
+
+function getNumForums() {
+	$sql = "SELECT * FROM forums";
+	$result = dbQuery($sql) or die ("Query failed: getNumForums");
+	return mysqli_num_rows($result);
+}
+?>

@@ -41,9 +41,9 @@ if($userData['siteTheme']=="") {
 	$userData['siteTheme']="SkyBlue";
 }
 // Get Page
-$pageName = cleanInput($_GET['page']);
-$pageID = cleanInput($_GET['pageID']);
-$pageID2 = cleanInput($_GET['pageID2']);
+$pageName = mysqli_real_escape_string($con, $_GET['page']);
+$pageID = mysqli_real_escape_string($con, $_GET['pageID']);
+$pageID2 = mysqli_real_escape_string($con, $_GET['pageID2']);
 if($pageName=="") $pageName = "home";
 $pagePost = $_POST;
 // Primary Display Website Call
