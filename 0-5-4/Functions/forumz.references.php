@@ -58,6 +58,9 @@ function getSiteName() {
 	global $siteSettings;
 	return $siteSettings['siteName'];
 }
+function getSiteAddress() {
+	return $_SERVER['SERVER_NAME'];
+}
 function getPageTitle() {
 	global $specPageTitle;
 	$pageTitle=getSiteName();
@@ -80,8 +83,13 @@ function getSiteNumMembers() {
 	return mysqli_num_rows($result);
 }
 function display($fileName) {
-	global $siteSettings;
-	require_once($siteSettings['siteVersionAddress'].'Themes/SkyBlue/'.$fileName.'.php');
+	global $siteSettings, $userData;
+	// Check userData for a set theme
+	// Else set to default theme
+	$themeToDisp = $siteSettings['defaultTheme'];
+	// If custom theme load from theme
+	// If file not found, load from default
+	require_once($siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php');
 }
 function defaultsInclude($fileName) {
 	global $siteSettings;

@@ -107,7 +107,7 @@ function logoutUser() {
 	addSuccessNotice("You are now logged out.");
 }
 function registerUser() {
-	global $pagePost;
+	global $pagePost, $siteSettings;
 	$user=$pagePost['username'];
 	$pass=$pagePost['password'];
 	$passCon=$pagePost['passwordCon'];
@@ -121,13 +121,28 @@ function registerUser() {
 		elseif(strpos($user," ")!==false||strpos($pass," ")!==false||strpos($passCon," ")!==false||strpos($email," ")!==false) {
 			addFailureNotice("ERROR: No spaces are allowed in the username, password, or email address.");
 		}
+		elseif(!isEmailValid($email)) {
+			addFailureNotice("Invalid Email Address");
+		}
 		
 		
 		// Check To Make Sure Passwords Match
 		elseif($pass!=$passCon) { addFailureNotice("ERROR: Passwords dont match."); }
 		
 		// Add User To Database
-		else { addUserToDatabase($user, $pass, $email); addSuccessNotice("You Are Now Registered."); }
+		else {
+			if (addUserToDatabase($user, $pass, $email)) {
+				addSuccessNotice("You Are Now Registered.");
+				$siteName = getSiteName();
+				$siteAddress = getSiteAddress();
+				$emailMsg = "Welcome To $siteName! <br><br> An account has been created for you: <br><b>Website: </b>$siteAddress <br><b>Username: </b>$user <br><b>Password: </b>$pass";
+				if($siteSettings['verifyRegisterEmail']) {
+					$emailMsg .= '<br><br><b style="color: red;">NOTICE: </b>You must confirm your account before you may login:<br><a href="http://'.$siteAddress.'/confirmAccount/'.$user.'/'.md5($pass).'">http://'.$siteAddress.'/confirmAccount/'.$user.'/'.md5($pass).'</a>';
+				}
+				$emailSubject = 'Account Created - '.$user;
+				sendEmail($email, $emailSubject, $emailMsg);
+			}
+		}
 	} else {
 		addFailureNotice("ERROR: registerUser called, but form did not appear to be submitted.");
 	}
@@ -153,8 +168,10 @@ function addUserToDatabase($user, $pass, $email) {
 		// Add Username To Database
 		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, joinIP) VALUES ('$userID','$user','$pass','$email', '$actStatus', '$rankID', '$joinDate', '$ipAddress')";
 		$result = dbQuery($sql) or die ("Query failed: addUserToDatabase");
+		return true;
 	} else {
-		addFailureNotice("ERROR: Username Is Unavailable.");
+		addFailureNotice("Username Unavailable - We are sorry, that username is already taken.");
+		return false;
 	}
 }
 // Checks if user with specified name exists
@@ -166,17 +183,22 @@ function checkUsernameAvailable($user) {
 		return true;
 	} return false;
 }
-function sendConfirmationEmail($user, $msgTo) {
-	global $siteSettings;
-	$subject = "Account Confirmation: ".$siteSettings['siteName']." - ".$user;
-	$message = $user.', please click the following link to confirm your email: <a href="http://www.forumzbb.com/">http://www.forumzbb.com/</a>';
-	$headers = "From: noReply@forumzbb.com";
-	
-	mail($msgTo, $subject, $message, $headers);
+
+//// Account Status Admin
+function confirmAccount() {
+	global $pageID, $pageID2;
+	$sql = "SELECT * FROM accounts WHERE username='$pageID' AND password='$pageID2'";
+	$result = dbQuery($sql) or die ("Query failed: confirmAccount-select");
+	if(mysqli_num_rows($result)==0) {
+		addFailureNotice("Invalid Activation Link");
+	} else {
+		setAccountAsConfirmedByEmail($pageID);
+	}
 }
 function setAccountAsConfirmedByEmail($user) {
 	// Make so it only confirms email, not just sets account to active.
 	setAccountAsActive($user);
+	addSuccessNotice("Account Activated - You May Now Login");
 }
 function setAccountAsConfirmedByAdmin($user) {
 	// Make so it only confirms by admin, not just sets account to active.

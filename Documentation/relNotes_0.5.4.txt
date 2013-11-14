@@ -1,12 +1,12 @@
 Forumz Version 0.5.4
 Harris Christiansen
--No Due Date Set
+-Due December 1 2013
 
 Completed:
+-Account Creation Validation
 
 To-Do:
 -Security Enhancements
--Account Creation Validation
 -Bot Checking
 -Spam Protection
 -Numerous failed logins locks account and sends activation email to account owner

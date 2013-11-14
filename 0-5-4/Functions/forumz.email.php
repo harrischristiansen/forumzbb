@@ -4,21 +4,27 @@
 
 function sendEmail($emailTarget, $msgSubject, $msg) {
 	$siteName = getSiteName();
+	$siteAddress = getSiteAddress();
 	if(!isEmailValid($emailTarget)) {
 		addFailureNotice("Invalid Email Address");
 		return false;
 	}
 	
 	// Send Email
-	$subject = 'Forumzbb - '.$siteName.' - '.$subject;
+	$subject = $siteName.' - Hosted By Forumzbb - '.$msgSubject;
 	$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= 'From: Forumzbb-'.$siteName.' <'.$siteName.'@forumzbb.com>';
-	$headers .= "\r\n".'Reply-To: replyTo@forumzbb.com';
+	$headers .= 'From: '.$siteName.' <'.$siteName.'@'.$siteAddress.'>';
+	$headers .= "\r\n".'Reply-To: replyTo@'.$siteAddress.'';
 	$message = '
 		<html><head>
 			<title>'.$subject.'</title>
 		</head><body>
 			'.$msg.'
+			<br><br>
+			<p>
+			'.$siteName.' - <a href="http://'.$siteAddress.'">'.$siteAddress.'</a><br>
+			This site is powered by ForumzBB - <a href="http://www.forumzbb.com">www.forumzbb.com</a>
+			</p>
 		</body></html>';
 	mail($emailTarget, $subject, $message, $headers);
 }
