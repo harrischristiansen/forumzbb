@@ -14,8 +14,9 @@ CREATE TABLE `forumzDev_accounts` (
   `lastLoginIP` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_accounts` values('0','Harris','7af4896825dfc7e94f8a1d6846a5a2d4','cloudy243@me.com','0','2','10-03-12','205.124.117.24','6-01-13','67.161.245.43'),
- ('Anonymous','Anonymous','-','Anonymous','-1','0','-','-','-','-');
+insert into `forumzDev_accounts` values('0','Harris','7af4896825dfc7e94f8a1d6846a5a2d4','cloudy243@me.com','0','2','2013-11-13','67.166.73.129','2013-11-13','67.166.73.129'),
+ ('Anonymous','Anonymous','-','Anonymous','-1','0','-','-','-','-'),
+ ('1','TestUser','7a95dec218ffaaf8992bb48b4bd94367','testUser@forumzbb.com','0','1','05-12-13','67.161.245.43','5-29-13','67.161.245.43');
 
 CREATE TABLE `forumzDev_bannedClients` (
   `ipAdr` text NOT NULL,
@@ -54,6 +55,8 @@ CREATE TABLE `forumzDev_forumCats` (
   `title` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+insert into `forumzDev_forumCats` values('0','0','General'),
+ ('1','1','General 2');
 
 CREATE TABLE `forumzDev_forumPosts` (
   `id` int(11) NOT NULL,
@@ -88,6 +91,9 @@ CREATE TABLE `forumzDev_forums` (
   `latestPost` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+insert into `forumzDev_forums` values('0','0','General Forum','For Dev And Testing Of Forumz','0','0','a:4:{s:5:\"title\";s:15:\"The Latest Post\";s:6:\"author\";s:6:\"Harris\";s:4:\"date\";s:7:\"5-29-13\";s:8:\"threadID\";s:1:\"2\";}'),
+ ('1','0','General Forum 2','A Second Forum','0','0','a:4:{s:5:\"title\";s:15:\"The Latest Post\";s:6:\"author\";s:6:\"Harris\";s:4:\"date\";s:7:\"5-29-13\";s:8:\"threadID\";s:1:\"2\";}'),
+ ('2','1','General Forum 3','A Third Forum','0','0','a:4:{s:5:\"title\";s:15:\"The Latest Post\";s:6:\"author\";s:6:\"Harris\";s:4:\"date\";s:7:\"5-29-13\";s:8:\"threadID\";s:1:\"2\";}');
 
 CREATE TABLE `forumzDev_navBar` (
   `navItemName` text NOT NULL,
@@ -101,6 +107,7 @@ insert into `forumzDev_navBar` values('Home','home','1','loggedOut'),
  ('Login','login','3','loggedOut'),
  ('Register','register','4','loggedOut'),
  ('Home','home','1','loggedIn'),
+ ('Forum','forums','2','loggedIn'),
  ('Members List','membersList','3','loggedIn'),
  ('Control Panel','controlPanel','4','loggedIn'),
  ('Logout','logout','5','loggedIn');
@@ -118,29 +125,33 @@ CREATE TABLE `forumzDev_pages` (
   `requireLogin` text NOT NULL,
   `siteRequireLoginApplies` text NOT NULL,
   `requirePermission` text NOT NULL,
-  `requireFormSubmitted` text NOT NULL
+  `requireFormSubmitted` text NOT NULL,
+  `customPage` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_pages` values('home','','viewBlogHome','','','Home','','','','','true','',''),
- ('login','','','','loginUser','Login','Login','','Please Login Above','','','','loginSubmitted'),
- ('blog','','viewBlog','','checkBlogEntryExists','Blog Entry','Blog Post','','','','true','',''),
- ('register','','','viewRegistration','registerUser','Register','Register','','','','','','registerSubmitted'),
- ('logout','','','','logoutUser','Logout','Logout','','','true','','',''),
- ('membersList','','viewMembersList','','','Members List','Members','','','','true','',''),
- ('membersList','changeUserRank','viewMembersList','','setUserRank','Members List - Change Member Rank','Set Member Rank','','Action Denied','true','','editMemberRank','newRank'),
- ('devOutput','','','','writeSessionData','Dev Output','Dev Output','','','','true','',''),
- ('blog','reply','viewBlog','viewBlog','addBlogComment','Blog Entry - Add Blog Comment','Post Comment','','','','true','postBlogComments','commentSubmitted'),
- ('controlPanel','','viewControlPanel','','','Control Panel','Control Panel','','','true','','',''),
- ('controlPanel','changePassword','viewControlPanel','viewControlPanel','updateAccountPassword','Control Panel - Change Password','Control Panel Change Password','','','true','','','cpFormSubmitted'),
- ('controlPanel','editProfile','viewControlPanel','viewControlPanel','updateAccountProfile','Control Panel - Update Profile','Control Panel Update Profile','','','true','','','cpFormSubmitted'),
- ('controlPanel','changePreferences','viewControlPanel','viewControlPanel','','Control Panel - Update Preferences','Control Panel Update Preferences','','','true','','','cpFormSubmitted'),
- ('controlPanel','editSiteSettings','viewControlPanel','viewControlPanel','updateSiteSettings','Control Panel - Update Site Settings','Control Panel Update Site Settings','','','true','','editSiteSettings','cpFormSubmitted'),
- ('controlPanel','addRank','viewControlPanel','viewControlPanel','addSiteRank','Control Panel - Add Rank','Control Panel Add Rank','','','true','','editRanks','cpFormSubmitted'),
- ('controlPanel','editRanks','viewControlPanel','viewControlPanel','updateRank','Control Panel - Edit Rank','Control Panel Edit Rank','','','true','','editRanks','cpFormSubmitted'),
- ('controlPanel','swapRanks','viewControlPanel','viewControlPanel','swapRanks','Control Panel - Edit Rank Order','Control Panel Edit Rank Order','','','true','','editRanks',''),
- ('composeEntry','','viewBlog','viewBlogCompose','addBlogEntry','Compose Blog Entry','New Entry','','','true','','postBlogEntries','blogComposeSubmitted'),
- ('editBlog','','viewBlog','viewBlogCompose','editBlogPost','Edit Blog Entry','Edit Blog','','','true','','','blogUpdateSubmitted'),
- ('deleteBlog','','viewBlogHome','','deleteBlogPost','Delete Blog Entry','Delete Blog','','','true','','','');
+insert into `forumzDev_pages` values('home','','viewBlogHome','','','Home','','','','','true','','',''),
+ ('login','','','','loginUser','Login','Login','','Please Login Above','','','','loginSubmitted',''),
+ ('blog','','viewBlog','','checkBlogEntryExists','Blog Entry','Blog Post','','','','true','','',''),
+ ('register','','','viewRegistration','registerUser','Register','Register','','','','','','registerSubmitted',''),
+ ('logout','','','','logoutUser','Logout','Logout','','','true','','','',''),
+ ('membersList','','viewMembersList','','','Members List','Members','','','','true','','',''),
+ ('membersList','changeUserRank','viewMembersList','','setUserRank','Members List - Change Member Rank','Set Member Rank','','Action Denied','true','','editMemberRank','newRank',''),
+ ('devOutput','','','','writeSessionData','Dev Output','Dev Output','','','','true','','',''),
+ ('blog','reply','viewBlog','viewBlog','addBlogComment','Blog Entry - Add Blog Comment','Post Comment','','','','true','postBlogComments','commentSubmitted',''),
+ ('controlPanel','','viewControlPanel','','','Control Panel','Control Panel','','','true','','','',''),
+ ('controlPanel','changePassword','viewControlPanel','viewControlPanel','updateAccountPassword','Control Panel - Change Password','Control Panel Change Password','','','true','','','cpFormSubmitted',''),
+ ('controlPanel','editProfile','viewControlPanel','viewControlPanel','updateAccountProfile','Control Panel - Update Profile','Control Panel Update Profile','','','true','','','cpFormSubmitted',''),
+ ('controlPanel','changePreferences','viewControlPanel','viewControlPanel','','Control Panel - Update Preferences','Control Panel Update Preferences','','','true','','','cpFormSubmitted',''),
+ ('controlPanel','editSiteSettings','viewControlPanel','viewControlPanel','updateSiteSettings','Control Panel - Update Site Settings','Control Panel Update Site Settings','','','true','','editSiteSettings','cpFormSubmitted',''),
+ ('controlPanel','addRank','viewControlPanel','viewControlPanel','addSiteRank','Control Panel - Add Rank','Control Panel Add Rank','','','true','','editRanks','cpFormSubmitted',''),
+ ('controlPanel','editRanks','viewControlPanel','viewControlPanel','updateRank','Control Panel - Edit Rank','Control Panel Edit Rank','','','true','','editRanks','cpFormSubmitted',''),
+ ('controlPanel','swapRanks','viewControlPanel','viewControlPanel','swapRanks','Control Panel - Edit Rank Order','Control Panel Edit Rank Order','','','true','','editRanks','',''),
+ ('composeEntry','','viewBlog','viewBlogCompose','addBlogEntry','Compose Blog Entry','New Entry','','','true','','postBlogEntries','blogComposeSubmitted',''),
+ ('editBlog','','viewBlog','viewBlogCompose','editBlogPost','Edit Blog Entry','Edit Blog','','','true','','','blogUpdateSubmitted',''),
+ ('deleteBlog','','viewBlogHome','','deleteBlogPost','Delete Blog Entry','Delete Blog','','','true','','','',''),
+ ('forums','','viewForumHome','','','Forums Home','Forums Home','','','','true','','',''),
+ ('forum','','viewForumThreads','','','Forum Topics - Needs To Dynamically Load Name','Forum Topics - Needs To Dynamically Load Name','','','','true','','',''),
+ ('confirmAccount','','','','confirmAccount','Confirm Account','Confirm Account','','','','','','','');
 
 CREATE TABLE `forumzDev_ranks` (
   `rankID` int(11) NOT NULL,
@@ -175,6 +186,6 @@ CREATE TABLE `forumzDev_siteSettings` (
   `blogEntriesPerPage` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_siteSettings` values('1','','Forumz','','Release Version 0.5.3 © 2013 Forumzbb','SkyBlue','','','false','false','false','4');
+insert into `forumzDev_siteSettings` values('1','0-5-4','Forumz','','Dev Version 0.5.4 © 2013 Forumzbb','SkyBlue','','','true','false','false','4');
 
 SET FOREIGN_KEY_CHECKS = 1;
