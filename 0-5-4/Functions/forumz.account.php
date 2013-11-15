@@ -27,9 +27,9 @@ function loginUser() {
 		unset($userData);
 		
 		// Failed Login Lockout
-		if(!isset($_SESSION['failedLogins'])) { $_SESSION['failedLogins']=0; }
+		if(!isset($_SESSION['failedLogins'])) { $_SESSION['failedLogins']=1; }
 		else { $_SESSION['failedLogins']++; }
-		if($_SESSION['failedLogins']>=5) {
+		if($_SESSION['failedLogins']==5) {
 			addFailureNotice("This Account Has Been Locked - Please check your email for a reactivation link");
 			setAccountAsLocked($user);
 			$emailAdr = getUserEmail($user);
