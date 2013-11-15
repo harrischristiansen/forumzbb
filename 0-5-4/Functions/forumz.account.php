@@ -22,7 +22,26 @@ function loginUser() {
 	$loginStatus=checkLogin($user, $pass);
 	
 	// User Not Found
-	if($loginStatus==-1) { addFailureNotice("Error: Invalid Username Or Password"); unset($userData); }
+	if($loginStatus==-1) {
+		addFailureNotice("Error: Invalid Username Or Password");
+		unset($userData);
+		
+		// Failed Login Lockout
+		if(!isset($_SESSION['failedLogins'])) { $_SESSION['failedLogins']=0; }
+		else { $_SESSION['failedLogins']++; }
+		if($_SESSION['failedLogins']>=5) {
+			addFailureNotice("This Account Has Been Locked - Please check your email for a reactivation link");
+			setAccountAsLocked($user);
+			$emailAdr = getUserEmail($user);
+			$pass = getUserEncryptedPass($user);
+			$siteName = getSiteName();
+			$siteAddress = getSiteAddress();
+			$emailMsg = 'Your Account On '.$siteName.' Has Been Locked Due To Suspicious Activity <br><br>
+			<b style="color: red;">Activate Account: </b>You must reactivate your account by clicking the following link before you may login:<br><a href="http://'.$siteAddress.'/confirmAccount/'.$user.'/'.$pass.'">http://'.$siteAddress.'/confirmAccount/'.$user.'/'.$pass.'</a>';
+			$emailSubject = 'Account Locked - '.$user;
+			sendEmail($emailAdr, $emailSubject, $emailMsg);
+		}
+	}
 	
 	// User Found, Allowed To Login
 	elseif($loginStatus==0) {
@@ -34,11 +53,12 @@ function loginUser() {
 		}
 		$userData['loggedIn'] = true;
 		setUserPrivileges();
+		$_SESSION['failedLogins']=0; // Clear Failed Login Lockout
 		addSuccessNotice("Success: You Are Now Logged In");
 	}
 	
 	// User Has Not Verified Login
-	elseif($loginStatus==1) { addFailureNotice("Error: You Must Verify Your Email Before You Can Login"); unset($userData); }
+	elseif($loginStatus==1) { addFailureNotice("Error: You Must Activate Your Account Before You Can Login - An Activation Link Has Been Sent To Your Email"); unset($userData); }
 	
 	// Admin Has Not Verified Login
 	elseif($loginStatus==2) { addFailureNotice("Error: An Admin Must Verify Your Account Before You Can Login"); unset($userData); }
@@ -207,6 +227,10 @@ function setAccountAsConfirmedByAdmin($user) {
 function setAccountAsActive($user) {
 	$sql = "UPDATE accounts SET actStatus='0' WHERE username='$user'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive");
+}
+function setAccountAsLocked($user) {
+	$sql = "UPDATE accounts SET actStatus='1' WHERE username='$user'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsLocked");
 }
 function setAccountAsBanned($user) {
 	$sql = "UPDATE accounts SET actStatus='-1' WHERE username='$user'";

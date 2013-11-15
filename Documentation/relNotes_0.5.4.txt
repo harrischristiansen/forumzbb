@@ -4,12 +4,13 @@ Harris Christiansen
 
 Completed:
 -Account Creation Validation
+-Numerous failed logins locks account and sends activation email to account owner
 
 To-Do:
 -Security Enhancements
 -Bot Checking
+-Forgot Password - Reset
 -Spam Protection
--Numerous failed logins locks account and sends activation email to account owner
 -Code Cleanup
 -Site BB Code
 -Forum

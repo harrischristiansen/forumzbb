@@ -34,6 +34,18 @@ function returnUsername() {
 		return "Anonymous";
 	}
 }
+function getUserEmail($user) {
+	$sql = "SELECT * FROM accounts WHERE username='$user'";
+	$result = dbQuery($sql) or die ("Query failed: getUserEmail");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['email'];
+}
+function getUserEncryptedPass($user) {
+	$sql = "SELECT * FROM accounts WHERE username='$user'";
+	$result = dbQuery($sql) or die ("Query failed: getUserEncryptedPass");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['password'];
+}
 function returnRemoteIP() {
 	return $_SERVER['REMOTE_ADDR'];
 }
