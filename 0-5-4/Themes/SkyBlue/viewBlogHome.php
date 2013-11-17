@@ -17,7 +17,7 @@ if(!isLastPage()) {
 if(!isFirstPage()) {
 	viewHTML('<a class="backPageButton" href="'.getPreviousPageLink().'">Newer Entries &rarr;</a>');
 }
-if(canMakeBlogPosts()) {
+if(userCan('postBlogEntries')) {
 	viewHTML('<a class="midButton" href="'.getNewBlogPageLink().'">Add Entry</a>');
 }
 viewHTML('</div>');

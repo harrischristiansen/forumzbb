@@ -27,16 +27,6 @@ function viewBlogEntries() {
 		viewFailure("No Entries Were Found On This Page");
 	}
 }
-function getNumPosBlogEntries() {
-	$sql = "SELECT * FROM blogs WHERE ID>=0";
-	$result = dbQuery($sql) or die ("Query failed: getNumPosBlogEntries");
-	return mysqli_num_rows($result);
-}
-function getNumBlogEntries() {
-	$sql = "SELECT * FROM blogs";
-	$result = dbQuery($sql) or die ("Query failed: getNumBlogEntries");
-	return mysqli_num_rows($result);
-}
 
 function isFirstPage() {
 	global $pageID;
@@ -118,12 +108,6 @@ function viewBlogComments() {
 	}
 }
 
-function numBlogComments() {
-	$sql = "SELECT * FROM blogComments";
-	$result = dbQuery($sql) or die ("Query failed: numBlogComments");
-	return mysqli_num_rows($result);
-}
-
 //////////// New Blog Entry System //////////
 function addBlogEntry() {
 	global $userData, $pagePost, $pageID, $con;
@@ -143,13 +127,6 @@ function addBlogEntry() {
 		$result = dbQuery($sql) or die ("Query failed: addBlogEntry");
 		addSuccessNotice("Blog Entry Created");
 	}
-}
-function canMakeBlogPosts() {
-	global $userData;
-	if($userData['permissions']['postBlogEntries']=="true") {
-		return true;
-	}
-	return false;
 }
 function getNewBlogPageLink() {
 	global $siteSettings;

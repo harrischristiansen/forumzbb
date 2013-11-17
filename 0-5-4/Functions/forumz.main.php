@@ -19,6 +19,7 @@ require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references.ph
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.security.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.settings.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.siteNotices.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.stats.php');
 
 function displayWebsite() {
 	global $pageName, $pageID, $pagePost, $siteSettings, $userData;
@@ -34,7 +35,7 @@ function displayWebsite() {
 	}
 	
 	addBreadcrumb(getSiteName(),"");
-	if($siteSettings['siteDisabled']&&($userData['permissions']['editSiteSettings']!="true")) { // Check if site is disabled
+	if($siteSettings['siteDisabled']&&!userCan('editSiteSettings')) { // Check if site is disabled
 		addBreadcrumb("Site Disabled","");
 		if($pageName=="login") {
 			addBreadcrumb("Login","login/");
@@ -56,7 +57,6 @@ function displayWebsite() {
 }
 function loadPage() {
 	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData, $specPageTitle;
-	$pageDisplayed=false;
 	$pageToDisplay="";
 	
 	///////////////////////////////
@@ -109,14 +109,13 @@ function loadPage() {
 		} elseif($pageData['siteRequireLoginApplies']=="true"&&$siteSettings['reqLogin']&&!$userData['loggedIn']) {
 			addFailureNotice("You Must Login To View This Site");
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
-		} elseif($pageData['requirePermission']!=""&&$userData['permissions'][$pageData['requirePermission']]!="true") {
+		} elseif($pageData['requirePermission']!=""&&!userCan($pageData['requirePermission'])) {
 			addFailureNotice("You Do Not Have Permission To View This Page");
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 		} elseif($pageData['requireFormSubmitted']&&!isset($pagePost[$pageData['requireFormSubmitted']])) {
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 			$pageToDisplay=$pageData['falseDisplayFile'];
 		} else {
-			
 			$pageToDisplay=$pageData['displayFile'];
 			if($pageData['trueMsg']!="") {
 				addSuccessNotice($pageData['trueMsg']);
@@ -132,9 +131,8 @@ function loadPage() {
 	// Display Page
 	if($pageToDisplay!="") {
 		display($pageToDisplay);
-		$pageDisplayed=true;
 	}
-	elseif(!$pageDisplayed) {
+	else {
 		if($userData['loggedIn']||!$siteSettings['reqLogin']) {
 			$pageID=1; // To Display Correct Home Page
 			display('viewBlogHome');

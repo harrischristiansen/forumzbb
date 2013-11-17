@@ -29,6 +29,12 @@ function returnUsername() {
 		return "Anonymous";
 	}
 }
+function getUsername($userID) {
+	$sql = "SELECT * FROM accounts WHERE actID='$userID'";
+	$result = dbQuery($sql) or die ("Query failed: getUsername");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['username'];
+}
 function getUserEmail($user) {
 	$sql = "SELECT * FROM accounts WHERE username='$user'";
 	$result = dbQuery($sql) or die ("Query failed: getUserEmail");
@@ -83,11 +89,6 @@ function getSiteMotd() {
 function getSiteSlogan() {
 	global $siteSettings;
 	return $siteSettings['siteSlogan'];
-}
-function getSiteNumMembers() {
-	$sql = "SELECT * FROM accounts WHERE actID<>'Anonymous'";
-	$result = dbQuery($sql) or die ("Query failed: getSiteNumMembers");
-	return mysqli_num_rows($result);
 }
 function display($fileName) {
 	global $siteSettings, $userData;

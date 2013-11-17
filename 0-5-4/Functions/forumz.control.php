@@ -32,7 +32,7 @@ function displayCPContent() {
 			$pageNotFound=false;
 			if($siteSettings['reqLogin']) { $reqLoginChecked="checked"; }
 			else { $reqLoginChecked=""; }
-			editSiteSettingsForm($siteURL,$siteSettings['siteName'],$siteSettings['siteMotd'],$siteSettings['siteSlogan'],$siteSettings['disabledMessage'],$reqLoginChecked,$siteSettings['blogEntriesPerPage']);
+			editSiteSettingsForm($siteURL, $siteSettings['siteName'], reverseFormatPost($siteSettings['siteMotd']), reverseFormatPost($siteSettings['siteSlogan']), reverseFormatPost($siteSettings['disabledMessage']), $reqLoginChecked, $siteSettings['blogEntriesPerPage']);
 		}
 	}
 	if($userData['permissions']['editRanks']=="true") {
@@ -81,14 +81,16 @@ function updateAccountProfile() {
 function updateSiteSettings() {
 	global $pagePost, $con;
 	$siteName=cleanInput($pagePost['siteName']);
-	$siteMotd=cleanInput($pagePost['siteMotd']);
-	$siteSlogan=cleanInput($pagePost['siteSlogan']);
-	$siteDisabled=cleanInput($pagePost['siteDisabled']);
+	$siteMotd=formatPost($pagePost['siteMotd']);
+	$siteSlogan=formatPost($pagePost['siteSlogan']);
+	$siteDisabled=formatPost($pagePost['siteDisabled']);
 	$reqLogin=cleanInput($pagePost['reqLogin']);
 	$numBlogEntriesPerPage=cleanInput($pagePost['numBlogEntriesPerPage']);
 	
 	$sql = "UPDATE siteSettings SET siteName='$siteName',siteMotd='$siteMotd',siteSlogan='$siteSlogan',siteDisabled='$siteDisabled',reqLogin='$reqLogin',blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
+	
+	loadSiteSettings(); // To Refresh Site Settings
 	addSuccessNotice("Success: Site Settings Updated");
 }
 

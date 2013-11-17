@@ -7,8 +7,10 @@ defaultsInclude('editRankFields');
 
 display('viewHeader');
 
+viewHTML('<table class="FullWidthTable">');
 displayMembersListHead();
 displayMembersList();
+viewHTML('</table>');
 
 display('viewFooter');
 ?>

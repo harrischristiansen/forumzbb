@@ -6,6 +6,8 @@ Completed:
 -Account Creation Validation
 -Numerous failed logins locks account and sends activation email to account owner
 -Site BB Code
+-CP Redesign
+-BB Code in site settings
 
 To-Do:
 -Security Enhancements
@@ -19,7 +21,6 @@ To-Do:
 	-Posts
 	-Comments
 	-Editable
--Pages
-	-Editable
 -Site Signup System
 	-Send Out Email when you create a site
+-Admin Panel Version Selector

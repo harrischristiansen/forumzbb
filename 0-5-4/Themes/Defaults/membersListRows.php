@@ -3,23 +3,23 @@
 // Created 10-3-12
 
 function displayMembersListHead() {
-	viewHTML('<div class="FullWidthTableHead">');
-	viewHTML('<div class="TableHeadColumn membersListColumn1">Username</div>');
-	viewHTML('<div class="TableHeadColumn membersListColumn2">Rank</div>');
-	viewHTML('<div class="TableHeadColumn membersListColumn3">Join Date</div>');
-	viewHTML('</div>');
+	viewHTML('<tr class="FullWidthTableHead">');
+		viewHTML('<td class="TableHeadColumn membersListColumn1">Username</td>');
+		viewHTML('<td class="TableHeadColumn membersListColumn2">Rank</td>');
+		viewHTML('<td class="TableHeadColumn membersListColumn3">Join Date</td>');
+	viewHTML('</tr>');
 }
 function displayMembersListRow($userName, $userRank, $dateJoined, $actID, $rowID, $cngRankFormDisplay) {
-	viewHTML('<div class="FullWidthTableRow">');
-	viewHTML('<div class="TableRowColumn membersListColumn1 membersListRow'.$rowID.'">'.$userName.'</div>');
-	viewHTML('<div class="TableRowColumn membersListColumn2 membersListRow'.$rowID.'">');
-	if($cngRankFormDisplay) {
-		getChangeRankList($actID);
-	} else {
-		viewHTML($userRank);
-	}
-	viewHTML('</div>');
-	viewHTML('<div class="TableRowColumn membersListColumn3 membersListRow'.$rowID.'">'.$dateJoined.'</div>');
-	viewHTML('</div>');
+	viewHTML('<tr class="FullWidthTableRow">');
+		viewHTML('<td class="TableRowColumn membersListColumn1 membersListRow'.$rowID.'">'.$userName.'</td>');
+		viewHTML('<td class="TableRowColumn membersListColumn2 membersListRow'.$rowID.'">');
+			if($cngRankFormDisplay) {
+				getChangeRankList($actID);
+			} else {
+				viewHTML($userRank);
+			}
+		viewHTML('</td>');
+		viewHTML('<td class="TableRowColumn membersListColumn3 membersListRow'.$rowID.'">'.$dateJoined.'</td>');
+	viewHTML('</tr>');
 }
 ?>

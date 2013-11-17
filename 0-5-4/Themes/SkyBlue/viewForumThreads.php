@@ -6,9 +6,9 @@ defaultsInclude('forumDivisions');
 
 display('viewHeader');
 
-viewHTML('<div class="forumHomeContainer">');
+viewHTML('<table class="FullWidthTable">');
 viewForumThreads();
-viewHTML('</div>');
+viewHTML('</table>');
 
 display('viewFooter');
 

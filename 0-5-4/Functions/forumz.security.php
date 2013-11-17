@@ -51,4 +51,12 @@ function isEmailValid($emailAdr) {
 	}
 	return true;
 }
+
+function userCan($permission) {
+	global $userData;
+	if($userData['permissions'][$permission]=="true") {
+		return true;
+	}
+	return false;
+}
 ?>

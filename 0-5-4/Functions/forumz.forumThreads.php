@@ -6,9 +6,13 @@ function viewForumThreads() {
 	global $pageID;
 	$threads=getForumThreadsInForum($pageID);
 	$rowID=0;
+	if(mysqli_num_rows($threads)==0) {
+		viewFailure("No Threads Found");
+		return false;
+	}
 	displayForumHead();
 	while($thread=mysqli_fetch_array($threads)) {
-		displayThreadLine($rowID,$subject,$startBy,$latestBy,$replies,$views);
+		displayThreadLine($rowID,$thread['subject'],getUsername($thread['creator']),$thread['latestPost'],'0',$thread['views']);
 		$rowID++;
 	}
 }
@@ -16,7 +20,7 @@ function viewForumThreads() {
 // General Functions
 
 function getForumThreadsInForum($forumID) {
-	$sql = "SELECT * FROM forumsThreads WHERE forumID='$forumID' ORDER BY orderID DESC";
+	$sql = "SELECT * FROM forumThreads WHERE forumID='$forumID' ORDER BY latestChange DESC";
 	$result = dbQuery($sql) or die ("Query failed: getForumThreadsInForum");
 	return $result;
 }
