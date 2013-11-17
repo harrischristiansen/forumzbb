@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 5-16-12
-// Updated 5-28-13
 
 defaultsInclude('blogDivisions');
 display('viewHeader');

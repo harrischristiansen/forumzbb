@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 11-03-12
 
 defaultsInclude('devTools');
 defaultsInclude('breadcrumbs');

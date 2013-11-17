@@ -209,7 +209,7 @@ function getBlogComposeField() {
 		if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
 			$formLink=$siteSettings['siteURLShort'].'editBlog/'.$pageID;
 			$blogEntry=getBlogEntry($pageID);
-			$currentEntry=$blogEntry['Post'];
+			$currentEntry=reverseFormatPost($blogEntry['Post']);
 			displayBlogComposeField($formLink, true, $currentEntry);
 		}
 	} else { // Creating New Entry

@@ -4,6 +4,7 @@
 
 // Requires
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.account.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.bbCode.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.blog.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.breadcrumbs.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.control.php');

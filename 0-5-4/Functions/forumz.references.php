@@ -16,11 +16,6 @@ function returnDateLong() {
 	// Return Date in form Month Day, Year
 	return date('F j, Y');
 }
-function returnDayCount() {
-	// Return Days since Jan 1, 2010
-	$days=date('z')+(365*(date('y')-13));
-	return $days;
-}
 function returnTime() {
 	// Returns Time in 24 Hour Time
 	return date('H:i');

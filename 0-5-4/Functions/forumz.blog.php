@@ -100,13 +100,6 @@ function checkBlogEntryExists() { // Used in viewBlog.php
 	return true;
 }
 
-function formatPost($post) {
-	global $con;
-	$post = cleanInput($con, $post);
-	$post=nl2br($post, false);
-	return $post;
-}
-
 
 ////////// Blog Comment View System //////////
 
@@ -187,7 +180,6 @@ function canPostBlogComments() {
 	return false;
 }
 
-
 ////////// Edit Blog System //////////
 function editBlogPost() {
 	global $pageID, $userData, $pagePost, $con;
@@ -208,7 +200,7 @@ function getBlogComposeField() {
 		if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
 			$formLink=$siteSettings['siteURLShort'].'editBlog/'.$pageID;
 			$blogEntry=getBlogEntry($pageID);
-			$currentEntry=$blogEntry['Post'];
+			$currentEntry=reverseFormatPost($blogEntry['Post']);
 			displayBlogComposeField($formLink, true, $currentEntry);
 		}
 	} else { // Creating New Entry

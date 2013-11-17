@@ -32,7 +32,13 @@ function userIsBanned() {
 
 function cleanInput($input) {
 	global $con;
-	return mysqli_real_escape_string($con, $input);
+	$output = mysqli_real_escape_string($con, $input);
+	$fix[0]="<"; $fixed[0]="&lt;";
+	$fix[1]=">"; $fixed[1]="&gt;";
+	$fix[2]="\'"; $fixed[2]="&#39;";
+	$fix[3]='\"'; $fixed[3]="&quot;";
+	$output=str_replace($fix, $fixed, $output);
+	return $output;
 }
 
 function isEmailValid($emailAdr) {

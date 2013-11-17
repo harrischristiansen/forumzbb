@@ -5,14 +5,15 @@ Harris Christiansen
 Completed:
 -Account Creation Validation
 -Numerous failed logins locks account and sends activation email to account owner
+-Site BB Code
 
 To-Do:
 -Security Enhancements
 -Bot Checking
 -Forgot Password - Reset
+-Change Email - Send email to new address and only change once confirmed by new address
 -Spam Protection
 -Code Cleanup
--Site BB Code
 -Forum
 	-Topics
 	-Posts

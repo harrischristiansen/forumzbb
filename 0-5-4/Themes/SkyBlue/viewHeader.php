@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 9-15-12
-// Updated 6-1-13
 
 global $userData, $siteSettings;
 defaultsInclude('registerLoginFields');
@@ -15,6 +14,14 @@ defaultsInclude('navBar');
 	<link REL="SHORTCUT ICON" HREF="/Resources/images/f.png">
 	<title><?php echo getPageTitle(); ?></title>
 	<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/SkyBlue/SkyBlue.css" type="text/css">
+	<!-- Jquery imports -->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<!-- bValidator -->
+	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/SkyBlue/siteScripts.js"></script>
+	<link rel="stylesheet" href="/Resources/plugins/validator.css" />
+	<script src="/Resources/plugins/jquery.bvalidator.js"></script>
 </head><body>
 
 <header id="navBar">
