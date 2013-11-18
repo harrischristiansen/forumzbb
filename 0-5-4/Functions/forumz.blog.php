@@ -89,6 +89,12 @@ function checkBlogEntryExists() { // Used in viewBlog.php
 	}
 	return true;
 }
+function getBlogEntryTitle($entryID) {
+	$sql = "SELECT * FROM blogs WHERE ID='$entryID'";
+	$result = dbQuery($sql) or die ("Query failed: getBlogEntry");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['Title'];
+}
 
 
 ////////// Blog Comment View System //////////

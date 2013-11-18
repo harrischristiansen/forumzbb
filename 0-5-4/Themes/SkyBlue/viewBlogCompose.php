@@ -3,6 +3,14 @@
 // Created 5-16-12
 
 defaultsInclude('blogDivisions');
+
+// Breadcrumbs
+global $pageID;
+if($pageID!="") {
+	addBreadcrumb(getBlogEntryTitle($pageID),"blog/".$pageID);
+	addBreadcrumb("Edit Blog","editBlog/".$pageID);
+}
+
 display('viewHeader');
 ?>
 

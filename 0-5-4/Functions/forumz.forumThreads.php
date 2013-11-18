@@ -25,12 +25,6 @@ function getForumThreadsInForum($forumID) {
 	return $result;
 }
 
-function getNumForumThreads() {
-	$sql = "SELECT * FROM forumThreads";
-	$result = dbQuery($sql) or die ("Query failed: getNumForumThreads");
-	return mysqli_num_rows($result);
-}
-
 function getNumForumThreadsInForum($forumID) {
 	$sql = "SELECT * FROM forumThreads WHERE forumID='$forumID'";
 	$result = dbQuery($sql) or die ("Query failed: getNumForumThreadsInForum");

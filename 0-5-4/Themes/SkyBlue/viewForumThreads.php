@@ -3,7 +3,11 @@
 // Created 10-6-13
 
 defaultsInclude('forumDivisions');
-global $siteSettings;
+global $siteSettings, $pageID;
+
+// Breadcrumbs
+addBreadcrumb("Forums","forums");
+addBreadcrumb(getForumTitle($pageID),"forum/".$pageID);
 
 display('viewHeader');
 

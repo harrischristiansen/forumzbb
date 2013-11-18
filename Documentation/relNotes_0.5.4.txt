@@ -9,6 +9,7 @@ Completed:
 -CP Redesign
 -BB Code in site settings
 -Admin Panel Version Selector
+-Added (->) Seperator To Breadcrumbs
 
 To-Do:
 -Security Enhancements

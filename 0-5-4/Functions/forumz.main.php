@@ -90,12 +90,28 @@ function loadPage() {
 		$pageData=mysqli_fetch_array($result);
 		// Breadcrumbs
 		if($pageData['breadcrumbTitle']!="") {
-			if($pageID2!="") {
-				addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID."/".$pageID2);
-			} elseif($pageID!="") {
-				addBreadcrumb($pageData['breadcrumbTitle'],$pageName."/".$pageID);
-			} else {
-				addBreadcrumb($pageData['breadcrumbTitle'],$pageName);
+			$breadcrumbs = explode("->",$pageData['breadcrumbTitle']);
+			if(count($breadcrumbs)==3) {
+				addBreadcrumb($breadcrumbs[0],$pageName);
+				addBreadcrumb($breadcrumbs[1],$pageName."/".$pageID);
+				addBreadcrumb($breadcrumbs[2],$pageName."/".$pageID."/".$pageID2);
+			}
+			elseif(count($breadcrumbs)==2) {
+				addBreadcrumb($breadcrumbs[0],$pageName);
+				if($pageID2!="") {
+					addBreadcrumb($breadcrumbs[1],$pageName."/".$pageID."/".$pageID2);
+				} elseif($pageID!="") {
+					addBreadcrumb($breadcrumbs[1],$pageName."/".$pageID);
+				}
+			}
+			else {
+				if($pageID2!="") {
+					addBreadcrumb($breadcrumbs[0],$pageName."/".$pageID."/".$pageID2);
+				} elseif($pageID!="") {
+					addBreadcrumb($breadcrumbs[0],$pageName."/".$pageID);
+				} else {
+					addBreadcrumb($pageData['breadcrumbTitle'],$pageName);
+				}
 			}
 		}
 		if($pageData['pageName']!="") {

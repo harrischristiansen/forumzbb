@@ -38,4 +38,11 @@ function getNumForums() {
 	$result = dbQuery($sql) or die ("Query failed: getNumForums");
 	return mysqli_num_rows($result);
 }
+
+function getForumTitle($forumID) {
+	$sql = "SELECT * FROM forums WHERE id='$forumID'";
+	$result = dbQuery($sql) or die ("Query failed: getForumTitle");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['title'];
+}
 ?>
