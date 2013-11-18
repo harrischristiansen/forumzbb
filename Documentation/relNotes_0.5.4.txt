@@ -8,6 +8,7 @@ Completed:
 -Site BB Code
 -CP Redesign
 -BB Code in site settings
+-Admin Panel Version Selector
 
 To-Do:
 -Security Enhancements
@@ -24,4 +25,3 @@ To-Do:
 	-Deleteable
 -Site Signup System
 	-Send Out Email when you create a site
--Admin Panel Version Selector

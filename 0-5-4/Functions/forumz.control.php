@@ -81,17 +81,33 @@ function updateAccountProfile() {
 function updateSiteSettings() {
 	global $pagePost, $con;
 	$siteName=cleanInput($pagePost['siteName']);
+	$siteVersion=formatPost($pagePost['siteVersion']);
 	$siteMotd=formatPost($pagePost['siteMotd']);
 	$siteSlogan=formatPost($pagePost['siteSlogan']);
 	$siteDisabled=formatPost($pagePost['siteDisabled']);
 	$reqLogin=cleanInput($pagePost['reqLogin']);
 	$numBlogEntriesPerPage=cleanInput($pagePost['numBlogEntriesPerPage']);
 	
-	$sql = "UPDATE siteSettings SET siteName='$siteName',siteMotd='$siteMotd',siteSlogan='$siteSlogan',siteDisabled='$siteDisabled',reqLogin='$reqLogin',blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
+	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
 	
 	loadSiteSettings(); // To Refresh Site Settings
 	addSuccessNotice("Success: Site Settings Updated");
+}
+
+function getSiteVersionOptions() {
+	global $siteSettings;
+	$sql = "SELECT * FROM siteSettings WHERE settingsProfile='0' ORDER BY siteVersion DESC";
+	$result = dbQuery($sql) or die ("Query failed: getSiteVersionOptions");
+	$returnValue="";
+	while($resultArray=mysqli_fetch_array($result)) {
+		if($resultArray['siteVersion']!=$siteSettings['siteVersion']) {
+			$returnValue=$returnValue.'<option value="'.$resultArray['siteVersion'].'">'.$resultArray['siteName'].'</option>';
+		} else {
+			$returnValue=$returnValue.'<option value="'.$resultArray['siteVersion'].'" selected>'.$resultArray['siteName'].'</option>';
+		}
+	}
+	return $returnValue;
 }
 
 function getNumSiteRanks() {
