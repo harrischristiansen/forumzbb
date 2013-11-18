@@ -11,22 +11,16 @@ defaultsInclude('breadcrumbs');
 //// Footer Bar ////
 
 // Left Side
-viewHTML('<div class="headFootLeftSide">');
+viewHTML('<div class="footLeftSide">');
 
 // siteName | siteSlogan
-viewHTML(getSiteName()." | ".getSiteSlogan());
+viewHTML(getSiteName()." | ".getSiteSlogan().' | Powered By <a href="http://www.forumzbb.com/" target="_blank">ForumzBB</a>');
 
 // Right Side
-viewHTML('</div><div class="headFootRightSide">');
+viewHTML('</div><div class="footRightSide">');
 
 // Date
 viewHTML(returnDateLong());
-
-// Center
-viewHTML('</div><div class="headFootCenter">');
-
-// Members: numMembers
-viewHTML('Members: '.getSiteNumMembers());
 
 viewHTML('</div>');
 ?>

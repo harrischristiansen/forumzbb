@@ -27,7 +27,7 @@ defaultsInclude('navBar');
 <header id="navBar">
 <?php //// Navigation Bar ////
 // Left Side
-viewHTML('<div class="headFootLeftSide">');
+viewHTML('<div class="headLeftSide">');
 if($userData['loggedIn']) {
 	displayNavBar();
 } else {
@@ -36,7 +36,7 @@ if($userData['loggedIn']) {
 	viewSingleLineLoginField();
 }
 
-viewHTML('</div><div class="headFootRightSide">');
+viewHTML('</div><div class="headRightSide">');
 
 // Right Side
 if($userData['loggedIn']) {
@@ -46,7 +46,7 @@ if($userData['loggedIn']) {
 	displayNavBar();
 }
 
-viewHTML('</div><div class="headFootCenter">');
+viewHTML('</div><div class="headCenter">');
 
 // Middle
 if($userData['loggedIn']) {

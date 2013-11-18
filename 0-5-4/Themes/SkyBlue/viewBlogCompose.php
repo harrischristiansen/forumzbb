@@ -16,7 +16,11 @@ display('viewHeader');
 
 <div id="composeBlogDiv">
 <div class="FullWidthPostHead">
+	<? if($pageID!="") { ?>
+	<div class="floatLeft">Edit Blog Post:</div>
+	<? } else { ?>
 	<div class="floatLeft">Compose Blog Post:</div>
+	<? } ?>
 </div>
 <div class="FullWidthPostRow" style="text-align: center;">
 <?php getBlogComposeField(); ?>
