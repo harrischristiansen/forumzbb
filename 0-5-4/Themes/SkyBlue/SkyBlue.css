@@ -5,7 +5,7 @@
 
 html, body {
 	background: #FFFFFF;
-	background: url(/Resources/images/subtle_white_feathers.png) repeat;
+	background: url(/Resources/images/furley_bg.png) repeat;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #000000;
 	font-size: 14px;
@@ -252,7 +252,6 @@ hr {
 .forumHomeColumn1 {
 	width: 60%;
 }
-
 .TableRowColumn.forumHomeColumn1 {
 	text-align: left;
 	padding-left: 5px;
@@ -269,8 +268,7 @@ hr {
 .forumHomeColumn4 {
 	width: 29%;
 }
-
-.forumHomeMultilineText {
+.TableRowColumn.forumHomeColumn4 {
 	font-size: 12px;
 }
 
@@ -336,6 +334,8 @@ hr {
 	margin-bottom: 10px;
 	font-size: 14px;
 	line-height: 24px;
+}
+.controlPanelSidePanelItemContent {
 	padding-left: 3px;
 }
 .controlPanelNavItem {

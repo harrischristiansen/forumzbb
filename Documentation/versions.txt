@@ -92,10 +92,10 @@ Version 0.5.5:
 -New Theme
 -Mobile Theme
 -Theme Changer
+-Pages System
+	-Editable Pages
 
 Future:
 -Member to Member PM/Chat System
--Forum View System
--Forum Posting System
 -Members Personal Wall for Posting
 -Members Friends+Privacy System

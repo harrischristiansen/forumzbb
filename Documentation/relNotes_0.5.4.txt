@@ -12,15 +12,16 @@ Completed:
 To-Do:
 -Security Enhancements
 -Bot Checking
--Forgot Password - Reset
--Change Email - Send email to new address and only change once confirmed by new address
 -Spam Protection
 -Code Cleanup
+-Forgot Password - Reset
+-Change Email - Send email to new address and only change once confirmed by new address
 -Forum
 	-Topics
 	-Posts
 	-Comments
 	-Editable
+	-Deleteable
 -Site Signup System
 	-Send Out Email when you create a site
 -Admin Panel Version Selector

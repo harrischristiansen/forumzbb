@@ -63,11 +63,11 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
 }
 
 function displayBlogComposeField($formLink, $updatingPost, $currentEntry) {
-	viewHTML('<form action="'.$formLink.'" method="POST">');
+	viewHTML('<form action="'.$formLink.'" method="POST" class="validateForm">');
 	if(!$updatingPost) {
-		viewHTML('<input type="text" name="blogEntryTitle" value="Blog Entry Title" placeholder="Blog Entry Title" onfocus="this.value=\'\';"><br>');
+		viewHTML('<input type="text" name="blogEntryTitle" value="Blog Entry Title" placeholder="Blog Entry Title" onfocus="this.value=\'\';" data-bvalidator="required"><br>');
 	}
-	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea">'.$currentEntry.'</textarea><br>');
+	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea" data-bvalidator="required">'.$currentEntry.'</textarea><br>');
 	if($updatingPost) {
 		viewHTML('<input type="submit" name="blogUpdateSubmitted" value="Update">');
 	} else {
@@ -84,8 +84,8 @@ function displayAddCommentField() {
 		viewHTML('</div>');
 	viewHTML('</div>');
 	viewHTML('<div class="FullWidthPostRow" style="text-align: center;">');
-		viewHTML('<form action="'.$siteSettings['siteURLShort'].'blog/'.$pageID.'/reply" method="POST">');
-			viewHTML('<textarea class="blogCommentTextArea" name="blogCommentText"></textarea><br>');
+		viewHTML('<form action="'.$siteSettings['siteURLShort'].'blog/'.$pageID.'/reply" method="POST" class="validateForm">');
+			viewHTML('<textarea class="blogCommentTextArea" name="blogCommentText" data-bvalidator="required"></textarea><br>');
 			viewHTML('<input type="submit" name="commentSubmitted" value="Reply">');
 		viewHtml('</form>');
 	viewHTML('</div>');

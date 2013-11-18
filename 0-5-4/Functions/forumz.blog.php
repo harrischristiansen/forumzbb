@@ -28,14 +28,14 @@ function viewBlogEntries() {
 	}
 }
 
-function isFirstPage() {
+function isFirstBlogPage() {
 	global $pageID;
 	if($pageID==1) {
 		return true;
 	} else { return false; }
 }
 
-function isLastPage() {
+function isLastBlogPage() {
 	global $pageID, $siteSettings;
 	$lastPage = ceil(getNumPosBlogEntries()/$siteSettings['blogEntriesPerPage']);
 	if($pageID=="none"||$pageID==0) {
@@ -127,10 +127,6 @@ function addBlogEntry() {
 		$result = dbQuery($sql) or die ("Query failed: addBlogEntry");
 		addSuccessNotice("Blog Entry Created");
 	}
-}
-function getNewBlogPageLink() {
-	global $siteSettings;
-	return $siteSettings['siteURLShort']."composeEntry/";
 }
 
 ////////// Blog Comment Post System //////////

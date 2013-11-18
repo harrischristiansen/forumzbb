@@ -9,4 +9,4 @@ $(document).ready(function(){
 	//Form Validator
 	$('#validateForm').bValidator();
 	$('.validateForm').bValidator();
-}
+});

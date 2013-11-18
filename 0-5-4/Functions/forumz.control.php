@@ -106,14 +106,26 @@ function editRanksControlPanel() {
 	$sql = "SELECT * FROM ranks WHERE rankID='$pageID2'";
 	$result = dbQuery($sql) or die ("Query failed: editRanksControlPanel");
 	$rankArray = mysqli_fetch_array($result);
+	
+	
 	// Get Checked Items
+	// Admin
 	if($rankArray['editSiteSettings']=="true") { $settingChecked['editSiteSettings']="checked"; } else { $settingChecked['editSiteSettings']=""; }
 	if($rankArray['editMemberRank']=="true") { $settingChecked['editMemberRank']="checked"; } else { $settingChecked['editMemberRank']=""; }
 	if($rankArray['editRanks']=="true") { $settingChecked['editRanks']="checked"; } else { $settingChecked['editRanks']=""; }
+	// Blog
 	if($rankArray['postBlogEntries']=="true") { $settingChecked['postBlogEntries']="checked"; } else { $settingChecked['postBlogEntries']=""; }
 	if($rankArray['postBlogComments']=="true") { $settingChecked['postBlogComments']="checked"; } else { $settingChecked['postBlogComments']=""; }
 	if($rankArray['editBlogEntries']=="true") { $settingChecked['editBlogEntries']="checked"; } else { $settingChecked['editBlogEntries']=""; }
 	if($rankArray['deleteBlogEntries']=="true") { $settingChecked['deleteBlogEntries']="checked"; } else { $settingChecked['deleteBlogEntries']=""; }
+	// Forums
+	if($rankArray['createForumThreads']=="true") { $settingChecked['createForumThreads']="checked"; } else { $settingChecked['createForumThreads']=""; }
+	if($rankArray['createForumPosts']=="true") { $settingChecked['createForumPosts']="checked"; } else { $settingChecked['createForumPosts']=""; }
+	if($rankArray['editForumPosts']=="true") { $settingChecked['editForumPosts']="checked"; } else { $settingChecked['editForumPosts']=""; }
+	if($rankArray['deleteForumPosts']=="true") { $settingChecked['deleteForumPosts']="checked"; } else { $settingChecked['deleteForumPosts']=""; }
+	if($rankArray['manageForums']=="true") { $settingChecked['manageForums']="checked"; } else { $settingChecked['manageForums']=""; }
+	
+	
 	// Display Form
 	editRanksForm($siteURL,$rankArray['rankID'],$rankArray['rankName'],$settingChecked);
 }
@@ -175,23 +187,39 @@ function updateRank() {
 	global $pagePost, $pageID2, $con, $userData;
 	$tarRank=$pageID2;
 	$rankName=cleanInput($pagePost['rankName']);
+	// Admin
 	$editSiteSettings=cleanInput($pagePost['editSiteSettings']);
 	$editMemberRank=cleanInput($pagePost['editMemberRank']);
 	$editRanks=cleanInput($pagePost['editRanks']);
+	// Blog
 	$postBlogEntries=cleanInput($pagePost['postBlogEntries']);
 	$postBlogComments=cleanInput($pagePost['postBlogComments']);
 	$editBlogEntries=cleanInput($pagePost['editBlogEntries']);
 	$deleteBlogEntries=cleanInput($pagePost['deleteBlogEntries']);
+	// Forums
+	$createForumThreads=cleanInput($pagePost['createForumThreads']);
+	$createForumPosts=cleanInput($pagePost['createForumPosts']);
+	$editForumPosts=cleanInput($pagePost['editForumPosts']);
+	$deleteForumPosts=cleanInput($pagePost['deleteForumPosts']);
+	$manageForums=cleanInput($pagePost['manageForums']);
 	
 	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])) { // Attempting to Edit Rank Greater Than Own
 		addFailureNotice("Permission Denied");
-	} else if(getHighestRankID()!=$userData['rankID']) {
+	} elseif(getHighestRankID()!=$userData['rankID']) {
 		$sql = "UPDATE ranks SET rankName='$rankName' WHERE rankID='$tarRank'";
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		addSuccessNotice("Success: Rank Updated");
 	} else {
-		$sql = "UPDATE ranks SET rankName='$rankName',editSiteSettings='$editSiteSettings',editMemberRank='$editMemberRank',editRanks='$editRanks',postBlogEntries='$postBlogEntries',postBlogComments='$postBlogComments',editBlogEntries='$editBlogEntries',deleteBlogEntries='$deleteBlogEntries' WHERE rankID='$tarRank'";
-		$result = dbQuery($sql) or die ("Query failed: updateRank");
+		// Admin
+		$sql = "UPDATE ranks SET rankName='$rankName', editSiteSettings='$editSiteSettings', editMemberRank='$editMemberRank', editRanks='$editRanks' WHERE rankID='$tarRank'";
+		$result = dbQuery($sql) or die ("Query failed: updateRank-Admin");
+		// Blog
+		$sql = "UPDATE ranks SET postBlogEntries='$postBlogEntries', postBlogComments='$postBlogComments', editBlogEntries='$editBlogEntries', deleteBlogEntries='$deleteBlogEntries' WHERE rankID='$tarRank'";
+		$result = dbQuery($sql) or die ("Query failed: updateRank-Blog");
+		// Forums
+		$sql = "UPDATE ranks SET createForumThreads='$createForumThreads', createForumPosts='$createForumPosts', editForumPosts='$editForumPosts', deleteForumPosts='$deleteForumPosts', manageForums='$manageForums' WHERE rankID='$tarRank'";
+		$result = dbQuery($sql) or die ("Query failed: updateRank-Forums");
+		
 		addSuccessNotice("Success: Rank Updated");
 	}
 }

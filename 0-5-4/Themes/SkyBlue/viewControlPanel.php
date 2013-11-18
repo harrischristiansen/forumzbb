@@ -10,11 +10,15 @@ display('viewHeader');
 <div id="controlPanelSidepanel">
 	<div class="controlPanelSidepanelItem">
 		<div class="controlPanelTitle">Navigation</div>
+		<div class="controlPanelSidePanelItemContent">
 		<?php displayCPNav(); ?>
+		</div>
 	</div>
 	<div class="controlPanelSidepanelItem">
 		<div class="controlPanelTitle">Quick Stats</div>
+		<div class="controlPanelSidePanelItemContent">
 		<? getSiteStats(); ?>
+		</div>
 	</div>
 </div>
 

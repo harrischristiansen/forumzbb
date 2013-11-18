@@ -18,7 +18,7 @@ function returnDateLong() {
 }
 function returnTime() {
 	// Returns Time in 24 Hour Time
-	return date('H:i');
+	return date('H:i:s');
 }
 function returnUsername() {
 	// Returns Username of current logged in user, "Anonymous" if not logged in.

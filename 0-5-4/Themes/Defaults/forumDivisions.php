@@ -19,9 +19,9 @@ function displayForumLine($rowID, $title, $desc, $numThreads, $numPosts, $latest
 		viewHTML('<td class="TableRowColumn forumHomeColumn2 forumHomeRow'.$rowID.'" onclick="parent.location=\''.$forumLink.'\';">'.$numThreads.'</td>');
 		viewHTML('<td class="TableRowColumn forumHomeColumn3 forumHomeRow'.$rowID.'" onclick="parent.location=\''.$forumLink.'\';">'.$numPosts.'</td>');
 		viewHTML('<td class="TableRowColumn forumHomeColumn4 forumHomeRow'.$rowID.'" onclick="parent.location=\''.$latestPostLink.'\';">');
-			viewHTML('<div class="forumHomeMultilineText floatLeft">'.$latestPostTitle.'</div><br>');
-			viewHTML('<div class="forumHomeMultilineText floatLeft">By: '.$latestPostAuthor.'</div>');
-			viewHTML('<div class="forumHomeMultilineText floatRight">'.$latestPostDate.'</div>');
+			viewHTML('<div class="floatLeft">'.$latestPostTitle.'</div><br>');
+			viewHTML('<div class="floatLeft">By: '.$latestPostAuthor.'</div>');
+			viewHTML('<div class="floatRight">'.$latestPostDate.'</div>');
 		viewHTML('</td>');
 	viewHTML('</tr>');
 }

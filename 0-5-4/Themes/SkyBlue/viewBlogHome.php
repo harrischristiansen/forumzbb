@@ -3,6 +3,7 @@
 // Created 9-15-12
 
 defaultsInclude('blogDivisions');
+global $siteSettings;
 
 display('viewHeader');
 
@@ -11,14 +12,14 @@ viewBlogEntries();
 viewHTML('</div>');
 
 viewHTML('<div class="pageChangeBtns">');
-if(!isLastPage()) {
+if(!isLastBlogPage()) {
 	viewHTML('<a class="nextPageButton" href="'.getNextPageLink().'">&larr; Older Entries</a>');
 }
-if(!isFirstPage()) {
+if(!isFirstBlogPage()) {
 	viewHTML('<a class="backPageButton" href="'.getPreviousPageLink().'">Newer Entries &rarr;</a>');
 }
 if(userCan('postBlogEntries')) {
-	viewHTML('<a class="midButton" href="'.getNewBlogPageLink().'">Add Entry</a>');
+	viewHTML('<a class="midButton" href="'.$siteSettings['siteURLShort'].'composeEntry/">Add Entry</a>');
 }
 viewHTML('</div>');
 
