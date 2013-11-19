@@ -18,12 +18,14 @@ To-Do:
 -Code Cleanup
 -Forgot Password - Reset
 -Change Email - Send email to new address and only change once confirmed by new address
--Forum
+-Basic Forum System
 	-Posts
 	-Comments
 	-Edit Posts
 	-Delete Posts
 	-Delete Threads
+	-Pagination
 -Site Signup System
 	-Send Out Email when you create a site
 -Internal Messaging System
+-Dynamically Load Page Names (Forum Thread's)

@@ -3,7 +3,7 @@
 // Created 5-29-13
 
 function viewForumThreads() {
-	global $pageID;
+	global $pageID, $siteSettings;
 	$threads=getForumThreadsInForum($pageID);
 	$rowID=0;
 	if(mysqli_num_rows($threads)==0) {
@@ -13,8 +13,9 @@ function viewForumThreads() {
 	displayForumHead();
 	while($thread=mysqli_fetch_array($threads)) {
 		$latestPost = unserialize($thread['latestPost']);
-		$latestBy = 
-		displayThreadLine($rowID,$thread['subject'],getUsername($thread['creator']),getUsername($latestPost['author']),$latestPost['date'],'0',$thread['views']);
+		$replies = getNumForumPostsInThread($thread['id'])-1;
+		$threadLink = $siteSettings['siteURLShort'].'thread/'.$thread['id'];
+		displayThreadLine($threadLink,$rowID,$thread['subject'],getUsername($thread['creator']),getUsername($latestPost['author']),$latestPost['date'],$replies,$thread['views']);
 		$rowID++;
 	}
 }
@@ -31,6 +32,20 @@ function getNumForumThreadsInForum($forumID) {
 	$sql = "SELECT * FROM forumThreads WHERE forumID='$forumID'";
 	$result = dbQuery($sql) or die ("Query failed: getNumForumThreadsInForum");
 	return mysqli_num_rows($result);
+}
+
+function getThreadTitle($threadID) {
+	$sql = "SELECT * FROM forumThreads WHERE id='$threadID'";
+	$result = dbQuery($sql) or die ("Query failed: getThreadTitle");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['subject'];
+}
+
+function getForumIDOfThead($threadID) {
+	$sql = "SELECT * FROM forumThreads WHERE id='$threadID'";
+	$result = dbQuery($sql) or die ("Query failed: getThreadTitle");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['forumID'];
 }
 
 // New Forum Thread

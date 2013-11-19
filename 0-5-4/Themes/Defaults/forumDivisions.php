@@ -36,8 +36,8 @@ function displayForumHead() {
 		viewHTML('<td class="TableHeadColumn forumThreadsColumn5">Views</td>');
 	viewHTML('</tr>');
 }
-function displayThreadLine($rowID,$subject,$startBy,$latestBy,$latestAt,$replies,$views) {
-	viewHTML('<tr class="FullWidthTableRow">');
+function displayThreadLine($threadLink,$rowID,$subject,$startBy,$latestBy,$latestAt,$replies,$views) {
+	viewHTML('<tr class="FullWidthTableRow" onclick="parent.location=\''.$threadLink.'\';">');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn1 forumThreadsRow'.$rowID.'">'.$subject.'</td>');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn2 forumThreadsRow'.$rowID.'">'.$startBy.'</td>');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn3 forumThreadsRow'.$rowID.'">');
@@ -47,5 +47,26 @@ function displayThreadLine($rowID,$subject,$startBy,$latestBy,$latestAt,$replies
 		viewHTML('<td class="TableRowColumn forumThreadsColumn4 forumThreadsRow'.$rowID.'">'.$replies.'</td>');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn5 forumThreadsRow'.$rowID.'">'.$views.'</td>');
 	viewHTML('</tr>');
+}
+
+// Posts
+function displayForumPost($rowID, $author, $subject, $postDate, $postTime, $post) {
+	viewHTML('<table class="FullWidthTable">');
+	viewHTML('<tr class="FullWidthTableHead">');
+		viewHTML('<td class="TableHeadColumn forumPostColumn1">'.$author.'</td>');
+		viewHTML('<td class="TableHeadColumn forumPostColumn2">');
+			viewHTML('<div class="floatLeft">'.$subject.'</div>');
+			viewHTML('<div class="floatRight">Posted On '.$postDate.' at '.$postTime.'</div>');
+		viewHTML('</td>');
+	viewHTML('</tr>');
+	viewHTML('<tr class="FullWidthTableRow">');
+		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'">UserInfo</td>');
+		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">'.$post.'</td>');
+	viewHTML('</tr>');
+	viewHTML('<tr class="FullWidthTableRow">');
+		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'"></td>');
+		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">Edit/Delete Buttons</td>');
+	viewHTML('</tr>');
+	viewHTML('</table>');
 }
 ?>

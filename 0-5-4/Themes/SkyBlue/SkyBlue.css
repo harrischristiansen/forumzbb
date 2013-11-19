@@ -233,11 +233,16 @@ hr {
 	color: #FFFFFF;
 	overflow: hidden;
 	text-align: center;
+	margin-top: 2px;
+}
+.TableRowItem {
+	margin-left: 2px;
+	background-color: #0F8BBF;
+	padding: 5px;
 }
 .TableRowColumn {
 	height: 34px;
 	margin-left: 2px;
-	margin-top: 2px;
 }
 
 .FullWidthTableRow:nth-child(odd) .TableRowColumn, .FullWidthPostRow:nth-child(4n+2) {
@@ -293,6 +298,9 @@ hr {
 .TableRowColumn.forumHomeColumn4 {
 	font-size: 12px;
 }
+.TableRowColumn.forumHomeColumn4:hover {
+	background-color: #3585cc;
+}
 
 /* Threads List */
 
@@ -318,6 +326,17 @@ hr {
 
 .forumThreadsColumn5 {
 	width: 5%;
+}
+
+/* Forum Thread */
+.forumPostColumn1 {
+	width: 30%;
+}
+.forumPostColumn2 {
+	width: 70%;
+}
+.TableRowItem.forumPostColumn2 {
+	text-align: left;
 }
 
 

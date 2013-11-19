@@ -7,6 +7,7 @@ function getSiteStats() {
 	viewHTML('Total Blog Posts: '.getNumPosBlogEntries().'<br>');
 	viewHTML('Total Blog Comments: '.numBlogComments().'<br>');
 	viewHTML('Total Forum Threads: '.getNumForumThreads().'<br>');
+	viewHTML('Total Forum Posts: '.getNumForumPosts().'<br>');
 }
 function getSiteNumMembers() {
 	$sql = "SELECT * FROM accounts WHERE actID<>'Anonymous'";
