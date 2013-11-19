@@ -24,7 +24,7 @@ if(!isFirstForumPage()) {
 }
 */
 if(userCan('createForumPosts')) {
-	viewHTML('<a class="midButton" href="'.$siteSettings['siteURLShort'].'newForumThread/">New Thread</a>');
+	viewHTML('<a class="midButton" href="'.$siteSettings['siteURLShort'].'newForumThread/'.$pageID.'">New Thread</a>');
 }
 viewHTML('</div>');
 

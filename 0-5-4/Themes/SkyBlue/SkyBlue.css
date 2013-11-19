@@ -307,6 +307,10 @@ hr {
 .forumThreadsColumn3 {
 	width: 25%;
 }
+.TableRowColumn.forumThreadsColumn3 {
+	font-size: 12px;
+	text-align: left;
+}
 
 .forumThreadsColumn4 {
 	width: 5%;

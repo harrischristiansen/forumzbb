@@ -18,7 +18,7 @@ display('viewHeader');
 	<div class="floatLeft">Compose New Forum Thread:</div>
 </div>
 <div class="FullWidthPostRow" style="text-align: center;">
-<?php displayThreadComposeField(); ?>
+<? displayThreadComposeField(); ?>
 </div>
 </div>
 

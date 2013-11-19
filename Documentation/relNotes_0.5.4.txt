@@ -19,11 +19,11 @@ To-Do:
 -Forgot Password - Reset
 -Change Email - Send email to new address and only change once confirmed by new address
 -Forum
-	-Topics
 	-Posts
 	-Comments
-	-Editable
-	-Deleteable
+	-Edit Posts
+	-Delete Posts
+	-Delete Threads
 -Site Signup System
 	-Send Out Email when you create a site
 -Internal Messaging System

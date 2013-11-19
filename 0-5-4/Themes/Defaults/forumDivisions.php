@@ -36,11 +36,14 @@ function displayForumHead() {
 		viewHTML('<td class="TableHeadColumn forumThreadsColumn5">Views</td>');
 	viewHTML('</tr>');
 }
-function displayThreadLine($rowID,$subject,$startBy,$latestBy,$replies,$views) {
+function displayThreadLine($rowID,$subject,$startBy,$latestBy,$latestAt,$replies,$views) {
 	viewHTML('<tr class="FullWidthTableRow">');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn1 forumThreadsRow'.$rowID.'">'.$subject.'</td>');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn2 forumThreadsRow'.$rowID.'">'.$startBy.'</td>');
-		viewHTML('<td class="TableRowColumn forumThreadsColumn3 forumThreadsRow'.$rowID.'">'.$latestBy.'</td>');
+		viewHTML('<td class="TableRowColumn forumThreadsColumn3 forumThreadsRow'.$rowID.'">');
+			viewHTML('By '.$latestBy.'<br>');
+			viewHTML($latestAt);
+		viewHTML('</td>');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn4 forumThreadsRow'.$rowID.'">'.$replies.'</td>');
 		viewHTML('<td class="TableRowColumn forumThreadsColumn5 forumThreadsRow'.$rowID.'">'.$views.'</td>');
 	viewHTML('</tr>');
