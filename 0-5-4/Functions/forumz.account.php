@@ -128,10 +128,10 @@ function logoutUser() {
 }
 function registerUser() {
 	global $pagePost, $siteSettings;
-	$user=$pagePost['username'];
-	$pass=$pagePost['password'];
-	$passCon=$pagePost['passwordCon'];
-	$email=$pagePost['email'];
+	$user=cleanInput($pagePost['username']);
+	$pass=cleanInput($pagePost['password']);
+	$passCon=cleanInput($pagePost['passwordCon']);
+	$email=cleanInput($pagePost['email']);
 	
 	if($pagePost['registerSubmitted']=="Register") {
 		// Check To Make Sure Form Is All Filled Out
@@ -171,9 +171,6 @@ function addUserToDatabase($user, $pass, $email) {
 	global $siteSettings;
 	
 	// Clean User Inputed Data
-	$user = cleanInput($user);
-	$pass = cleanInput($pass);
-	$email = cleanInput($email);
 	$pass = md5($pass);
 	
 	// Check Username
@@ -205,7 +202,7 @@ function checkUsernameAvailable($user) {
 }
 
 //// Account Status Admin
-function confirmAccount() {
+function confirmAccount() { // Fix to not work for banned acts and acts with admin accept req
 	global $pageID, $pageID2;
 	$sql = "SELECT * FROM accounts WHERE username='$pageID' AND password='$pageID2'";
 	$result = dbQuery($sql) or die ("Query failed: confirmAccount-select");
@@ -236,6 +233,39 @@ function setAccountAsBanned($user) {
 	$sql = "UPDATE accounts SET actStatus='-1' WHERE username='$user'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsBanned");
 }
+
+//// Reset Password ////
+
+function resetPassword() {
+	global $pagePost;
+	$user=cleanInput($pagePost['username']);
+	if(checkUsernameAvailable($user)) { addFailureNotice("Account Not Found"); }
+	else {
+		// Get New Pass
+		$chars = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9));
+		$newPass="";
+		for($i=0;$i<8;$i++) {
+			$randNum=rand(0,63);
+			$newPass=$newPass.$chars[$randNum];
+		}
+		
+		// Email New Pass
+		$email = getUserEmail($user);
+		$emailMsg = "Your password has been reset. Your new password is: ".$newPass." (case sensitive)";
+		$emailSubject = 'Password Reset - '.$user;
+		sendEmail($email, $emailSubject, $emailMsg);
+		
+		// Reset New Pass
+		$newPass = md5($newPass);
+		$sql = "UPDATE accounts SET password='$newPass' WHERE username='$user'";
+		$result = dbQuery($sql) or die ("Query failed: resetPassword");
+		
+		// Confirm Password Reset
+		addSuccessNotice("Password Reset - A New Password Has Been Emailed To You");
+	}
+}
+
+//// Get Ranks ////
 
 function getUserRank($actID) {
 	$sql = "SELECT * FROM accounts WHERE actID='$actID'";

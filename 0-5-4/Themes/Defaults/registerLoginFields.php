@@ -31,4 +31,12 @@ function viewRegisterField() {
 	viewHTML('<input type="submit" name="registerSubmitted" value="Register">');
 	viewHtml('</form>');
 }
+
+function viewPassResetField() {
+	global $siteSettings;
+	viewHTML('<form action="'.$siteSettings['siteURLShort'].'resetPassword/" method="POST">');
+	viewHTML('<input type="text" name="username" value="Username" placeholder="Username" onfocus="this.value=\'\';">');
+	viewHTML('<input type="submit" name="resetSubmitted" value="Reset Password">');
+	viewHtml('</form>');
+}
 ?>

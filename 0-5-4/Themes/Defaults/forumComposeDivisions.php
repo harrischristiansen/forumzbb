@@ -11,4 +11,12 @@ function displayThreadComposeField() {
 	viewHtml('</form>');
 }
 
+function displayReplyComposeField() {
+	global $siteSettings, $pageID;
+	viewHTML('<form action="'.$siteSettings['siteURLShort'].'newForumPost/'.$pageID.'" method="POST" class="validateForm">');
+	viewHTML('<textarea name="threadPost" class="newForumThreadTextArea" data-bvalidator="required"></textarea><br>');
+	viewHTML('<input type="submit" name="replyComposeSubmitted" value="Reply">');
+	viewHtml('</form>');
+}
+
 ?>

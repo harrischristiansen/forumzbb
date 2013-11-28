@@ -10,13 +10,14 @@ Completed:
 -BB Code in site settings
 -Admin Panel Version Selector
 -Added (->) Seperator To Breadcrumbs
+-Forgot Password - Reset
 
 To-Do:
 -Security Enhancements
 -Bot Checking
 -Spam Protection
+	-Registartions
 -Code Cleanup
--Forgot Password - Reset
 -Change Email - Send email to new address and only change once confirmed by new address
 -Basic Forum System
 	-Posts
@@ -24,7 +25,7 @@ To-Do:
 	-Edit Posts
 	-Delete Posts
 	-Delete Threads
-	-Pagination
+	-Pagination - 20 posts per page
 -Site Signup System
 	-Send Out Email when you create a site
 -Internal Messaging System
