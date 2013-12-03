@@ -37,6 +37,15 @@ function getNumForumPostsInForum($forumID) {
 	return mysqli_num_rows($result);
 }
 
+// Update View Count
+
+function updateThreadViewCount() {
+	global $pageID;
+	$threadID = $pageID;
+	$sql = "UPDATE forumThreads SET views=views+1 WHERE id='$threadID'";
+	$result = dbQuery($sql) or die ("Query failed: updateThreadViewCount");
+}
+
 // Add Comment
 
 function addForumPost() {
@@ -48,11 +57,25 @@ function addForumPost() {
 	$threadAuthor = returnUserID();
 	$threadDate = returnDateOfficial();
 	$threadTime = returnTime();
+	$latestChange = $threadDate.' '.$threadTime;
+	
+	// Update Forum Latest Thread
+	$latestPostArray['title']=$threadSubject;
+	$latestPostArray['author']=$threadAuthor;
+	$latestPostArray['date']=$latestChange;
+	$latestPostArray['threadID']=$threadID;
+	$latestPost = serialize($latestPostArray);
+	$sql = "UPDATE forums SET latestPost='$latestPost' WHERE id='$forumID'";
+	$result = dbQuery($sql) or die ("Query failed: addForumPost-updateForumLatestThread");
+	
+	// Update Thread Latest Change
+	$sql = "UPDATE forumThreads SET latestChange='$latestChange' WHERE id='$threadID'";
+	$result = dbQuery($sql) or die ("Query failed: addForumPost-updateThreadLatestChange");
 	
 	// Add Post
 	$postID = getNumForumPosts();
 	$sql = "INSERT INTO forumPosts (id, threadID, forumID, subject, post, author, postDate, postTime) VALUES ('$postID', '$threadID', '$forumID', '$threadSubject', '$threadPost', '$threadAuthor', '$threadDate', '$threadTime')";
-	$result = dbQuery($sql) or die ("Query failed: createForumThread-addPost");
+	$result = dbQuery($sql) or die ("Query failed: addForumPost-addPost");
 	
 	addSuccessNotice("Reply Added");
 }
