@@ -71,6 +71,8 @@ function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 		viewHTML('Edit Forum Posts: <input type="checkbox" name="editForumPosts" value="true" '.$settingChecked['editForumPosts'].'><br>');
 		viewHTML('Delete Forum Posts: <input type="checkbox" name="deleteForumPosts" value="true" '.$settingChecked['deleteForumPosts'].'><br>');
 		viewHTML('Manage Forums: <input type="checkbox" name="manageForums" value="true" '.$settingChecked['manageForums'].'><br>');
+		viewHTML('<br><u>Chat:</u><br>');
+		viewHTML('Use Chat System: <input type="checkbox" name="useChat" value="true" '.$settingChecked['useChat'].'><br>');
 		viewHTML('<br>');
 		if($linkID!="") {
 			viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Rank">');

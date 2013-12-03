@@ -9,4 +9,9 @@ $(document).ready(function(){
 	//Form Validator
 	$('#validateForm').bValidator();
 	$('.validateForm').bValidator();
+	
+	// Chat Toggle
+	$("#menuBarChatItem").click(function() {
+		$("#chatWindow").slideToggle(500);
+  	});
 });

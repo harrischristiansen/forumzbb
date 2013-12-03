@@ -41,7 +41,7 @@ function getThreadTitle($threadID) {
 	return $resultArray['subject'];
 }
 
-function getForumIDOfThead($threadID) {
+function getForumIDOfThread($threadID) {
 	$sql = "SELECT * FROM forumThreads WHERE id='$threadID'";
 	$result = dbQuery($sql) or die ("Query failed: getThreadTitle");
 	$resultArray = mysqli_fetch_array($result);

@@ -35,6 +35,8 @@ hr {
 	clear: both;
 }
 
+/* ----- Header ----- */
+
 #navBar {
 	text-align: center;
 	overflow: hidden;
@@ -47,21 +49,6 @@ hr {
 	color: #FFFFFF;
 	border-bottom: 1px solid #000000;
 }
-
-#footBar {
-	text-align: center;
-	overflow: hidden;
-	width: 100%;
-	height: 35px;
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	background-color: #73B1CB;
-	color: #FFFFFF;
-	border-top: 1px solid #000000;
-}
-
-/* ----- Header ----- */
 
 .headLeftSide {
 	text-align: left;
@@ -108,6 +95,19 @@ hr {
 
 /* ----- Footer ----- */
 
+#footBar {
+	text-align: center;
+	overflow: hidden;
+	width: 100%;
+	height: 35px;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	background-color: #73B1CB;
+	color: #FFFFFF;
+	border-top: 1px solid #000000;
+}
+
 .footLeftSide {
 	text-align: left;
 	float: left;
@@ -126,6 +126,21 @@ hr {
 	padding-top: 8px;
 }
 
+#menuBarChatItem {
+	width: 32px;
+	height: 32px;
+	margin-left: 10px;
+	background: url(/Resources/images/icons/chatIcon.png)top no-repeat;
+	float: right;
+	margin-top: -6px;
+}
+
+#menuBarChatItem:hover {
+	background: url(/Resources/images/icons/chatIcon.png)bottom no-repeat;
+}
+
+/* ----- Breadcrumbs Bar ----- */
+
 #breadcrumbsBar {
 	background-color: #73B1CB;
 	height: 18px;
@@ -140,6 +155,20 @@ hr {
 	border-top: 1px solid #000000;
 	border-right: 1px solid #000000;
 }
+
+/* ----- Chat Window ----- */
+#chatWindow {
+	width: 280px;
+	height: 350px;
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	position: fixed;
+	right: 5px;
+	bottom: 36px;
+	display: none;
+}
+
+/* ----- Site Divisions ----- */
 
 .FullWidthContentDivision {
 	background-color: #0F8BBF;
@@ -331,10 +360,10 @@ hr {
 
 /* Forum Thread */
 .forumPostColumn1 {
-	width: 30%;
+	width: 25%;
 }
 .forumPostColumn2 {
-	width: 70%;
+	width: 75%;
 }
 .TableRowItem.forumPostColumn2 {
 	text-align: left;
@@ -519,7 +548,7 @@ hr {
 	height: 100px;
 }
 
-.newForumThreadTextArea {
+.newForumThreadTextArea, .newForumPostTextArea {
 	width: 90%;
 	height: 100px;
 }

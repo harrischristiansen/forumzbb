@@ -20,12 +20,11 @@ To-Do:
 -Code Cleanup
 -Change Email - Send email to new address and only change once confirmed by new address
 -Basic Forum System
-	-Posts
-	-Comments
 	-Edit Posts
 	-Delete Posts
 	-Delete Threads
 	-Pagination - 20 posts per page
+-BB Code Editor
 -Site Signup System
 	-Send Out Email when you create a site
 -Internal Messaging System

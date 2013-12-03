@@ -29,6 +29,11 @@ function returnUsername() {
 		return "Anonymous";
 	}
 }
+function returnUserID() {
+	// Returns actID
+	global $userData;
+	return $userData['actID'];
+}
 function getUsername($userID) {
 	$sql = "SELECT * FROM accounts WHERE actID='$userID'";
 	$result = dbQuery($sql) or die ("Query failed: getUsername");

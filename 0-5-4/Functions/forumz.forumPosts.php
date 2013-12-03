@@ -36,4 +36,25 @@ function getNumForumPostsInForum($forumID) {
 	$result = dbQuery($sql) or die ("Query failed: getNumForumPostsInForum");
 	return mysqli_num_rows($result);
 }
+
+// Add Comment
+
+function addForumPost() {
+	global $pagePost, $pageID;
+	$threadID = $pageID;
+	$threadPost = formatPost($pagePost['threadPost']);
+	$forumID = getForumIDOfThread($threadID);
+	$threadSubject = "RE: ".getThreadTitle($threadID);
+	$threadAuthor = returnUserID();
+	$threadDate = returnDateOfficial();
+	$threadTime = returnTime();
+	
+	// Add Post
+	$postID = getNumForumPosts();
+	$sql = "INSERT INTO forumPosts (id, threadID, forumID, subject, post, author, postDate, postTime) VALUES ('$postID', '$threadID', '$forumID', '$threadSubject', '$threadPost', '$threadAuthor', '$threadDate', '$threadTime')";
+	$result = dbQuery($sql) or die ("Query failed: createForumThread-addPost");
+	
+	addSuccessNotice("Reply Added");
+}
+
 ?>

@@ -140,6 +140,8 @@ function editRanksControlPanel() {
 	if($rankArray['editForumPosts']=="true") { $settingChecked['editForumPosts']="checked"; } else { $settingChecked['editForumPosts']=""; }
 	if($rankArray['deleteForumPosts']=="true") { $settingChecked['deleteForumPosts']="checked"; } else { $settingChecked['deleteForumPosts']=""; }
 	if($rankArray['manageForums']=="true") { $settingChecked['manageForums']="checked"; } else { $settingChecked['manageForums']=""; }
+	// Chat
+	if($rankArray['useChat']=="true") { $settingChecked['useChat']="checked"; } else { $settingChecked['useChat']=""; }
 	
 	
 	// Display Form
@@ -178,13 +180,6 @@ function displayRankNavItems() {
 function addSiteRank() {
 	global $pagePost, $con, $userData;
 	$rankName=cleanInput($pagePost['rankName']);
-	$editSiteSettings=cleanInput($pagePost['editSiteSettings']);
-	$editMemberRank=cleanInput($pagePost['editMemberRank']);
-	$editRanks=cleanInput($pagePost['editRanks']);
-	$postBlogEntries=cleanInput($pagePost['postBlogEntries']);
-	$postBlogComments=cleanInput($pagePost['postBlogComments']);
-	$editBlogEntries=cleanInput($pagePost['editBlogEntries']);
-	$deleteBlogEntries=cleanInput($pagePost['deleteBlogEntries']);
 	$rankID=getNumSiteRanks();
 	$highestRankOrder=getHighestRankOrder();
 	$newHighestRankOrder=$highestRankOrder+1;
@@ -193,7 +188,7 @@ function addSiteRank() {
 	} else {
 		$sql = "UPDATE ranks SET rankOrder='$newHighestRankOrder' WHERE rankOrder='$highestRankOrder'"; // Move Admin Rank Forward One Position
 		$result = dbQuery($sql) or die ("Query failed: addSiteRank-moveAdminRank");
-		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, editSiteSettings, editMemberRank, editRanks, postBlogEntries, postBlogComments, editBlogEntries, deleteBlogEntries) VALUES ('$rankID','$highestRankOrder','$rankName','$editSiteSettings','$editMemberRank','$editRanks','$postBlogEntries','$postBlogComments','$editBlogEntries','$deleteBlogEntries')";
+		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName) VALUES ('$rankID','$highestRankOrder','$rankName')";
 		$result = dbQuery($sql) or die ("Query failed: addSiteRank-addRank");
 		addSuccessNotice("Success: Rank Added");
 	}
@@ -218,6 +213,8 @@ function updateRank() {
 	$editForumPosts=cleanInput($pagePost['editForumPosts']);
 	$deleteForumPosts=cleanInput($pagePost['deleteForumPosts']);
 	$manageForums=cleanInput($pagePost['manageForums']);
+	// Chat
+	$useChat=cleanInput($pagePost['useChat']);
 	
 	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])) { // Attempting to Edit Rank Greater Than Own
 		addFailureNotice("Permission Denied");
@@ -235,6 +232,9 @@ function updateRank() {
 		// Forums
 		$sql = "UPDATE ranks SET createForumThreads='$createForumThreads', createForumPosts='$createForumPosts', editForumPosts='$editForumPosts', deleteForumPosts='$deleteForumPosts', manageForums='$manageForums' WHERE rankID='$tarRank'";
 		$result = dbQuery($sql) or die ("Query failed: updateRank-Forums");
+		// Chat
+		$sql = "UPDATE ranks SET useChat='$useChat' WHERE rankID='$tarRank'";
+		$result = dbQuery($sql) or die ("Query failed: updateRank-Chat");
 		
 		addSuccessNotice("Success: Rank Updated");
 	}

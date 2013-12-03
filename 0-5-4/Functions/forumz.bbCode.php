@@ -12,8 +12,8 @@ function applyBBCode($post) {
 	// Primary security fixs
 	$fix[0]="<"; $fixed[0]="&lt;";
 	$fix[1]=">"; $fixed[1]="&gt;";
-	$fix[2]="\'"; $fixed[2]="&#39;";
-	$fix[3]='\"'; $fixed[3]="&quot;";
+	$fix[2]="'"; $fixed[2]="&#39;";
+	$fix[3]='"'; $fixed[3]="&quot;";
 	$post=str_replace($fix, $fixed, $post);
 
 	// Database Fixes

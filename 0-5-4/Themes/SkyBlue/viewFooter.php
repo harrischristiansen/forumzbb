@@ -4,6 +4,7 @@
 
 defaultsInclude('devTools');
 defaultsInclude('breadcrumbs');
+defaultsInclude('chatSystem');
 ?>
 
 <footer id="footBar">
@@ -22,15 +23,21 @@ viewHTML('</div><div class="footRightSide">');
 // Date
 viewHTML(returnDateLong());
 
+// Chat
+displayChatMenuBarItem();
+
 viewHTML('</div>');
 ?>
 </footer>
 <div id="breadcrumbsBar">
-<?php
+<?
 //// Breadcrumbs Bar ////
 viewBreadcrumbs();
 ?>
 </div>
+<? //// Chat Window
+viewChatWindow();
+?>
 <br><br>
 <?php echo getPageLoadInfo(); ?>
 </body></html>
