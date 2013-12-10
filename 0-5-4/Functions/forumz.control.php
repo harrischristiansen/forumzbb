@@ -70,16 +70,25 @@ function updateAccountPassword() {
 }
 
 function updateAccountProfile() {
-	global $userData, $pagePost, $con;
-	$accountID=$userData['actID'];
-	$newEmail=cleanInput($pagePost['newEmail']);
-	$sql = "UPDATE accounts SET email='$newEmail' WHERE actID='$accountID'";
-	$result = dbQuery($sql) or die ("Query failed: updateAccountProfile");
+	global $pagePost;
+	$accountID = returnUserID();
+	$user = returnUsername();
+	$actPass = returnUserPass();
+	$newEmail = cleanInput($pagePost['newEmail']);
+	$newEmailMD5 = md5($newEmail);
+	if($newEmail!=returnUserEmail()) {
+		$emailMsg = 'The contact information for account "'.$user.'" was recently updated to this email address.<br>Please confirm this address using the following link<br><br>';
+		$emailSubject = 'Account Contact Info Updated - '.$user;
+		sendEmail($newEmail, $emailSubject, $emailMsg);
+		addFailureNotice("A contact info change confirmation has been emailed to your new address. Please confirm this change using the emailed link.");
+	}
+	/*$sql = "UPDATE accounts SET email='$newEmail' WHERE actID='$accountID'";
+	$result = dbQuery($sql) or die ("Query failed: updateAccountProfile");*/
 	addSuccessNotice("Success: Profile Updated");
 }
 
 function updateSiteSettings() {
-	global $pagePost, $con;
+	global $pagePost;
 	$siteName=cleanInput($pagePost['siteName']);
 	$siteVersion=formatPost($pagePost['siteVersion']);
 	$siteMotd=formatPost($pagePost['siteMotd']);
@@ -122,26 +131,29 @@ function editRanksControlPanel() {
 	$sql = "SELECT * FROM ranks WHERE rankID='$pageID2'";
 	$result = dbQuery($sql) or die ("Query failed: editRanksControlPanel");
 	$rankArray = mysqli_fetch_array($result);
+	$permissionsArray = unserialize($rankArray['permissions']);
 	
 	
 	// Get Checked Items
 	// Admin
-	if($rankArray['editSiteSettings']=="true") { $settingChecked['editSiteSettings']="checked"; } else { $settingChecked['editSiteSettings']=""; }
-	if($rankArray['editMemberRank']=="true") { $settingChecked['editMemberRank']="checked"; } else { $settingChecked['editMemberRank']=""; }
-	if($rankArray['editRanks']=="true") { $settingChecked['editRanks']="checked"; } else { $settingChecked['editRanks']=""; }
+	if($permissionsArray['editSiteSettings']=="true") { $settingChecked['editSiteSettings']="checked"; } else { $settingChecked['editSiteSettings']=""; }
+	if($permissionsArray['editMemberRank']=="true") { $settingChecked['editMemberRank']="checked"; } else { $settingChecked['editMemberRank']=""; }
+	if($permissionsArray['editRanks']=="true") { $settingChecked['editRanks']="checked"; } else { $settingChecked['editRanks']=""; }
+	if($permissionsArray['viewMembersList']=="true") { $settingChecked['viewMembersList']="checked"; } else { $settingChecked['viewMembersList']=""; }
 	// Blog
-	if($rankArray['postBlogEntries']=="true") { $settingChecked['postBlogEntries']="checked"; } else { $settingChecked['postBlogEntries']=""; }
-	if($rankArray['postBlogComments']=="true") { $settingChecked['postBlogComments']="checked"; } else { $settingChecked['postBlogComments']=""; }
-	if($rankArray['editBlogEntries']=="true") { $settingChecked['editBlogEntries']="checked"; } else { $settingChecked['editBlogEntries']=""; }
-	if($rankArray['deleteBlogEntries']=="true") { $settingChecked['deleteBlogEntries']="checked"; } else { $settingChecked['deleteBlogEntries']=""; }
+	if($permissionsArray['postBlogEntries']=="true") { $settingChecked['postBlogEntries']="checked"; } else { $settingChecked['postBlogEntries']=""; }
+	if($permissionsArray['postBlogComments']=="true") { $settingChecked['postBlogComments']="checked"; } else { $settingChecked['postBlogComments']=""; }
+	if($permissionsArray['editBlogEntries']=="true") { $settingChecked['editBlogEntries']="checked"; } else { $settingChecked['editBlogEntries']=""; }
+	if($permissionsArray['deleteBlogEntries']=="true") { $settingChecked['deleteBlogEntries']="checked"; } else { $settingChecked['deleteBlogEntries']=""; }
 	// Forums
-	if($rankArray['createForumThreads']=="true") { $settingChecked['createForumThreads']="checked"; } else { $settingChecked['createForumThreads']=""; }
-	if($rankArray['createForumPosts']=="true") { $settingChecked['createForumPosts']="checked"; } else { $settingChecked['createForumPosts']=""; }
-	if($rankArray['editForumPosts']=="true") { $settingChecked['editForumPosts']="checked"; } else { $settingChecked['editForumPosts']=""; }
-	if($rankArray['deleteForumPosts']=="true") { $settingChecked['deleteForumPosts']="checked"; } else { $settingChecked['deleteForumPosts']=""; }
-	if($rankArray['manageForums']=="true") { $settingChecked['manageForums']="checked"; } else { $settingChecked['manageForums']=""; }
+	if($permissionsArray['viewForum']=="true") { $settingChecked['viewForum']="checked"; } else { $settingChecked['viewForum']=""; }
+	if($permissionsArray['createForumThreads']=="true") { $settingChecked['createForumThreads']="checked"; } else { $settingChecked['createForumThreads']=""; }
+	if($permissionsArray['createForumPosts']=="true") { $settingChecked['createForumPosts']="checked"; } else { $settingChecked['createForumPosts']=""; }
+	if($permissionsArray['editForumPosts']=="true") { $settingChecked['editForumPosts']="checked"; } else { $settingChecked['editForumPosts']=""; }
+	if($permissionsArray['deleteForumPosts']=="true") { $settingChecked['deleteForumPosts']="checked"; } else { $settingChecked['deleteForumPosts']=""; }
+	if($permissionsArray['manageForums']=="true") { $settingChecked['manageForums']="checked"; } else { $settingChecked['manageForums']=""; }
 	// Chat
-	if($rankArray['useChat']=="true") { $settingChecked['useChat']="checked"; } else { $settingChecked['useChat']=""; }
+	if($permissionsArray['useChat']=="true") { $settingChecked['useChat']="checked"; } else { $settingChecked['useChat']=""; }
 	
 	
 	// Display Form
@@ -199,42 +211,35 @@ function updateRank() {
 	$tarRank=$pageID2;
 	$rankName=cleanInput($pagePost['rankName']);
 	// Admin
-	$editSiteSettings=cleanInput($pagePost['editSiteSettings']);
-	$editMemberRank=cleanInput($pagePost['editMemberRank']);
-	$editRanks=cleanInput($pagePost['editRanks']);
+	$newPermissions['editSiteSettings']=cleanInput($pagePost['editSiteSettings']);
+	$newPermissions['editMemberRank']=cleanInput($pagePost['editMemberRank']);
+	$newPermissions['editRanks']=cleanInput($pagePost['editRanks']);
+	$newPermissions['viewMembersList']=cleanInput($pagePost['viewMembersList']);
 	// Blog
-	$postBlogEntries=cleanInput($pagePost['postBlogEntries']);
-	$postBlogComments=cleanInput($pagePost['postBlogComments']);
-	$editBlogEntries=cleanInput($pagePost['editBlogEntries']);
-	$deleteBlogEntries=cleanInput($pagePost['deleteBlogEntries']);
+	$newPermissions['postBlogEntries']=cleanInput($pagePost['postBlogEntries']);
+	$newPermissions['postBlogComments']=cleanInput($pagePost['postBlogComments']);
+	$newPermissions['editBlogEntries']=cleanInput($pagePost['editBlogEntries']);
+	$newPermissions['deleteBlogEntries']=cleanInput($pagePost['deleteBlogEntries']);
 	// Forums
-	$createForumThreads=cleanInput($pagePost['createForumThreads']);
-	$createForumPosts=cleanInput($pagePost['createForumPosts']);
-	$editForumPosts=cleanInput($pagePost['editForumPosts']);
-	$deleteForumPosts=cleanInput($pagePost['deleteForumPosts']);
-	$manageForums=cleanInput($pagePost['manageForums']);
+	$newPermissions['viewForum']=cleanInput($pagePost['viewForum']);
+	$newPermissions['createForumThreads']=cleanInput($pagePost['createForumThreads']);
+	$newPermissions['createForumPosts']=cleanInput($pagePost['createForumPosts']);
+	$newPermissions['editForumPosts']=cleanInput($pagePost['editForumPosts']);
+	$newPermissions['deleteForumPosts']=cleanInput($pagePost['deleteForumPosts']);
+	$newPermissions['manageForums']=cleanInput($pagePost['manageForums']);
 	// Chat
-	$useChat=cleanInput($pagePost['useChat']);
+	$newPermissions['useChat']=cleanInput($pagePost['useChat']);
 	
-	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])) { // Attempting to Edit Rank Greater Than Own
+	if(getOrderOfRank($tarRank)>=getOrderOfRank($userData['rankID'])&&getHighestRankID()!=$userData['rankID']) { // Attempting to Edit Rank Greater Than Own
 		addFailureNotice("Permission Denied");
-	} elseif(getHighestRankID()!=$userData['rankID']) {
+	} elseif(getHighestRankID()!=$userData['rankID']) { // Only Highest Rank Can Change Permissions
 		$sql = "UPDATE ranks SET rankName='$rankName' WHERE rankID='$tarRank'";
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		addSuccessNotice("Success: Rank Updated");
 	} else {
-		// Admin
-		$sql = "UPDATE ranks SET rankName='$rankName', editSiteSettings='$editSiteSettings', editMemberRank='$editMemberRank', editRanks='$editRanks' WHERE rankID='$tarRank'";
-		$result = dbQuery($sql) or die ("Query failed: updateRank-Admin");
-		// Blog
-		$sql = "UPDATE ranks SET postBlogEntries='$postBlogEntries', postBlogComments='$postBlogComments', editBlogEntries='$editBlogEntries', deleteBlogEntries='$deleteBlogEntries' WHERE rankID='$tarRank'";
-		$result = dbQuery($sql) or die ("Query failed: updateRank-Blog");
-		// Forums
-		$sql = "UPDATE ranks SET createForumThreads='$createForumThreads', createForumPosts='$createForumPosts', editForumPosts='$editForumPosts', deleteForumPosts='$deleteForumPosts', manageForums='$manageForums' WHERE rankID='$tarRank'";
-		$result = dbQuery($sql) or die ("Query failed: updateRank-Forums");
-		// Chat
-		$sql = "UPDATE ranks SET useChat='$useChat' WHERE rankID='$tarRank'";
-		$result = dbQuery($sql) or die ("Query failed: updateRank-Chat");
+		$newPermissionsSave = serialize($newPermissions);
+		$sql = "UPDATE ranks SET permissions='$newPermissionsSave' WHERE rankID='$tarRank'";
+		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		
 		addSuccessNotice("Success: Rank Updated");
 	}

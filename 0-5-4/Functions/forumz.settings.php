@@ -28,15 +28,13 @@ function setupSiteURLs() {
 }
 function displayNavBar() {
 	global $siteSettings;
-	if(isLoggedIn()) {
-		$sql="SELECT * FROM navBar WHERE navItemDisplay='loggedIn' ORDER BY navItemOrder";
-	} else {
-		$sql="SELECT * FROM navBar WHERE navItemDisplay='loggedOut' ORDER BY navItemOrder";
-	}
+	$sql="SELECT * FROM navBar ORDER BY navItemOrder";
 	$result = dbQuery($sql) or die ("Query failed: displayNavBar");
 	while($navItem = mysqli_fetch_array($result)) {
 		$navLink = $siteSettings['siteURLShort'].$navItem['navItemLink']."/";
-		displayNavItem($navLink,$navItem['navItemName']);
+		if($navItem['reqPermission']==""||userCan($navItem['reqPermission'])) {
+			displayNavItem($navLink,$navItem['navItemName']);
+		}
 	}
 }
 ?>

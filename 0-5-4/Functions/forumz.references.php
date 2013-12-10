@@ -34,6 +34,23 @@ function returnUserID() {
 	global $userData;
 	return $userData['actID'];
 }
+function returnUserPass() {
+	// Returns actPass
+	global $userData;
+	$actID = $userData['actID'];
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: returnUserPass");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['password'];
+}
+function returnUserEmail() {
+	global $userData;
+	$actID = $userData['actID'];
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: returnUserEmail");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['email'];
+}
 function getUsername($userID) {
 	$sql = "SELECT * FROM accounts WHERE actID='$userID'";
 	$result = dbQuery($sql) or die ("Query failed: getUsername");

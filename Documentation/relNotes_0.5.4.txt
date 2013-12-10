@@ -13,12 +13,12 @@ Completed:
 -Forgot Password - Reset
 
 To-Do:
--Security Enhancements
--Bot Checking
 -Spam Protection
 	-Registartions
--Code Cleanup
 -Change Email - Send email to new address and only change once confirmed by new address
+-Blog System
+	-Edit Comments
+	-Delete Comments
 -Basic Forum System
 	-Edit Posts
 	-Delete Posts

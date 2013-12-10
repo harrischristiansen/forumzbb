@@ -89,6 +89,10 @@ Version 0.5.4:
 -BB Code Posts
 
 Version 0.5.5:
+-Security Enhancements
+-Bot Checking
+-Spam Protection
+-Code Cleanup
 -New Theme
 -Mobile Theme
 -Theme Changer
