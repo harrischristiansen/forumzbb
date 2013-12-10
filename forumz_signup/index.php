@@ -52,7 +52,7 @@
             	<center><font size="5">Forumz Public Signup</font></center><br><br>
                 <a href="http://beta.forumzbb.com" class="link">View the Demo</a><br>
                 <a href="http://signup.forumzbb.com/relNotes.txt" class="link">View Release Notes</a><br>
-				Contact Email: <a href="mailTo:cloudy243@me.com" style="color: #000000;">cloudy243@me.com</a>
+                <a href="http://www.harrischristiansen.com" class="link">View Developer Info</a><br>
         </div>
         <div class="right">
         	<img src="images/mac.png" alt="Picture of site">

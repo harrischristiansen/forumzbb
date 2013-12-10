@@ -35,6 +35,19 @@
 
 </head>
 
+<?
+function isEmailValid($emailAdr) {
+	$emailAdr = str_replace(' ', '', $emailAdr);
+	$emailAdrs = split(',', $emailAdr);
+	for($i=0;$i<count($emailAdrs);$i++) {
+		if(!filter_var($emailAdrs[$i], FILTER_VALIDATE_EMAIL)) {
+			return false;
+		}
+	}
+	return true;
+}
+?>
+
 <body><div id="main">
 	<div id="menuBar">
     	<div id="menuLeft">
@@ -52,7 +65,7 @@
             	<center><font size="5">Forumz Public Signup</font></center><br><br>
                 <a href="http://beta.forumzbb.com" class="link">View the Demo</a><br>
                 <a href="http://signup.forumzbb.com/relNotes.txt" class="link">View Release Notes</a><br>
-				Contact Email: <a href="mailTo:cloudy243@me.com" style="color: #000000;">cloudy243@me.com</a>
+                <a href="http://www.harrischristiansen.com" class="link">View Developer Info</a><br>
         </div>
         <div class="right">
         	<img src="images/mac.png" alt="Picture of site">
@@ -60,7 +73,7 @@
     </div>
     
     <div id="r2">
-    	<div class="left"><b>Released Version</b> | Forumz 0.5.3</div>
+    	<div class="left"><b>Released Version</b> | Forumz 0.5.2</div>
     </div>
     
     <div id="r3"><br>
@@ -130,6 +143,11 @@
         	echo '<font size="5" style="color: red;">Invalid Invitation Code</font><br>';
         }
         
+        //Check Email Address
+        elseif(!isEmailValid($emailInput)) {
+        	echo '<font size="5" style="color: red;">Invalid Email Address</font><br>';
+        }
+        
         //Create Site
         else {
         	//Add User To Database
@@ -145,6 +163,22 @@
         	$con = @mysqli_connect($mysqliServer, $mysqliUser, $mysqliPass, $mysqliForumzDatabase) or die ("Connection Failed: Forumz Public DB");
         	require_once('setupNewDatabase.php');
         	fillDatabase($con,$newDatabaseName,$usernameInput,$passwordEncrypted,$emailInput,$ipAddress,$joinDate,$domainInput);
+        	
+        	//Send Confirmation Email
+			$subject = 'ForumzBB Site Created - '.$domainInput;
+			$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'From: ForumzBB <noReply@Forumzbb.com>';
+			$message = '
+				<html><head>
+					<title>'.$subject.'</title>
+				</head><body>
+					Your Site Was Created on ForumzBB
+					<br><br>
+					<p>
+						Website Address: <a href="http://public.forumzbb.com/'.$domainInput.'/">public.forumzbb.com/'.$domainInput.'/</a>
+					</p>
+				</body></html>';
+			mail($emailInput, $subject, $message, $headers);
        		
         	//Confirm Site Creation, Print Site Address
         	echo '<font size="5" style="color: green;">Site Created</font><br>';
