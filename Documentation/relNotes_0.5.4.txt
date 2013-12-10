@@ -7,10 +7,13 @@ Completed:
 -Numerous failed logins locks account and sends activation email to account owner
 -Site BB Code
 -CP Redesign
--BB Code in site settings
+-Use BB Code in site settings
 -Admin Panel Version Selector
 -Added (->) Seperator To Breadcrumbs
 -Forgot Password - Reset
+-Permissions System converted to serialized array
+-NavBar loads based on permissions
+-Activate Account by actID not username
 
 To-Do:
 -Spam Protection

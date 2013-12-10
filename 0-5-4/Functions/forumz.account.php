@@ -32,12 +32,13 @@ function loginUser() {
 		if($_SESSION['failedLogins']==5) {
 			addFailureNotice("This Account Has Been Locked - Please check your email for a reactivation link");
 			setAccountAsLocked($user);
+			$actID = getActID($user);
 			$emailAdr = getUserEmail($user);
 			$pass = getUserEncryptedPass($user);
 			$siteName = getSiteName();
 			$siteAddress = getSiteAddress();
 			$emailMsg = 'Your Account On '.$siteName.' Has Been Locked Due To Suspicious Activity <br><br>
-			<b style="color: red;">Activate Account: </b>You must reactivate your account by clicking the following link before you may login:<br><a href="http://'.$siteAddress.'/confirmAccount/'.$user.'/'.$pass.'">http://'.$siteAddress.'/confirmAccount/'.$user.'/'.$pass.'</a>';
+			<b style="color: red;">Activate Account: </b>You must reactivate your account by clicking the following link before you may login:<br><a href="http://'.$siteAddress.'/confirmAccount/'.$actID.'/'.$pass.'">http://'.$siteAddress.'/confirmAccount/'.$actID.'/'.$pass.'</a>';
 			$emailSubject = 'Account Locked - '.$user;
 			sendEmail($emailAdr, $emailSubject, $emailMsg);
 		}
@@ -153,11 +154,12 @@ function registerUser() {
 		else {
 			if (addUserToDatabase($user, $pass, $email)) {
 				addSuccessNotice("You Are Now Registered.");
+				$actID = getActID($user);
 				$siteName = getSiteName();
 				$siteAddress = getSiteAddress();
 				$emailMsg = "Welcome To $siteName! <br><br> An account has been created for you: <br><b>Website: </b>$siteAddress <br><b>Username: </b>$user <br><b>Password: </b>$pass";
 				if($siteSettings['verifyRegisterEmail']) {
-					$emailMsg .= '<br><br><b style="color: red;">NOTICE: </b>You must confirm your account before you may login:<br><a href="http://'.$siteAddress.'/confirmAccount/'.$user.'/'.md5($pass).'">http://'.$siteAddress.'/confirmAccount/'.$user.'/'.md5($pass).'</a>';
+					$emailMsg .= '<br><br><b style="color: red;">NOTICE: </b>You must confirm your account before you may login:<br><a href="http://'.$siteAddress.'/confirmAccount/'.$actID.'/'.md5($pass).'">http://'.$siteAddress.'/confirmAccount/'.$actID.'/'.md5($pass).'</a>';
 				}
 				$emailSubject = 'Account Created - '.$user;
 				sendEmail($email, $emailSubject, $emailMsg);
@@ -204,7 +206,7 @@ function checkUsernameAvailable($user) {
 //// Account Status Admin
 function confirmAccount() { // Fix to not work for banned acts and acts with admin accept req
 	global $pageID, $pageID2;
-	$sql = "SELECT * FROM accounts WHERE username='$pageID' AND password='$pageID2'";
+	$sql = "SELECT * FROM accounts WHERE actID='$pageID' AND password='$pageID2'";
 	$result = dbQuery($sql) or die ("Query failed: confirmAccount-select");
 	if(mysqli_num_rows($result)==0) {
 		addFailureNotice("Invalid Activation Link");
@@ -212,25 +214,25 @@ function confirmAccount() { // Fix to not work for banned acts and acts with adm
 		setAccountAsConfirmedByEmail($pageID);
 	}
 }
-function setAccountAsConfirmedByEmail($user) {
+function setAccountAsConfirmedByEmail($actID) {
 	// Make so it only confirms email, not just sets account to active.
-	setAccountAsActive($user);
+	setAccountAsActive($actID);
 	addSuccessNotice("Account Activated - You May Now Login");
 }
-function setAccountAsConfirmedByAdmin($user) {
+function setAccountAsConfirmedByAdmin($actID) {
 	// Make so it only confirms by admin, not just sets account to active.
-	setAccountAsActive($user);
+	setAccountAsActive($actID);
 }
-function setAccountAsActive($user) {
-	$sql = "UPDATE accounts SET actStatus='0' WHERE username='$user'";
+function setAccountAsActive($actID) {
+	$sql = "UPDATE accounts SET actStatus='0' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive");
 }
-function setAccountAsLocked($user) {
-	$sql = "UPDATE accounts SET actStatus='1' WHERE username='$user'";
+function setAccountAsLocked($actID) {
+	$sql = "UPDATE accounts SET actStatus='1' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsLocked");
 }
-function setAccountAsBanned($user) {
-	$sql = "UPDATE accounts SET actStatus='-1' WHERE username='$user'";
+function setAccountAsBanned($actID) {
+	$sql = "UPDATE accounts SET actStatus='-1' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsBanned");
 }
 

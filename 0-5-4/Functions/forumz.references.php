@@ -51,6 +51,12 @@ function returnUserEmail() {
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['email'];
 }
+function getActID($username) {
+	$sql = "SELECT * FROM accounts WHERE username='$username'";
+	$result = dbQuery($sql) or die ("Query failed: getActID");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['actID'];
+}
 function getUsername($userID) {
 	$sql = "SELECT * FROM accounts WHERE actID='$userID'";
 	$result = dbQuery($sql) or die ("Query failed: getUsername");

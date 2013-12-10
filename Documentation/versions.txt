@@ -94,7 +94,9 @@ Version 0.5.5:
 -Spam Protection
 -Code Cleanup
 -New Theme
+	-Robotics Site Theme
 -Mobile Theme
+	-Robotics Site Theme
 -Theme Changer
 -Pages System
 	-Editable Pages
