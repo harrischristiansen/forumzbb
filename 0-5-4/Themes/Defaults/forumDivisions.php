@@ -50,7 +50,7 @@ function displayThreadLine($threadLink,$rowID,$subject,$startBy,$latestBy,$lates
 }
 
 // Posts
-function displayForumPost($rowID, $author, $subject, $postDate, $postTime, $post) {
+function displayForumPost($rowID, $author, $subject, $postDate, $postTime, $post, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText) {
 	viewHTML('<table class="FullWidthTable">');
 	viewHTML('<tr class="FullWidthTableHead">');
 		viewHTML('<td class="TableHeadColumn forumPostColumn1">'.$author.'</td>');
@@ -63,10 +63,26 @@ function displayForumPost($rowID, $author, $subject, $postDate, $postTime, $post
 		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'">UserInfo</td>');
 		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">'.$post.'</td>');
 	viewHTML('</tr>');
+	if($viewEdit||$viewDelete) {
 	viewHTML('<tr class="FullWidthTableRow">');
 		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'"></td>');
-		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">Edit/Delete Buttons</td>');
+		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">');
+			if($viewEdit) { viewHTML('<button class="editButton">Edit</button>'); }
+			if($viewDelete) { viewHTML('<a href="'.$deleteLink.'"><button>Delete</button></a>'); }
+		viewHTML('</td>');
 	viewHTML('</tr>');
+	}
+	if($viewEdit) {
+	viewHTML('<tr class="FullWidthTableRow editCommentDiv">');
+		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'"></td>');
+		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">');
+			viewHTML('<form action="'.$editLink.'" method="POST" class="validateForm">');
+				viewHTML('<textarea name="forumPost" data-bvalidator="required">'.$editText.'</textarea>');
+				viewHTML('<input type="submit" name="editForumPostSubmitted" value="Update">');
+			viewHtml('</form>');
+		viewHTML('</td>');
+	viewHTML('</tr>');
+	}
 	viewHTML('</table>');
 }
 ?>

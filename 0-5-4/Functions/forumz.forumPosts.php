@@ -3,7 +3,7 @@
 // Created 5-29-13
 
 function viewForumThread() {
-	global $pageID;
+	global $pageID, $siteSettings;
 	$posts = getForumPostsInThread($pageID);
 	$rowID = 1;
 	while($post=mysqli_fetch_array($posts)) {
@@ -11,8 +11,14 @@ function viewForumThread() {
 		$subject = $post['subject'];
 		$postDate = $post['postDate'];
 		$postTime = $post['postTime'];
-		$post = $post['post'];
-		displayForumPost($rowID, $author, $subject, $postDate, $postTime, $post);
+		$postText = $post['post'];
+		$viewEdit = userCan('editForumPosts');
+		$viewDelete = userCan('deleteForumPosts');
+		if($post['author']==returnUserID()) { $viewEdit = true; $viewDelete = true; }
+		$editLink = $siteSettings['siteURLShort']."editForumPost/".$post['id'];
+		$deleteLink  = $siteSettings['siteURLShort']."deleteForumPost/".$post['id'];
+		$editText = reverseFormatPost($postText);
+		displayForumPost($rowID, $author, $subject, $postDate, $postTime, $postText, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText);
 		$rowID++;
 	}
 }
@@ -78,6 +84,62 @@ function addForumPost() {
 	$result = dbQuery($sql) or die ("Query failed: addForumPost-addPost");
 	
 	addSuccessNotice("Reply Added");
+}
+
+// Edit Forum Post
+function editForumPost() {
+	global $pageID, $pagePost;
+	if($pageID=="") {
+		addFailureNotice("Invalid Action");
+		return false;
+	}
+	if(userCan('editForumPosts')||returnUserID()==getForumPostAuthorID($pageID)) {
+		$newForumPost=formatPost($pagePost['forumPost']);
+		$sql = "UPDATE forumPosts SET post='$newForumPost' WHERE id='$pageID'";
+		$result = dbQuery($sql) or die ("Query failed: editForumPost");
+		addSuccessNotice("Post Updated");
+	} else {
+		addFailureNotice("Permission Denied");
+	}
+	
+	// Set pageID to threadID
+	$pageID = getThreadIDOfPost($pageID);
+}
+
+// Delete Forum Post
+function deleteForumPost() {
+	global $pageID;
+	if($pageID=="") {
+		addFailureNotice("Invalid Action");
+		return false;
+	}
+	if(userCan('deleteForumPosts')||returnUserID()==getForumPostAuthorID($pageID)) {
+		// If first post, delete thread - require permission not just ownership
+		$newPostID = 0-$pageID;
+		$sql = "UPDATE forumPosts SET id='$newPostID' WHERE id='$pageID'";
+		$result = dbQuery($sql) or die ("Query failed: deleteForumPost");
+		addSuccessNotice("Post Deleted");
+	} else {
+		addFailureNotice("Permission Denied");
+	}
+	
+	// Set pageID to threadID
+	$pageID = getThreadIDOfPost($newPostID);
+}
+
+// Lookup Functions
+function getForumPostAuthorID($postID) {
+	$sql = "SELECT * FROM forumPosts WHERE id='$postID'";
+	$result = dbQuery($sql) or die ("Query failed: getForumPostAuthorID");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['author'];
+}
+
+function getThreadIDOfPost($postID) {
+	$sql = "SELECT * FROM forumPosts WHERE id='$postID'";
+	$result = dbQuery($sql) or die ("Query failed: getForumPostAuthorID");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['threadID'];
 }
 
 ?>

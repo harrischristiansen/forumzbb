@@ -234,7 +234,7 @@ function deleteBlogPost() {
 	}
 }
 function deleteBlogComment() {
-	global $pageID, $pagePost;
+	global $pageID;
 	if($pageID=="") {
 		addFailureNotice("Invalid Action");
 		return false;

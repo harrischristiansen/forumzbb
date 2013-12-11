@@ -103,6 +103,7 @@ Version 0.5.5:
 	-Editable Pages
 
 Future:
+-BB Code Editor
 -Member to Member PM/Chat System
 -Members Personal Wall for Posting
 -Members Friends+Privacy System
