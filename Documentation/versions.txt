@@ -103,6 +103,10 @@ Version 0.5.5:
 	-Editable Pages
 
 Future:
+-Forum
+	-Pagination - max threads per forum page, posts per thread page, etc
+	-Move Threads
+	-Create Categories/Forums
 -BB Code Editor
 -Member to Member PM/Chat System
 -Members Personal Wall for Posting

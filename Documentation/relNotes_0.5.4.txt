@@ -23,14 +23,12 @@ Completed:
 -Basic Forum System
 	-Create Threads, Posts
 	-Edit Posts
+	-Delete Posts
+	-Delete Threads
 
 To-Do:
 -Spam Protection
 	-Registrations
 -Change Email - Send email to new address and only change once confirmed by new address
--Basic Forum System
-	-Delete Posts
-	-Delete Threads
-	-Pagination - 20 posts per page
 -Internal Messaging System
 -Dynamically Load Page Names (Forum Thread's)

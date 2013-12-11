@@ -23,13 +23,13 @@ function viewForumThreads() {
 // General Functions
 
 function getForumThreadsInForum($forumID) {
-	$sql = "SELECT * FROM forumThreads WHERE forumID='$forumID' ORDER BY latestChange DESC";
+	$sql = "SELECT * FROM forumThreads WHERE forumID='$forumID' AND id>='0' ORDER BY latestChange DESC";
 	$result = dbQuery($sql) or die ("Query failed: getForumThreadsInForum");
 	return $result;
 }
 
 function getNumForumThreadsInForum($forumID) {
-	$sql = "SELECT * FROM forumThreads WHERE forumID='$forumID'";
+	$sql = "SELECT * FROM forumThreads WHERE forumID='$forumID' AND id>='0'";
 	$result = dbQuery($sql) or die ("Query failed: getNumForumThreadsInForum");
 	return mysqli_num_rows($result);
 }

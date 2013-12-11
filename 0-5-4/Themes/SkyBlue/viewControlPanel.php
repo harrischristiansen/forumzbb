@@ -14,12 +14,14 @@ display('viewHeader');
 		<?php displayCPNav(); ?>
 		</div>
 	</div>
+	<? if(userCan('editSiteSettings')) { ?>
 	<div class="controlPanelSidepanelItem">
 		<div class="controlPanelTitle">Quick Stats</div>
 		<div class="controlPanelSidePanelItemContent">
 		<? getSiteStats(); ?>
 		</div>
 	</div>
+	<? } ?>
 </div>
 
 <div id="controlPanelContent">

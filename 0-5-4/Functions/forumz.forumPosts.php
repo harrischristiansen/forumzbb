@@ -26,19 +26,19 @@ function viewForumThread() {
 // General Functions
 
 function getForumPostsInThread($threadID) {
-	$sql = "SELECT * FROM forumPosts WHERE threadID='$threadID' ORDER BY postDate, postTime";
+	$sql = "SELECT * FROM forumPosts WHERE threadID='$threadID' AND id>='0' ORDER BY postDate, postTime";
 	$result = dbQuery($sql) or die ("Query failed: getForumPostsInThread");
 	return $result;
 }
 
 function getNumForumPostsInThread($threadID) {
-	$sql = "SELECT * FROM forumPosts WHERE threadID='$threadID'";
+	$sql = "SELECT * FROM forumPosts WHERE threadID='$threadID' AND id>='0'";
 	$result = dbQuery($sql) or die ("Query failed: getNumForumPostsInThread");
 	return mysqli_num_rows($result);
 }
 
 function getNumForumPostsInForum($forumID) {
-	$sql = "SELECT * FROM forumPosts WHERE forumID='$forumID'";
+	$sql = "SELECT * FROM forumPosts WHERE forumID='$forumID' AND id>='0' AND threadID>='0'";
 	$result = dbQuery($sql) or die ("Query failed: getNumForumPostsInForum");
 	return mysqli_num_rows($result);
 }
@@ -113,8 +113,20 @@ function deleteForumPost() {
 		addFailureNotice("Invalid Action");
 		return false;
 	}
-	if(userCan('deleteForumPosts')||returnUserID()==getForumPostAuthorID($pageID)) {
-		// If first post, delete thread - require permission not just ownership
+	$threadID = getThreadIDOfPost($pageID);
+	if($pageID==getThreadFirstPostID($threadID)) {
+		if(userCan('deleteForumPosts')) {
+			$newThreadID = 0-$threadID;
+			$sql = "UPDATE forumThreads SET id='$newThreadID' WHERE id='$threadID'";
+			$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thread");
+			$sql = "UPDATE forumPosts SET threadID='$newThreadID' WHERE threadID='$threadID'";
+			$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thread-Posts");
+			addSuccessNotice("Thread Deleted");
+		} else {
+			addFailureNotice("Permission Denied - Contact A Moderator To Delete Threads");
+		}
+	}
+	elseif(userCan('deleteForumPosts')||returnUserID()==getForumPostAuthorID($pageID)) {
 		$newPostID = 0-$pageID;
 		$sql = "UPDATE forumPosts SET id='$newPostID' WHERE id='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: deleteForumPost");
@@ -124,7 +136,7 @@ function deleteForumPost() {
 	}
 	
 	// Set pageID to threadID
-	$pageID = getThreadIDOfPost($newPostID);
+	$pageID = $threadID;
 }
 
 // Lookup Functions
@@ -140,6 +152,13 @@ function getThreadIDOfPost($postID) {
 	$result = dbQuery($sql) or die ("Query failed: getForumPostAuthorID");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['threadID'];
+}
+
+function getThreadFirstPostID($threadID) {
+	$sql = "SELECT * FROM forumPosts WHERE threadID='$threadID' ORDER BY postDate, postTime";
+	$result = dbQuery($sql) or die ("Query failed: getThreadFirstPostID");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['id'];
 }
 
 ?>
