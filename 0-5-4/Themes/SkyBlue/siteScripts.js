@@ -14,4 +14,9 @@ $(document).ready(function(){
 	$("#menuBarChatItem").click(function() {
 		$("#chatWindow").slideToggle(500);
   	});
+  	
+  	// Edit Comment Toggle
+  	$(".editButton").click(function() {
+    	$(this).closest('.FullWidthPostRow').find('.editCommentDiv').slideToggle(600);
+	});
 });

@@ -152,7 +152,7 @@ function loadPage() {
 	else {
 		if($userData['loggedIn']||!$siteSettings['reqLogin']) {
 			$pageID=1; // To Display Correct Home Page
-			display('viewBlogHome');
+			display('viewSiteHome');
 		} else {
 			display('viewBlank');
 		}

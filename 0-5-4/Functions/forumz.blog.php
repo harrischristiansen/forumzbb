@@ -100,17 +100,23 @@ function getBlogEntryTitle($entryID) {
 ////////// Blog Comment View System //////////
 
 function getBlogComments($blogID) {
-	$sql = "SELECT * FROM blogComments WHERE blogID='$blogID' ORDER BY idNum";
+	$sql = "SELECT * FROM blogComments WHERE blogID='$blogID' AND idNum>='0' ORDER BY idNum";
 	$result = dbQuery($sql) or die ("Query failed: getBlogComments");
 	return $result;
 }
 
 function viewBlogComments() {
-	global $pageID;
+	global $pageID, $siteSettings;
 	$blogComments=getBlogComments($pageID);
 
 	while($comment = mysqli_fetch_array($blogComments)) {
-		displayBlogComment(getMemberName($comment['posterID']),$comment['date'],$comment['time'],$comment['comment']);
+		$viewEdit = userCan('editBlogComments');
+		$viewDelete = userCan('deleteBlogComments');
+		$editLink = $siteSettings['siteURLShort']."editBlogComment/".$comment['idNum'];
+		$deleteLink  = $siteSettings['siteURLShort']."deleteBlogComment/".$comment['idNum'];
+		$editText = reverseFormatPost($comment['comment']);
+		if($comment['posterID']==returnUserID()) { $viewEdit = true; $viewDelete = true; }
+		displayBlogComment(getMemberName($comment['posterID']),$comment['date'],$comment['time'],$comment['comment'],$viewEdit,$viewDelete,$editLink,$deleteLink,$editText);
 	}
 }
 
@@ -161,8 +167,12 @@ function canPostBlogComments() {
 
 ////////// Edit Blog System //////////
 function editBlogPost() {
-	global $pageID, $userData, $pagePost, $con;
-	if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
+	global $pageID, $pagePost;
+	if($pageID=="") {
+		addFailureNotice("Invalid Action");
+		return false;
+	}
+	if(userCan('editBlogEntries')||returnUserID()==getBlogAuthorID($pageID)) {
 		$newBlogEntry=formatPost($pagePost['blogEntryText']);
 		$updateAuthor=$userData['actID'];
 		$updateDate=returnDateOfficial();
@@ -173,10 +183,28 @@ function editBlogPost() {
 		addFailureNotice("Permission Denied");
 	}
 }
+function editBlogComment() {
+	global $pageID, $pagePost;
+	if($pageID=="") {
+		addFailureNotice("Invalid Action");
+		return false;
+	}
+	if(userCan('editBlogComments')||returnUserID()==getBlogCommentAuthorID($pageID)) {
+		$newBlogComment=formatPost($pagePost['blogComment']);
+		$sql = "UPDATE blogComments SET comment='$newBlogComment' WHERE idNum='$pageID'";
+		$result = dbQuery($sql) or die ("Query failed: editBlogPost");
+		addSuccessNotice("Blog Comment Updated");
+	} else {
+		addFailureNotice("Permission Denied");
+	}
+	
+	// Set pageID to blogID
+	$pageID = getBlogIDOfComment($pageID);
+}
 function getBlogComposeField() {
 	global $pageID, $siteSettings, $userData;
 	if($pageID!="") { // Updating Entry
-		if($userData['permissions']['editBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
+		if(userCan('editBlogEntries')||$userData['actID']==getBlogAuthorID($pageID)) {
 			$formLink=$siteSettings['siteURLShort'].'editBlog/'.$pageID;
 			$blogEntry=getBlogEntry($pageID);
 			$currentEntry=reverseFormatPost($blogEntry['Post']);
@@ -191,6 +219,10 @@ function getBlogComposeField() {
 ////////// Delete Blog System /////////
 function deleteBlogPost() {
 	global $pageID, $userData;
+	if($pageID=="") {
+		addFailureNotice("Invalid Action");
+		return false;
+	}
 	if($userData['permissions']['deleteBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
 		$newBlogID=-$pageID;
 		$sql = "UPDATE blogs SET ID='$newBlogID' WHERE ID='$pageID'";
@@ -201,11 +233,43 @@ function deleteBlogPost() {
 		addFailureNotice("Permission Denied");
 	}
 }
+function deleteBlogComment() {
+	global $pageID, $pagePost;
+	if($pageID=="") {
+		addFailureNotice("Invalid Action");
+		return false;
+	}
+	if(userCan('deleteBlogComments')||returnUserID()==getBlogCommentAuthorID($pageID)) {
+		$newCommentID = 0-$pageID;
+		$sql = "UPDATE blogComments SET idNum='$newCommentID' WHERE idNum='$pageID'";
+		$result = dbQuery($sql) or die ("Query failed: deleteBlogComment");
+		addSuccessNotice("Blog Comment Deleted");
+	} else {
+		addFailureNotice("Permission Denied");
+	}
+	
+	// Set pageID to blogID
+	$pageID = getBlogIDOfComment($newCommentID);
+}
 
 function getBlogAuthorID($blogID) {
 	$sql = "SELECT * FROM blogs WHERE ID='$blogID'";
 	$result = dbQuery($sql) or die ("Query failed: getBlogAuthorID");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['Author'];
+}
+
+function getBlogCommentAuthorID($commentID) {
+	$sql = "SELECT * FROM blogComments WHERE idNum='$commentID'";
+	$result = dbQuery($sql) or die ("Query failed: getBlogCommentAuthorID");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['posterID'];
+}
+
+function getBlogIDOfComment($commentID) {
+	$sql = "SELECT * FROM blogComments WHERE idNum='$commentID'";
+	$result = dbQuery($sql) or die ("Query failed: getBlogIDOfComment");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['blogID'];
 }
 ?>

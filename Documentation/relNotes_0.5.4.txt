@@ -5,6 +5,7 @@ Harris Christiansen
 Completed:
 -Account Creation Validation
 -Numerous failed logins locks account and sends activation email to account owner
+-Clean Input Function
 -Site BB Code
 -CP Redesign
 -Use BB Code in site settings
@@ -16,14 +17,16 @@ Completed:
 -Activate Account by actID not username
 -Site Signup System
 	-Send Out Email when you create a site
+-Blog System Updates
+	-Edit Comments
+	-Delete Comments
+-Basic Forum System
+	-Create Threads, Posts
 
 To-Do:
 -Spam Protection
 	-Registrations
 -Change Email - Send email to new address and only change once confirmed by new address
--Blog System
-	-Edit Comments
-	-Delete Comments
 -Basic Forum System
 	-Edit Posts
 	-Delete Posts

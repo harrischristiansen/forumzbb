@@ -66,6 +66,8 @@ function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 		viewHTML('Post Blog Comments: <input type="checkbox" name="postBlogComments" value="true" '.$settingChecked['postBlogComments'].'><br>');
 		viewHTML('Edit Blog Entries: <input type="checkbox" name="editBlogEntries" value="true" '.$settingChecked['editBlogEntries'].'><br>');
 		viewHTML('Delete Blog Entries: <input type="checkbox" name="deleteBlogEntries" value="true" '.$settingChecked['deleteBlogEntries'].'><br>');
+		viewHTML('Edit Blog Comments: <input type="checkbox" name="editBlogComments" value="true" '.$settingChecked['editBlogComments'].'><br>');
+		viewHTML('Delete Blog Comments: <input type="checkbox" name="deleteBlogComments" value="true" '.$settingChecked['deleteBlogComments'].'><br>');
 		viewHTML('<br><u>Forums:</u><br>');
 		viewHTML('View Forum: <input type="checkbox" name="viewForum" value="true" '.$settingChecked['viewForum'].'><br>');
 		viewHTML('Create Forum Threads: <input type="checkbox" name="createForumThreads" value="true" '.$settingChecked['createForumThreads'].'><br>');

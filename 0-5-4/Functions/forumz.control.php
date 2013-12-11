@@ -145,6 +145,8 @@ function editRanksControlPanel() {
 	if($permissionsArray['postBlogComments']=="true") { $settingChecked['postBlogComments']="checked"; } else { $settingChecked['postBlogComments']=""; }
 	if($permissionsArray['editBlogEntries']=="true") { $settingChecked['editBlogEntries']="checked"; } else { $settingChecked['editBlogEntries']=""; }
 	if($permissionsArray['deleteBlogEntries']=="true") { $settingChecked['deleteBlogEntries']="checked"; } else { $settingChecked['deleteBlogEntries']=""; }
+	if($permissionsArray['editBlogComments']=="true") { $settingChecked['editBlogComments']="checked"; } else { $settingChecked['editBlogComments']=""; }
+	if($permissionsArray['deleteBlogComments']=="true") { $settingChecked['deleteBlogComments']="checked"; } else { $settingChecked['deleteBlogComments']=""; }
 	// Forums
 	if($permissionsArray['viewForum']=="true") { $settingChecked['viewForum']="checked"; } else { $settingChecked['viewForum']=""; }
 	if($permissionsArray['createForumThreads']=="true") { $settingChecked['createForumThreads']="checked"; } else { $settingChecked['createForumThreads']=""; }
@@ -220,6 +222,8 @@ function updateRank() {
 	$newPermissions['postBlogComments']=cleanInput($pagePost['postBlogComments']);
 	$newPermissions['editBlogEntries']=cleanInput($pagePost['editBlogEntries']);
 	$newPermissions['deleteBlogEntries']=cleanInput($pagePost['deleteBlogEntries']);
+	$newPermissions['editBlogComments']=cleanInput($pagePost['editBlogComments']);
+	$newPermissions['deleteBlogComments']=cleanInput($pagePost['deleteBlogComments']);
 	// Forums
 	$newPermissions['viewForum']=cleanInput($pagePost['viewForum']);
 	$newPermissions['createForumThreads']=cleanInput($pagePost['createForumThreads']);

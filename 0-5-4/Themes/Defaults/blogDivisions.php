@@ -48,7 +48,7 @@ function displayBlogEntry($authorName,$postDate,$postTime,$entryTitle,$entry,$ed
 	viewHTML('</div>');
 }
 
-function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
+function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEdit,$viewDelete,$editLink,$deleteLink,$editText) {
 	viewHTML('<div class="FullWidthPostHead">');
 		viewHTML('<div class="floatLeft">');
 			viewHTML("Comment By: ".$userName);
@@ -59,6 +59,20 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
 	viewHTML('</div>');
 	viewHTML('<div class="FullWidthPostRow">');
 		viewHTML($comment);
+		if($viewEdit||$viewDelete) {
+			viewHTML('<br><hr>');
+			if($viewEdit) { viewHTML('<button class="editButton">Edit</button>'); }
+			if($viewDelete) { viewHTML('<a href="'.$deleteLink.'"><button>Delete</button></a>'); }
+		}
+		if($viewEdit) {
+			viewHTML('<div class="editCommentDiv">');
+			viewHTML('<form action="'.$editLink.'" method="POST" class="validateForm">');
+				viewHTML('<textarea name="blogComment" data-bvalidator="required">'.$editText.'</textarea>');
+				viewHTML('<input type="submit" name="editBlogCommentSubmitted" value="Update">');
+			viewHtml('</form>');
+			viewHTML('</div>');
+			
+		}
 	viewHTML('</div>');
 }
 
