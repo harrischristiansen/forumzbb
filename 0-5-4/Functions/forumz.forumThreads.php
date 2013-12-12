@@ -58,7 +58,7 @@ function createForumThread() {
 	$threadDate = returnDateOfficial();
 	$threadTime = returnTime();
 	$latestChange = $threadDate.' '.$threadTime;
-	$threadID = getNumForumThreads();
+	$threadID = getNumForumThreads()+1;
 	$threadAuthor = $userData['actID'];
 	$latestPostArray['title']=$threadSubject;
 	$latestPostArray['author']=$threadAuthor;
@@ -76,7 +76,7 @@ function createForumThread() {
 	$result = dbQuery($sql) or die ("Query failed: createForumThread-createThread");
 	
 	// Add Post
-	$postID = getNumForumPosts();
+	$postID = getNumForumPosts()+1;
 	$sql = "INSERT INTO forumPosts (id, threadID, forumID, subject, post, author, postDate, postTime) VALUES ('$postID', '$threadID', '$forumID', '$threadSubject', '$threadPost', '$threadAuthor', '$threadDate', '$threadTime')";
 	$result = dbQuery($sql) or die ("Query failed: createForumThread-addPost");
 	

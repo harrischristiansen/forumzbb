@@ -158,7 +158,7 @@ hr {
 
 /* ----- Chat Window ----- */
 #chatWindow {
-	width: 280px;
+	width: 265px;
 	height: 350px;
 	background-color: #FFFFFF;
 	border: 1px solid #000000;
@@ -166,6 +166,45 @@ hr {
 	right: 5px;
 	bottom: 36px;
 	display: none;
+	color: #000000;
+	text-align: left;
+}
+#chatWindowHead {
+	width: 100%;
+	height: 22px;
+	font-size: 18px;
+	text-align: center;
+	background-color: #0F8BBF;
+	color: #333333;
+	border-bottom: 1px solid #000000;
+}
+#chatWindowCont {
+	height: 260px;
+	width: 100%;
+	font-size: 12px;
+	overflow-y: scroll;
+}
+#chatWindowField {
+	border-top: 1px solid #000000;
+	height: 66px;
+	width: 100%;
+}
+.chatWindowMsg {
+	border-bottom: 1px solid #AAAAAA;
+	padding-top: 5px;
+	padding-bottom: 3px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.chatWindowMsgSender {
+	font-weight: bold;
+	display: inline;
+}
+#chatWindowTextarea {
+	width: 259px;
+	height: 60px;
+	resize: none;
+	background-color: #DDDDDD;
 }
 
 /* ----- Site Divisions ----- */

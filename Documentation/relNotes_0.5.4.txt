@@ -25,10 +25,10 @@ Completed:
 	-Edit Posts
 	-Delete Posts
 	-Delete Threads
+-Internal Messaging System
 
 To-Do:
 -Spam Protection
 	-Registrations
 -Change Email - Send email to new address and only change once confirmed by new address
--Internal Messaging System
 -Dynamically Load Page Names (Forum Thread's)

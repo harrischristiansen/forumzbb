@@ -145,7 +145,7 @@ function addBlogEntry() {
 function addBlogComment() {
 	global $pageID, $userData, $pagePost, $con;
 	if($userData['permissions']['postBlogComments']=="true") {
-		$commentID=numBlogComments();
+		$commentID=numBlogComments()+1;
 		$postClean=formatPost($pagePost['blogCommentText']);
 		$date=returnDateOfficial();
 		$time=returnTime();

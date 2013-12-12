@@ -7,7 +7,6 @@ require_once($siteSettings['siteVersionAddress'].'Functions/forumz.account.php')
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.bbCode.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.blog.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.breadcrumbs.php');
-require_once($siteSettings['siteVersionAddress'].'Functions/forumz.chat.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.control.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.devTools.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.email.php');

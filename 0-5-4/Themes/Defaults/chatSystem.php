@@ -12,7 +12,15 @@ function displayChatMenuBarItem() {
 function viewChatWindow() {
 	if(userCan("useChat")) {
 		viewHTML('<div id="chatWindow">');
-		
+			viewHTML('<div id="chatWindowHead">Chat</div>');
+			viewHTML('<div id="chatWindowCont">');
+				include_once('Chats/siteChat.html');
+			viewHTML('</div>');
+			viewHTML('<div id="chatWindowField">');
+				viewHTML('<form id="chatWindowForum" action="">');
+					viewHTML('<textarea id="chatWindowTextarea"></textarea>');
+				viewHTML('</form>');
+			viewHTML('</div>');
 		viewHTML('</div>');
 	}
 }

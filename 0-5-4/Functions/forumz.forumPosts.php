@@ -79,7 +79,7 @@ function addForumPost() {
 	$result = dbQuery($sql) or die ("Query failed: addForumPost-updateThreadLatestChange");
 	
 	// Add Post
-	$postID = getNumForumPosts();
+	$postID = getNumForumPosts()+1;
 	$sql = "INSERT INTO forumPosts (id, threadID, forumID, subject, post, author, postDate, postTime) VALUES ('$postID', '$threadID', '$forumID', '$threadSubject', '$threadPost', '$threadAuthor', '$threadDate', '$threadTime')";
 	$result = dbQuery($sql) or die ("Query failed: addForumPost-addPost");
 	
