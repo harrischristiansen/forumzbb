@@ -160,6 +160,7 @@ function registerUser() {
 				$emailMsg = "Welcome To $siteName! <br><br> An account has been created for you: <br><b>Website: </b>$siteAddress <br><b>Username: </b>$user <br><b>Password: </b>$pass";
 				if($siteSettings['verifyRegisterEmail']) {
 					$emailMsg .= '<br><br><b style="color: red;">NOTICE: </b>You must confirm your account before you may login:<br><a href="http://'.$siteAddress.'/confirmAccount/'.$actID.'/'.md5($pass).'">http://'.$siteAddress.'/confirmAccount/'.$actID.'/'.md5($pass).'</a>';
+					addFailureNotice("You must confirm your account before you may login. An activation link has been sent to your email.");
 				}
 				$emailSubject = 'Account Created - '.$user;
 				sendEmail($email, $emailSubject, $emailMsg);
