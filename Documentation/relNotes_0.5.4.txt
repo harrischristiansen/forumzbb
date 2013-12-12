@@ -28,6 +28,4 @@ Completed:
 -Internal Messaging System
 -Change Email - Send email to new address and only change once confirmed by new address
 -Spam Protection
-
-To-Do:
--Dynamically Load Page Names (Forum Thread's)
+-Dynamic Forum Page Titles

@@ -79,14 +79,32 @@ Version 0.5.3:
 -Pulls Version # From SiteSettings and loads folder for that version
 
 Version 0.5.4:
--Security Enhancements
 -Account Creation Validation
--Bot Checking
--Spam Protection
--Check for clean mysql inputs
 -Numerous failed logins locks account and sends activation email to account owner
--Code Cleanup
--BB Code Posts
+-Clean Input Function
+-Site BB Code
+-CP Redesign
+-Use BB Code in site settings
+-Admin Panel Version Selector
+-Added (->) Seperator To Breadcrumbs
+-Forgot Password - Reset
+-Permissions System converted to serialized array
+-NavBar loads based on permissions
+-Activate Account by actID not username
+-Site Signup System
+	-Send Out Email when you create a site
+-Blog System Updates
+	-Edit Comments
+	-Delete Comments
+-Basic Forum System
+	-Create Threads, Posts
+	-Edit Posts
+	-Delete Posts
+	-Delete Threads
+-Internal Messaging System
+-Change Email - Send email to new address and only change once confirmed by new address
+-Spam Protection
+-Dynamic Forum Page Titles
 
 Version 0.5.5:
 -Security Enhancements
@@ -103,6 +121,8 @@ Version 0.5.5:
 	-Editable Pages
 
 Future:
+-Spam Protection
+	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam makers)
 -Forum
 	-Pagination - max threads per forum page, posts per thread page, etc
 	-Move Threads

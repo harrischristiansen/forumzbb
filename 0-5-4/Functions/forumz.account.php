@@ -129,7 +129,7 @@ function logoutUser() {
 }
 function registerUser() {
 	global $pagePost, $siteSettings;
-	$user=cleanInput($pagePost['username']);
+	$user=ucwords(cleanInput($pagePost['username']));
 	$pass=cleanInput($pagePost['password']);
 	$passCon=cleanInput($pagePost['passwordCon']);
 	$email=cleanInput($pagePost['email']);

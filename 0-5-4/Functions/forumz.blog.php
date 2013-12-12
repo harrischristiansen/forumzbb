@@ -72,8 +72,8 @@ function getBlogEntry($entryID) {
 function viewBlogPageBlogEntry() {
 	global $pageID, $userData, $siteSettings;
 	$blogEntry = getBlogEntry($pageID);
-	$canEdit=$userData['permissions']['editBlogEntries']; // User Has Admin Access
-	$canDelete=$userData['permissions']['deleteBlogEntries']; // User Has Admin Access
+	$canEdit=userCan('editBlogEntries');
+	$canDelete=userCan('deleteBlogEntries');
 	if($userData['actID']==$blogEntry['Author']) { $canEdit=true;$canDelete=true; } // User Posted Entry
 	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
 	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }

@@ -118,9 +118,6 @@ function loadPage() {
 				}
 			}
 		}
-		if($pageData['pageName']!="") {
-			$specPageTitle=$pageData['pageName'];
-		}
 		
 		// Page
 		if($pageData['requireLogin']=="true"&&!$userData['loggedIn']) {
@@ -143,6 +140,14 @@ function loadPage() {
 			if($pageData['functionCall']!="") {
 				$pageData['functionCall']();
 			}
+		}
+		
+		// Page Name
+		if($pageData['pageName']!="") {
+			$pageTitle = $pageData['pageName'];
+			$pageTitle = str_replace("threadTitle",getForumTitle(getForumIDOfThread($pageID)).' - '.getThreadTitle($pageID),$pageTitle);
+			$pageTitle = str_replace("forumTitle",getForumTitle($pageID),$pageTitle);
+			$specPageTitle=$pageTitle;
 		}
 	}
 	
