@@ -25,6 +25,10 @@ function displayWebsite() {
 	global $pageName, $pageID, $pagePost, $siteSettings, $userData;
 	loadSettings();
 	if(!isset($userData['username'])) { // Logged Out, Anonymous Act
+		if(ipFlaggedAsSpam(returnRemoteIP())) {
+			echo "We are sorry, but your IP is flagged as spam. You may not visit the website";
+			return false;
+		}
 		setAccountToDefault();
 	}
 	setUserPrivileges(); // Updates Permissions On Each Page Load

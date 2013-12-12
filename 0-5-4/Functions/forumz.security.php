@@ -59,4 +59,19 @@ function userCan($permission) {
 	}
 	return false;
 }
+
+function ipFlaggedAsSpam($ip){
+	$failCount=0;
+	$dnsbl_lookup=array("dnsbl-1.uceprotect.net","dnsbl-2.uceprotect.net","dnsbl-3.uceprotect.net","dnsbl.dronebl.org","dnsbl.sorbs.net","zen.spamhaus.org");
+	$reverse_ip=implode(".",array_reverse(explode(".",$ip)));
+	foreach($dnsbl_lookup as $host){
+		if(checkdnsrr($reverse_ip.".".$host.".","A")){
+			$failCount++;
+		}
+	}
+	if($failCount>2) {
+		return true;
+	}
+	return false;
+}
 ?>
