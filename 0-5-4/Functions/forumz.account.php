@@ -267,6 +267,31 @@ function resetPassword() {
 	}
 }
 
+//// Change Email ////
+function changeEmail() {
+	global $pageID,$userData;
+	$changeData = str_replace("-at-","@",$pageID);
+	$changeData = str_replace("-dot-",".",$changeData);
+	$changeData = explode('-',$changeData);
+	$userID = $changeData[0];
+	$userPass = $changeData[1];
+	$emailAdr = $changeData[2];
+	$emailEnc = $changeData[3];
+	
+	$sql = "SELECT * FROM accounts WHERE actID='$userID' AND password='$userPass'";
+	$result = dbQuery($sql) or die ("Query failed: changeEmail-selectAccount");
+	if(mysqli_num_rows($result)==0) {
+		addFailureNotice("Invalid Target Account");
+	} elseif(md5($emailAdr)!=$emailEnc) {
+		addFailureNotice("Invalid Target Address");
+	} else {
+		$sql = "UPDATE accounts SET email='$emailAdr' WHERE actID='$userID'";
+		$result = dbQuery($sql) or die ("Query failed: changeEmail");
+		$userData['email']=$emailAdr;
+		addSuccessNotice("Email Address Changed");
+	}
+}
+
 //// Get Ranks ////
 
 function getUserRank($actID) {

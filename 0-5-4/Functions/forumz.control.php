@@ -75,9 +75,12 @@ function updateAccountProfile() {
 	$user = returnUsername();
 	$actPass = returnUserPass();
 	$newEmail = cleanInput($pagePost['newEmail']);
+	$newEmailToSend = str_replace("@","-at-",$newEmail);
+	$newEmailToSend = str_replace(".","-dot-",$newEmailToSend);
 	$newEmailMD5 = md5($newEmail);
+	$activationLink = getSiteAddress().'/changeEmail/'.$accountID.'-'.$actPass.'-'.$newEmailToSend.'-'.$newEmailMD5.'/';
 	if($newEmail!=returnUserEmail()) {
-		$emailMsg = 'The contact information for account "'.$user.'" was recently updated to this email address.<br>Please confirm this address using the following link<br><br>';
+		$emailMsg = 'The contact information for account "'.$user.'" was recently updated to this email address.<br>Please confirm this address using the following link<br><br><a href="http://'.$activationLink.'">'.$activationLink.'</a>';
 		$emailSubject = 'Account Contact Info Updated - '.$user;
 		sendEmail($newEmail, $emailSubject, $emailMsg);
 		addFailureNotice("A contact info change confirmation has been emailed to your new address. Please confirm this change using the emailed link.");

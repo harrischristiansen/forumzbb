@@ -26,9 +26,9 @@ Completed:
 	-Delete Posts
 	-Delete Threads
 -Internal Messaging System
+-Change Email - Send email to new address and only change once confirmed by new address
 
 To-Do:
 -Spam Protection
 	-Registrations
--Change Email - Send email to new address and only change once confirmed by new address
 -Dynamically Load Page Names (Forum Thread's)
