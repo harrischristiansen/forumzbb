@@ -245,7 +245,7 @@ function updateRank() {
 		addSuccessNotice("Success: Rank Updated");
 	} else {
 		$newPermissionsSave = serialize($newPermissions);
-		$sql = "UPDATE ranks SET permissions='$newPermissionsSave' WHERE rankID='$tarRank'";
+		$sql = "UPDATE ranks SET rankName='$rankName', permissions='$newPermissionsSave' WHERE rankID='$tarRank'";
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		
 		addSuccessNotice("Success: Rank Updated");
