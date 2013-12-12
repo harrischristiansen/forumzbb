@@ -1,0 +1,19 @@
+Forumz Version 0.5.5
+Harris Christiansen
+-Due January 20, 2014
+
+Completed:
+
+To-Do:
+-Security Enhancements
+-Bot Checking
+-Spam Protection
+-Code Cleanup
+-New Theme
+	-Robotics Site Theme
+	-Include All Associated Settings (facebookLink, youtubeLink, metaData, googleAnalytics, etc)
+-Mobile Theme
+	-Robotics Site Theme
+-Theme Changer
+-Pages System
+	-Editable Pages
