@@ -1,12 +1,14 @@
 Forumz Release Notes
 Harris Christiansen
-Current Stable Released Version: 0.5.3
+Current Stable Released Version: 0.5.4
 
 Features:
 -Account System with ranks and privileges
 -Customizable Theme
--Blog System with comments
+-Blog System
+-Forum System
 -Control Panel
 -Members List
 -Notification System
--Self Hosted
+-Website Chat System
+-Hastle Free Setup
