@@ -5,6 +5,7 @@
 global $userData, $siteSettings;
 themeInclude('siteNotices');
 defaultsInclude('navBar');
+defaultsInclude('chatSystem');
 //// HTML Head ////
 ?>
 <!DOCTYPE HTML>
@@ -39,8 +40,9 @@ defaultsInclude('navBar');
 
 <div id="navBar">
 	<ul id="navMenu">
-		<? if(isLoggedIn()) { ?>
-		<? } ?>
+		<? if(userCan('useChat')) { ?>
+		<div id="menuBarChatItem"></div>
+		<? viewChatWindow(); } ?>
 		<? displayNavBar(); ?>
 	</ul>
 </div>
