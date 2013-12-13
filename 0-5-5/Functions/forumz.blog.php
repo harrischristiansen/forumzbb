@@ -17,11 +17,9 @@ function viewBlogEntries() {
 
 	while($entry = mysqli_fetch_array($blogEntries)) {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
-		$postDateOrTime=$entry['AuthorDate'];
-		if($postDateOrTime==returnDateOfficial()) {
-			$postDateOrTime=$entry['AuthorTime'];
-		}
-		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDateOrTime,$entry['Title'],$entry['Post'],$blogLink);
+		$postDate=$entry['AuthorDate'];
+		$postDate = date("M j", strtotime($postDate));
+		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDate,$entry['Title'],$entry['Post'],$blogLink);
 	}
 	if(mysqli_num_rows($blogEntries)==0) {
 		viewFailure("No Entries Were Found On This Page");
@@ -72,12 +70,13 @@ function getBlogEntry($entryID) {
 function viewBlogPageBlogEntry() {
 	global $pageID, $userData, $siteSettings;
 	$blogEntry = getBlogEntry($pageID);
-	$canEdit=userCan('editBlogEntries');
-	$canDelete=userCan('deleteBlogEntries');
+	$canEdit=$userData['permissions']['editBlogEntries']; // User Has Admin Access
+	$canDelete=$userData['permissions']['deleteBlogEntries']; // User Has Admin Access
 	if($userData['actID']==$blogEntry['Author']) { $canEdit=true;$canDelete=true; } // User Posted Entry
 	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
 	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }
-	displayBlogEntry(getMemberName($blogEntry['Author']),$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$editEntryLink,$deleteEntryLink);
+	$postDateShort = $postDate = date("M j", strtotime($blogEntry['AuthorDate']));
+	displayBlogEntry(getMemberName($blogEntry['Author']),$postDateShort,$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$editEntryLink,$deleteEntryLink);
 }
 function checkBlogEntryExists() { // Used in viewBlog.php
 	global $pageID;

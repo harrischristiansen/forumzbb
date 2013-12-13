@@ -160,7 +160,7 @@ function loadPage() {
 	else {
 		if($userData['loggedIn']||!$siteSettings['reqLogin']) {
 			$pageID=1; // To Display Correct Home Page
-			display('viewSiteHome');
+			display('viewHome');
 		} else {
 			display('viewBlank');
 		}

@@ -64,12 +64,16 @@ hr {
 	display: inline;
 }
 
-.navItemLink {
+#navMenu {
+	margin: 0px;
+	padding: 0px;
+}
+.navItem, .navItemRight {
 	border-right: 2px groove #FFFFFF;
 	padding-right: 3px;
+	display: inline;
 }
-
-.navItemLink:last-child {
+.navItem:last-child, .navItemRight:last-child {
 	border-right: none;
 }
 
@@ -290,6 +294,11 @@ hr {
 .editCommentDiv textarea {
 	width: 96%;
 	height: 100px;
+}
+
+.centerTable {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* ---------- Table System ---------- */

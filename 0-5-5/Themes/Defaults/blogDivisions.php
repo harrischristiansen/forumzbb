@@ -22,7 +22,7 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 	viewHTML('</div>');
 }
 
-function displayBlogEntry($authorName,$postDate,$postTime,$entryTitle,$entry,$editEntryLink,$deleteEntryLink) {
+function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryTitle,$entry,$editEntryLink,$deleteEntryLink) {
 	viewHTML('<div class="FullWidthPostHead">'); // Blog Entry Head
 		viewHTML('<div class="floatLeft">');
 			viewHTML("By: ".$authorName);

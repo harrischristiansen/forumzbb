@@ -15,7 +15,7 @@ function changePasswordForm($siteURL) {
 	viewHTML('</form>');
 }
 
-function editProfileForm($currentEmail,$siteURL) {
+function editProfileForm($siteURL,$currentEmail) {
 	viewHTML('<form action="'.$siteURL.'controlPanel/editProfile/" method="POST">');
 	viewHTML('Email: <input type="text" name="newEmail" value="'.$currentEmail.'"><br>');
 	viewHTML('<input type="submit" name="cpFormSubmitted" value="Change Profile">');
@@ -23,13 +23,17 @@ function editProfileForm($currentEmail,$siteURL) {
 }
 
 function changePreferencesForm($siteURL) {
-	viewHTML('Edit Preferences Form');
+	viewHTML('<form action="'.$siteURL.'controlPanel/changePreferences/" method="POST">');
+	viewHTML('Site Theme: <select name="siteTheme">'.getUserThemeOptions().'</select><br>');
+	viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Preferences">');
+	viewHTML('</form>');
 }
 
 function editSiteSettingsForm($siteURL,$siteName,$siteMotd,$siteSlogan,$siteDisabled,$reqLogin,$numBlogEntriesPerPage) {
 	viewHTML('<form action="'.$siteURL.'controlPanel/editSiteSettings/" method="POST">');
 	viewHTML('Site Name: <input type="text" name="siteName" value="'.$siteName.'"><br>');
 	viewHTML('Site Version: <select name="siteVersion">'.getSiteVersionOptions().'</select><br>');
+	viewHTML('Default Theme: <select name="siteTheme">'.getSiteThemeOptions().'</select><br>');
 	viewHTML('Site Banner: <input type="text" name="siteMotd" value="'.$siteMotd.'"><br>');
 	viewHTML('Site Slogan: <input type="text" name="siteSlogan" value="'.$siteSlogan.'"><br>');
 	viewHTML('Site Disabled (Enter Message To Disable): <input type="text" name="siteDisabled" value="'.$siteDisabled.'"><br>');

@@ -107,10 +107,6 @@ Version 0.5.4:
 -Dynamic Forum Page Titles
 
 Version 0.5.5:
--Security Enhancements
--Bot Checking
--Spam Protection
--Code Cleanup
 -New Theme
 	-Robotics Site Theme
 	-Include All Associated Settings (facebookLink, youtubeLink, metaData, googleAnalytics, etc)
@@ -121,12 +117,17 @@ Version 0.5.5:
 	-Editable Pages
 
 Future:
+-Security Enhancements
+-Bot Checking
 -Spam Protection
 	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam makers)
+-Code Cleanup
 -Forum
 	-Pagination - max threads per forum page, posts per thread page, etc
 	-Move Threads
 	-Create Categories/Forums
+-Control Panel
+	-Pagination
 -BB Code Editor
 -Member to Member PM/Chat System
 	-Include Security

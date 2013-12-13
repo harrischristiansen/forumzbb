@@ -120,16 +120,29 @@ function getSiteSlogan() {
 }
 function display($fileName) {
 	global $siteSettings, $userData;
-	// Check userData for a set theme
-	// Else set to default theme
-	$themeToDisp = $siteSettings['defaultTheme'];
-	// If custom theme load from theme
-	// If file not found, load from default
-	require_once($siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php');
+	if($userData['themePref']!="") {
+		$themeToDisp = $userData['themePref'];
+	} else {
+		$themeToDisp = $siteSettings['defaultTheme'];
+	}
+	if((@include_once $siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php') === false) {
+		require_once($siteSettings['siteVersionAddress'].'Themes/SkyBlue/'.$fileName.'.php');
+	}
 }
 function defaultsInclude($fileName) {
 	global $siteSettings;
 	require_once($siteSettings['siteVersionAddress'].'Themes/Defaults/'.$fileName.'.php');
+}
+function themeInclude($fileName) {
+	global $siteSettings, $userData;
+	if($userData['themePref']!="") {
+		$themeToDisp = $userData['themePref'];
+	} else {
+		$themeToDisp = $siteSettings['defaultTheme'];
+	}
+	if((@include_once $siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php') === false) {
+		require_once($siteSettings['siteVersionAddress'].'Themes/Defaults/'.$fileName.'.php');
+	}
 }
 function viewHTML($HTMLtxt) {
 	echo "	".$HTMLtxt."\n";

@@ -31,7 +31,9 @@ defaultsInclude('navBar');
 // Left Side
 viewHTML('<div class="headLeftSide">');
 if($userData['loggedIn']) {
+	viewHTML('<ul id="navMenu">');
 	displayNavBar();
+	viewHTML('</ul>');
 } else {
 	// Login Bar
 	viewHTML('Login: ');
@@ -45,7 +47,9 @@ if($userData['loggedIn']) {
 	// Search Bar
 	viewHTML('<b>Search Here</b>');
 } else {
+	viewHTML('<ul id="navMenu">');
 	displayNavBar();
+	viewHTML('</ul>');
 }
 
 viewHTML('</div><div class="headCenter">');

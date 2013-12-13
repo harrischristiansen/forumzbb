@@ -32,8 +32,9 @@ function displayNavBar() {
 	$result = dbQuery($sql) or die ("Query failed: displayNavBar");
 	while($navItem = mysqli_fetch_array($result)) {
 		$navLink = $siteSettings['siteURLShort'].$navItem['navItemLink']."/";
+		if($navItem['navItemOrder']>=10) { if($rightItem!=true) { viewHTML(''); } $rightItem=true; }
 		if($navItem['reqPermission']==""||userCan($navItem['reqPermission'])) {
-			displayNavItem($navLink,$navItem['navItemName']);
+			displayNavItem($navLink,$navItem['navItemName'],$rightItem);
 		}
 	}
 }

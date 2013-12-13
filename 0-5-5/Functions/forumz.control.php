@@ -22,7 +22,7 @@ function displayCPContent() {
 	
 	// Common Pages
 	if($pageID=="changePassword") { changePasswordForm($siteURL); $pageNotFound=false; }
-	elseif($pageID=="editProfile") { editProfileForm($userData['email'],$siteURL); $pageNotFound=false; }
+	elseif($pageID=="editProfile") { editProfileForm($siteURL,$userData['email']); $pageNotFound=false; }
 	elseif($pageID=="changePreferences") { changePreferencesForm($siteURL); $pageNotFound=false; }
 	
 	// Permission Restricted Pages
@@ -90,17 +90,42 @@ function updateAccountProfile() {
 	addSuccessNotice("Success: Profile Updated");
 }
 
+function updateAccountPreferences() {
+	global $pagePost, $userData;
+	$accountID = returnUserID();
+	$themePref = cleanInput($pagePost['siteTheme']);
+	$sql = "UPDATE accounts SET themePref='$themePref' WHERE actID='$accountID'";
+	$result = dbQuery($sql) or die ("Query failed: updateAccountPreferences");
+	$userData['themePref']=$themePref;
+	addSuccessNotice("Success: Preferences Updated");
+}
+
+function getUserThemeOptions() {
+	global $userData;
+	$sql = "SELECT * FROM themes ORDER BY themeName";
+	$result = dbQuery($sql) or die ("Query failed: getSiteThemeOptions");
+	while($resultArray=mysqli_fetch_array($result)) {
+		if($resultArray['themeAddress']!=$userData['themePref']) {
+			$returnValue=$returnValue.'<option value="'.$resultArray['themeAddress'].'">'.$resultArray['themeName'].'</option>';
+		} else {
+			$returnValue=$returnValue.'<option value="'.$resultArray['themeAddress'].'" selected>'.$resultArray['themeName'].'</option>';
+		}
+	}
+	return $returnValue;
+}
+
 function updateSiteSettings() {
 	global $pagePost;
 	$siteName=cleanInput($pagePost['siteName']);
-	$siteVersion=formatPost($pagePost['siteVersion']);
+	$siteVersion=cleanInput($pagePost['siteVersion']);
+	$siteTheme=cleanInput($pagePost['siteTheme']);
 	$siteMotd=formatPost($pagePost['siteMotd']);
 	$siteSlogan=formatPost($pagePost['siteSlogan']);
 	$siteDisabled=formatPost($pagePost['siteDisabled']);
 	$reqLogin=cleanInput($pagePost['reqLogin']);
 	$numBlogEntriesPerPage=cleanInput($pagePost['numBlogEntriesPerPage']);
 	
-	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
+	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', defaultTheme='$siteTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
 	
 	loadSiteSettings(); // To Refresh Site Settings
@@ -117,6 +142,20 @@ function getSiteVersionOptions() {
 			$returnValue=$returnValue.'<option value="'.$resultArray['siteVersion'].'">'.$resultArray['siteName'].'</option>';
 		} else {
 			$returnValue=$returnValue.'<option value="'.$resultArray['siteVersion'].'" selected>'.$resultArray['siteName'].'</option>';
+		}
+	}
+	return $returnValue;
+}
+
+function getSiteThemeOptions() {
+	global $siteSettings;
+	$sql = "SELECT * FROM themes ORDER BY themeName";
+	$result = dbQuery($sql) or die ("Query failed: getSiteThemeOptions");
+	while($resultArray=mysqli_fetch_array($result)) {
+		if($resultArray['themeAddress']!=$siteSettings['defaultTheme']) {
+			$returnValue=$returnValue.'<option value="'.$resultArray['themeAddress'].'">'.$resultArray['themeName'].'</option>';
+		} else {
+			$returnValue=$returnValue.'<option value="'.$resultArray['themeAddress'].'" selected>'.$resultArray['themeName'].'</option>';
 		}
 	}
 	return $returnValue;

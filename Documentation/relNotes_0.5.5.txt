@@ -3,17 +3,15 @@ Harris Christiansen
 -Due January 20, 2014
 
 Completed:
+-Theme Changer
+	-User Preference
 
 To-Do:
--Security Enhancements
--Bot Checking
--Spam Protection
--Code Cleanup
 -New Theme
 	-Robotics Site Theme
+		-Forums -> Black on white
 	-Include All Associated Settings (facebookLink, youtubeLink, metaData, googleAnalytics, etc)
 -Mobile Theme
 	-Robotics Site Theme
--Theme Changer
 -Pages System
 	-Editable Pages
