@@ -54,6 +54,7 @@ hr {
 	text-align: left;
 	float: left;
 	width: 30%;
+	min-width: 420px;
 	overflow: hidden;
 	padding-left: 10px;
 	height: 25px;

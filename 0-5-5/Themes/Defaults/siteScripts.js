@@ -24,7 +24,7 @@ $(function() {
 	$('#chatWindowTextarea').keyup(function(e) {
         if(e.keyCode == 13) {
             var userMsg = $(this).val();
-			$.post("/Chats/chatSend.php", {text: userMsg});                
+			$.post("/Chats/chatSend.php", {text: userMsg, sessionName: phpSessionName});                
 			$(this).val("");
 			setTimeout(loadSiteChat, 500);
         }

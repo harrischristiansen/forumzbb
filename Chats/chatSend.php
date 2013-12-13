@@ -1,8 +1,9 @@
 <?
-session_name("forumzDev");
+$sessionName = $_POST['sessionName'];
+session_name($sessionName);
 session_start();
 $userData=$_SESSION['userData'];
-if($userData['permissions']['useChat']=="true"){  
+if($userData['permissions']['useChat']=="true"){
     $text = stripslashes(htmlspecialchars($_POST['text']));
     $text = str_replace("\n","",$text);
     $username = $userData['username'];

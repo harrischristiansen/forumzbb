@@ -19,6 +19,7 @@ defaultsInclude('navBar');
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	<!-- Scripts -->
+	<script>var phpSessionName=<? echo session_name(); ?>;</script>
 	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/SkyBlue/themeScripts.js"></script>
 	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Defaults/siteScripts.js"></script>
 	<!-- bValidator -->

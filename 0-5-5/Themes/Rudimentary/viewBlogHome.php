@@ -22,8 +22,7 @@ viewHTML('<div id="leftSite"><div class="panelHead">Blog</div>');
 viewHTML('</div>');
 
 viewHTML('<div id="rightSite">');
-	viewHTML('<div class="panelHead">Recent Mentor Posts</div>');		
-	viewMentorBlogEntries();
+	viewHTML('<div class="panelHead">Something Here</div>');
 viewHTML('</div>');
 
 viewHTML('<div class="clearBoth"></div>');
