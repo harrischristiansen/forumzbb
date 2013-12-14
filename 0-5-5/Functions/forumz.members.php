@@ -30,7 +30,6 @@ function getRankName($rankID) {
 }
 
 function displayMembersList() {
-	global $userData;
 	// Get List Of Members
 	$rowID=1;
 	$activeMembers=getListActiveMembers();

@@ -161,7 +161,7 @@ function loadPage() {
 		display($pageToDisplay);
 	}
 	else {
-		if($userData['loggedIn']||!$siteSettings['reqLogin']) {
+		if(isLoggedIn()||!$siteSettings['reqLogin']) {
 			$pageID=1; // To Display Correct Home Page
 			display('viewHome');
 		} else {

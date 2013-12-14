@@ -21,7 +21,7 @@ function setUserPrivileges() { // Sets a users permissions based on their rank -
 }
 
 function setUserRank() {
-	global $userData, $pageID2, $pagePost, $con;
+	global $userData, $pageID2, $pagePost;
 	$userID=$pageID2;
 	$tarRank=cleanInput($pagePost['newRank']);
 	if(!hasPermissionToEditRank($tarRank)||$tarRank==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
@@ -44,7 +44,6 @@ function getChangeRankList($actID) {
 }
 
 function getChangeRankListOptions($actID) {
-	
 	// Get Users Rank ID
 	$userRank=getUserRank($actID);
 	
@@ -84,14 +83,14 @@ function getHighestRankOrder() {
 }
 function hasPermissionToEditRank($rankID) {
 	global $userData;
-	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&getOrderOfRank($rankID)<$userData['permissions']['rankOrder']) {
+	if(isLoggedIn()&&userCan('editMemberRank')&&getOrderOfRank($rankID)<$userData['permissions']['rankOrder']) {
 		return true;
 	}
 	return false;
 }
 function hasPermissionToEditRankOrder($rankOrder) {
 	global $userData;
-	if($userData['loggedIn']&&$userData['permissions']['editMemberRank']=="true"&&$rankOrder<$userData['permissions']['rankOrder']&&$rankOrder!=0) { // Used For Determining Swaping Ranks
+	if($userData['loggedIn']&&userCan('editMemberRank')&&$rankOrder<$userData['permissions']['rankOrder']&&$rankOrder!=0) { // Used For Determining Swaping Ranks
 		return true;
 	}
 	return false;
