@@ -451,6 +451,16 @@ footer {
 	margin-bottom: 10px;
 }
 
+.editCommentDiv {
+	display: none;
+	text-align: center;
+}
+
+.editCommentDiv textarea {
+	width: 96%;
+	height: 100px;
+}
+
 /* ---------- Table System ---------- */
 
 .FullWidthTable {

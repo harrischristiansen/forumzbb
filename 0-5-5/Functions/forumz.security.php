@@ -5,9 +5,8 @@
 // Account Security Functions
 
 function userIsBanned() {
-	global $userData;
 	$ipAddress=returnRemoteIP();
-	$userActID=$userData['actID'];
+	$userActID=returnUserID();
 	$sql = "SELECT * FROM bannedClients WHERE ipAdr='$ipAddress' OR actID='$userActID'";
 	$result = dbQuery($sql) or die ("Query failed: userIsBanned");
 	if(mysqli_num_rows($result)==0) { // User Not Banned
@@ -24,7 +23,7 @@ function userIsBanned() {
 		} else { // Ban Has Expired
 			$sql = "DELETE FROM bannedClients WHERE ipAdr='$ipAddress' OR actID='$userActID'";
 			$result = dbQuery($sql) or die ("Query failed: userIsBanned - removeBan");
-			addSuccessNotice("Your Suspension Has Expried!");
+			addSuccessNotice("Your Suspension Has Expired!");
 			return false;
 		}
 	}

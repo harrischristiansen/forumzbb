@@ -120,16 +120,18 @@ Future:
 -Security Enhancements
 -Bot Checking
 -Spam Protection
-	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam makers)
+	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
 -Code Cleanup
 -Forum
 	-Pagination - max threads per forum page, posts per thread page, etc
 	-Move Threads
 	-Create Categories/Forums
--Control Panel
+-Members List
 	-Pagination
 -BB Code Editor
 -Member to Member PM/Chat System
 	-Include Security
+	-Wipe site chat each night at midnight?
 -Members Personal Wall for Posting
 -Members Friends+Privacy System
+-Theme Customizer

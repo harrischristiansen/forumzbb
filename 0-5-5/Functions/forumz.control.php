@@ -3,20 +3,20 @@
 // Created 10-10-12
 
 function displayCPNav() {
-	global $siteSettings, $userData;
+	global $siteSettings;
 	displayCPNavItem("Change Password",$siteSettings['siteURLShort']."controlPanel/changePassword/");
 	displayCPNavItem("Edit Profile",$siteSettings['siteURLShort']."controlPanel/editProfile/");
 	displayCPNavItem("Change Preferences",$siteSettings['siteURLShort']."controlPanel/changePreferences/");
-	if($userData['permissions']['editSiteSettings']=="true") {
+	if(userCan('editSiteSettings')) {
 		displayCPNavItem("Edit Site Settings",$siteSettings['siteURLShort']."controlPanel/editSiteSettings/");
 	}
-	if($userData['permissions']['editRanks']=="true") {
+	if(userCan('editRanks')) {
 		displayCPNavItem("Edit Ranks",$siteSettings['siteURLShort']."controlPanel/editRanks/");
 	}
 }
 
 function displayCPContent() {
-	global $pageID, $siteSettings, $pagePost, $userData;
+	global $pageID, $siteSettings, $pagePost;
 	$siteURL=$siteSettings['siteURLShort'];
 	$pageNotFound=true;
 	
@@ -26,7 +26,7 @@ function displayCPContent() {
 	elseif($pageID=="changePreferences") { changePreferencesForm($siteURL); $pageNotFound=false; }
 	
 	// Permission Restricted Pages
-	if($userData['permissions']['editSiteSettings']=="true") {
+	if(userCan('editSiteSettings')) {
 		if($pageID=="editSiteSettings") {
 			global $siteSettings;
 			$pageNotFound=false;
@@ -35,7 +35,7 @@ function displayCPContent() {
 			editSiteSettingsForm($siteURL, $siteSettings['siteName'], reverseFormatPost($siteSettings['siteMotd']), reverseFormatPost($siteSettings['siteSlogan']), reverseFormatPost($siteSettings['disabledMessage']), $reqLoginChecked, $siteSettings['blogEntriesPerPage']);
 		}
 	}
-	if($userData['permissions']['editRanks']=="true") {
+	if(userCan('editRanks')) {
 		if($pageID=="addRank") { editRanksForm($siteURL,"","",""); $pageNotFound=false; }
 		if($pageID=="editRanks"||$pageID=="swapRanks") { editRanksControlPanel(); $pageNotFound=false; }
 	}
@@ -45,10 +45,10 @@ function displayCPContent() {
 }
 
 function updateAccountPassword() {
-	global $userData, $pagePost;
+	global $pagePost;
 	// Get Username From Session, Passwords From Form
-	$username=$userData['username'];
-	$accountID=$userData['actID'];
+	$username=returnUsername();
+	$accountID=returnUserID();
 	$oldPass=$pagePost['oldPass'];
 	$newPass=$pagePost['newPass'];
 	$newPassCon=$pagePost['newPassCon'];
@@ -91,7 +91,7 @@ function updateAccountProfile() {
 }
 
 function updateAccountPreferences() {
-	global $pagePost, $userData;
+	global $pagePost;
 	$accountID = returnUserID();
 	$themePref = cleanInput($pagePost['siteTheme']);
 	$sql = "UPDATE accounts SET themePref='$themePref' WHERE actID='$accountID'";

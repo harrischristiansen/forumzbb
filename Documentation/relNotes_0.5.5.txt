@@ -8,9 +8,11 @@ Completed:
 
 To-Do:
 -New Theme
-	-Robotics Site Theme
-		-Forums -> Black on white
+	-Edit Blog Comments/Forum Posts Fix - check?
+	-Forums -> Black on white
 	-Include All Associated Settings (facebookLink, youtubeLink, metaData, googleAnalytics, etc)
 -Mobile Theme
 -Pages System
 	-Editable Pages
+	
+-Why do emails take so long to send?

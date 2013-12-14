@@ -46,7 +46,7 @@ function isLastBlogPage() {
 
 function getNextPageLink() {
 	global $pageID, $siteSettings;
-	return $siteSettings['siteURLShort']."home/".($pageID+1);
+	return $siteSettings['siteURLShort']."blogHome/".($pageID+1);
 }
 
 function getPreviousPageLink() {
@@ -56,7 +56,7 @@ function getPreviousPageLink() {
 	if($pageID>$lastPage) {
 		$pageID=$lastPage+1;
 	}
-	return $siteSettings['siteURLShort']."home/".($pageID-1);
+	return $siteSettings['siteURLShort']."blogHome/".($pageID-1);
 }
 
 
@@ -68,11 +68,11 @@ function getBlogEntry($entryID) {
 	return $resultArray;
 }
 function viewBlogPageBlogEntry() {
-	global $pageID, $userData, $siteSettings;
+	global $pageID, $siteSettings;
 	$blogEntry = getBlogEntry($pageID);
-	$canEdit=$userData['permissions']['editBlogEntries']; // User Has Admin Access
-	$canDelete=$userData['permissions']['deleteBlogEntries']; // User Has Admin Access
-	if($userData['actID']==$blogEntry['Author']) { $canEdit=true;$canDelete=true; } // User Posted Entry
+	$canEdit=userCan('editBlogEntries');
+	$canDelete=userCan('deleteBlogEntries');
+	if(returnUserID()==$blogEntry['Author']) { $canEdit=true;$canDelete=true; }
 	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
 	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }
 	$postDateShort = $postDate = date("M j", strtotime($blogEntry['AuthorDate']));
@@ -107,7 +107,6 @@ function getBlogComments($blogID) {
 function viewBlogComments() {
 	global $pageID, $siteSettings;
 	$blogComments=getBlogComments($pageID);
-
 	while($comment = mysqli_fetch_array($blogComments)) {
 		$viewEdit = userCan('editBlogComments');
 		$viewDelete = userCan('deleteBlogComments');
@@ -121,17 +120,17 @@ function viewBlogComments() {
 
 //////////// New Blog Entry System //////////
 function addBlogEntry() {
-	global $userData, $pagePost, $pageID, $con;
+	global $pagePost, $pageID;
 	$newEntryTitle=cleanInput($pagePost['blogEntryTitle']);
 	$newEntryText=formatPost($pagePost['blogEntryText']);
-	if($userData['permissions']['postBlogEntries']!="true") {
+	if(!userCan('postBlogEntries')) {
 		addFailureNotice("Permission Denied");
-	} elseif($newEntryTitle==""||$newEntryText=="") {
-		addFailureNotice("Please Type An Entry Before Submitting");
+	} elseif($newEntryTitle==""||$newEntryTitle=="Blog Entry Title"||$newEntryText=="") {
+		addFailureNotice("Please enter a Title and Entry before submitting");
 	} else {
 		$blogID=getNumBlogEntries()+1;
 		$pageID=$blogID; // To Display Blog Once Added
-		$author=$userData['actID'];
+		$author=returnUserID();
 		$date=returnDateOfficial();
 		$time=returnTime();
 		$sql = "INSERT INTO blogs (ID, Title, Author, AuthorDate, AuthorTime, Post) VALUES ('$blogID','$newEntryTitle','$author','$date', '$time', '$newEntryText')";
@@ -142,26 +141,19 @@ function addBlogEntry() {
 
 ////////// Blog Comment Post System //////////
 function addBlogComment() {
-	global $pageID, $userData, $pagePost, $con;
-	if($userData['permissions']['postBlogComments']=="true") {
+	global $pageID, $pagePost;
+	if(userCan('postBlogComments')) {
 		$commentID=numBlogComments()+1;
 		$postClean=formatPost($pagePost['blogCommentText']);
 		$date=returnDateOfficial();
 		$time=returnTime();
-		$userID=$userData['actID'];
+		$userID=returnUserID();
 		$sql = "INSERT INTO blogComments (idNum, blogID, posterID, date, time, comment) VALUES ('$commentID','$pageID','$userID','$date', '$time', '$postClean')";
 		$result = dbQuery($sql) or die ("Query failed: addBlogComment");
 		addSuccessNotice("Comment Added");
 	} else {
 		addFailureNotice("Permission Denied To Add Comment");
 	}
-}
-function canPostBlogComments() {
-	global $userData;
-	if($userData['permissions']['postBlogComments']=="true") {
-		return true;
-	}
-	return false;
 }
 
 ////////// Edit Blog System //////////
@@ -201,9 +193,9 @@ function editBlogComment() {
 	$pageID = getBlogIDOfComment($pageID);
 }
 function getBlogComposeField() {
-	global $pageID, $siteSettings, $userData;
+	global $pageID, $siteSettings;
 	if($pageID!="") { // Updating Entry
-		if(userCan('editBlogEntries')||$userData['actID']==getBlogAuthorID($pageID)) {
+		if(userCan('editBlogEntries')||returnUserID()==getBlogAuthorID($pageID)) {
 			$formLink=$siteSettings['siteURLShort'].'editBlog/'.$pageID;
 			$blogEntry=getBlogEntry($pageID);
 			$currentEntry=reverseFormatPost($blogEntry['Post']);
@@ -217,12 +209,12 @@ function getBlogComposeField() {
 
 ////////// Delete Blog System /////////
 function deleteBlogPost() {
-	global $pageID, $userData;
+	global $pageID;
 	if($pageID=="") {
 		addFailureNotice("Invalid Action");
 		return false;
 	}
-	if($userData['permissions']['deleteBlogEntries']=="true"||$userData['actID']==getBlogAuthorID($pageID)) {
+	if(userCan('deleteBlogEntries')||$userData['actID']==getBlogAuthorID($pageID)) {
 		$newBlogID=-$pageID;
 		$sql = "UPDATE blogs SET ID='$newBlogID' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: deleteBlogPost");

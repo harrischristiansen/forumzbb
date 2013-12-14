@@ -15,7 +15,9 @@ require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumPosts.ph
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumThreads.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.members.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.ranking.php');
-require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references_account.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references_display.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references_site.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.security.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.settings.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.siteNotices.php');
@@ -26,7 +28,8 @@ function displayWebsite() {
 	loadSettings();
 	if(!isset($userData['username'])) { // Logged Out, Anonymous Act
 		if(ipFlaggedAsSpam(returnRemoteIP())) {
-			echo "We are sorry, but your IP is flagged as spam. You may not visit the website";
+			addFailureNotice("We are sorry, but your IP is flagged as spam. You may not visit the website");
+			display('viewBlank');
 			return false;
 		}
 		setAccountToDefault();

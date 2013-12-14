@@ -29,6 +29,20 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
 		viewHTML('<div class="blogCommentAuthor">By: '.$userName.'<br>'.$commentDate.' at '.$commentTime.'</div>');
 		viewHTML('<div class="blogCommentText">'.$comment.'</div>');
 		viewHTML('<div class="clearBoth"></div>');
+		if($viewEdit||$viewDelete) {
+			viewHTML('<br><hr>');
+			if($viewEdit) { viewHTML('<button class="editButton">Edit</button>'); }
+			if($viewDelete) { viewHTML('<a href="'.$deleteLink.'"><button>Delete</button></a>'); }
+		}
+		if($viewEdit) {
+			viewHTML('<div class="editCommentDiv">');
+			viewHTML('<form action="'.$editLink.'" method="POST" class="validateForm">');
+				viewHTML('<textarea name="blogComment" data-bvalidator="required">'.$editText.'</textarea>');
+				viewHTML('<input type="submit" name="editBlogCommentSubmitted" value="Update">');
+			viewHtml('</form>');
+			viewHTML('</div>');
+			
+		}
 	viewHTML('</div>');
 }
 

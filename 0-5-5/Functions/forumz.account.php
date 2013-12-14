@@ -64,7 +64,7 @@ function loginUser() {
 	// Admin Has Not Verified Login
 	elseif($loginStatus==2) { addFailureNotice("Error: An Admin Must Verify Your Account Before You Can Login"); unset($userData); }
 	
-	// Admin Has Not Verified Login
+	// Admin And User Has Not Verified Login
 	elseif($loginStatus==12) { addFailureNotice("Error: You Must Both Verify Your Email And Be Approved By An Admin"); unset($userData); }
 	
 	// Account Banned

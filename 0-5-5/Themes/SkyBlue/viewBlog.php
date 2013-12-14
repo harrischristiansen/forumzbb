@@ -13,7 +13,7 @@ if(checkBlogEntryExists()) {
 	
 	viewHTML('<div id="BlogPageComments">');
 		viewBlogComments();
-		if(canPostBlogComments()) { displayAddCommentField(); }
+		if(userCan('postBlogComments')) { displayAddCommentField(); }
 	viewHTML('</div>');
 }
 
