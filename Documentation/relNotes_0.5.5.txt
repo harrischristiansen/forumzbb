@@ -9,7 +9,6 @@ Completed:
 To-Do:
 -New Theme
 	-Forums -> Black on white
-	-Login Button
 -Mobile Theme
 -Pages System
 	-Editable Pages
@@ -17,3 +16,5 @@ To-Do:
 	-Edit New Site Settings
 
 -Why do emails take so long to send?
+
+-Extra Space on right side of page, items going off right navbar slightly

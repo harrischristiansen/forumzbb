@@ -27,6 +27,7 @@ function loadSiteSettings() {
 	$siteSettings['googleAnalytics'] = $setting['googleAnalytics'];
 	$siteSettings['metaDesc'] = $setting['metaDesc'];
 	$siteSettings['metaKeywords'] = $setting['metaKeywords'];
+	$siteSettings['siteAbout'] = $setting['siteAbout'];
 	if($setting['reqLogin']=="true") {
 		$siteSettings['reqLogin'] = true;
 	} else { $siteSettings['reqLogin'] = false; }

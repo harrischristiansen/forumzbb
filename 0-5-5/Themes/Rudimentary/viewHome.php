@@ -22,10 +22,12 @@ viewHTML('<div id="rightSite">');
 			viewMultiLineLoginField();
 		viewHTML('</div><br>');
 	}
-	viewHTML('<div class="panelHead">About</div>');
-	viewHTML('<div class="siteContPanel whitePanel">');
-		viewHTML('');
-	viewHTML('</div>');
+	if($siteSettings['siteAbout']!="") {
+		viewHTML('<div class="panelHead">About</div>');
+		viewHTML('<div class="siteContPanel whitePanel">');
+			viewHTML($siteSettings['siteAbout']);
+		viewHTML('</div>');
+	}
 viewHTML('</div>');
 
 viewHTML('<div class="clearBoth"></div>');

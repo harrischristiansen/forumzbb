@@ -40,15 +40,18 @@ defaultsInclude('chatSystem');
 </header>
 
 <div id="navBar">
+	<div id="navHandle">Navigation</div>
 	<ul id="navMenu">
-		<? if(userCan('loggedOut')) { ?>
-		<div id="menuBarLoginItem" class="loginWindButton"></div>
-		<? viewLoginWindow(); } ?>
+		<? if(!isLoggedIn()) { ?>
+			<li id="menuBarLoginItem" class="loginWindButton"></li>
+		<? } ?>
 		<? if(userCan('useChat')) { ?>
-		<div id="menuBarChatItem"></div>
-		<? viewChatWindow(); } ?>
+			<li id="menuBarChatItem"></li>
+		<? } ?>
 		<? displayNavBar(); ?>
 	</ul>
+	<? if(!isLoggedIn()) { viewLoginWindow(); } ?>
+	<? if(userCan('useChat')) { viewChatWindow(); } ?>
 </div>
 
 <div class="centerPanel siteContainer">
