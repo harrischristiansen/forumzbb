@@ -36,7 +36,7 @@ function displayMembersList() {
 	
 	// Run While Statement For Each Member
 	while($member = mysqli_fetch_array($activeMembers)) {
-		displayMembersListRow($member['username'], getRankName($member['rankID']), $member['joinDate'], $member['actID'], $rowID, hasPermissionToEditRank($member['rankID']));
+		displayMembersListRow($member['username'], getRankName($member['rankID']), $member['joinDate'], $member['lastLogin'], $member['actID'], $rowID, hasPermissionToEditRank($member['rankID']));
 		$rowID++;
 	}
 }

@@ -91,7 +91,7 @@ function updateAccountProfile() {
 }
 
 function updateAccountPreferences() {
-	global $pagePost;
+	global $pagePost, $userData;
 	$accountID = returnUserID();
 	$themePref = cleanInput($pagePost['siteTheme']);
 	$sql = "UPDATE accounts SET themePref='$themePref' WHERE actID='$accountID'";
