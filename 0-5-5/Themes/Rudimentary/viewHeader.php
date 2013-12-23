@@ -4,6 +4,7 @@
 
 global $userData, $siteSettings;
 themeInclude('siteNotices');
+themeInclude('loginWindow');
 defaultsInclude('navBar');
 defaultsInclude('chatSystem');
 //// HTML Head ////
@@ -40,6 +41,9 @@ defaultsInclude('chatSystem');
 
 <div id="navBar">
 	<ul id="navMenu">
+		<? if(userCan('loggedOut')) { ?>
+		<div id="menuBarLoginItem" class="loginWindButton"></div>
+		<? viewLoginWindow(); } ?>
 		<? if(userCan('useChat')) { ?>
 		<div id="menuBarChatItem"></div>
 		<? viewChatWindow(); } ?>

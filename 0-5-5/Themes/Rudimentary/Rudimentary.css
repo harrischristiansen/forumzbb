@@ -179,6 +179,46 @@ header {
 	background-color: #DDDDDD;
 }
 
+/* ----- Login Button ----- */
+#menuBarLoginItem {
+	width: 32px;
+	height: 32px;
+	margin-top: 2px;
+	margin-left: 10px;
+	background: url(/Resources/images/icons/lockIcon.png)top no-repeat;
+	float: right;
+}
+
+#menuBarLoginItem:hover {
+	background: url(/Resources/images/icons/lockIcon.png)bottom no-repeat;
+}
+
+/* ----- Login Window ----- */
+#loginWindow {
+	display: none;
+	position: fixed;
+	width: 260px;
+	height: 150px;
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	top: 50%;
+	left: 50%;
+	margin-top: -75px;
+	margin-left: -130px;
+	z-index: 3;
+	padding: 20px;
+}
+#backgroundFade {
+	display: none;
+	z-index: 2;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	background-color:rgba(100,100,100,0.55);
+}
+
 /* ---------- Main Site ---------- */
 .siteContainer { min-height: 100%; min-height: calc(100% - 320px); }
 .fullSite {
