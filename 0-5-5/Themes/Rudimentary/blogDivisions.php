@@ -24,7 +24,7 @@ function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryT
 	viewHTML('</div>');
 }
 
-function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
+function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEdit,$viewDelete,$editLink,$deleteLink,$editText) {
 	viewHTML('<div class="siteContPanel whitePanel">');
 		viewHTML('<div class="blogCommentAuthor">By: '.$userName.'<br>'.$commentDate.' at '.$commentTime.'</div>');
 		viewHTML('<div class="blogCommentText">'.$comment.'</div>');
@@ -35,7 +35,7 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment) {
 			if($viewDelete) { viewHTML('<a href="'.$deleteLink.'"><button>Delete</button></a>'); }
 		}
 		if($viewEdit) {
-			viewHTML('<div class="editCommentDiv">');
+			viewHTML('<div class="editCommentDiv"><hr><br>');
 			viewHTML('<form action="'.$editLink.'" method="POST" class="validateForm">');
 				viewHTML('<textarea name="blogComment" data-bvalidator="required">'.$editText.'</textarea>');
 				viewHTML('<input type="submit" name="editBlogCommentSubmitted" value="Update">');

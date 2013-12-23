@@ -1,7 +1,6 @@
 <?php
 // Harris Christiansen
 // Created 6-1-13
-// Updated 6-1-13
 
 // Loads Site Settings from Database
 
@@ -23,6 +22,11 @@ function loadSiteSettings() {
 	$siteSettings['siteSlogan'] = $setting['siteSlogan'];
 	$siteSettings['defaultTheme'] = $setting['defaultTheme'];
 	$siteSettings['blogEntriesPerPage'] = $setting['blogEntriesPerPage'];
+	$siteSettings['facebookLink'] = $setting['facebookLink'];
+	$siteSettings['youtubeLink'] = $setting['youtubeLink'];
+	$siteSettings['googleAnalytics'] = $setting['googleAnalytics'];
+	$siteSettings['metaDesc'] = $setting['metaDesc'];
+	$siteSettings['metaKeywords'] = $setting['metaKeywords'];
 	if($setting['reqLogin']=="true") {
 		$siteSettings['reqLogin'] = true;
 	} else { $siteSettings['reqLogin'] = false; }

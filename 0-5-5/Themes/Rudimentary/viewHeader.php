@@ -13,8 +13,7 @@ defaultsInclude('chatSystem');
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 	<link REL="SHORTCUT ICON" HREF="/Resources/images/f.png">
 	<meta name="viewport" content="width=device-width">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
+	<? displayMetadata(); ?>
 	<title><?php echo getPageTitle(); ?></title>
 	<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Rudimentary/Rudimentary.css" type="text/css">
 	<!-- Jquery imports -->

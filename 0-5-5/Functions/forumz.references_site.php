@@ -52,4 +52,17 @@ function getSiteSlogan() {
 	global $siteSettings;
 	return $siteSettings['siteSlogan'];
 }
+
+function displayMetadata() {
+	global $siteSettings;
+	if($siteSettings['metaDesc']!="") {
+		viewHTML('<meta name="description" content="'.$siteSettings['metaDesc'].'">');
+	}
+	if($siteSettings['metaKeywords']!="") {
+		viewHTML('<meta name="keywords" content="'.$siteSettings['metaKeywords'].'">');
+	}
+	if($siteSettings['googleAnalytics']!="") {
+		viewHTML($siteSettings['googleAnalytics']);
+	}
+}
 ?>
