@@ -18,8 +18,8 @@ global $siteSettings;
 </div>
 
 <div id="blackBar">
-	<a href="<? echo $siteSettings['youtubeLink']; ?>" class="noSelect youTubeLink"></a>
-	<a href="<? echo $siteSettings['facebookLink']; ?>" class="noSelect facebookLink" target="_blank"></a>
+	<? if($siteSettings['youtubeLink']!="") { ?><a href="<? echo $siteSettings['youtubeLink']; ?>" class="noSelect youTubeLink" target="_blank"></a> <? } ?>
+	<? if($siteSettings['facebookLink']!="") { ?><a href="<? echo $siteSettings['facebookLink']; ?>" class="noSelect facebookLink" target="_blank"></a> <? } ?>
 	<div class="copyright"><? viewHTML(getSiteName()." | ".getSiteSlogan().' | Powered By <a href="http://www.forumzbb.com/" target="_blank">ForumzBB</a>'); ?></div>
 </div>
 </footer>
