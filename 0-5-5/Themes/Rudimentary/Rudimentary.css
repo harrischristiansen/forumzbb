@@ -11,6 +11,7 @@ html, body {
     font-size: 14px;
     margin: 0px;
     height: 100%;
+    padding: 0px;
 }
 
 a { text-decoration: none; color: #777777; }
@@ -45,9 +46,10 @@ header {
 	margin-right: auto;
 	padding-top: 6px;
 	padding-bottom: 4px;
+	overflow: hidden;
 }
 #siteLogo img {
-	height: 85px;
+	height: 80px;
 }
 #guestInfo {
 	float: right;
@@ -72,11 +74,10 @@ header {
 #navMenu {
 	width: 100%;
 	max-width: 1280px;
+	padding-left: 0px;
 	margin-left: auto;
 	margin-right: auto;
 	overflow: hidden;
-	padding-left: 30px;
-	padding-right: 30px;
 }
 #navMenu li {
 	display: inline-block;
@@ -120,38 +121,12 @@ header {
 	display: none;
 }
 
-@media only screen and (max-width : 480px) {
-	#navHandle {
-		display: block;
-		width: 100%;
-		line-height: 35px;
-		font-size: 14px;
-		padding-left: 10px;
-		color: #FFFFFF;
-		height: 35px;
-		position: relative;
-		border-bottom: 1px solid #000000;
-	}
-	#navHandle:after {
-        content:"";  
-        background: url('/Resources/images/icons/navMenuIcon.png') no-repeat;
-        background-size: cover;
-        width: 28px;
-        height: 28px;  
-        display: inline-block;  
-        position: absolute;  
-        right: 15px;  
-        top: 4px;  
-    }
-    #navHandle:hover {
-		background-color: #084763;
-    }
+@media only screen and (max-width : 640px) {
 	#navBar {
 		height: auto;
 		margin-top: 20px;
 	}
 	#navMenu {
-		display: none;
 		width: 100%;
 		height: auto;
 		padding: 0px;
@@ -186,6 +161,36 @@ header {
 	.navItem :last-of-type {
 		border-right: 1px solid #000000;
 	}
+}
+@media only screen and (max-width : 480px) {
+	#navHandle {
+		display: block;
+		width: 100%;
+		line-height: 35px;
+		font-size: 14px;
+		text-indent: 20px;
+		color: #FFFFFF;
+		height: 35px;
+		position: relative;
+		border-bottom: 1px solid #000000;
+	}
+	#navHandle:after {
+        content:"";  
+        background: url('/Resources/images/icons/navMenuIcon.png') no-repeat;
+        background-size: cover;
+        width: 28px;
+        height: 28px;  
+        display: inline-block;  
+        position: absolute;  
+        right: 15px;  
+        top: 4px;  
+    }
+    #navHandle:hover {
+		background-color: #10698f;
+    }
+    #navMenu {
+		display: none;
+    }
 }
 
 /* ----- Chat Button ----- */
@@ -329,6 +334,13 @@ header {
 #rightSite .siteContPanel { margin-left: 10px; margin-right: 4px; }
 .fullSite .siteContPanel { width: calc(100% - 20px); margin-left: 4px; margin-right: 4px; }
 
+@media only screen and (max-width : 640px) {
+	#leftSite { width: 100%; float: none; }
+	#rightSite { width: 100%; float: none; }
+	#leftSite .siteContPanel { width: calc(100% - 20px); margin-left: 4px; margin-right: 4px; }
+	#rightSite .siteContPanel { width: calc(100% - 20px); margin-left: 4px; margin-right: 4px; }
+}
+
 .whitePanel { background-color: #FFFFFF; }
 .greenPanel { background-color: #009933; color: #FFFFFF; }
 .redPanel { background-color: #CC0000; color: #FFFFFF; }
@@ -432,6 +444,7 @@ header {
 	height: 40px;
 	line-height: 38px;
 	color: #000000;
+	overflow: hidden;
 }
 .blogAuthor {
 	float: right;
@@ -520,12 +533,27 @@ footer {
 }
 .copyright {
 	float: right;
+	text-align: right;
+	width: 60%;
+	width: calc(100% - 108px);
 	padding-right: 8px;
 	padding-top: 20px;
 	color: #EEEEEE;
 }
 .copyright a { color: #CCCCCC; }
 .copyright a:hover { text-decoration: underline; }
+
+@media only screen and (max-width : 640px) {
+	.copyright {
+		padding-top: 14px;
+	}
+}
+
+@media only screen and (max-width : 420px) {
+	.copyright {
+		padding-top: 6px;
+	}
+}
 
 
 /* ---------- Forumz - Sky Blue ---------- */

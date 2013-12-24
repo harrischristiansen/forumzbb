@@ -15,6 +15,6 @@ To-Do:
 -Control Panel
 	-Edit New Site Settings
 
+Issues:
 -Why do emails take so long to send?
-
--Extra Space on right side of page, items going off right navbar slightly
+-Put space on each side of menubar (med size)
