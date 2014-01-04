@@ -1,17 +1,16 @@
 Forumz Version 0.5.5
 Harris Christiansen
--Due January 20, 2014
+-Due January 12, 2014
 
 Completed:
 -Theme Changer
 	-User Preference
+-Permissions System
 
 To-Do:
 -New Theme
 	-Forums -> Black on white
 -Mobile Theme
--Pages System
-	-Editable Pages
 -Control Panel
 	-Edit New Site Settings
 

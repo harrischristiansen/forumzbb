@@ -12,7 +12,7 @@ defaultsInclude('chatSystem');
 <!DOCTYPE HTML>
 <html><head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-	<link REL="SHORTCUT ICON" HREF="/Resources/images/f.png">
+	<link REL="SHORTCUT ICON" HREF="/Resources/siteImages/f.png">
 	<meta name="viewport" content="width=device-width">
 	<? displayMetadata(); ?>
 	<title><?php echo getPageTitle(); ?></title>

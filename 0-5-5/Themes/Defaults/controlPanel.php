@@ -60,35 +60,24 @@ function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 		viewHTML('Add Rank:<br>');
 	}
 		viewHTML('Rank Name: <input type="text" name="rankName" value="'.$rankName.'"><br>');
-		viewHTML('<br><u>Admin:</u><br>');
-		viewHTML('Edit Site Settings: <input type="checkbox" name="editSiteSettings" value="true" '.$settingChecked['editSiteSettings'].'><br>');
-		viewHTML('Edit Members Rank: <input type="checkbox" name="editMemberRank" value="true" '.$settingChecked['editMemberRank'].'><br>');
-		viewHTML('Edit Ranks: <input type="checkbox" name="editRanks" value="true" '.$settingChecked['editRanks'].'><br>');
-		viewHTML('View Members List: <input type="checkbox" name="viewMembersList" value="true" '.$settingChecked['viewMembersList'].'><br>');
-		viewHTML('<br><u>Blog:</u><br>');
-		viewHTML('Post Blog Entries: <input type="checkbox" name="postBlogEntries" value="true" '.$settingChecked['postBlogEntries'].'><br>');
-		viewHTML('Post Blog Comments: <input type="checkbox" name="postBlogComments" value="true" '.$settingChecked['postBlogComments'].'><br>');
-		viewHTML('Edit Blog Entries: <input type="checkbox" name="editBlogEntries" value="true" '.$settingChecked['editBlogEntries'].'><br>');
-		viewHTML('Delete Blog Entries: <input type="checkbox" name="deleteBlogEntries" value="true" '.$settingChecked['deleteBlogEntries'].'><br>');
-		viewHTML('Edit Blog Comments: <input type="checkbox" name="editBlogComments" value="true" '.$settingChecked['editBlogComments'].'><br>');
-		viewHTML('Delete Blog Comments: <input type="checkbox" name="deleteBlogComments" value="true" '.$settingChecked['deleteBlogComments'].'><br>');
-		viewHTML('<br><u>Forums:</u><br>');
-		viewHTML('View Forum: <input type="checkbox" name="viewForum" value="true" '.$settingChecked['viewForum'].'><br>');
-		viewHTML('Create Forum Threads: <input type="checkbox" name="createForumThreads" value="true" '.$settingChecked['createForumThreads'].'><br>');
-		viewHTML('Create Forum Posts: <input type="checkbox" name="createForumPosts" value="true" '.$settingChecked['createForumPosts'].'><br>');
-		viewHTML('Edit Forum Posts: <input type="checkbox" name="editForumPosts" value="true" '.$settingChecked['editForumPosts'].'><br>');
-		viewHTML('Delete Forum Posts: <input type="checkbox" name="deleteForumPosts" value="true" '.$settingChecked['deleteForumPosts'].'><br>');
-		viewHTML('Manage Forums: <input type="checkbox" name="manageForums" value="true" '.$settingChecked['manageForums'].'><br>');
-		viewHTML('<br><u>Chat:</u><br>');
-		viewHTML('Use Chat System: <input type="checkbox" name="useChat" value="true" '.$settingChecked['useChat'].'><br>');
-		viewHTML('<br>');
-		if($linkID!="") {
-			viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Rank">');
-		} else {
-			viewHTML('<input type="submit" name="cpFormSubmitted" value="Add Rank">');
+		
+		
+	$permissionsTable = getPermissionsTable();
+	$currentCat = "";
+	while($permission = mysqli_fetch_array($permissionsTable)) {
+		if($currentCat!=$permission['category']) {
+			viewHTML('<br><u>'.$permission['category'].'</u><br>');
+			$currentCat=$permission['category'];
 		}
-		viewHTML('</form>');
-	
+		viewHTML($permission['itemDesc'].': <input type="checkbox" name="'.$permission['internalName'].'" value="true" '.$settingChecked[$permission['internalName']].'><br>');
+	}
+	viewHTML('<br>');
+	if($linkID!="") {
+		viewHTML('<input type="submit" name="cpFormSubmitted" value="Update Rank">');
+	} else {
+		viewHTML('<input type="submit" name="cpFormSubmitted" value="Add Rank">');
+	}
+	viewHTML('</form>');
 	viewHTML('</div>');
 }
 

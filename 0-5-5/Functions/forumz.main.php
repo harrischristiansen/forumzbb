@@ -14,6 +14,7 @@ require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forums.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumPosts.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.forumThreads.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.members.php');
+require_once($siteSettings['siteVersionAddress'].'Functions/forumz.permissions.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.ranking.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references_account.php');
 require_once($siteSettings['siteVersionAddress'].'Functions/forumz.references_display.php');
