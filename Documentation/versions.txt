@@ -138,6 +138,7 @@ Version 0.5.7: - Due Feb 16th
 
 Version 0.6.0: - First Public Release, no activation code - Due by March 1st
 -Code Cleanup
+-Streamlined sign up (new site design?)
 
 
 

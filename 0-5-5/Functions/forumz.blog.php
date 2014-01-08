@@ -18,7 +18,7 @@ function viewBlogEntries() {
 	while($entry = mysqli_fetch_array($blogEntries)) {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
 		$postDate=$entry['AuthorDate'];
-		$postDate = date("M j", strtotime($postDate));
+		$postDate = date("M\\<\\b\\r\\>j", strtotime($postDate));
 		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDate,$entry['Title'],$entry['Post'],$blogLink);
 	}
 	if(mysqli_num_rows($blogEntries)==0) {
@@ -75,7 +75,7 @@ function viewBlogPageBlogEntry() {
 	if(returnUserID()==$blogEntry['Author']) { $canEdit=true;$canDelete=true; }
 	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
 	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }
-	$postDateShort = $postDate = date("M j", strtotime($blogEntry['AuthorDate']));
+	$postDateShort = date("M\\<\\b\\r\\>j", strtotime($blogEntry['AuthorDate']));
 	displayBlogEntry(getMemberName($blogEntry['Author']),$postDateShort,$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$editEntryLink,$deleteEntryLink);
 }
 function checkBlogEntryExists() { // Used in viewBlog.php
