@@ -6,18 +6,20 @@ Completed:
 -Theme Changer
 	-User Preference
 -Permissions System
+-Control Panel
+	-Edit New Site Settings
 
 To-Do:
 -New Theme
 	-Forums -> Black on white
--Control Panel
-	-Edit New Site Settings
 -File Upload
 	-Media in Post management
--Update latest forum post upon deletes
+-BB Code Editor - plugin
+-Update latest forum post upon delete
 
 Issues:
 -Why do emails take so long to send?
 -Put space on each side of menubar (med size)
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
 -Make mail RFC 5322 compliant
+-Control Panel facebookLink, youtubeLink, and googleAnalytics escaping important chars

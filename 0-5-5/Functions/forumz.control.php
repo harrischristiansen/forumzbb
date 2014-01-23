@@ -31,8 +31,10 @@ function displayCPContent() {
 			global $siteSettings;
 			$pageNotFound=false;
 			if($siteSettings['reqLogin']) { $reqLoginChecked="checked"; }
-			else { $reqLoginChecked=""; }
-			editSiteSettingsForm($siteURL, $siteSettings['siteName'], reverseFormatPost($siteSettings['siteMotd']), reverseFormatPost($siteSettings['siteSlogan']), reverseFormatPost($siteSettings['disabledMessage']), $reqLoginChecked, $siteSettings['blogEntriesPerPage']);
+			if($siteSettings['verifyRegisterEmail']) { $verifyRegisterEmailChecked="checked"; }
+			if($siteSettings['verifyRegisterAdmin']) { $verifyRegisterAdminChecked="checked"; }
+			if($siteSettings['htmlAllowed']) { $htmlAllowedChecked="checked"; }
+			editSiteSettingsForm($siteURL, $siteSettings['siteName'], reverseFormatPost($siteSettings['siteMotd']), reverseFormatPost($siteSettings['siteSlogan']), reverseFormatPost($siteSettings['disabledMessage']), $reqLoginChecked, $verifyRegisterEmailChecked, $verifyRegisterAdminChecked, $siteSettings['blogEntriesPerPage'], $htmlAllowedChecked, $siteSettings['facebookLink'], $siteSettings['youtubeLink'], $siteSettings['googleAnalytics'], $siteSettings['metaDesc'], $siteSettings['metaKeywords'], $siteSettings['siteAbout']);
 		}
 	}
 	if(userCan('editRanks')) {
@@ -124,9 +126,17 @@ function updateSiteSettings() {
 	$siteSlogan=formatPost($pagePost['siteSlogan']);
 	$siteDisabled=formatPost($pagePost['siteDisabled']);
 	$reqLogin=cleanInput($pagePost['reqLogin']);
+	$verifyRegisterEmail=cleanInput($pagePost['verifyRegisterEmail']);
+	$verifyRegisterAdmin=cleanInput($pagePost['verifyRegisterAdmin']);
 	$numBlogEntriesPerPage=cleanInput($pagePost['numBlogEntriesPerPage']);
+	$facebookLink=cleanInput($pagePost['facebookLink']);
+	$youtubeLink=cleanInput($pagePost['youtubeLink']);
+	$googleAnalytics=cleanInput($pagePost['googleAnalytics']);
+	$metaDesc=cleanInput($pagePost['metaDesc']);
+	$metaKeywords=cleanInput($pagePost['metaKeywords']);
+	$siteAbout=cleanInput($pagePost['siteAbout']);
 	
-	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', defaultTheme='$siteTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', blogEntriesPerPage='$numBlogEntriesPerPage' WHERE settingsProfile='1'";
+	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', defaultTheme='$siteTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
 	
 	loadSiteSettings(); // To Refresh Site Settings

@@ -29,7 +29,7 @@ function changePreferencesForm($siteURL) {
 	viewHTML('</form>');
 }
 
-function editSiteSettingsForm($siteURL,$siteName,$siteMotd,$siteSlogan,$siteDisabled,$reqLogin,$numBlogEntriesPerPage) {
+function editSiteSettingsForm($siteURL,$siteName,$siteMotd,$siteSlogan,$siteDisabled,$reqLogin,$verifyRegisterEmail,$verifyRegisterAdmin,$numBlogEntriesPerPage,$htmlAllowed,$facebookLink,$youtubeLink,$googleAnalytics,$metaDesc,$metaKeywords,$siteAbout) {
 	viewHTML('<form action="'.$siteURL.'controlPanel/editSiteSettings/" method="POST">');
 	viewHTML('Site Name: <input type="text" name="siteName" value="'.$siteName.'"><br>');
 	viewHTML('Site Version: <select name="siteVersion">'.getSiteVersionOptions().'</select><br>');
@@ -38,8 +38,20 @@ function editSiteSettingsForm($siteURL,$siteName,$siteMotd,$siteSlogan,$siteDisa
 	viewHTML('Site Slogan: <input type="text" name="siteSlogan" value="'.$siteSlogan.'"><br>');
 	viewHTML('Site Disabled (Enter Message To Disable): <input type="text" name="siteDisabled" value="'.$siteDisabled.'"><br>');
 	viewHTML('Require Login: <input type="checkbox" name="reqLogin" value="true" '.$reqLogin.'><br>');
+	viewHTML('Require Email Verification of New Accounts: <input type="checkbox" name="verifyRegisterEmail" value="true" '.$verifyRegisterEmail.'><br>');
+	viewHTML('Require Admin Verification of New Accounts: <input type="checkbox" name="verifyRegisterAdmin" value="true" '.$verifyRegisterAdmin.'><br>');
 	viewHTML('<br>');
 	viewHTML('Number Blog Entries Per Page: <input type="text" name="numBlogEntriesPerPage" value="'.$numBlogEntriesPerPage.'"><br>');
+	viewHTML('<br>');
+	viewHTML('HTML Allowed in posts: <input type="checkbox" name="htmlAllowed" value="true" '.$htmlAllowed.'><br>');
+	viewHTML('<br>');
+	viewHTML('Facebook Link: <input type="text" name="facebookLink" value="'.$facebookLink.'"><br>');
+	viewHTML('Youtube Link: <input type="text" name="youtubeLink" value="'.$youtubeLink.'"><br>');
+	viewHTML('Google Analytics: <input type="text" name="googleAnalytics" value="'.$googleAnalytics.'"><br>');
+	viewHTML('Meta Desc: <input type="text" name="metaDesc" value="'.$metaDesc.'"><br>');
+	viewHTML('Meta Keywords: <input type="text" name="metaKeywords" value="'.$metaKeywords.'"><br>');
+	viewHTML('Site About: <input type="text" name="siteAbout" value="'.$siteAbout.'"><br>');
+	
 	viewHTML('<input type="submit" name="cpFormSubmitted" value="Change Site Settings">');
 	viewHTML('</form>');
 }
