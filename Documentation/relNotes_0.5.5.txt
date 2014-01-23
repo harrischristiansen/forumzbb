@@ -19,8 +19,6 @@ To-Do:
 Issues:
 -Why do emails take so long to send?
 -Put space on each side of menubar (med size)
--Setting permissions for new rank via addRank
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
--Control Panel -> Edit Profile - current email not showing up
 -Make mail RFC 5322 compliant
 -Make update profile-email work with emails with -'s

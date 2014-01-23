@@ -215,24 +215,32 @@ function displayRankNavItems() {
 
 // Both need to confirm that only highest ranking member can edit ranks permissions
 function addSiteRank() {
-	global $pagePost, $con, $userData;
+	global $pagePost, $userData;
 	$rankName=cleanInput($pagePost['rankName']);
 	$rankID=getNumSiteRanks();
 	$highestRankOrder=getHighestRankOrder();
 	$newHighestRankOrder=$highestRankOrder+1;
+	
+	// Get Permissions Inputs
+	$permissionsTable = getPermissionsTable();
+	while($permission = mysqli_fetch_array($permissionsTable)) {
+		$newPermissions[$permission['internalName']] = cleanInput($pagePost[$permission['internalName']]);
+	}
+	$newPermissionsSave = serialize($newPermissions);
+	
 	if(getHighestRankID()!=$userData['rankID']) {
 		addFailureNotice("Permission Denied");
 	} else {
 		$sql = "UPDATE ranks SET rankOrder='$newHighestRankOrder' WHERE rankOrder='$highestRankOrder'"; // Move Admin Rank Forward One Position
 		$result = dbQuery($sql) or die ("Query failed: addSiteRank-moveAdminRank");
-		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName) VALUES ('$rankID','$highestRankOrder','$rankName')";
+		$sql = "INSERT INTO ranks (rankID, rankOrder, rankName, permissions) VALUES ('$rankID','$highestRankOrder','$rankName','$newPermissionsSave')";
 		$result = dbQuery($sql) or die ("Query failed: addSiteRank-addRank");
 		addSuccessNotice("Success: Rank Added");
 	}
 }
 
 function updateRank() {
-	global $pagePost, $pageID2, $con, $userData;
+	global $pagePost, $pageID2, $userData;
 	$tarRank=$pageID2;
 	$rankName=cleanInput($pagePost['rankName']);
 	
