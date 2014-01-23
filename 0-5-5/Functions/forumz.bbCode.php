@@ -2,6 +2,22 @@
 // Harris Christiansen
 // Created 2013-11-16
 
+// Misc Input
+function cleanInput($input) {
+	global $con;
+	$fix[0]="<"; $fixed[0]="&lt;";
+	$fix[1]=">"; $fixed[1]="&gt;";
+	$fix[2]="'"; $fixed[2]="&#39;";
+	$fix[3]='"'; $fixed[3]="&quot;";
+	$output=str_replace($fix, $fixed, $input);
+	$output = mysqli_real_escape_string($con, $output);
+	$postFix[0]='\\&#39;'; $postFixed[0]="&#39;";
+	$postFix[1]='\\&quot;'; $postFixed[1]="&quot;";
+	$output=str_replace($postFix, $postFixed, $output);
+	return $output;
+}
+
+// Posts
 function formatPost($post) {
 	$post = applyBBCode($post);
 	$post = nl2br($post, false);

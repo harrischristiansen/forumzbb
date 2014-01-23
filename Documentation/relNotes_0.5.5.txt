@@ -25,5 +25,3 @@ Issues:
 -Not putting <br> in shortDate on viewBlog (maybe fixed?)
 -Google Analytics in header
 -Make mail RFC 5322 compliant
--Blog titles ' -> \'
--Can users delete own blog posts (prob not). Make either yes or no (right now delete button shows up but next page denies permission)

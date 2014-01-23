@@ -214,7 +214,7 @@ function deleteBlogPost() {
 		addFailureNotice("Invalid Action");
 		return false;
 	}
-	if(userCan('deleteBlogEntries')||$userData['actID']==getBlogAuthorID($pageID)) {
+	if(userCan('deleteBlogEntries')||returnUserID()==getBlogAuthorID($pageID)) {
 		$newBlogID=-$pageID;
 		$sql = "UPDATE blogs SET ID='$newBlogID' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: deleteBlogPost");
