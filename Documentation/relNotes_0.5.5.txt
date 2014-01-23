@@ -21,4 +21,3 @@ Issues:
 -Put space on each side of menubar (med size)
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
 -Make mail RFC 5322 compliant
--Make update profile-email work with emails with -'s

@@ -275,6 +275,7 @@ function changeEmail() {
 	global $pageID,$userData;
 	$changeData = str_replace("-at-","@",$pageID);
 	$changeData = str_replace("-dot-",".",$changeData);
+	$changeData = str_replace("-dash-","-",$changeData);
 	$changeData = explode('-',$changeData);
 	$userID = $changeData[0];
 	$userPass = $changeData[1];

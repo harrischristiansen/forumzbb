@@ -77,6 +77,7 @@ function updateAccountProfile() {
 	$newEmail = cleanInput($pagePost['newEmail']);
 	$newEmailToSend = str_replace("@","-at-",$newEmail);
 	$newEmailToSend = str_replace(".","-dot-",$newEmailToSend);
+	$newEmailToSend = str_replace("-","-dash-",$newEmailToSend);
 	$newEmailMD5 = md5($newEmail);
 	$activationLink = getSiteAddress().'/changeEmail/'.$accountID.'-'.$actPass.'-'.$newEmailToSend.'-'.$newEmailMD5.'/';
 	if($newEmail!=returnUserEmail()) {
