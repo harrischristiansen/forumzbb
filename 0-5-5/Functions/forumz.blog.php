@@ -18,7 +18,7 @@ function viewBlogEntries() {
 	while($entry = mysqli_fetch_array($blogEntries)) {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
 		$postDate=$entry['AuthorDate'];
-		$postDate = date("M\\<\\b\\r\\>j", strtotime($postDate));
+		$postDate = date("M", strtotime($postDate)).'<br>'.date("j", strtotime($postDate));
 		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDate,$entry['Title'],$entry['Post'],$blogLink);
 	}
 	if(mysqli_num_rows($blogEntries)==0) {

@@ -22,7 +22,7 @@ function displayCPContent() {
 	
 	// Common Pages
 	if($pageID=="changePassword") { changePasswordForm($siteURL); $pageNotFound=false; }
-	elseif($pageID=="editProfile") { editProfileForm($siteURL,$userData['email']); $pageNotFound=false; }
+	elseif($pageID=="editProfile") { editProfileForm($siteURL,returnUserEmail()); $pageNotFound=false; }
 	elseif($pageID=="changePreferences") { changePreferencesForm($siteURL); $pageNotFound=false; }
 	
 	// Permission Restricted Pages

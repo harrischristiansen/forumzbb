@@ -25,13 +25,19 @@ function returnUserPass() {
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['password'];
 }
-function returnUserEmail() {
+/*
+function returnUserEmail() { // Why?
 	global $userData;
 	$actID = $userData['actID'];
 	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: returnUserEmail");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['email'];
+}
+*/
+function returnUserEmail() {
+	global $userData;
+	return $userData['email'];
 }
 function getActID($username) {
 	$sql = "SELECT * FROM accounts WHERE username='$username'";

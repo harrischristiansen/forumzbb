@@ -10,11 +10,11 @@ Completed:
 To-Do:
 -New Theme
 	-Forums -> Black on white
--Mobile Theme
 -Control Panel
 	-Edit New Site Settings
 -File Upload
--Media in Post management
+	-Media in Post management
+-Update latest forum post upon deletes
 
 Issues:
 -Why do emails take so long to send?
@@ -22,6 +22,5 @@ Issues:
 -Setting permissions for new rank via addRank
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
 -Control Panel -> Edit Profile - current email not showing up
--Not putting <br> in shortDate on viewBlog (maybe fixed?)
--Google Analytics in header
 -Make mail RFC 5322 compliant
+-Make update profile-email work with emails with -'s

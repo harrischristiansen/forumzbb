@@ -27,6 +27,8 @@ defaultsInclude('navBar');
 	<!-- bValidator -->
 	<link rel="stylesheet" href="/Resources/plugins/validator.css" />
 	<script src="/Resources/plugins/jquery.bvalidator.js"></script>
+	<!-- Google Analytics -->
+	<? echo $siteSettings['googleAnalytics'];?>
 </head><body>
 
 <header id="navBar">
