@@ -22,4 +22,3 @@ Issues:
 -Put space on each side of menubar (med size)
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
 -Make mail RFC 5322 compliant
--Control Panel facebookLink, youtubeLink, and googleAnalytics escaping important chars

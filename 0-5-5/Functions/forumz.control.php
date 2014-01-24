@@ -131,7 +131,7 @@ function updateSiteSettings() {
 	$numBlogEntriesPerPage=cleanInput($pagePost['numBlogEntriesPerPage']);
 	$facebookLink=cleanInput($pagePost['facebookLink']);
 	$youtubeLink=cleanInput($pagePost['youtubeLink']);
-	$googleAnalytics=cleanInput($pagePost['googleAnalytics']);
+	$googleAnalytics=$pagePost['googleAnalytics'];
 	$metaDesc=cleanInput($pagePost['metaDesc']);
 	$metaKeywords=cleanInput($pagePost['metaKeywords']);
 	$siteAbout=cleanInput($pagePost['siteAbout']);
