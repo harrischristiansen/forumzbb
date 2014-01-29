@@ -13,8 +13,9 @@ function sendEmail($emailTarget, $msgSubject, $msg) {
 	// Send Email
 	$subject = $siteName.' - Hosted By Forumzbb - '.$msgSubject;
 	$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= 'From: '.$siteName.' <'.$siteName.'@'.$siteAddress.'>';
-	$headers .= "\r\n".'Reply-To: replyTo@'.$siteAddress.'';
+	$headers .= 'MIME-Version: 1.0' . "\r\n"; 
+	$headers .= 'From: "'.$siteName.'"<'.$siteName.'@'.$siteAddress.'>'."\r\n";
+	$headers .= 'Reply-To: replyTo@'.$siteAddress.'';
 	$message = '
 		<html><head>
 			<title>'.$subject.'</title>

@@ -16,9 +16,12 @@ To-Do:
 	-Media in Post management
 -BB Code Editor - plugin
 -Update latest forum post upon delete
+-Suspend/Ban Users
+-Flag Users for rename at next login
 
 Issues:
--Why do emails take so long to send?
 -Put space on each side of menubar (med size)
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
 -Make mail RFC 5322 compliant
+-Make Update Author - Blog Post Work
+-Add ability to update blog titles
