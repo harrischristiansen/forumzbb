@@ -18,10 +18,12 @@ To-Do:
 -Update latest forum post upon delete
 -Suspend/Ban Users
 -Flag Users for rename at next login
+-Updated Blog Posts - Put note at bottom of updated posts
+-Add ability to update blog titles
+-Add User Info on Forum Posts
+-Blog on Home - display num comments
 
 Issues:
 -Put space on each side of menubar (med size)
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
--Make mail RFC 5322 compliant
--Make Update Author - Blog Post Work
--Add ability to update blog titles
+-Poor link color on forum posts

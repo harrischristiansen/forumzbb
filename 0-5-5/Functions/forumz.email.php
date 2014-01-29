@@ -6,14 +6,15 @@ function sendEmail($emailTarget, $msgSubject, $msg) {
 	$siteName = getSiteName();
 	$siteAddress = getSiteAddress();
 	if(!isEmailValid($emailTarget)) {
-		addFailureNotice("Invalid Email Address");
+		addFailureNotice("Mail Not Delivered - Invalid Email Address");
 		return false;
 	}
 	
 	// Send Email
 	$subject = $siteName.' - Hosted By Forumzbb - '.$msgSubject;
-	$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	$headers .= 'MIME-Version: 1.0' . "\r\n"; 
+	$headers = 'Content-type: text/html; charset=iso-8859-1'."\r\n";
+	$headers .= 'MIME-Version: 1.0'."\r\n";
+	$headers .= 'X-Mailer: PHP/'.phpversion()."\r\n"; 
 	$headers .= 'From: "'.$siteName.'"<'.$siteName.'@'.$siteAddress.'>'."\r\n";
 	$headers .= 'Reply-To: replyTo@'.$siteAddress.'';
 	$message = '
