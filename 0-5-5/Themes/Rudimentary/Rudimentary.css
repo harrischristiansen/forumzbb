@@ -740,6 +740,10 @@ footer {
 .TableRowItem.forumPostColumn2 {
 	text-align: left;
 }
+.FullWidthTableRow .forumPostColumn1 {
+	font-size: 10px;
+	text-align: left;
+}
 
 
 

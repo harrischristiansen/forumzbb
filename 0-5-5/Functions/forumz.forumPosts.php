@@ -8,6 +8,7 @@ function viewForumThread() {
 	$rowID = 1;
 	while($post=mysqli_fetch_array($posts)) {
 		$author = getUsername($post['author']);
+		$authorInfo = getAuthorInformation($post['author']);
 		$subject = $post['subject'];
 		$postDate = $post['postDate'];
 		$postTime = $post['postTime'];
@@ -18,7 +19,7 @@ function viewForumThread() {
 		$editLink = $siteSettings['siteURLShort']."editForumPost/".$post['id'];
 		$deleteLink  = $siteSettings['siteURLShort']."deleteForumPost/".$post['id'];
 		$editText = reverseFormatPost($postText);
-		displayForumPost($rowID, $author, $subject, $postDate, $postTime, $postText, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText);
+		displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $postTime, $postText, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText);
 		$rowID++;
 	}
 }
@@ -50,6 +51,15 @@ function updateThreadViewCount() {
 	$threadID = $pageID;
 	$sql = "UPDATE forumThreads SET views=views+1 WHERE id='$threadID'";
 	$result = dbQuery($sql) or die ("Query failed: updateThreadViewCount");
+}
+
+// Get Author Information
+
+function getAuthorInformation($authorID) {
+	$sql = "SELECT * FROM forumPosts WHERE author='$authorID'";
+	$result = dbQuery($sql) or die ("Query failed: getAuthorInformation-authorNumPosts");
+	$numForumPosts=mysqli_num_rows($result);
+	return "Author Info:<br>"."Number Forum Posts: ".$numForumPosts;
 }
 
 // Add Comment

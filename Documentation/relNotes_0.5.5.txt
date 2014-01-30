@@ -20,7 +20,6 @@ To-Do:
 -Flag Users for rename at next login
 -Updated Blog Posts - Put note at bottom of updated posts
 -Add ability to update blog titles
--Add User Info on Forum Posts
 -Blog on Home - display num comments
 
 Issues:

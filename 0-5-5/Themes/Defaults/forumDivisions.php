@@ -50,7 +50,7 @@ function displayThreadLine($threadLink,$rowID,$subject,$startBy,$latestBy,$lates
 }
 
 // Posts
-function displayForumPost($rowID, $author, $subject, $postDate, $postTime, $post, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText) {
+function displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $postTime, $post, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText) {
 	viewHTML('<table class="FullWidthTable">');
 	viewHTML('<tr class="FullWidthTableHead">');
 		viewHTML('<td class="TableHeadColumn forumPostColumn1">'.$author.'</td>');
@@ -60,7 +60,7 @@ function displayForumPost($rowID, $author, $subject, $postDate, $postTime, $post
 		viewHTML('</td>');
 	viewHTML('</tr>');
 	viewHTML('<tr class="FullWidthTableRow">');
-		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'">UserInfo</td>');
+		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'">'.$authorInfo.'</td>');
 		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">'.$post.'</td>');
 	viewHTML('</tr>');
 	if($viewEdit||$viewDelete) {
