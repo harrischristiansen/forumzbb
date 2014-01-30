@@ -113,6 +113,7 @@ Version 0.5.5: - Due Feb 2nd
 -Mobile Theme
 	-Robotics Site Theme
 -Theme Changer
+-BB Code Editor
 
 Version 0.5.6: - Due Feb 16th
 -Spam Protection
@@ -136,7 +137,6 @@ Version 0.5.7: - Due March 2nd
 	-Move Threads
 	-Create Categories/Forums
 	-Delete Categories/Forums
--BB Code Editor
 
 Version 0.6.0: - First Public Release, no activation code - Due by March 23rd
 -Code Cleanup
