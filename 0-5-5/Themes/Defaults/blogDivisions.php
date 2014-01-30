@@ -2,7 +2,7 @@
 // Harris Christiansen
 // Created 11-03-12
 
-function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$blogLink) {
+function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$blogLink,$numComments) {
 	viewHTML('<div class="FullWidthPostHead">');
 		viewHTML('<div class="floatLeft">');
 			viewHTML("By: ".$authorName);

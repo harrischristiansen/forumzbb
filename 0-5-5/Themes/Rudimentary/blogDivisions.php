@@ -2,10 +2,11 @@
 // Harris Christiansen
 // Created 2013-12-12
 
-function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$blogLink) {
+function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$blogLink,$numComments) {
 	viewHTML('<div class="siteContPanel whitePanel">');
 		viewHTML('<div class="hpBlogDate">'.$postDate.'</div>');
-		viewHTML('<a class="hpBlogTitle" href="'.$blogLink.'">'.$entryTitle.'</a>');
+		viewHTML('<a class="hpBlogTitle" href="'.$blogLink.'">'.$entryTitle.'<div class="blogAuthor"><br>Comments: '.$numComments.'</div>'.'</a>');
+		viewHTML();
 		viewHTML('<div class="hpBlogText">'.$blogEntry.'</div>');
 	viewHTML('</div>');
 }

@@ -19,7 +19,8 @@ function viewBlogEntries() {
 		$blogLink=$siteSettings['siteURLShort']."blog/".$entry['ID'];
 		$postDate=$entry['AuthorDate'];
 		$postDate = date("M", strtotime($postDate)).'<br>'.date("j", strtotime($postDate));
-		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDate,$entry['Title'],$entry['Post'],$blogLink);
+		$numComments = mysqli_num_rows(getBlogComments($entry['ID']));
+		displayHomePageBlogEntry(getMemberName($entry['Author']),$postDate,$entry['Title'],$entry['Post'],$blogLink,$numComments);
 	}
 	if(mysqli_num_rows($blogEntries)==0) {
 		viewFailure("No Entries Were Found On This Page");
