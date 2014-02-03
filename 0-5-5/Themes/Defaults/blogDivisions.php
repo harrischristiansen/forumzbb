@@ -22,7 +22,7 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 	viewHTML('</div>');
 }
 
-function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryTitle,$entry,$editEntryLink,$deleteEntryLink) {
+function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryTitle,$entry,$updateInfo,$editEntryLink,$deleteEntryLink) {
 	viewHTML('<div class="FullWidthPostHead">'); // Blog Entry Head
 		viewHTML('<div class="floatLeft">');
 			viewHTML("By: ".$authorName);
@@ -37,6 +37,13 @@ function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryT
 		viewHTML('</div>');
 		viewHTML('<hr>');
 		viewHTML($entry);
+		// Updated Entry Info
+		if($updateInfo!="") {
+			viewHTML('<hr>');
+			viewHTML('<div style="font-size: 10px;">');
+				viewHTML($updateInfo);
+			viewHTML('</div>');
+		}
 		// Admin Functions
 		if($editEntryLink!=""||$deleteEntryLink!="") {
 			viewHTML('<hr>');

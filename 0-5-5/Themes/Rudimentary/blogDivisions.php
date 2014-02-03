@@ -11,10 +11,16 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 	viewHTML('</div>');
 }
 
-function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryTitle,$entry,$editEntryLink,$deleteEntryLink) {
+function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryTitle,$entry,$updateInfo,$editEntryLink,$deleteEntryLink) {
 	viewHTML('<div class="siteContPanel whitePanel">');
 		viewHTML('<div class="blogDate">'.$postDateShort.'</div>');
-		viewHTML('<div class="blogTitle">'.$entryTitle.'<div class="blogAuthor">By: '.$authorName.'<br>'.$postDate.' at '.$postTime.'</div></div>');
+		viewHTML('<div class="blogTitle">'.$entryTitle);
+			viewHTML('<div class="blogAuthor">');
+				viewHTML('By: '.$authorName.'<br>'.$postDate.' at '.$postTime);
+				// Updated Entry Info
+				if($updateInfo!="") { viewHTML('<br>'.$updateInfo); }
+			viewHTMl('</div>');
+		viewHTML('</div>');
 		viewHTML('<div class="blogText">'.$entry.'</div>');
 		// Admin Functions
 		if($editEntryLink!=""||$deleteEntryLink!="") {

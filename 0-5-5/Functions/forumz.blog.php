@@ -61,7 +61,7 @@ function getPreviousPageLink() {
 }
 
 
-////////// Select Blog View System //////////
+////////// Blog View System //////////
 function getBlogEntry($entryID) {
 	$sql = "SELECT * FROM blogs WHERE ID='$entryID'";
 	$result = dbQuery($sql) or die ("Query failed: getBlogEntry");
@@ -77,7 +77,8 @@ function viewBlogPageBlogEntry() {
 	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
 	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }
 	$postDateShort = date("M\\<\\b\\r\\>j", strtotime($blogEntry['AuthorDate']));
-	displayBlogEntry(getMemberName($blogEntry['Author']),$postDateShort,$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$editEntryLink,$deleteEntryLink);
+	if($blogEntry['updateAuthor']!="") { $updateInfo = "Updated by ".getUsername($blogEntry['updateAuthor'])." on ".$blogEntry['updateDate']."."; }
+	displayBlogEntry(getMemberName($blogEntry['Author']),$postDateShort,$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$updateInfo,$editEntryLink,$deleteEntryLink);
 }
 function checkBlogEntryExists() { // Used in viewBlog.php
 	global $pageID;

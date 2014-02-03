@@ -17,7 +17,6 @@ To-Do:
 -*BB Code Editor - plugin
 -*Suspend/Ban Users
 -*Flag Users for rename at next login
--Updated Blog Posts - Put note at bottom of updated posts
 -Add ability to update blog titles
 -Update latest forum post upon delete
 
