@@ -143,6 +143,10 @@ Version 0.6.0: - First Public Release, no activation code - Due by March 23rd
 -Streamlined sign up (new site design?)
 	-Place for users to make suggestions (of new features, of bugs, etc)
 
+Version 0.6.1:
+- Another new theme, from scratch, using latest web standards
+	-Challenge Self
+	-Make signup site design?
 
 
 Future:

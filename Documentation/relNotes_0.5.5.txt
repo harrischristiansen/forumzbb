@@ -23,4 +23,3 @@ To-Do:
 Issues:
 -Put space on each side of menubar (med size)
 -Fix Theme not loading when no files present (auto-redirect to known theme...)
--Poor link color on forum posts

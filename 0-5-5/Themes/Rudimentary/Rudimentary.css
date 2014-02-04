@@ -650,6 +650,10 @@ footer {
 	background-color: #0D78A5;
 }
 
+.FullWidthTableRow a {
+	color: #FFFFFF;
+}
+
 .FullWidthTableRow:hover .TableRowColumn {
 	background-color: #45B0DF;
 	cursor: pointer;
