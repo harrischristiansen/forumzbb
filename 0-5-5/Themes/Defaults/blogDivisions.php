@@ -83,10 +83,10 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEd
 	viewHTML('</div>');
 }
 
-function displayBlogComposeField($formLink, $updatingPost, $currentEntry) {
+function displayBlogComposeField($formLink, $updatingPost, $currentTitle, $currentEntry) {
 	viewHTML('<form action="'.$formLink.'" method="POST" class="validateForm">');
 	if(!$updatingPost) {
-		viewHTML('<input type="text" name="blogEntryTitle" value="Blog Entry Title" placeholder="Blog Entry Title" onfocus="this.value=\'\';" data-bvalidator="required"><br>');
+		viewHTML('<input type="text" name="blogEntryTitle" value="'.$currentTitle.'" placeholder="Blog Entry Title" data-bvalidator="required"><br>');
 	}
 	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea" data-bvalidator="required">'.$currentEntry.'</textarea><br>');
 	if($updatingPost) {

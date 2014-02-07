@@ -146,7 +146,7 @@ Version 0.6.0: - First Public Release, no activation code - Due by March 23rd
 Version 0.6.1:
 - Another new theme, from scratch, using latest web standards
 	-Challenge Self
-	-Make signup site design?
+	-Match signup site design?
 
 
 Future:

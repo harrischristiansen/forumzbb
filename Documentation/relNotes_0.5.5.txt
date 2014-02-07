@@ -17,7 +17,6 @@ To-Do:
 -*BB Code Editor - plugin
 -*Suspend/Ban Users
 -*Flag Users for rename at next login
--Add ability to update blog titles
 
 Issues:
 -Put space on each side of menubar (med size)

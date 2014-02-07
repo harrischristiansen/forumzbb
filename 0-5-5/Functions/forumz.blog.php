@@ -166,10 +166,11 @@ function editBlogPost() {
 		return false;
 	}
 	if(userCan('editBlogEntries')||returnUserID()==getBlogAuthorID($pageID)) {
+		$newBlogTitle=cleanInput($pagePost['blogEntryTitle']);
 		$newBlogEntry=formatPost($pagePost['blogEntryText']);
 		$updateAuthor=returnUserID();
 		$updateDate=returnDateOfficial();
-		$sql = "UPDATE blogs SET Post='$newBlogEntry',updateAuthor='$updateAuthor',updateDate='$updateDate' WHERE ID='$pageID'";
+		$sql = "UPDATE blogs SET Title='$newBlogTitle',Post='$newBlogEntry',updateAuthor='$updateAuthor',updateDate='$updateDate' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: editBlogPost");
 		addSuccessNotice("Blog Entry Updated");
 	} else {
@@ -201,11 +202,12 @@ function getBlogComposeField() {
 			$formLink=$siteSettings['siteURLShort'].'editBlog/'.$pageID;
 			$blogEntry=getBlogEntry($pageID);
 			$currentEntry=reverseFormatPost($blogEntry['Post']);
-			displayBlogComposeField($formLink, true, $currentEntry);
+			$currentTitle=$blogEntry['Title'];
+			displayBlogComposeField($formLink, true, $currentTitle, $currentEntry);
 		}
 	} else { // Creating New Entry
 		$formLink=$siteSettings['siteURLShort'].'composeEntry/';
-		displayBlogComposeField($formLink, false, "");
+		displayBlogComposeField($formLink, false, "", "");
 	}
 }
 
