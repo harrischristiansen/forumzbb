@@ -124,13 +124,21 @@ function deleteForumPost() {
 		return false;
 	}
 	$threadID = getThreadIDOfPost($pageID);
-	if($pageID==getThreadFirstPostID($threadID)) {
+	if($pageID==getThreadFirstPostID($threadID)) { // Delete Thread
 		if(userCan('deleteForumPosts')) {
 			$newThreadID = 0-$threadID;
 			$sql = "UPDATE forumThreads SET id='$newThreadID' WHERE id='$threadID'";
 			$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thread");
 			$sql = "UPDATE forumPosts SET threadID='$newThreadID' WHERE threadID='$threadID'";
 			$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thread-Posts");
+			// Update Latest Forum Post if set to thread
+			$forumID = getForumIDOfPost($pageID);
+			$forum = getForumByID($forumID);
+			$latestPost=unserialize($forum['latestPost']);
+			if($latestPost['threadID']==$threadID) {
+				$sql = "UPDATE forums SET latestPost='' WHERE id='$forumID'";
+				$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thead-Forum-LatestPost");
+			}
 			addSuccessNotice("Thread Deleted");
 		} else {
 			addFailureNotice("Permission Denied - Contact A Moderator To Delete Threads");
@@ -159,9 +167,16 @@ function getForumPostAuthorID($postID) {
 
 function getThreadIDOfPost($postID) {
 	$sql = "SELECT * FROM forumPosts WHERE id='$postID'";
-	$result = dbQuery($sql) or die ("Query failed: getForumPostAuthorID");
+	$result = dbQuery($sql) or die ("Query failed: getThreadIDOfPost");
 	$resultArray = mysqli_fetch_array($result);
 	return $resultArray['threadID'];
+}
+
+function getForumIDOfPost($postID) {
+	$sql = "SELECT * FROM forumPosts WHERE id='$postID'";
+	$result = dbQuery($sql) or die ("Query failed: getForumIDOfPost");
+	$resultArray = mysqli_fetch_array($result);
+	return $resultArray['forumID'];
 }
 
 function getThreadFirstPostID($threadID) {

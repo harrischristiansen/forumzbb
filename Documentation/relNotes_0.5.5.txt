@@ -18,7 +18,6 @@ To-Do:
 -*Suspend/Ban Users
 -*Flag Users for rename at next login
 -Add ability to update blog titles
--Update latest forum post upon delete
 
 Issues:
 -Put space on each side of menubar (med size)

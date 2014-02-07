@@ -33,6 +33,12 @@ function getForumsInCat($catID) {
 	return $result;
 }
 
+function getForumByID($forumID) {
+	$sql = "SELECT * FROM forums WHERE id='$forumID'";
+	$result = dbQuery($sql) or die ("Query failed: getForumByID");
+	return mysqli_fetch_array($result);
+}
+
 function getNumForums() {
 	$sql = "SELECT * FROM forums";
 	$result = dbQuery($sql) or die ("Query failed: getNumForums");
