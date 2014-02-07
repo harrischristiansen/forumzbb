@@ -13,7 +13,7 @@ function userIsBanned() {
 		return false;
 	} else {
 		$resultArray=mysqli_fetch_array($result);
-		$daysUntilBanExpires=$resultArray['banInitDay']+$resultArray['banLength']-returnDayCount();
+		$daysUntilBanExpires=$resultArray['banInitDay']+$resultArray['banLength']-returnDateOfficial();
 		if($daysUntilBanExpires>0) { // Ban Still In Effect
 			addFailureNotice("You Are Currently Suspended From The Site");
 			addFailureNotice("Reason For Suspension: ".$resultArray['banReason']);
@@ -23,7 +23,7 @@ function userIsBanned() {
 		} else { // Ban Has Expired
 			$sql = "DELETE FROM bannedClients WHERE ipAdr='$ipAddress' OR actID='$userActID'";
 			$result = dbQuery($sql) or die ("Query failed: userIsBanned - removeBan");
-			addSuccessNotice("Your Suspension Has Expired!");
+			addSuccessNotice("Notice: You account was recently suspended. Your suspension has been lifted!");
 			return false;
 		}
 	}

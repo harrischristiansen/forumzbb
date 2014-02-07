@@ -129,6 +129,8 @@ Version 0.5.6: - Due Feb 23
 	-Pagination
 		-threads per forum page
 		-posts per thread pages
+-Working Version Changer System
+-SiteSetting for if user can change personal siteTheme
 -Solid Update System (When new version is released, upgrading is as easy as pressing a button)
 
 Version 0.5.7: - Due March 9

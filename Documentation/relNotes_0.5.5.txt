@@ -8,10 +8,9 @@ Completed:
 -Permissions System
 -Control Panel
 	-Edit New Site Settings
+-New Theme
 
 To-Do:
--*New Theme
-	-Forums -> Black on white
 -*File Upload
 	-Media in Post management
 -*BB Code Editor - plugin
