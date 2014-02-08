@@ -11,8 +11,6 @@ Completed:
 -New Theme
 
 To-Do:
--*File Upload
-	-Media in Post management
 -*BB Code Editor - plugin
 -*Suspend/Ban Users
 -*Flag Users for rename at next login
