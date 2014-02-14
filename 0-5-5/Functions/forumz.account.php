@@ -12,11 +12,13 @@ function setAccountToDefault() {
 	$userData['actID']="Anonymous";
 	$userData['rankID']=0;
 	$userData['email']="-";
+	$userData['themePref']="";
+	unset($userData['themePref']);
 }
 function loginUser() {
 	global $userData, $pagePost;
-	$user=$pagePost['username'];
-	$pass=$pagePost['password'];
+	$user=cleanInput($pagePost['username']);
+	$pass=cleanInput($pagePost['password']);
 	
 	// Check Account Login Information And Status
 	$loginStatus=checkLogin($user, $pass);
@@ -70,13 +72,14 @@ function loginUser() {
 	// Account Banned
 	elseif($loginStatus==3) { addFailureNotice("Error: The Account Is Currently Banned From The System"); unset($userData); }
 	
+	// Account Flagged For Rename
+	elseif($loginStatus==4) { addFailureNotice('Your Account Has Been Flagged For Rename. Please enter desired new username: <form action="/renameUser/" method="POST" class="validateForm inlineDiv"><input type="text" name="username" value="" data-bvalidator="required"><input type="submit" name="renameUserSubmitted" value="Save"></form>'); $userData['renameActID']=$userData['actID']; setAccountToDefault(); }
+	
 }
 function checkLogin($user, $pass) {
 	global $userData;
 	
 	// Clean User Inputed Data
-	$user = cleanInput($user);
-	$pass = cleanInput($pass);
 	$pass = md5($pass);
 	
 	// Store Login Date and IP-Address
@@ -294,6 +297,28 @@ function changeEmail() {
 		$userData['email']=$emailAdr;
 		addSuccessNotice("Email Address Changed");
 	}
+}
+
+//// Change Username ////
+function renameUser() {
+	global $pagePost, $userData;
+	$newUsername = cleanInput($pagePost['username']);
+	$tarActID = $userData['renameActID'];
+	
+	// Get Act Flags
+	$sql = "SELECT * FROM accounts WHERE actID='$tarActID'";
+	$result = dbQuery($sql) or die ("Query failed: renameUser-selectAccount");
+	$resultArray = mysqli_fetch_array($result);
+	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags['userRename']="0";
+	$actFlags = serialize($actFlags);
+	
+	// Update Account
+	$sql = "UPDATE accounts SET username='$newUsername', actFlags='$actFlags' WHERE actID='$tarActID'";
+	$result = dbQuery($sql) or die ("Query failed: renameUser");
+	
+	unset($userData);
+	addSuccessNotice("Username Updated. Please login with new username.");
 }
 
 //// Get Ranks ////
