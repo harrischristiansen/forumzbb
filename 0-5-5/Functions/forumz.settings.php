@@ -3,20 +3,13 @@
 // Created 9-15-12
 
 // Loads Settings And NavBar
-function getDefaultAccountStatus() {
+function getDefaultAccountFlags() {
 	global $siteSettings;
-	if($siteSettings['verifyRegisterAdmin']&&$siteSettings['verifyRegisterEmail']) {
-		return 12;
-	}
-	elseif($siteSettings['verifyRegisterEmail']) {
-		return 1;
-	}
-	elseif($siteSettings['verifyRegisterAdmin']) {
-		return 2;
-	}
-	else {
-		return 0;
-	}
+	$actFlags['status'] = "1";
+	if($siteSettings['verifyRegisterEmail']) { $actFlags['emailConfirmed']="0"; } else { $actFlags['emailConfirmed']="1"; }
+	if($siteSettings['verifyRegisterAdmin']) { $actFlags['adminConfirmed']="0"; } else { $actFlags['adminConfirmed']="1"; }
+	$actFlags['userRename'] = "0";
+	return serialize($actFlags);
 }
 function setupSiteURLs() {
 	global $siteSettings;

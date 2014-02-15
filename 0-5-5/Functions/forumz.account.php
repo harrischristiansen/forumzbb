@@ -66,9 +66,6 @@ function loginUser() {
 	// Admin Has Not Verified Login
 	elseif($loginStatus==2) { addFailureNotice("Error: An Admin Must Verify Your Account Before You Can Login"); unset($userData); }
 	
-	// Admin And User Has Not Verified Login
-	elseif($loginStatus==12) { addFailureNotice("Error: You Must Both Verify Your Email And Be Approved By An Admin"); unset($userData); }
-	
 	// Account Banned
 	elseif($loginStatus==3) { addFailureNotice("Error: The Account Is Currently Banned From The System"); unset($userData); }
 	
@@ -90,32 +87,28 @@ function checkLogin($user, $pass) {
 	$result = dbQuery($sql) or die ("Query failed: checkUserLogin");
 	$users=mysqli_num_rows($result);
 	
-	// Login Was Correct
-	if($users==1) {
-		$userInfo=mysqli_fetch_array($result);
-		$actStatus = $userInfo['actStatus'];
-		$userData['actID']=$userInfo['actID'];
-		$userData['rankID']=$userInfo['rankID'];
-		$userData['email']=$userInfo['email'];
-		$userData['themePref']=$userInfo['themePref'];
-		return $actStatus;
-	} else { 
+	if($users!=1) { // More or less than one account matched
 		$sql = "SELECT * FROM accounts WHERE email='$user' AND password='$pass'";
 		$result = dbQuery($sql) or die ("Query failed: checkEmailLogin");
 		$users=mysqli_num_rows($result);
-		if($users==1) {
-			$userInfo=mysqli_fetch_array($result);
-			$actStatus = $userInfo['actStatus'];
-			global $userData;
-			$userData['actID']=$userInfo['actID'];
-			$userData['rankID']=$userInfo['rankID'];
-			$userData['email']=$userInfo['email'];
-			$userData['themePref']=$userInfo['themePref'];
+		if($users==1) { // Found Account
 			global $emailActName;
 			$emailActName = $userInfo['username'];
-			return $actStatus;
-		} else { return -1; }
+		} else { return -1; } // No Matching Account Found
 	}
+	
+	$userInfo=mysqli_fetch_array($result);
+	// Account Status
+	$actFlags = unserialize($userInfo['actFlags']);
+	if($actFlags['status']!="1") { return 3; }
+	elseif($actFlags['emailConfirmed']!="1") { return 1; }
+	elseif($actFlags['adminConfirmed']!="1") { return 2; }
+	// Account Details
+	$userData['actID']=$userInfo['actID'];
+	$userData['rankID']=$userInfo['rankID'];
+	$userData['email']=$userInfo['email'];
+	$userData['themePref']=$userInfo['themePref'];
+	return 0;
 }
 function updateLoginReport($user) {
 	$lastLoginDate=returnDateOfficial();
@@ -183,15 +176,15 @@ function addUserToDatabase($user, $pass, $email) {
 	
 	// Check Username
 	if(checkUsernameAvailable($user)) {
-		// Get Default User Account Status
-		$actStatus=getDefaultAccountStatus();
+		// Get Default User Account Flags
+		$actFlags=getDefaultAccountFlags();
 		$userID = getSiteNumMembers();
 		$joinDate = returnDateOfficial();
 		$ipAddress = returnRemoteIP();
 		$rankID = getRankByOrder(1);
 		
 		// Add Username To Database
-		$sql = "INSERT INTO accounts (actID, username, password, email, actStatus, rankID, joinDate, joinIP) VALUES ('$userID','$user','$pass','$email', '$actStatus', '$rankID', '$joinDate', '$ipAddress')";
+		$sql = "INSERT INTO accounts (actID, username, password, email, actFlags, rankID, joinDate, joinIP) VALUES ('$userID','$user','$pass','$email', '$actFlags', '$rankID', '$joinDate', '$ipAddress')";
 		$result = dbQuery($sql) or die ("Query failed: addUserToDatabase");
 		return true;
 	} else {
@@ -221,25 +214,45 @@ function confirmAccount() { // Fix to not work for banned acts and acts with adm
 	}
 }
 function setAccountAsConfirmedByEmail($actID) {
-	// Make so it only confirms email, not just sets account to active.
-	setAccountAsActive($actID);
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByEmail-get");
+	$resultArray = mysqli_fetch_array($result);
+	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags['emailConfirmed']="1";
+	$actFlags = serialize($actFlags);
+	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByEmail-set");
 	addSuccessNotice("Account Activated - You May Now Login");
 }
 function setAccountAsConfirmedByAdmin($actID) {
-	// Make so it only confirms by admin, not just sets account to active.
-	setAccountAsActive($actID);
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByAdmin-get");
+	$resultArray = mysqli_fetch_array($result);
+	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags['adminConfirmed']="1";
+	$actFlags = serialize($actFlags);
+	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByAdmin-set");
 }
 function setAccountAsActive($actID) {
-	$sql = "UPDATE accounts SET actStatus='0' WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive");
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive-get");
+	$resultArray = mysqli_fetch_array($result);
+	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags['status']="1";
+	$actFlags = serialize($actFlags);
+	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive-set");
 }
 function setAccountAsLocked($actID) {
-	$sql = "UPDATE accounts SET actStatus='1' WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: setAccountAsLocked");
-}
-function setAccountAsBanned($actID) {
-	$sql = "UPDATE accounts SET actStatus='-1' WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: setAccountAsBanned");
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsLocked-get");
+	$resultArray = mysqli_fetch_array($result);
+	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags['status']="0";
+	$actFlags = serialize($actFlags);
+	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: setAccountAsLocked-set");
 }
 
 //// Reset Password ////
