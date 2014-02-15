@@ -70,7 +70,7 @@ function loginUser() {
 	elseif($loginStatus==3) { addFailureNotice("Error: The Account Is Currently Banned From The System"); unset($userData); }
 	
 	// Account Flagged For Rename
-	elseif($loginStatus==4) { addFailureNotice('Your Account Has Been Flagged For Rename. Please enter desired new username: <form action="/renameUser/" method="POST" class="validateForm inlineDiv"><input type="text" name="username" value="" data-bvalidator="required"><input type="submit" name="renameUserSubmitted" value="Save"></form>'); $userData['renameActID']=$userData['actID']; setAccountToDefault(); }
+	elseif($loginStatus==4) { addFailureNotice('Your Account Has Been Flagged For Rename. Please enter desired new username: <form action="/renameUser/" method="POST" class="validateForm inlineDiv"><input type="text" name="username" value="" data-bvalidator="required"><input type="submit" name="renameUserSubmitted" value="Save"></form>'); setAccountToDefault(); }
 	
 }
 function checkLogin($user, $pass) {
@@ -100,9 +100,10 @@ function checkLogin($user, $pass) {
 	$userInfo=mysqli_fetch_array($result);
 	// Account Status
 	$actFlags = unserialize($userInfo['actFlags']);
-	if($actFlags['status']!="1") { return 3; }
-	elseif($actFlags['emailConfirmed']!="1") { return 1; }
-	elseif($actFlags['adminConfirmed']!="1") { return 2; }
+	if($actFlags['status']!="1") { return 3; } // Act Banned
+	elseif($actFlags['emailConfirmed']!="1") { return 1; } // Needs Email Confirmation
+	elseif($actFlags['adminConfirmed']!="1") { return 2; } // Needs Admin Confirmation
+	elseif($actFlags['userRename']=="1") { $userData['renameActID']=$userInfo['actID']; return 4; } // Flagged For rename
 	// Account Details
 	$userData['actID']=$userInfo['actID'];
 	$userData['rankID']=$userInfo['rankID'];
@@ -317,6 +318,13 @@ function renameUser() {
 	global $pagePost, $userData;
 	$newUsername = cleanInput($pagePost['username']);
 	$tarActID = $userData['renameActID'];
+	
+	// Check Username Availability
+	if(!checkUsernameAvailable($newUsername)) {
+		addFailureNotice("Username Unavailable. Please Try Again.");
+		addFailureNotice('Please enter desired new username: <form action="/renameUser/" method="POST" class="validateForm inlineDiv"><input type="text" name="username" value="" data-bvalidator="required"><input type="submit" name="renameUserSubmitted" value="Save"></form>');
+		return false;
+	}
 	
 	// Get Act Flags
 	$sql = "SELECT * FROM accounts WHERE actID='$tarActID'";
