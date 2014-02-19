@@ -25,8 +25,11 @@ defaultsInclude('navBar');
 	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/SkyBlue/themeScripts.js"></script>
 	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Defaults/siteScripts.js"></script>
 	<!-- bValidator -->
-	<link rel="stylesheet" href="/Resources/plugins/validator.css" />
-	<script src="/Resources/plugins/jquery.bvalidator.js"></script>
+	<link rel="stylesheet" href="/Resources/plugins/bvalidator/validator.css" />
+	<script src="/Resources/plugins/bvalidator/jquery.bvalidator.js"></script>
+	<!-- SCEditor -->
+	<link rel="stylesheet" href="/Resources/plugins/sceditor/minified/themes/default.min.css" type="text/css" media="all" />
+	<script type="text/javascript" src="/Resources/plugins/sceditor/minified/jquery.sceditor.bbcode.min.js"></script>
 </head><body>
 
 <header id="navBar">

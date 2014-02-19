@@ -30,4 +30,4 @@ $(window).resize(function(){
     if(w > 480) {  
         $("#navMenu").show(); 
     }  
-});  
+});

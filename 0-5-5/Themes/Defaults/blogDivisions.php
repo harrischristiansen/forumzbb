@@ -88,7 +88,7 @@ function displayBlogComposeField($formLink, $updatingPost, $currentTitle, $curre
 	if(!$updatingPost) {
 		viewHTML('<input type="text" name="blogEntryTitle" value="'.$currentTitle.'" placeholder="Blog Entry Title" data-bvalidator="required"><br>');
 	}
-	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea" data-bvalidator="required">'.$currentEntry.'</textarea><br>');
+	viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea sceditor" data-bvalidator="required">'.$currentEntry.'</textarea><br>');
 	if($updatingPost) {
 		viewHTML('<input type="submit" name="blogUpdateSubmitted" value="Update">');
 	} else {
@@ -106,7 +106,7 @@ function displayAddCommentField() {
 	viewHTML('</div>');
 	viewHTML('<div class="FullWidthPostRow" style="text-align: center;">');
 		viewHTML('<form action="'.$siteSettings['siteURLShort'].'blog/'.$pageID.'/reply" method="POST" class="validateForm">');
-			viewHTML('<textarea class="blogCommentTextArea" name="blogCommentText" data-bvalidator="required"></textarea><br>');
+			viewHTML('<textarea class="blogCommentTextArea sceditor" name="blogCommentText" data-bvalidator="required"></textarea><br>');
 			viewHTML('<input type="submit" name="commentSubmitted" value="Reply">');
 		viewHtml('</form>');
 	viewHTML('</div>');
