@@ -9,12 +9,11 @@ Completed:
 -Control Panel
 	-Edit New Site Settings
 -New Theme
+-Flag Users For Rename
 
 To-Do:
 -*BB Code Editor - plugin
 -*Suspend/Ban Users
--*Flag Users for rename at next login
 
 Issues:
--Put space on each side of menubar (med size)
 -Fix Theme not loading when no files present (auto-redirect to known theme...)

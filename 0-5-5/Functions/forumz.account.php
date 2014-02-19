@@ -341,6 +341,19 @@ function renameUser() {
 	unset($userData);
 	addSuccessNotice("Username Updated. Please login with new username.");
 }
+function flagForRename($actID) {
+	// Get Act Flags
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: flagForRename-selectAccount");
+	$resultArray = mysqli_fetch_array($result);
+	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags['userRename']="1";
+	$actFlags = serialize($actFlags);
+	
+	// Update Account
+	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: flagForRename");
+}
 
 //// Get Ranks ////
 

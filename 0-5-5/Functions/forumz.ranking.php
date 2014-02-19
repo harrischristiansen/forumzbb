@@ -24,16 +24,20 @@ function setUserRank() {
 	global $userData, $pageID2, $pagePost;
 	$userID=$pageID2;
 	$tarRank=cleanInput($pagePost['newRank']);
-	if(!hasPermissionToEditRank($tarRank)||$tarRank==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
+	if(!hasPermissionToEditRank(getUserRank($userID))) { // Attempting to edit someone of equal or greater rank
 		addFailureNotice("Permission Denied");
+		return false;
 	}
-	elseif(!hasPermissionToEditRank(getUserRank($userID))) { // Attempting to demote someone of your rank or above
-		addFailureNotice("Permission Denied");
+	if(is_numeric($tarRank)) {
+		if(!hasPermissionToEditRank($tarRank)||$tarRank==0) { // Attempting to Promote User to your rank or above, or into pre-login rank
+			addFailureNotice("Permission Denied");
+		} else {
+			$sql = "UPDATE accounts SET rankID='$tarRank' WHERE actID='$userID'";
+			$result = dbQuery($sql) or die ("Query failed: setUserRank");
+			addSuccessNotice("Changed ".getMemberName($pageID2)."'s Rank");
+		}
 	} else {
-	
-	$sql = "UPDATE accounts SET rankID='$tarRank' WHERE actID='$userID'";
-	$result = dbQuery($sql) or die ("Query failed: setUserRank");
-	addSuccessNotice("Changed ".getMemberName($pageID2)."'s Rank");
+		if($tarRank="rename") { flagForRename($userID); addSuccessNotice("Flagged ".getMemberName($pageID2)." for rename."); }
 	}
 }
 
@@ -46,6 +50,9 @@ function getChangeRankList($actID) {
 function getChangeRankListOptions($actID) {
 	// Get Users Rank ID
 	$userRank=getUserRank($actID);
+	
+	// Flag User for Rename Option
+	if(userCan("flagRenames")) { displayChangeRankListOption(" - Flag For Rename - ", "rename", ""); }
 	
 	// Display Rank List With Current Rank Selected
 	$sql = "SELECT * FROM ranks ORDER BY rankOrder";
