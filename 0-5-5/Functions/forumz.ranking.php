@@ -37,7 +37,10 @@ function setUserRank() {
 			addSuccessNotice("Changed ".getMemberName($pageID2)."'s Rank");
 		}
 	} else {
-		if($tarRank="rename") { flagForRename($userID); addSuccessNotice("Flagged ".getMemberName($pageID2)." for rename."); }
+		if($tarRank=="rename") { flagForRename($userID); addSuccessNotice("Flagged ".getMemberName($pageID2)." for rename."); }
+		elseif($tarRank=="noRename") { unflagForRename($userID); addSuccessNotice("Unflagged ".getMemberName($pageID2)." for rename."); }
+		elseif($tarRank=="ban") { setAccountAsLocked($userID); addSuccessNotice("Banned ".getMemberName($pageID2)."."); }
+		elseif($tarRank=="unban") { setAccountAsActive($userID); addSuccessNotice("Removed Ban From ".getMemberName($pageID2)."."); }
 	}
 }
 
@@ -50,9 +53,13 @@ function getChangeRankList($actID) {
 function getChangeRankListOptions($actID) {
 	// Get Users Rank ID
 	$userRank=getUserRank($actID);
+	$actFlags = getAccountFlags($actID);
 	
 	// Flag User for Rename Option
-	if(userCan("flagRenames")) { displayChangeRankListOption(" - Flag For Rename - ", "rename", ""); }
+	if(userCan("flagRenames")&&$actFlags['userRename']=="0") { displayChangeRankListOption(" - Flag For Rename - ", "rename", ""); }
+	elseif(userCan("flagRenames")&&$actFlags['userRename']=="1") { displayChangeRankListOption(" - Unflag For Rename - ", "noRename", ""); }
+	if(userCan("banUsers")&&$actFlags['status']=="1") { displayChangeRankListOption(" - Ban User - ", "ban", ""); }
+	elseif(userCan("banUsers")&&$actFlags['status']=="0") { displayChangeRankListOption(" - Remove Ban From User - ", "unban", ""); }
 	
 	// Display Rank List With Current Rank Selected
 	$sql = "SELECT * FROM ranks ORDER BY rankOrder";

@@ -10,10 +10,7 @@ Completed:
 	-Edit New Site Settings
 -New Theme
 -Flag Users For Rename
+-Ban Users
 
 To-Do:
 -*BB Code Editor - plugin
--*Suspend/Ban Users
-
-Issues:
--Fix Theme not loading when no files present (auto-redirect to known theme...)

@@ -6,7 +6,7 @@
 
 
 function getListActiveMembers() {
-	$sql = "SELECT * FROM accounts WHERE actFlags LIKE '%s:6:\"status\";s:1:\"1\";%' ORDER BY username";
+	$sql = "SELECT * FROM accounts WHERE rankID!='0' ORDER BY username";
 	$result = dbQuery($sql) or die ("Query failed: getListActiveMembers");
 	return $result;
 }

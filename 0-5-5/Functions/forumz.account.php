@@ -203,6 +203,15 @@ function checkUsernameAvailable($user) {
 	} return false;
 }
 
+//// Get Account Flags
+function getAccountFlags($actID) {
+	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: getAccountFlags");
+	$resultArray = mysqli_fetch_array($result);
+	$actFlags = unserialize($resultArray['actFlags']);
+	return $actFlags;
+}
+
 //// Account Status Admin
 function confirmAccount() { // Fix to not work for banned acts and acts with admin accept req
 	global $pageID, $pageID2;
@@ -215,10 +224,7 @@ function confirmAccount() { // Fix to not work for banned acts and acts with adm
 	}
 }
 function setAccountAsConfirmedByEmail($actID) {
-	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByEmail-get");
-	$resultArray = mysqli_fetch_array($result);
-	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags = getAccountFlags($actID);
 	$actFlags['emailConfirmed']="1";
 	$actFlags = serialize($actFlags);
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
@@ -226,30 +232,21 @@ function setAccountAsConfirmedByEmail($actID) {
 	addSuccessNotice("Account Activated - You May Now Login");
 }
 function setAccountAsConfirmedByAdmin($actID) {
-	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByAdmin-get");
-	$resultArray = mysqli_fetch_array($result);
-	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags = getAccountFlags($actID);
 	$actFlags['adminConfirmed']="1";
 	$actFlags = serialize($actFlags);
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByAdmin-set");
 }
 function setAccountAsActive($actID) {
-	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive-get");
-	$resultArray = mysqli_fetch_array($result);
-	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags = getAccountFlags($actID);
 	$actFlags['status']="1";
 	$actFlags = serialize($actFlags);
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive-set");
 }
 function setAccountAsLocked($actID) {
-	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: setAccountAsLocked-get");
-	$resultArray = mysqli_fetch_array($result);
-	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags = getAccountFlags($actID);
 	$actFlags['status']="0";
 	$actFlags = serialize($actFlags);
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
@@ -326,15 +323,10 @@ function renameUser() {
 		return false;
 	}
 	
-	// Get Act Flags
-	$sql = "SELECT * FROM accounts WHERE actID='$tarActID'";
-	$result = dbQuery($sql) or die ("Query failed: renameUser-selectAccount");
-	$resultArray = mysqli_fetch_array($result);
-	$actFlags = unserialize($resultArray['actFlags']);
+	// Update Account
+	$actFlags = getAccountFlags($actID);
 	$actFlags['userRename']="0";
 	$actFlags = serialize($actFlags);
-	
-	// Update Account
 	$sql = "UPDATE accounts SET username='$newUsername', actFlags='$actFlags' WHERE actID='$tarActID'";
 	$result = dbQuery($sql) or die ("Query failed: renameUser");
 	
@@ -342,17 +334,22 @@ function renameUser() {
 	addSuccessNotice("Username Updated. Please login with new username.");
 }
 function flagForRename($actID) {
-	// Get Act Flags
-	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
-	$result = dbQuery($sql) or die ("Query failed: flagForRename-selectAccount");
-	$resultArray = mysqli_fetch_array($result);
-	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags = getAccountFlags($actID);
 	$actFlags['userRename']="1";
 	$actFlags = serialize($actFlags);
 	
 	// Update Account
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: flagForRename");
+}
+function unflagForRename($actID) {
+	$actFlags = getAccountFlags($actID);
+	$actFlags['userRename']="0";
+	$actFlags = serialize($actFlags);
+	
+	// Update Account
+	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
+	$result = dbQuery($sql) or die ("Query failed: unflagForRename");
 }
 
 //// Get Ranks ////

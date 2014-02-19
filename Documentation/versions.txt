@@ -121,6 +121,7 @@ Version 0.5.6: - Due Feb 23
 	-Flood Control
 -File Upload
 	-Media in Post management
+-User/IP Suspensions
 -Admin Verification of New Accounts
 -Multiple site managers (edit site settings and ranks)
 -Pages System
