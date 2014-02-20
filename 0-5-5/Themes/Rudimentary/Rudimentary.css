@@ -42,6 +42,17 @@ textarea {
 	margin-right: auto;
 }
 
+/* ----- Misc div styling ----- */
+
+p {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul, ol {
+	margin: 0px;
+}
+
 /* ---------- Header ---------- */
 header {
 	width: 100%;

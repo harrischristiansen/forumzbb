@@ -52,6 +52,7 @@ $(function() {
     $(".sceditor").sceditor({
         plugins: "bbcode",
         toolbar: "bold,italic,underline,strike,subscript,superscript|left,center,right|font,size,color,removeformat|pastetext|bulletlist,orderedlist|table|code,quote|horizontalrule,image,email,link,unlink|emoticon,youtube,date,time|maximize,source",
+        parserOptions: { breakAfterBlock: false },
 		style: "/Resources/plugins/sceditor/minified/jquery.sceditor.default.min.css",
 		emoticonsRoot: "/Resources/plugins/sceditor/"
     });

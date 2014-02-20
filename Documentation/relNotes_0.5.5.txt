@@ -11,6 +11,4 @@ Completed:
 -New Theme
 -Flag Users For Rename
 -Ban Users
-
-To-Do:
--Fix spacing of <p>, <table>, <ul>, <ol>
+-BB Code Editor
