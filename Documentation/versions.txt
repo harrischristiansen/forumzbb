@@ -106,7 +106,7 @@ Version 0.5.4:
 -Spam Protection - deny with 3 spam marks on IP
 -Dynamic Forum Page Titles
 
-Version 0.5.5: - Due Feb 22
+Version 0.5.5:
 -Theme Changer
 	-User Preference
 -Permissions System
@@ -156,6 +156,8 @@ Version 0.6.0: - First Public Release, no activation code - Due March 23
 	-Place for users to make suggestions (of new features, of bugs, etc)
 
 Version 0.6.1:
+- HarrisChristiansen.com Theme
+- Forumzbb.com Theme
 - Another new theme, from scratch, using latest web standards
 	-Challenge Self
 	-Match signup site design?
