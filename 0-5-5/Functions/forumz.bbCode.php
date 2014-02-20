@@ -2,6 +2,8 @@
 // Harris Christiansen
 // Created 2013-11-16
 
+include($_SERVER['DOCUMENT_ROOT'].'/Resources/plugins/jbbcode/Parser.php');
+
 // Misc Input
 function cleanInput($input) {
 	global $con;
@@ -31,21 +33,22 @@ function applyBBCode($post) {
 	$fix[2]="'"; $fixed[2]="&#39;";
 	$fix[3]='"'; $fixed[3]="&quot;";
 	$post=str_replace($fix, $fixed, $post);
-
-	// Database Fixes
+	
+	// BB Code Parser
+	$parser = new JBBCode\Parser();
+	
+	// Add Definitions
 	$sql="SELECT * FROM bbCode ORDER BY orderNum";
 	$result = dbQuery($sql) or die ("Query failed: applyBBCode");
 	while($fix = mysqli_fetch_array($result)) {
-		if(strpos($fix['before'],'value') !== false) { // contains a "value"
-			preg_match('/\[(.*?)=([^\]]+)]/', $post, $match);
-			if(strpos($fix['before'],$match[0]) !== false) { // contains searched value
-				
-			}
-		} else { // Does not contain "value"
-			$post=str_replace($fix['before'], $fix['after'], $post);
-		}
+		$builder = new JBBCode\CodeDefinitionBuilder($fix['before'], $fix['after']);
+		if($fix['useOption']=="true") { $builder->setUseOption(true); }
+		$parser->addCodeDefinition($builder->build());
 	}
-	return $post;
+ 
+	$parser->parse(htmlentities($post));
+ 
+	return $parser->getAsHtml();
 }
 
 function reverseFormatPost($post) {
