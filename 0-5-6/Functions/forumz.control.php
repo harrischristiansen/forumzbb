@@ -30,11 +30,21 @@ function displayCPContent() {
 		if($pageID=="editSiteSettings") {
 			global $siteSettings;
 			$pageNotFound=false;
+			
+			// Checked Settings
 			if($siteSettings['reqLogin']) { $reqLoginChecked="checked"; }
 			if($siteSettings['verifyRegisterEmail']) { $verifyRegisterEmailChecked="checked"; }
 			if($siteSettings['verifyRegisterAdmin']) { $verifyRegisterAdminChecked="checked"; }
 			if($siteSettings['htmlAllowed']) { $htmlAllowedChecked="checked"; }
-			editSiteSettingsForm($siteURL, $siteSettings['siteName'], reverseFormatPost($siteSettings['siteMotd']), reverseFormatPost($siteSettings['siteSlogan']), reverseFormatPost($siteSettings['disabledMessage']), $reqLoginChecked, $verifyRegisterEmailChecked, $verifyRegisterAdminChecked, $siteSettings['blogEntriesPerPage'], $htmlAllowedChecked, $siteSettings['facebookLink'], $siteSettings['youtubeLink'], $siteSettings['googleAnalytics'], $siteSettings['metaDesc'], $siteSettings['metaKeywords'], $siteSettings['siteAbout']);
+			
+			// BB Code Settings
+			$sql = "SELECT * FROM siteSettings WHERE settingsProfile='1'";
+			$result = dbQuery($sql) or die ("Query failed: displayCPContent-getSiteSettings");
+			$resultArray = mysqli_fetch_array($result);
+			$settings = unserialize($resultArray['settings_bb']);
+			
+			// Display Form
+			editSiteSettingsForm($siteURL, $settings['siteName'], $settings['siteMotd'], $settings['siteSlogan'], $settings['disabledMessage'], $reqLoginChecked, $verifyRegisterEmailChecked, $verifyRegisterAdminChecked, $siteSettings['blogEntriesPerPage'], $htmlAllowedChecked, $siteSettings['facebookLink'], $siteSettings['youtubeLink'], $siteSettings['googleAnalytics'], $siteSettings['metaDesc'], $siteSettings['metaKeywords'], $siteSettings['siteAbout']);
 		}
 	}
 	if(userCan('editRanks')) {
@@ -136,7 +146,13 @@ function updateSiteSettings() {
 	$metaKeywords=cleanInput($pagePost['metaKeywords']);
 	$siteAbout=cleanInput($pagePost['siteAbout']);
 	
-	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', defaultTheme='$siteTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
+	$settings['siteName']=cleanInput($pagePost['siteName']);
+	$settings['siteMotd']=cleanInput($pagePost['siteMotd']);
+	$settings['siteSlogan']=cleanInput($pagePost['siteSlogan']);
+	$settings['disabledMessage']=cleanInput($pagePost['siteDisabled']);
+	$settings = serialize($settings);
+	
+	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', settings_bb='$settings', defaultTheme='$siteTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
 	
 	loadSiteSettings(); // To Refresh Site Settings
