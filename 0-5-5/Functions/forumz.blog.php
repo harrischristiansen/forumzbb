@@ -114,7 +114,7 @@ function viewBlogComments() {
 		$viewDelete = userCan('deleteBlogComments');
 		$editLink = $siteSettings['siteURLShort']."editBlogComment/".$comment['idNum'];
 		$deleteLink  = $siteSettings['siteURLShort']."deleteBlogComment/".$comment['idNum'];
-		$editText = reverseFormatPost($comment['comment']);
+		$editText = $comment['comment_bb'];
 		if($comment['posterID']==returnUserID()) { $viewEdit = true; $viewDelete = true; }
 		displayBlogComment(getMemberName($comment['posterID']),$comment['date'],$comment['time'],$comment['comment'],$viewEdit,$viewDelete,$editLink,$deleteLink,$editText);
 	}
@@ -125,6 +125,7 @@ function addBlogEntry() {
 	global $pagePost, $pageID;
 	$newEntryTitle=cleanInput($pagePost['blogEntryTitle']);
 	$newEntryText=formatPost($pagePost['blogEntryText']);
+	$newEntryText_bb=cleanInput($pagePost['blogEntryText']);
 	if(!userCan('postBlogEntries')) {
 		addFailureNotice("Permission Denied");
 	} elseif($newEntryTitle==""||$newEntryTitle=="Blog Entry Title"||$newEntryText=="") {
@@ -135,7 +136,7 @@ function addBlogEntry() {
 		$author=returnUserID();
 		$date=returnDateOfficial();
 		$time=returnTime();
-		$sql = "INSERT INTO blogs (ID, Title, Author, AuthorDate, AuthorTime, Post) VALUES ('$blogID','$newEntryTitle','$author','$date', '$time', '$newEntryText')";
+		$sql = "INSERT INTO blogs (ID, Title, Author, AuthorDate, AuthorTime, Post, Post_bb) VALUES ('$blogID','$newEntryTitle','$author','$date', '$time', '$newEntryText', '$newEntryText_bb')";
 		$result = dbQuery($sql) or die ("Query failed: addBlogEntry");
 		addSuccessNotice("Blog Entry Created");
 	}
@@ -147,10 +148,11 @@ function addBlogComment() {
 	if(userCan('postBlogComments')) {
 		$commentID=numBlogComments()+1;
 		$postClean=formatPost($pagePost['blogCommentText']);
+		$post_bb=cleanInput($pagePost['blogCommentText']);
 		$date=returnDateOfficial();
 		$time=returnTime();
 		$userID=returnUserID();
-		$sql = "INSERT INTO blogComments (idNum, blogID, posterID, date, time, comment) VALUES ('$commentID','$pageID','$userID','$date', '$time', '$postClean')";
+		$sql = "INSERT INTO blogComments (idNum, blogID, posterID, date, time, comment, comment_bb) VALUES ('$commentID','$pageID','$userID','$date', '$time', '$postClean', '$post_bb')";
 		$result = dbQuery($sql) or die ("Query failed: addBlogComment");
 		addSuccessNotice("Comment Added");
 	} else {
@@ -168,9 +170,10 @@ function editBlogPost() {
 	if(userCan('editBlogEntries')||returnUserID()==getBlogAuthorID($pageID)) {
 		$newBlogTitle=cleanInput($pagePost['blogEntryTitle']);
 		$newBlogEntry=formatPost($pagePost['blogEntryText']);
+		$newBlogEntry_bb=cleanInput($pagePost['blogEntryText']);
 		$updateAuthor=returnUserID();
 		$updateDate=returnDateOfficial();
-		$sql = "UPDATE blogs SET Title='$newBlogTitle',Post='$newBlogEntry',updateAuthor='$updateAuthor',updateDate='$updateDate' WHERE ID='$pageID'";
+		$sql = "UPDATE blogs SET Title='$newBlogTitle',Post='$newBlogEntry',Post_bb='$newBlogEntry_bb',updateAuthor='$updateAuthor',updateDate='$updateDate' WHERE ID='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: editBlogPost");
 		addSuccessNotice("Blog Entry Updated");
 	} else {
@@ -185,7 +188,8 @@ function editBlogComment() {
 	}
 	if(userCan('editBlogComments')||returnUserID()==getBlogCommentAuthorID($pageID)) {
 		$newBlogComment=formatPost($pagePost['blogComment']);
-		$sql = "UPDATE blogComments SET comment='$newBlogComment' WHERE idNum='$pageID'";
+		$newBlogComment_bb=cleanInput($pagePost['blogComment']);
+		$sql = "UPDATE blogComments SET comment='$newBlogComment', comment_bb='$newBlogComment_bb' WHERE idNum='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: editBlogPost");
 		addSuccessNotice("Blog Comment Updated");
 	} else {
@@ -201,7 +205,7 @@ function getBlogComposeField() {
 		if(userCan('editBlogEntries')||returnUserID()==getBlogAuthorID($pageID)) {
 			$formLink=$siteSettings['siteURLShort'].'editBlog/'.$pageID;
 			$blogEntry=getBlogEntry($pageID);
-			$currentEntry=reverseFormatPost($blogEntry['Post']);
+			$currentEntry=$blogEntry['Post_bb'];
 			$currentTitle=$blogEntry['Title'];
 			displayBlogComposeField($formLink, true, $currentTitle, $currentEntry);
 		}

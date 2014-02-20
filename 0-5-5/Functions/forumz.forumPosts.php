@@ -18,7 +18,7 @@ function viewForumThread() {
 		if($post['author']==returnUserID()) { $viewEdit = true; $viewDelete = true; }
 		$editLink = $siteSettings['siteURLShort']."editForumPost/".$post['id'];
 		$deleteLink  = $siteSettings['siteURLShort']."deleteForumPost/".$post['id'];
-		$editText = reverseFormatPost($postText);
+		$editText = $post['post_bb'];
 		displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $postTime, $postText, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText);
 		$rowID++;
 	}
@@ -68,6 +68,7 @@ function addForumPost() {
 	global $pagePost, $pageID;
 	$threadID = $pageID;
 	$threadPost = formatPost($pagePost['threadPost']);
+	$threadPost_bb = cleanInput($pagePost['threadPost']);
 	$forumID = getForumIDOfThread($threadID);
 	$threadSubject = "RE: ".getThreadTitle($threadID);
 	$threadAuthor = returnUserID();
@@ -90,7 +91,7 @@ function addForumPost() {
 	
 	// Add Post
 	$postID = getNumForumPosts()+1;
-	$sql = "INSERT INTO forumPosts (id, threadID, forumID, subject, post, author, postDate, postTime) VALUES ('$postID', '$threadID', '$forumID', '$threadSubject', '$threadPost', '$threadAuthor', '$threadDate', '$threadTime')";
+	$sql = "INSERT INTO forumPosts (id, threadID, forumID, subject, post, post_bb, author, postDate, postTime) VALUES ('$postID', '$threadID', '$forumID', '$threadSubject', '$threadPost', '$threadPost_bb', '$threadAuthor', '$threadDate', '$threadTime')";
 	$result = dbQuery($sql) or die ("Query failed: addForumPost-addPost");
 	
 	addSuccessNotice("Reply Added");
@@ -105,7 +106,8 @@ function editForumPost() {
 	}
 	if(userCan('editForumPosts')||returnUserID()==getForumPostAuthorID($pageID)) {
 		$newForumPost=formatPost($pagePost['forumPost']);
-		$sql = "UPDATE forumPosts SET post='$newForumPost' WHERE id='$pageID'";
+		$newForumPost=cleanInput($pagePost['forumPost']);
+		$sql = "UPDATE forumPosts SET post='$newForumPost', post_bb='$newForumPost_bb' WHERE id='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: editForumPost");
 		addSuccessNotice("Post Updated");
 	} else {

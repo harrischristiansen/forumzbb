@@ -106,7 +106,7 @@ Version 0.5.4:
 -Spam Protection - deny with 3 spam marks on IP
 -Dynamic Forum Page Titles
 
-Version 0.5.5: - Due Feb 9
+Version 0.5.5: - Due Feb 22
 -New Theme
 	-Robotics Site Theme
 	-Include All Associated Settings (facebookLink, youtubeLink, metaData, googleAnalytics, etc)
@@ -115,7 +115,7 @@ Version 0.5.5: - Due Feb 9
 -Theme Changer
 -BB Code Editor
 
-Version 0.5.6: - Due Feb 23
+Version 0.5.6: - Due March 2
 -Spam Protection
 	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
 	-Flood Control
@@ -135,7 +135,7 @@ Version 0.5.6: - Due Feb 23
 -Live username available checking
 -Solid Update System (When new version is released, upgrading is as easy as pressing a button)
 
-Version 0.5.7: - Due March 9
+Version 0.5.7: - Due March 16
 -Security Enhancements
 -Advanced Forum
 	-Move Threads
@@ -148,7 +148,7 @@ Version 0.5.7: - Due March 9
 		-threads per forum page
 		-posts per thread pages
 
-Version 0.6.0: - First Public Release, no activation code - Due by March 23rd
+Version 0.6.0: - First Public Release, no activation code - Due March 23
 -Code Cleanup
 -Streamlined sign up (new site design?)
 	-Place for users to make suggestions (of new features, of bugs, etc)

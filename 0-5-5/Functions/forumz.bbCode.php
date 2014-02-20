@@ -46,19 +46,9 @@ function applyBBCode($post) {
 		$parser->addCodeDefinition($builder->build());
 	}
  
-	$parser->parse(htmlentities($post));
+	$parser->parse($post);
  
 	return $parser->getAsHtml();
-}
-
-function reverseFormatPost($post) {
-	$post=str_replace('<br>','',$post);
-	$sql="SELECT * FROM bbCode ORDER BY orderNum DESC";
-	$result = dbQuery($sql) or die ("Query failed: reverseFormatPost");
-	while($fix = mysqli_fetch_array($result)) {
-		$post=str_replace($fix['after'], $fix['before'], $post);
-	}
-	return $post;
 }
 
 ?>
