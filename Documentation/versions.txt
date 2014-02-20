@@ -107,12 +107,14 @@ Version 0.5.4:
 -Dynamic Forum Page Titles
 
 Version 0.5.5: - Due Feb 22
--New Theme
-	-Robotics Site Theme
-	-Include All Associated Settings (facebookLink, youtubeLink, metaData, googleAnalytics, etc)
--Mobile Theme
-	-Robotics Site Theme
 -Theme Changer
+	-User Preference
+-Permissions System
+-Control Panel
+	-Edit New Site Settings
+-New Theme
+-Flag Users For Rename
+-Ban Users
 -BB Code Editor
 
 Version 0.5.6: - Due March 2

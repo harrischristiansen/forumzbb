@@ -6,7 +6,7 @@ CREATE TABLE `forumzDev_accounts` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `email` text NOT NULL,
-  `actStatus` int(11) NOT NULL COMMENT '0=active, 1=waitingEmailVerification, 2=waitingAdminVerification, 3=banned',
+  `actFlags` text NOT NULL COMMENT 'active/banned, emailConfirmed, adminConfirmed, renameFlagged',
   `rankID` int(11) NOT NULL,
   `joinDate` text NOT NULL,
   `joinIP` text NOT NULL,
@@ -15,10 +15,9 @@ CREATE TABLE `forumzDev_accounts` (
   `themePref` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_accounts` values('2','john','81dc9bdb52d04dc20036dbd8313ed055','grimes.johnathan3@gmail.com','0','3','2013-11-21','81.87.47.20','2013-12-12','81.87.38.139',''),
- ('0','Harris','7af4896825dfc7e94f8a1d6846a5a2d4','harrischristiansen@me.com','0','2','2013-11-13','67.166.73.129','2013-12-12','67.166.73.129','Rudimentary'),
- ('Anonymous','Anonymous','-','Anonymous','-1','0','-','-','-','-',''),
- ('1','TestUser','7a95dec218ffaaf8992bb48b4bd94367','testUser@forumzbb.com','0','1','2013-05-12','67.161.245.43','2013-12-12','67.166.73.129','');
+insert into `forumzDev_accounts` values('0','Harris','7af4896825dfc7e94f8a1d6846a5a2d4','harrischristiansen@mac.com','a:4:{s:6:\"status\";s:1:\"1\";s:14:\"emailConfirmed\";s:1:\"1\";s:14:\"adminConfirmed\";s:1:\"1\";s:10:\"userRename\";s:1:\"0\";}','2','2013-11-13','67.166.73.129','2014-02-19','67.166.73.129','Rudimentary'),
+ ('Anonymous','UnregisteredUser','-','Anonymous','','0','-','-','-','-',''),
+ ('1','TestUser','7a95dec218ffaaf8992bb48b4bd94367','testUser@forumzbb.com','a:4:{s:6:\"status\";s:1:\"1\";s:14:\"emailConfirmed\";s:1:\"1\";s:14:\"adminConfirmed\";s:1:\"1\";s:10:\"userRename\";s:1:\"0\";}','1','2013-05-12','67.161.245.43','2014-02-19','205.124.117.23','');
 
 CREATE TABLE `forumzDev_bannedClients` (
   `ipAdr` text NOT NULL,
@@ -32,71 +31,35 @@ CREATE TABLE `forumzDev_bannedClients` (
 CREATE TABLE `forumzDev_bbCode` (
   `orderNum` int(11) NOT NULL,
   `before` text NOT NULL,
-  `after` text NOT NULL
+  `after` text NOT NULL,
+  `useOption` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_bbCode` values('1','[img]','<img src=\"'),
- ('2','[/img]','\" alt=\"image\">'),
- ('3','[code]','<xmp>'),
- ('4','[/code]','</xmp>'),
- ('5','[link]','<a href=\"'),
- ('6','[/link]','\" target=\"_blank\">'),
- ('7','[linkText]',''),
- ('8','[/linkText]','</a>'),
- ('9','[center]','<center>'),
- ('10','[/center]','</center>'),
- ('11','[b]','<b>'),
- ('12','[/b]','</b>'),
- ('13','[i]','<i>'),
- ('14','[/i]','</i>'),
- ('15','[u]','<u>'),
- ('16','[/u]','</u>'),
- ('17',':)','<img src=\"/Resources/images/smilies/01.png\">'),
- ('18',':D',' <img src=\"/Resources/images/smilies/02.png\"> '),
- ('19',':O',' <img src=\"/Resources/images/smilies/03.png\"> '),
- ('20',':(',' <img src=\"/Resources/images/smilies/04.png\"> '),
- ('21',':|',' <img src=\"/Resources/images/smilies/05.png\"> '),
- ('22','[sleep]',' <img src=\"/Resources/images/smilies/06.png\"> '),
- ('23',':]',' <img src=\"/Resources/images/smilies/07.png\"> '),
- ('24','[tired]',' <img src=\"/Resources/images/smilies/08.png\"> '),
- ('25','[stoned]',' <img src=\"/Resources/images/smilies/09.png\"> '),
- ('26','[love]',' <img src=\"/Resources/images/smilies/10.png\"> '),
- ('27','[laugh]',' <img src=\"/Resources/images/smilies/11.png\"> '),
- ('28','[blush]',' <img src=\"/Resources/images/smilies/12.png\"> '),
- ('29','[yawn]',' <img src=\"/Resources/images/smilies/13.png\"> '),
- ('30',' :/',' <img src=\"/Resources/images/smilies/14.png\"> '),
- ('31','[sly]','<img src=\"/Resources/images/smilies/15.png\"> '),
- ('32','[grin]','<img src=\"/Resources/images/smilies/16.png\"> '),
- ('33','>:)','<img src=\"/Resources/images/smilies/17.png\"> '),
- ('34','>:(','<img src=\"/Resources/images/smilies/18.png\"> '),
- ('35','<:D','<img src=\"/Resources/images/smilies/19.png\"> '),
- ('36','>:O',' <img src=\"/Resources/images/smilies/20.png\"> '),
- ('37','[confused]',' <img src=\"/Resources/images/smilies/21.png\"> '),
- ('38','[grr]',' <img src=\"/Resources/images/smilies/22.png\"> '),
- ('39','[smoke]',' <img src=\"/Resources/images/smilies/23.png\"> '),
- ('40','[pissed]',' <img src=\"/Resources/images/smilies/24.png\"> '),
- ('41','[money]',' <img src=\"/Resources/images/smilies/25.png\"> '),
- ('42','[awe]',' <img src=\"/Resources/images/smilies/26.png\"> '),
- ('43','[cry]',' <img src=\"/Resources/images/smilies/27.png\"> '),
- ('44','[sad]',' <img src=\"/Resources/images/smilies/28.png\"> '),
- ('45','[evil]',' <img src=\"/Resources/images/smilies/29.png\"> '),
- ('46','[mad]',' <img src=\"/Resources/images/smilies/30.png\"> '),
- ('47','[cool]',' <img src=\"/Resources/images/smilies/31.png\"> '),
- ('48','[slick]',' <img src=\"/Resources/images/smilies/32.png\"> '),
- ('49','[apathetic]',' <img src=\"/Resources/images/smilies/33.png\"> '),
- ('50','[woah]',' <img src=\"/Resources/images/smilies/34.png\"> '),
- ('51','[boring]',' <img src=\"/Resources/images/smilies/35.png\"> '),
- ('52',':P',' <img src=\"/Resources/images/smilies/36.png\"> '),
- ('58','[color-red]','<span style=\"color: red\">'),
- ('53','[/color]','</span>'),
- ('59','[color-blue]','<span style=\"color: blue\">'),
- ('60','[color-green]','<span style=\"color: green\">'),
- ('61','[color-yellow]','<span style=\"color: yellow\">'),
- ('55','[blue]','<span style=\"color: blue\">'),
- ('54','[red]','<span style=\"color: red\">'),
- ('56','[green]','<span style=\"color: green\">'),
- ('57','[yellow]','<span style=\"color: yellow\">'),
- ('58','[color-pink]','<span style=\"color: #FF0099\">');
+insert into `forumzDev_bbCode` values('1','img','<img src=\"{param}\" alt=\"image\">',''),
+ ('2','code','<code>{param}</code>',''),
+ ('3','pre','<pre>{param}</pre>',''),
+ ('5','li','<li>{param}</li>',''),
+ ('6','center','<p style=\"text-align: center;\">{param}</p>',''),
+ ('4','b','<b>{param}</b>',''),
+ ('7','i','<i>{param}</i>',''),
+ ('8','u','<u>{param}</u>',''),
+ ('9','s','<strike>{param}</strike>',''),
+ ('10','url','<a href=\"{option}\" target=\"_blank\">{param}</a>','true'),
+ ('11','ul','<ul>{param}</ul>',''),
+ ('12','ol','<ol>{param}</ol>',''),
+ ('13','td','<td>{param}</td>',''),
+ ('14','sub','<sub>{param}</sub>',''),
+ ('15','sup','<sup>{param}</sup>',''),
+ ('16','color','<span style=\"color: {option};\">{param}</span>','true'),
+ ('17','font','<span style=\"font-family: {option};\">{param}</span>','true'),
+ ('18','size','<span style=\"text-size: {option};\">{param}</span>','true'),
+ ('19','hr','<hr>',''),
+ ('20','email','<a href=\"mailto:{option}\">{param}</a>','true'),
+ ('21','table','<table>{param}</table>',''),
+ ('22','tr','<tr>{param}</tr>',''),
+ ('23','video','<video width=\"320\" height=\"240\" controls><source src=\"{param}\" type=\"video/mp4\">',''),
+ ('24','left','<p style=\"text-align: left;\">{param}</p>',''),
+ ('25','right','<p style=\"text-align: right;\">{param}</p>','');
 
 CREATE TABLE `forumzDev_blogComments` (
   `idNum` int(11) NOT NULL,
@@ -104,7 +67,8 @@ CREATE TABLE `forumzDev_blogComments` (
   `posterID` text NOT NULL,
   `date` text NOT NULL,
   `time` text NOT NULL,
-  `comment` text NOT NULL
+  `comment` text NOT NULL,
+  `comment_bb` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
@@ -115,11 +79,12 @@ CREATE TABLE `forumzDev_blogs` (
   `AuthorDate` text NOT NULL,
   `AuthorTime` text NOT NULL,
   `Post` text NOT NULL,
+  `Post_bb` text NOT NULL,
   `updateAuthor` text NOT NULL,
   `updateDate` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_blogs` values('1','Forumz Development Site','0','2013-11-15','22:15','Forumz Development Site - Version 0.5.4<br>\r\nFor more info, please visit the ForumzBB project website at: <a href=\"http://www.forumzbb.com\" target=\"_blank\">ForumzBB.com</a>','0','2013-11-18');
+insert into `forumzDev_blogs` values('1','Forumz Development Version 0.5.5','0','2014-02-19','22:02:21','Forumz Development Site - Version 0.5.5<br>\r\n<br>\r\nFor more information on the ForumzBB project please visit <a href=\"http://www.forumzbb.com\" target=\"_blank\">forumzbb.com</a>.<br>\r\n<br>\r\nThe beta (latest version under testing) may be found at: <a href=\"http://beta.forumzbb.com\" target=\"_blank\">beta.forumzbb.com</a>.<br>\r\n<br>\r\nPublic Version will be released March 23, 2014.','Forumz Development Site - Version 0.5.5\r\n\r\nFor more information on the ForumzBB project please visit [url=http://www.forumzbb.com]forumzbb.com[/url].\r\n\r\nThe beta (latest version under testing) may be found at: [url=http://beta.forumzbb.com]beta.forumzbb.com[/url].\r\n\r\nPublic Version will be released March 23, 2014.','0','2014-02-19');
 
 CREATE TABLE `forumzDev_forumCats` (
   `id` int(11) NOT NULL,
@@ -138,7 +103,8 @@ CREATE TABLE `forumzDev_forumPosts` (
   `post` text NOT NULL,
   `author` int(11) NOT NULL,
   `postDate` text NOT NULL,
-  `postTime` text NOT NULL
+  `postTime` text NOT NULL,
+  `post_bb` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
@@ -176,8 +142,7 @@ CREATE TABLE `forumzDev_navBar` (
 
 insert into `forumzDev_navBar` values('Home','home','1',''),
  ('Members List','membersList','11','viewMembersList'),
- ('Login','login','4','loggedOut'),
- ('Register','register','5','loggedOut'),
+ ('Register','register','4','loggedOut'),
  ('Forum','forums','3','viewForum'),
  ('Control Panel','controlPanel','10','loggedIn'),
  ('Logout','logout','12','loggedIn'),
@@ -203,9 +168,9 @@ CREATE TABLE `forumzDev_pages` (
 insert into `forumzDev_pages` values('home','','viewHome','','','Home','','','','','true','','',''),
  ('login','','','','loginUser','Login','Login','','Please Login Using Form.<br>\nIf You Need To Reset Your Password <a href=\"/resetPassword\">Click Here</a>','','','','loginSubmitted',''),
  ('blog','','viewBlog','','checkBlogEntryExists','Blog Entry','Blog Post','','','','true','','',''),
- ('register','','','viewRegistration','registerUser','Register','Register','','','','','','registerSubmitted',''),
- ('logout','','','','logoutUser','Logout','Logout','','','true','','','',''),
- ('membersList','','viewMembersList','','','Members List','Members','','','','true','','',''),
+ ('register','','','viewRegistration','registerUser','Register','Register','','','','','loggedOut','registerSubmitted',''),
+ ('logout','','','','logoutUser','Logout','Logout','','','true','','loggedIn','',''),
+ ('membersList','','viewMembersList','','','Members List','Members','','','','true','viewMembersList','',''),
  ('membersList','changeUserRank','viewMembersList','','setUserRank','Members List - Change Member Rank','Set Member Rank','','Action Denied','true','','editMemberRank','newRank',''),
  ('devOutput','','','','writeSessionData','Dev Output','Dev Output','','','','true','','',''),
  ('blog','reply','viewBlog','viewBlog','addBlogComment','Blog Entry - Add Blog Comment','Post Comment','','','','true','postBlogComments','commentSubmitted',''),
@@ -220,19 +185,47 @@ insert into `forumzDev_pages` values('home','','viewHome','','','Home','','','',
  ('composeEntry','','viewBlog','viewBlogCompose','addBlogEntry','Compose Blog Entry','New Entry','','','true','','postBlogEntries','blogComposeSubmitted',''),
  ('editBlog','','viewBlog','viewBlogCompose','editBlogPost','Edit Blog Entry','','','','true','','','blogUpdateSubmitted',''),
  ('deleteBlog','','viewBlogHome','','deleteBlogPost','Delete Blog Entry','Delete Blog','','','true','','','',''),
- ('forums','','viewForumHome','','','Forums Home','Forums','','','','true','','',''),
- ('forum','','viewForumThreads','','','Forums - forumTitle','','','','','true','','',''),
+ ('forums','','viewForumHome','','','Forums Home','Forums','','','','true','viewForum','',''),
+ ('forum','','viewForumThreads','','','Forums - forumTitle','','','','','true','viewForum','',''),
  ('confirmAccount','','','','confirmAccount','Confirm Account','Confirm Account','','','','','','',''),
  ('newForumThread','','viewForumThreads','viewThreadCompose','createForumThread','Forums - forumTitle - New Thread','','','','','true','createForumThreads','threadComposeSubmitted',''),
- ('thread','','viewForumThread','','updateThreadViewCount','Forums - threadTitle','','','','','true','','',''),
+ ('thread','','viewForumThread','','updateThreadViewCount','Forums - threadTitle','','','','','true','viewForum','',''),
  ('resetPassword','','','viewPassReset','resetPassword','Reset Password ','Reset Password','','','','','','resetSubmitted',''),
  ('newForumPost','','viewForumThread','','addForumPost','Forums - threadTitle - Add Reply','Add Reply','','','','true','createForumPosts','replyComposeSubmitted',''),
  ('editBlogComment','','viewBlog','','editBlogComment','Edit Blog Comment','Edit Blog Comment','','','true','','','editBlogCommentSubmitted',''),
  ('deleteBlogComment','','viewBlog','','deleteBlogComment','Delete Blog Comment','Delete Blog Comment','','','true','','','',''),
- ('editForumPost','','viewForumThread','','editForumPost','Forums - threadTitle - Edit Post','Edit Forum Post','','','true','','','editForumPostSubmitted',''),
- ('deleteForumPost','','viewForumThread','','deleteForumPost','Forums - threadTitle - DeletePost','Delete Forum Post','','','true','','','',''),
+ ('editForumPost','','viewForumThread','','editForumPost','Forums - threadTitle - Edit Post','Edit Forum Post','','','true','','viewForum','editForumPostSubmitted',''),
+ ('deleteForumPost','','viewForumThread','','deleteForumPost','Forums - threadTitle - DeletePost','Delete Forum Post','','','true','','viewForum','',''),
  ('changeEmail','','','','changeEmail','Change Account Email','Change Account Email','','','','','','',''),
- ('blogHome','','viewBlogHome','','','Blog','Blog','','','','true','','','');
+ ('blogHome','','viewBlogHome','','','Blog','Blog','','','','true','','',''),
+ ('renameUser','','','','renameUser','Rename User','Rename User','','','','','','renameUserSubmitted','');
+
+CREATE TABLE `forumzDev_permissions` (
+  `internalName` text NOT NULL,
+  `itemDesc` text NOT NULL,
+  `category` text NOT NULL,
+  `orderNum` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+insert into `forumzDev_permissions` values('editSiteSettings','Edit Site Settings','Admin','1'),
+ ('editMemberRank','Edit Member Rank','Admin','2'),
+ ('editRanks','Edit Ranks','Admin','3'),
+ ('viewMembersList','View Members List','Admin','6'),
+ ('postBlogEntries','Post Blog Entries','Blog','1'),
+ ('postBlogComments','Post Blog Comments','Blog','2'),
+ ('editBlogEntries','Edit Blog Entries','Blog','3'),
+ ('deleteBlogEntries','Delete Blog Entries','Blog','4'),
+ ('editBlogComments','Edit Blog Comments','Blog','5'),
+ ('deleteBlogComments','Delete Blog Comments','Blog','6'),
+ ('viewForum','View Forum','Forums','1'),
+ ('createForumThreads','Create Forum Threads','Forums','2'),
+ ('createForumPosts','Create Forum Posts','Forums','3'),
+ ('editForumPosts','Edit Forum Posts','Forums','4'),
+ ('deleteForumPosts','Delete Forum Posts','Forums','5'),
+ ('manageForums','Manage Forums','Forums','6'),
+ ('useChat','Use Chat','Chat','1'),
+ ('flagRenames','Flag Users For Rename','Admin','5'),
+ ('banUsers','Ban Users','Admin','4');
 
 CREATE TABLE `forumzDev_ranks` (
   `rankID` int(11) NOT NULL,
@@ -243,8 +236,8 @@ CREATE TABLE `forumzDev_ranks` (
 
 insert into `forumzDev_ranks` values('0','0','Anonymous','a:15:{s:16:\"editSiteSettings\";s:0:\"\";s:14:\"editMemberRank\";s:0:\"\";s:9:\"editRanks\";s:0:\"\";s:15:\"viewMembersList\";s:0:\"\";s:15:\"postBlogEntries\";s:0:\"\";s:16:\"postBlogComments\";s:0:\"\";s:15:\"editBlogEntries\";s:0:\"\";s:17:\"deleteBlogEntries\";s:0:\"\";s:9:\"viewForum\";s:0:\"\";s:18:\"createForumThreads\";s:0:\"\";s:16:\"createForumPosts\";s:0:\"\";s:14:\"editForumPosts\";s:0:\"\";s:16:\"deleteForumPosts\";s:0:\"\";s:12:\"manageForums\";s:0:\"\";s:7:\"useChat\";s:0:\"\";}'),
  ('1','1','Member','a:15:{s:16:\"editSiteSettings\";s:0:\"\";s:14:\"editMemberRank\";s:0:\"\";s:9:\"editRanks\";s:0:\"\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:0:\"\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:0:\"\";s:17:\"deleteBlogEntries\";s:0:\"\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:0:\"\";s:16:\"deleteForumPosts\";s:0:\"\";s:12:\"manageForums\";s:0:\"\";s:7:\"useChat\";s:0:\"\";}'),
- ('2','3','Admin','a:17:{s:16:\"editSiteSettings\";s:4:\"true\";s:14:\"editMemberRank\";s:4:\"true\";s:9:\"editRanks\";s:4:\"true\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:4:\"true\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:4:\"true\";s:17:\"deleteBlogEntries\";s:4:\"true\";s:16:\"editBlogComments\";s:4:\"true\";s:18:\"deleteBlogComments\";s:4:\"true\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:4:\"true\";s:16:\"deleteForumPosts\";s:4:\"true\";s:12:\"manageForums\";s:4:\"true\";s:7:\"useChat\";s:4:\"true\";}'),
- ('3','2','Moderator','a:17:{s:16:\"editSiteSettings\";s:0:\"\";s:14:\"editMemberRank\";s:0:\"\";s:9:\"editRanks\";s:0:\"\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:4:\"true\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:0:\"\";s:17:\"deleteBlogEntries\";s:0:\"\";s:16:\"editBlogComments\";s:4:\"true\";s:18:\"deleteBlogComments\";s:0:\"\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:4:\"true\";s:16:\"deleteForumPosts\";s:0:\"\";s:12:\"manageForums\";s:0:\"\";s:7:\"useChat\";s:4:\"true\";}');
+ ('2','3','Admin','a:19:{s:16:\"editSiteSettings\";s:4:\"true\";s:14:\"editMemberRank\";s:4:\"true\";s:9:\"editRanks\";s:4:\"true\";s:8:\"banUsers\";s:4:\"true\";s:11:\"flagRenames\";s:4:\"true\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:4:\"true\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:4:\"true\";s:17:\"deleteBlogEntries\";s:4:\"true\";s:16:\"editBlogComments\";s:4:\"true\";s:18:\"deleteBlogComments\";s:4:\"true\";s:7:\"useChat\";s:4:\"true\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:4:\"true\";s:16:\"deleteForumPosts\";s:4:\"true\";s:12:\"manageForums\";s:4:\"true\";}'),
+ ('3','2','Moderator','a:17:{s:16:\"editSiteSettings\";s:0:\"\";s:14:\"editMemberRank\";s:0:\"\";s:9:\"editRanks\";s:0:\"\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:4:\"true\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:0:\"\";s:17:\"deleteBlogEntries\";s:0:\"\";s:16:\"editBlogComments\";s:4:\"true\";s:18:\"deleteBlogComments\";s:0:\"\";s:7:\"useChat\";s:4:\"true\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:4:\"true\";s:16:\"deleteForumPosts\";s:0:\"\";s:12:\"manageForums\";s:0:\"\";}');
 
 CREATE TABLE `forumzDev_siteSettings` (
   `settingsProfile` text NOT NULL,
@@ -258,12 +251,18 @@ CREATE TABLE `forumzDev_siteSettings` (
   `verifyRegisterEmail` text NOT NULL,
   `verifyRegisterAdmin` text NOT NULL,
   `htmlAllowed` text NOT NULL,
-  `blogEntriesPerPage` int(11) NOT NULL
+  `blogEntriesPerPage` int(11) NOT NULL,
+  `facebookLink` text NOT NULL,
+  `youtubeLink` text NOT NULL,
+  `googleAnalytics` text NOT NULL,
+  `metaDesc` text NOT NULL,
+  `metaKeywords` text NOT NULL,
+  `siteAbout` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_siteSettings` values('1','0-5-5','Forumz','','Dev Version 0.5.4 © 2013 <a href=\"http://www.forumzbb.com/\" target=\"_blank\">ForumzBB</a> - All Rights Reserved','Rudimentary','','','true','false','false','4'),
- ('0','0-5-4','0.5.4','','','','','','','','','0'),
- ('0','0-5-5','0.5.5','','','','','','','','','0');
+insert into `forumzDev_siteSettings` values('1','0-5-5','Forumz','','Dev Version 0.5.5 © 2014 <a href=\"http://www.forumzbb.com/\" target=\"_blank\">ForumzBB</a> - All Rights Reserved','Rudimentary','','','true','','false','4','','','','Forumzbb Development Site.','Forumz, Forumzbb, Development',''),
+ ('0','0-5-4','0.5.4','','','','','','','','','0','','','','','',''),
+ ('0','0-5-5','0.5.5','','','','','','','','','0','','','','','','');
 
 CREATE TABLE `forumzDev_themes` (
   `themeName` text NOT NULL,

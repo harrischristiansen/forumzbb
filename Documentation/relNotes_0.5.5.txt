@@ -1,14 +1,26 @@
-Forumz Version 0.5.5
+Forumz Version 0.5.6
 Harris Christiansen
--Due Feburary 22, 2014
+-Due March 2, 2014
 
 Completed:
--Theme Changer
-	-User Preference
--Permissions System
--Control Panel
-	-Edit New Site Settings
--New Theme
--Flag Users For Rename
--Ban Users
--BB Code Editor
+
+
+To-Do:
+-Spam Protection
+	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
+	-Flood Control
+-File Upload
+	-Media in Post management
+-User/IP Suspensions
+-Admin Verification of New Accounts
+-Multiple site managers (edit site settings and ranks)
+-Inbrowser bbcode to html manager
+-BBCode Smilies
+-Pages System
+	-Editable Pages
+-Pages Table
+	-Add ability for specific pages to require specific themes
+-Working Version Changer System
+-SiteSetting for if user can change personal siteTheme
+-Live username available checking
+-Solid Update System (When new version is released, upgrading is as easy as pressing a button)
