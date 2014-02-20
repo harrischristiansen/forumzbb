@@ -124,6 +124,8 @@ Version 0.5.6: - Due Feb 23
 -User/IP Suspensions
 -Admin Verification of New Accounts
 -Multiple site managers (edit site settings and ranks)
+-Inbrowser bbcode to html manager
+-BBCode Smilies
 -Pages System
 	-Editable Pages
 -Pages Table

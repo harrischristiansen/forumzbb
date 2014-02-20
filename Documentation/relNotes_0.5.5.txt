@@ -13,5 +13,4 @@ Completed:
 -Ban Users
 
 To-Do:
--*BB Code Editor - plugin - needs to be fully incorperated
-	-make smilies work
+-BBCode value replacements

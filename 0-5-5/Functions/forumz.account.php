@@ -324,7 +324,7 @@ function renameUser() {
 	}
 	
 	// Update Account
-	$actFlags = getAccountFlags($actID);
+	$actFlags = getAccountFlags($tarActID);
 	$actFlags['userRename']="0";
 	$actFlags = serialize($actFlags);
 	$sql = "UPDATE accounts SET username='$newUsername', actFlags='$actFlags' WHERE actID='$tarActID'";

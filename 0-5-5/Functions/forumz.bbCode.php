@@ -36,7 +36,14 @@ function applyBBCode($post) {
 	$sql="SELECT * FROM bbCode ORDER BY orderNum";
 	$result = dbQuery($sql) or die ("Query failed: applyBBCode");
 	while($fix = mysqli_fetch_array($result)) {
-		$post=str_replace($fix['before'], $fix['after'], $post);
+		if(strpos($fix['before'],'value') !== false) { // contains a "value"
+			preg_match('/\[(.*?)=([^\]]+)]/', $post, $match);
+			if(strpos($fix['before'],$match[0]) !== false) { // contains searched value
+				
+			}
+		} else { // Does not contain "value"
+			$post=str_replace($fix['before'], $fix['after'], $post);
+		}
 	}
 	return $post;
 }
