@@ -13,7 +13,6 @@ To-Do:
 	-Media in Post management
 -User/IP Suspensions
 -Admin Verification of New Accounts
--Multiple site managers (edit site settings and ranks)
 -Inbrowser bbcode to html manager
 -BBCode Smilies
 -Pages System
@@ -25,3 +24,4 @@ To-Do:
 
  === DB Changes ===
 -siteSettings added settings_bb
+-pages added requireTheme

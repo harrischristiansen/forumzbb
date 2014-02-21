@@ -36,7 +36,9 @@ function displayMembersList() {
 	
 	// Run While Statement For Each Member
 	while($member = mysqli_fetch_array($activeMembers)) {
-		displayMembersListRow($member['username'], getRankName($member['rankID']), $member['joinDate'], $member['lastLogin'], $member['actID'], $rowID, hasPermissionToEditRank($member['rankID']));
+		$canChangeRank = hasPermissionToEditRank($member['rankID']);
+		if($member['actID']==returnUserID()) { $canChangeRank=false; }
+		displayMembersListRow($member['username'], getRankName($member['rankID']), $member['joinDate'], $member['lastLogin'], $member['actID'], $rowID, $canChangeRank);
 		$rowID++;
 	}
 }

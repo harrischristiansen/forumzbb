@@ -97,14 +97,17 @@ function getHighestRankOrder() {
 }
 function hasPermissionToEditRank($rankID) {
 	global $userData;
-	if(isLoggedIn()&&userCan('editMemberRank')&&getOrderOfRank($rankID)<$userData['permissions']['rankOrder']) {
+	if(isLoggedIn()&&userCan('editMemberRank')&&getOrderOfRank($rankID)<$userData['permissions']['rankOrder']) { // Can edit up to own rank
+		return true;
+	}
+	if($userData['rankID']==getHighestRankID()) { // Is Admin of site
 		return true;
 	}
 	return false;
 }
-function hasPermissionToEditRankOrder($rankOrder) {
+function hasPermissionToEditRankOrder($rankOrder) { // Used For Determining Swaping Ranks
 	global $userData;
-	if($userData['loggedIn']&&userCan('editMemberRank')&&$rankOrder<$userData['permissions']['rankOrder']&&$rankOrder!=0) { // Used For Determining Swaping Ranks
+	if($userData['loggedIn']&&userCan('editMemberRank')&&$rankOrder<$userData['permissions']['rankOrder']&&$rankOrder!=0) {
 		return true;
 	}
 	return false;
