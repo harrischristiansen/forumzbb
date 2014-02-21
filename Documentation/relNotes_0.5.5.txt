@@ -3,7 +3,7 @@ Harris Christiansen
 -Due March 2, 2014
 
 Completed:
-
+-In Browser BB Code Manager
 
 To-Do:
 -Spam Protection
@@ -13,9 +13,8 @@ To-Do:
 	-Media in Post management
 -User/IP Suspensions
 -Admin Verification of New Accounts
--Inbrowser bbcode to html manager
+-Inbrowser pages manager
 -BBCode Smilies
--Working Version Changer System
 -SiteSetting for if user can change personal siteTheme
 -Live username available checking
 -Solid Update System (When new version is released, upgrading is as easy as pressing a button)
@@ -23,3 +22,8 @@ To-Do:
  === DB Changes ===
 -siteSettings added settings_bb
 -pages added requireTheme
+-bbCode
+	-removed orderNum
+	-added idNum
+	-changed before to bbCode
+	-changed after to htmlCode

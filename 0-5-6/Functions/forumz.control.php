@@ -9,6 +9,7 @@ function displayCPNav() {
 	displayCPNavItem("Change Preferences",$siteSettings['siteURLShort']."controlPanel/changePreferences/");
 	if(userCan('editSiteSettings')) {
 		displayCPNavItem("Edit Site Settings",$siteSettings['siteURLShort']."controlPanel/editSiteSettings/");
+		displayCPNavItem("Edit BBCode",$siteSettings['siteURLShort']."controlPanel/editBBCode/");
 	}
 	if(userCan('editRanks')) {
 		displayCPNavItem("Edit Ranks",$siteSettings['siteURLShort']."controlPanel/editRanks/");
@@ -28,7 +29,6 @@ function displayCPContent() {
 	// Permission Restricted Pages
 	if(userCan('editSiteSettings')) {
 		if($pageID=="editSiteSettings") {
-			global $siteSettings;
 			$pageNotFound=false;
 			
 			// Checked Settings
@@ -46,6 +46,10 @@ function displayCPContent() {
 			// Display Form
 			editSiteSettingsForm($siteURL, $settings['siteName'], $settings['siteMotd'], $settings['siteSlogan'], $settings['disabledMessage'], $reqLoginChecked, $verifyRegisterEmailChecked, $verifyRegisterAdminChecked, $siteSettings['blogEntriesPerPage'], $htmlAllowedChecked, $siteSettings['facebookLink'], $siteSettings['youtubeLink'], $siteSettings['googleAnalytics'], $siteSettings['metaDesc'], $siteSettings['metaKeywords'], $siteSettings['siteAbout']);
 		}
+		if($pageID=="editBBCode") {
+			editBBCodeForm($siteURL);
+			$pageNotFound=false;
+		}
 	}
 	if(userCan('editRanks')) {
 		if($pageID=="addRank") { editRanksForm($siteURL,"","",""); $pageNotFound=false; }
@@ -54,6 +58,18 @@ function displayCPContent() {
 	
 	// Page Not Found
 	if($pageNotFound) { viewHTML('Please Select An Item From The Menu On The Left.'); }
+}
+
+function getEditBBCodeTable() {
+	global $siteSettings;
+	$siteURL=$siteSettings['siteURLShort'];
+	$sql = "SELECT * FROM bbCode WHERE idNum>'0'";
+	$result = dbQuery($sql) or die ("Query failed: getEditBBCodeTable");
+	while($bbCode = mysqli_fetch_array($result)) {
+		$bbCodeAfter = cleanInput($bbCode['htmlCode']);
+		viewEditBBCodeTableRow($siteURL,$bbCode['idNum'],$bbCode['bbCode'],$bbCodeAfter);
+	}
+		viewEditBBCodeTableRow($siteURL,"new","Create New BBCode","");
 }
 
 function updateAccountPassword() {
@@ -157,6 +173,32 @@ function updateSiteSettings() {
 	
 	loadSiteSettings(); // To Refresh Site Settings
 	addSuccessNotice("Success: Site Settings Updated");
+}
+
+function updateBBCode() {
+	global $pagePost;
+	$bbCodeID = cleanInput($pagePost['bbCodeId']);
+	$bbCode = cleanInput($pagePost['bbCode']);
+	$replacement = $pagePost['replacement'];
+	$deleteBBCode = cleanInput($pagePost['deleteBBCode']);
+	$useOption="";
+	if(strpos($replacement,'{option}') !== false) { $useOption="true"; }
+	if($bbCodeID=="new") {
+		$newID = getNumBBCodes()+1;
+		$sql = "INSERT INTO bbCode (idNum, bbCode, htmlCode, useOption) VALUES ('$newID','$bbCode','$replacement','$useOption')";
+		$result = dbQuery($sql) or die ("Query failed: updateBBCode-new");
+		addSuccessNotice("Added BBCode");
+	} else {
+		$sql = "UPDATE bbCode SET bbCode='$bbCode', htmlCode='$replacement', useOption='$useOption' WHERE idNum='$bbCodeID'";
+		$result = dbQuery($sql) or die ("Query failed: updateBBCode-update");
+		addSuccessNotice("Updated BBCode");
+	}
+}
+
+function getNumBBCodes() {
+	$sql = "SELECT * FROM bbCode";
+	$result = dbQuery($sql) or die ("Query failed: getNumBBCodes");
+	return mysqli_num_rows($result);
 }
 
 function getSiteVersionOptions() {

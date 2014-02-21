@@ -38,10 +38,10 @@ function applyBBCode($post) {
 	$parser = new JBBCode\Parser();
 	
 	// Add Definitions
-	$sql="SELECT * FROM bbCode ORDER BY orderNum";
+	$sql="SELECT * FROM bbCode WHERE idNum>'0'";
 	$result = dbQuery($sql) or die ("Query failed: applyBBCode");
 	while($fix = mysqli_fetch_array($result)) {
-		$builder = new JBBCode\CodeDefinitionBuilder($fix['before'], $fix['after']);
+		$builder = new JBBCode\CodeDefinitionBuilder($fix['bbCode'], $fix['htmlCode']);
 		if($fix['useOption']=="true") { $builder->setUseOption(true); }
 		$parser->addCodeDefinition($builder->build());
 	}

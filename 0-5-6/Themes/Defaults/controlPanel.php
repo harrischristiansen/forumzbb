@@ -56,6 +56,21 @@ function editSiteSettingsForm($siteURL,$siteName,$siteMotd,$siteSlogan,$siteDisa
 	viewHTML('</form>');
 }
 
+function editBBCodeForm() {
+	viewHTML('<table class="FullWidthTable"><tr class="FullWidthTableHead"><td class="TableHeadColumn" style="width: 20%;">BB Code Tag</td><td class="TableHeadColumn" style="width: 60%;">Replacement HTML</td><td class="TableHeadColumn" style="width: 18%;">Action</td></tr>');
+	getEditBBCodeTable();
+	viewHTML('</table>');
+}
+
+function viewEditBBCodeTableRow($siteURL,$idNum,$bbCode,$replacement) {
+	viewHTML('<form action="'.$siteURL.'controlPanel/editBBCode/" method="POST"><tr class="FullWidthTableRow">');
+	viewHTML('<td class="TableRowColumn"><input type="hidden" name="bbCodeId" value="'.$idNum.'"><input type="text" name="bbCode" value="'.$bbCode.'" style="width: 90%;"></td>');
+	viewHTML('<td class="TableRowColumn"><input type="text" name="replacement" value="'.$replacement.'"style="width: 90%;"></td>');
+	viewHTML('<td class="TableRowColumn">Delete: <input type="checkbox" name="deleteBBCode" value="delete"><input type="submit" name="cpFormSubmitted" value="Update BBCode"></td>');
+	viewHTML('</tr></form>');
+	
+}
+
 function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 	viewHTML('<div id="controlPanelNav2">');
 	viewHTML('Ranks:<br>');
