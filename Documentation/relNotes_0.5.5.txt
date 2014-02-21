@@ -15,8 +15,6 @@ To-Do:
 -Admin Verification of New Accounts
 -Inbrowser bbcode to html manager
 -BBCode Smilies
--Pages System
-	-Editable Pages
 -Working Version Changer System
 -SiteSetting for if user can change personal siteTheme
 -Live username available checking

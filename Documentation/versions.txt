@@ -128,8 +128,6 @@ Version 0.5.6: - Due March 2
 -Multiple site managers (edit site settings and ranks)
 -Inbrowser bbcode to html manager
 -BBCode Smilies
--Pages System
-	-Editable Pages
 -Pages Table
 	-Add ability for specific pages to require specific themes
 -Working Version Changer System
@@ -171,3 +169,5 @@ Future:
 -Members Friends+Privacy System
 -Theme Customizer
 -Personal Domains
+-Pages System
+	-Custom Editable Pages
