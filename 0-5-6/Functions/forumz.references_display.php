@@ -12,6 +12,9 @@ function display($fileName) {
 	if((@include_once $siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php') === false) {
 		require_once($siteSettings['siteVersionAddress'].'Themes/SkyBlue/'.$fileName.'.php');
 	}
+}function displayWithTheme($fileName,$themeName) {
+	global $siteSettings;
+	require_once($siteSettings['siteVersionAddress'].'Themes/'.$themeName.'/'.$fileName.'.php');
 }
 function defaultsInclude($fileName) {
 	global $siteSettings;

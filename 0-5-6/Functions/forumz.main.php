@@ -65,7 +65,7 @@ function displayWebsite() {
 }
 function loadPage() {
 	global $pageName, $pageID, $pageID2, $pagePost, $siteSettings, $userData, $specPageTitle;
-	$pageToDisplay="";
+	$pageToDisplay="";$themeReq="";
 	
 	///////////////////////////////
 	
@@ -136,8 +136,10 @@ function loadPage() {
 		} elseif($pageData['requireFormSubmitted']&&!isset($pagePost[$pageData['requireFormSubmitted']])) {
 			if($pageData['falseMsg']!="") { addFailureNotice($pageData['falseMsg']); }
 			$pageToDisplay=$pageData['falseDisplayFile'];
+			$themeReq = $pageData['requireTheme'];
 		} else {
 			$pageToDisplay=$pageData['displayFile'];
+			$themeReq = $pageData['requireTheme'];
 			if($pageData['trueMsg']!="") {
 				addSuccessNotice($pageData['trueMsg']);
 			}
@@ -159,7 +161,11 @@ function loadPage() {
 	
 	// Display Page
 	if($pageToDisplay!="") {
-		display($pageToDisplay);
+		if($themeReq!="") {
+			displayWithTheme($pageToDisplay,$themeReq);
+		} else {
+			display($pageToDisplay);
+		}
 	}
 	else {
 		if(isLoggedIn()||!$siteSettings['reqLogin']) {

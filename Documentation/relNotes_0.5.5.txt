@@ -18,8 +18,6 @@ To-Do:
 -BBCode Smilies
 -Pages System
 	-Editable Pages
--Pages Table
-	-Add ability for specific pages to require specific themes
 -Working Version Changer System
 -SiteSetting for if user can change personal siteTheme
 -Live username available checking
