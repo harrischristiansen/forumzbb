@@ -38,16 +38,23 @@ function applyBBCode($post) {
 	$parser = new JBBCode\Parser();
 	
 	// Add Definitions
-	$sql="SELECT * FROM bbCode WHERE idNum>'0'";
-	$result = dbQuery($sql) or die ("Query failed: applyBBCode");
+	$sql="SELECT * FROM bbCode WHERE idNum>'0' AND useOption<>'emoticon'";
+	$result = dbQuery($sql) or die ("Query failed: applyBBCode-definitions");
 	while($fix = mysqli_fetch_array($result)) {
 		$builder = new JBBCode\CodeDefinitionBuilder($fix['bbCode'], $fix['htmlCode']);
 		if($fix['useOption']=="true") { $builder->setUseOption(true); }
 		$parser->addCodeDefinition($builder->build());
 	}
- 
+	
+	// Add Emoticons
+	$sql="SELECT * FROM bbCode WHERE idNum>'0' AND useOption='emoticon'";
+	$result = dbQuery($sql) or die ("Query failed: applyBBCode-emoticons");
+	while($fix = mysqli_fetch_array($result)) {
+		$post = str_replace($fix['bbCode'], $fix['htmlCode'], $post);
+	}
+	
+	// Parse Code
 	$parser->parse($post);
- 
 	return $parser->getAsHtml();
 }
 

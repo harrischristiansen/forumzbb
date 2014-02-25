@@ -32,6 +32,7 @@ function displayCPContent() {
 			$pageNotFound=false;
 			
 			// Checked Settings
+			if($siteSettings['userTheme']) { $userThemeChecked="checked"; }
 			if($siteSettings['reqLogin']) { $reqLoginChecked="checked"; }
 			if($siteSettings['verifyRegisterEmail']) { $verifyRegisterEmailChecked="checked"; }
 			if($siteSettings['verifyRegisterAdmin']) { $verifyRegisterAdminChecked="checked"; }
@@ -44,7 +45,7 @@ function displayCPContent() {
 			$settings = unserialize($resultArray['settings_bb']);
 			
 			// Display Form
-			editSiteSettingsForm($siteURL, $settings['siteName'], $settings['siteMotd'], $settings['siteSlogan'], $settings['disabledMessage'], $reqLoginChecked, $verifyRegisterEmailChecked, $verifyRegisterAdminChecked, $siteSettings['blogEntriesPerPage'], $htmlAllowedChecked, $siteSettings['facebookLink'], $siteSettings['youtubeLink'], $siteSettings['googleAnalytics'], $siteSettings['metaDesc'], $siteSettings['metaKeywords'], $siteSettings['siteAbout']);
+			editSiteSettingsForm($siteURL, $settings['siteName'], $userThemeChecked, $settings['siteMotd'], $settings['siteSlogan'], $settings['disabledMessage'], $reqLoginChecked, $verifyRegisterEmailChecked, $verifyRegisterAdminChecked, $siteSettings['blogEntriesPerPage'], $htmlAllowedChecked, $siteSettings['facebookLink'], $siteSettings['youtubeLink'], $siteSettings['googleAnalytics'], $siteSettings['metaDesc'], $siteSettings['metaKeywords'], $siteSettings['siteAbout']);
 		}
 		if($pageID=="editBBCode") {
 			editBBCodeForm($siteURL);
@@ -63,7 +64,7 @@ function displayCPContent() {
 function getEditBBCodeTable() {
 	global $siteSettings;
 	$siteURL=$siteSettings['siteURLShort'];
-	$sql = "SELECT * FROM bbCode WHERE idNum>'0'";
+	$sql = "SELECT * FROM bbCode WHERE idNum>'0' AND useOption<>'emoticon'";
 	$result = dbQuery($sql) or die ("Query failed: getEditBBCodeTable");
 	while($bbCode = mysqli_fetch_array($result)) {
 		$bbCodeAfter = cleanInput($bbCode['htmlCode']);
@@ -120,9 +121,9 @@ function updateAccountProfile() {
 }
 
 function updateAccountPreferences() {
-	global $pagePost, $userData;
+	global $pagePost, $userData, $siteSettings;
 	$accountID = returnUserID();
-	$themePref = cleanInput($pagePost['siteTheme']);
+	if($siteSettings['userTheme']) { $themePref = cleanInput($pagePost['siteTheme']); }
 	$sql = "UPDATE accounts SET themePref='$themePref' WHERE actID='$accountID'";
 	$result = dbQuery($sql) or die ("Query failed: updateAccountPreferences");
 	$userData['themePref']=$themePref;
@@ -148,6 +149,7 @@ function updateSiteSettings() {
 	$siteName=cleanInput($pagePost['siteName']);
 	$siteVersion=cleanInput($pagePost['siteVersion']);
 	$siteTheme=cleanInput($pagePost['siteTheme']);
+	$userTheme=cleanInput($pagePost['userTheme']);
 	$siteMotd=formatPost($pagePost['siteMotd']);
 	$siteSlogan=formatPost($pagePost['siteSlogan']);
 	$siteDisabled=formatPost($pagePost['siteDisabled']);
@@ -168,7 +170,7 @@ function updateSiteSettings() {
 	$settings['disabledMessage']=cleanInput($pagePost['siteDisabled']);
 	$settings = serialize($settings);
 	
-	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', settings_bb='$settings', defaultTheme='$siteTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
+	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', settings_bb='$settings', defaultTheme='$siteTheme', userTheme='$userTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
 	
 	loadSiteSettings(); // To Refresh Site Settings
@@ -196,7 +198,7 @@ function updateBBCode() {
 }
 
 function getNumBBCodes() {
-	$sql = "SELECT * FROM bbCode";
+	$sql = "SELECT * FROM bbCode WHERE useOption<>'emoticon'";
 	$result = dbQuery($sql) or die ("Query failed: getNumBBCodes");
 	return mysqli_num_rows($result);
 }

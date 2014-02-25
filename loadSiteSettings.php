@@ -21,6 +21,7 @@ function loadSiteSettings() {
 	$siteSettings['siteMotd'] = $setting['siteMotd'];
 	$siteSettings['siteSlogan'] = $setting['siteSlogan'];
 	$siteSettings['defaultTheme'] = $setting['defaultTheme'];
+	$siteSettings['userTheme'] = $setting['userTheme'];
 	$siteSettings['blogEntriesPerPage'] = $setting['blogEntriesPerPage'];
 	$siteSettings['facebookLink'] = $setting['facebookLink'];
 	$siteSettings['youtubeLink'] = $setting['youtubeLink'];
