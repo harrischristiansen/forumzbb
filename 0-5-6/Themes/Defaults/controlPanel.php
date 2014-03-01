@@ -33,7 +33,6 @@ function changePreferencesForm($siteURL) {
 function editSiteSettingsForm($siteURL,$siteName,$userTheme,$siteMotd,$siteSlogan,$siteDisabled,$reqLogin,$verifyRegisterEmail,$verifyRegisterAdmin,$numBlogEntriesPerPage,$htmlAllowed,$facebookLink,$youtubeLink,$googleAnalytics,$metaDesc,$metaKeywords,$siteAbout) {
 	viewHTML('<form action="'.$siteURL.'controlPanel/editSiteSettings/" method="POST">');
 	viewHTML('Site Name: <input type="text" name="siteName" value="'.$siteName.'"><br>');
-	viewHTML('Site Version: <select name="siteVersion">'.getSiteVersionOptions().'</select><br>');
 	viewHTML('Default Theme: <select name="siteTheme">'.getSiteThemeOptions().'</select><br>');
 	viewHTML('User Can Change Personal Theme: <input type="checkbox" name="userTheme" value="true" '.$userTheme.'><br>');
 	viewHTML('Site Banner: <input type="text" name="siteMotd" value="'.$siteMotd.'"><br>');

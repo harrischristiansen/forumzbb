@@ -6,7 +6,6 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 	viewHTML('<div class="siteContPanel whitePanel">');
 		viewHTML('<div class="hpBlogDate">'.$postDate.'</div>');
 		viewHTML('<a class="hpBlogTitle" href="'.$blogLink.'">'.$entryTitle.'<div class="blogAuthor"><br>Comments: '.$numComments.'</div>'.'</a>');
-		viewHTML();
 		viewHTML('<div class="hpBlogText">'.$blogEntry.'</div>');
 	viewHTML('</div>');
 }

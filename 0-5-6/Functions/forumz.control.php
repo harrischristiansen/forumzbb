@@ -147,7 +147,6 @@ function getUserThemeOptions() {
 function updateSiteSettings() {
 	global $pagePost;
 	$siteName=cleanInput($pagePost['siteName']);
-	$siteVersion=cleanInput($pagePost['siteVersion']);
 	$siteTheme=cleanInput($pagePost['siteTheme']);
 	$userTheme=cleanInput($pagePost['userTheme']);
 	$siteMotd=formatPost($pagePost['siteMotd']);
@@ -170,7 +169,7 @@ function updateSiteSettings() {
 	$settings['disabledMessage']=cleanInput($pagePost['siteDisabled']);
 	$settings = serialize($settings);
 	
-	$sql = "UPDATE siteSettings SET siteName='$siteName', siteVersion='$siteVersion', settings_bb='$settings', defaultTheme='$siteTheme', userTheme='$userTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
+	$sql = "UPDATE siteSettings SET siteName='$siteName', settings_bb='$settings', defaultTheme='$siteTheme', userTheme='$userTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
 	
 	loadSiteSettings(); // To Refresh Site Settings
@@ -201,21 +200,6 @@ function getNumBBCodes() {
 	$sql = "SELECT * FROM bbCode WHERE useOption<>'emoticon'";
 	$result = dbQuery($sql) or die ("Query failed: getNumBBCodes");
 	return mysqli_num_rows($result);
-}
-
-function getSiteVersionOptions() {
-	global $siteSettings;
-	$sql = "SELECT * FROM siteSettings WHERE settingsProfile='0' ORDER BY siteVersion DESC";
-	$result = dbQuery($sql) or die ("Query failed: getSiteVersionOptions");
-	$returnValue="";
-	while($resultArray=mysqli_fetch_array($result)) {
-		if($resultArray['siteVersion']!=$siteSettings['siteVersion']) {
-			$returnValue=$returnValue.'<option value="'.$resultArray['siteVersion'].'">'.$resultArray['siteName'].'</option>';
-		} else {
-			$returnValue=$returnValue.'<option value="'.$resultArray['siteVersion'].'" selected>'.$resultArray['siteName'].'</option>';
-		}
-	}
-	return $returnValue;
 }
 
 function getSiteThemeOptions() {

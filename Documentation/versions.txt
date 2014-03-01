@@ -133,7 +133,6 @@ Version 0.5.6: - Due March 2
 -Working Version Changer System
 -SiteSetting for if user can change personal siteTheme
 -Live username available checking
--Solid Update System (When new version is released, upgrading is as easy as pressing a button)
 
 Version 0.5.7: - Due March 16
 -Security Enhancements
@@ -150,6 +149,7 @@ Version 0.5.7: - Due March 16
 
 Version 0.6.0: - First Public Release, no activation code - Due March 23
 -Code Cleanup
+-Solid Update System (When new version is released, upgrading is as easy as pressing a button)
 -Streamlined sign up (new site design?)
 	-Place for users to make suggestions (of new features, of bugs, etc)
 
