@@ -9,10 +9,13 @@ function display($fileName) {
 	} else {
 		$themeToDisp = $siteSettings['defaultTheme'];
 	}
-	if((@include_once $siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php') === false) {
+	if(file_exists($siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php')) {
+		require_once($siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php');
+	} else {
 		require_once($siteSettings['siteVersionAddress'].'Themes/SkyBlue/'.$fileName.'.php');
 	}
-}function displayWithTheme($fileName,$themeName) {
+}
+function displayWithTheme($fileName,$themeName) {
 	global $siteSettings;
 	require_once($siteSettings['siteVersionAddress'].'Themes/'.$themeName.'/'.$fileName.'.php');
 }
@@ -27,7 +30,9 @@ function themeInclude($fileName) {
 	} else {
 		$themeToDisp = $siteSettings['defaultTheme'];
 	}
-	if((@include_once $siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php') === false) {
+	if(file_exists($siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php')) {
+		require_once($siteSettings['siteVersionAddress'].'Themes/'.$themeToDisp.'/'.$fileName.'.php');
+	} else {
 		require_once($siteSettings['siteVersionAddress'].'Themes/Defaults/'.$fileName.'.php');
 	}
 }
