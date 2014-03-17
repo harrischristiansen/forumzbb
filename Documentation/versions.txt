@@ -117,7 +117,7 @@ Version 0.5.5:
 -Ban Users
 -BB Code Editor
 
-Version 0.5.6: - Due March 2
+Version 0.5.6: - Due March 9
 -Spam Protection
 	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
 	-Flood Control
@@ -134,7 +134,7 @@ Version 0.5.6: - Due March 2
 -SiteSetting for if user can change personal siteTheme
 -Live username available checking
 
-Version 0.5.7: - Due March 16
+Version 0.5.7: - Due March 23
 -Security Enhancements
 -Advanced Forum
 	-Move Threads
@@ -147,7 +147,7 @@ Version 0.5.7: - Due March 16
 		-threads per forum page
 		-posts per thread pages
 
-Version 0.6.0: - First Public Release, no activation code - Due March 23
+Version 0.6.0: - First Public Release, no activation code - Due March 30
 -Code Cleanup
 -Solid Update System (When new version is released, upgrading is as easy as pressing a button)
 -Streamlined sign up (new site design?)
@@ -159,6 +159,8 @@ Version 0.6.1:
 - Another new theme, from scratch, using latest web standards
 	-Challenge Self
 	-Match signup site design?
+-Inbrowser pages manager
+	-Custom Pages
 
 
 Future:
