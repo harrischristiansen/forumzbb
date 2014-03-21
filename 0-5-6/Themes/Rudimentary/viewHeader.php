@@ -31,14 +31,14 @@ defaultsInclude('chatSystem');
 	<!-- SCEditor -->
 	<link rel="stylesheet" href="/Resources/plugins/sceditor/minified/themes/monocons.min.css" type="text/css" media="all" />
 	<script type="text/javascript" src="/Resources/plugins/sceditor/minified/jquery.sceditor.bbcode.min.js"></script>
-</head><body>
+</head><body><div id="siteContainer">
 
 <header>
 	<a href="/home/" id="siteLogo" class="noSelect"><img src="/Resources/siteImages/logo.png" alt="<? echo getSiteName(); ?>"></a>
 	<? if($userData['loggedIn']) {
 		viewHTML('<div id="guestInfo">Welcome, <b>'.returnUsername().'</b>.</div>');
 	} else {
-		viewHTML('<div id="guestInfo">Welcome, <b>Guest</b>.<br>Please Login or <a href="'.$siteSettings['siteURLShort'].'register/">Register</a>.</div>');
+		viewHTML('<div id="guestInfo">Welcome, <b>Guest</b>.<br>Please <a href="#" class="loginWindButton">Login</a> or <a href="'.$siteSettings['siteURLShort'].'register/">Register</a>.</div>');
 	} ?>
 </header>
 
@@ -52,12 +52,18 @@ defaultsInclude('chatSystem');
 			<li id="menuBarChatItem"></li>
 		<? } ?>
 		<? displayNavBar(); ?>
+		<? if(!isLoggedIn()) { ?>
+			<li class="navItem loginWindButton navItem-hidden"><a href="#">Login</a></li>
+		<? } ?>
+		<? if(userCan('useChat')) { ?>
+			<li class="navItem navItem-hidden" id="menuBarChatButton"><a href="#">Chat</a></li>
+		<? } ?>
 	</ul>
 	<? if(!isLoggedIn()) { viewLoginWindow(); } ?>
 	<? if(userCan('useChat')) { viewChatWindow(); } ?>
 </div>
 
-<div class="centerPanel siteContainer">
+<div class="centerPanel" id="mainContainer">
 <?php //// Page Notices (Site Notices, Successes, Failures) ////
 	displayAllNotices();
 ?>

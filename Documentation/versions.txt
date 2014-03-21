@@ -117,35 +117,8 @@ Version 0.5.5:
 -Ban Users
 -BB Code Editor
 
-Version 0.5.6: - Due March 9
--Spam Protection
-	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
-	-Flood Control
--File Upload
-	-Media in Post management
--User/IP Suspensions
--Admin Verification of New Accounts
--Multiple site managers (edit site settings and ranks)
--Inbrowser bbcode to html manager
--BBCode Smilies
--Pages Table
-	-Add ability for specific pages to require specific themes
--Working Version Changer System
--SiteSetting for if user can change personal siteTheme
--Live username available checking
-
-Version 0.5.7: - Due March 23
--Security Enhancements
--Advanced Forum
-	-Move Threads
-	-Create Categories/Forums
-	-Delete Categories/Forums
--Members List
-	-Pagination
--Forum
-	-Pagination
-		-threads per forum page
-		-posts per thread pages
+Version 0.5.6: - Due March 23
+-To Be Inserted Later
 
 Version 0.6.0: - First Public Release, no activation code - Due March 30
 -Code Cleanup
@@ -164,12 +137,18 @@ Version 0.6.1:
 
 
 Future:
+-Spam Protection
+	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
+	-Flood Control
+-User/IP Suspensions (Not Bans)
+-Live username available checking
+-Admin Verification of New Accounts
 -Member to Member PM/Chat System
 	-Include Security
 	-Only Log back so far (say 100 recent messages)
 -Members Personal Wall for Posting
 -Members Friends+Privacy System
--Theme Customizer
+-Theme Customizer ***
 -Personal Domains
 -Pages System
 	-Custom Editable Pages

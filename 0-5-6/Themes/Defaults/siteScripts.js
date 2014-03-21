@@ -14,6 +14,14 @@ $(document).ready(function(){
 	$("#menuBarChatItem").click(function() {
 		$("#chatWindow").slideToggle(500);
   	});
+	$("#menuBarChatButton").click(function() {
+		$("#chatWindow").slideToggle(500);
+  	});
+	
+	// Chat Close
+	$(".chatClose").click(function() {
+		$("#chatWindow").slideToggle(500);
+  	});
   	
   	// Chat Reload
   	setInterval(loadSiteChat, 5000);

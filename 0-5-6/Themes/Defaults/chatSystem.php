@@ -12,7 +12,7 @@ function displayChatMenuBarItem() {
 function viewChatWindow() {
 	if(userCan("useChat")) {
 		viewHTML('<div id="chatWindow">');
-			viewHTML('<div id="chatWindowHead">Chat</div>');
+			viewHTML('<div id="chatWindowHead">Chat<button type="button" style="float: right;" class="chatClose">Close</button></div>');
 			viewHTML('<div id="chatWindowCont">');
 				include_once('Chats/siteChat.html');
 			viewHTML('</div>');

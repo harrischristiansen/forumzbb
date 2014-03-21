@@ -23,4 +23,4 @@ global $siteSettings;
 	<div class="copyright"><? viewHTML(getSiteName()." | ".getSiteSlogan().' | Powered By <a href="http://www.forumzbb.com/" target="_blank">ForumzBB</a>'); ?></div>
 </div>
 </footer>
-</body></html>
+</div></body></html>
