@@ -19,3 +19,9 @@ To-Do:
 -Forum
 	-Pagination
 		-threads per forum page
+-Task Organizer
+	-Create Tasks
+		-Options include fileUpload, textResponse, etc.
+	-Claim Tasks
+	-Mark Tasks As Complete
+	-Remove Tasks
