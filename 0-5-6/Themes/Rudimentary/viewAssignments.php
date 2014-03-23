@@ -6,9 +6,7 @@ defaultsInclude('assignmentDivisions');
 
 display('viewHeader');
 
-viewHTML('<table class="FullWidthTable">');
 viewAssignmentsHome();
-viewHTML('</table>');
 
 display('viewFooter');
 

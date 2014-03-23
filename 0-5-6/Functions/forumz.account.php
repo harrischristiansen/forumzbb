@@ -118,8 +118,6 @@ function updateLoginReport($user) {
 	$result = dbQuery($sql) or die ("Query failed: updateLoginReport");
 }
 
-
-
 function logoutUser() {
 	global $userData;
 	setAccountToDefault();

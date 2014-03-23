@@ -8,20 +8,13 @@ Completed:
 -SiteSetting for if user can change personal siteTheme
 -Mobile Login/Chat Buttons
 -Footer Fixes
+-Assignment Organizer
+	-Create Tasks
+	-Claim Tasks
+	-Mark Tasks As Complete
+	-View Completed Tasks
+	-Cancel Tasks
 
 To-Do:
 -File Upload
 	-Media in Post management
--Advanced Forum
-	-Move Threads
-	-Create Categories/Forums
-	-Delete Categories/Forums
--Forum
-	-Pagination
-		-threads per forum page
--Task Organizer
-	-Create Tasks
-		-Options include fileUpload, textResponse, etc.
-	-Claim Tasks
-	-Mark Tasks As Complete
-	-Remove Tasks

@@ -121,22 +121,34 @@ Version 0.5.6: - Due March 23
 -To Be Inserted Later
 
 Version 0.6.0: - First Public Release, no activation code - Due March 30
--Code Cleanup
--Solid Update System (When new version is released, upgrading is as easy as pressing a button)
+-Solid Update System (When new version is released, upgrading is as easy as pressing a button, no downgrading)
 -Streamlined sign up (new site design?)
 	-Place for users to make suggestions (of new features, of bugs, etc)
 
-Version 0.6.1:
+Version 0.6.1: - New Themes!
 - HarrisChristiansen.com Theme
 - Forumzbb.com Theme
+- Forum Theme like Instructure Canvas
 - Another new theme, from scratch, using latest web standards
 	-Challenge Self
 	-Match signup site design?
--Inbrowser pages manager
-	-Custom Pages
-
 
 Future:
+-Display Dates in more friendly way
+	-Display date function ($date,$time)
+		-If date is today say today at ...
+		-If date is yesterday say yesterday at ...
+		-etc
+-Website Search
+-Assignment Organizer
+	-Search Completed Tasks
+-Advanced Forum
+	-Move Threads
+	-Create Categories/Forums
+	-Delete Categories/Forums
+-Forum
+	-Pagination
+		-threads per forum page
 -Spam Protection
 	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
 	-Flood Control
@@ -152,3 +164,4 @@ Future:
 -Personal Domains
 -Pages System
 	-Custom Editable Pages
+	-Pages designed for embeds (such as google calendar)

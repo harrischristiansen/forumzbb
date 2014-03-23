@@ -782,6 +782,24 @@ footer {
 	text-align: left;
 }
 
+/* Assignments List */
+
+.assignmentsColumn1 {
+	width: 49%;
+}
+
+.assignmentsColumn2 {
+	width: 17%;
+}
+
+.assignmentsColumn3 {
+	width: 17%;
+}
+
+.assignmentsColumn4 {
+	width: 16%;
+}
+
 
 
 
