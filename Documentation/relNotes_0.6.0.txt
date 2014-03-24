@@ -1,0 +1,9 @@
+Forumz Version 0.6.0
+Harris Christiansen
+-Due March 30, 2014
+
+Completed:
+
+To-Do:
+-Streamlined sign up (new site design?)
+	-Place for users to make suggestions (of new features, of bugs, etc)

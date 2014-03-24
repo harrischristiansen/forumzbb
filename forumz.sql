@@ -15,9 +15,24 @@ CREATE TABLE `forumzDev_accounts` (
   `themePref` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_accounts` values('0','Harris','7af4896825dfc7e94f8a1d6846a5a2d4','harrischristiansen@mac.com','a:4:{s:6:\"status\";s:1:\"1\";s:14:\"emailConfirmed\";s:1:\"1\";s:14:\"adminConfirmed\";s:1:\"1\";s:10:\"userRename\";s:1:\"0\";}','2','2013-11-13','67.166.73.129','2014-02-19','67.166.73.129','Rudimentary'),
+insert into `forumzDev_accounts` values('0','Harris','7af4896825dfc7e94f8a1d6846a5a2d4','harrischristiansen@mac.com','a:4:{s:6:\"status\";s:1:\"1\";s:14:\"emailConfirmed\";s:1:\"1\";s:14:\"adminConfirmed\";s:1:\"1\";s:10:\"userRename\";s:1:\"0\";}','2','2013-11-13','67.166.73.129','2014-03-23','67.166.73.129',''),
  ('Anonymous','UnregisteredUser','-','Anonymous','','0','-','-','-','-',''),
- ('1','TestUser','7a95dec218ffaaf8992bb48b4bd94367','testUser@forumzbb.com','a:4:{s:6:\"status\";s:1:\"1\";s:14:\"emailConfirmed\";s:1:\"1\";s:14:\"adminConfirmed\";s:1:\"1\";s:10:\"userRename\";s:1:\"0\";}','1','2013-05-12','67.161.245.43','2014-02-19','205.124.117.23','');
+ ('1','TestUser','7a95dec218ffaaf8992bb48b4bd94367','testUser@forumzbb.com','a:4:{s:6:\"status\";s:1:\"1\";s:14:\"emailConfirmed\";s:1:\"1\";s:14:\"adminConfirmed\";s:1:\"1\";s:10:\"userRename\";s:1:\"0\";}','1','2013-05-12','67.161.245.43','2014-03-23','67.166.73.129','');
+
+CREATE TABLE `forumzDev_assignments` (
+  `taskID` text NOT NULL,
+  `taskStatus` text NOT NULL,
+  `taskPriority` text NOT NULL,
+  `taskName` text NOT NULL,
+  `taskDesc` text NOT NULL,
+  `taskOptions` text NOT NULL,
+  `createDate` text NOT NULL,
+  `claimUser` text NOT NULL,
+  `claimDate` text NOT NULL,
+  `closeUser` text NOT NULL,
+  `closeDate` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `forumzDev_bannedClients` (
   `ipAdr` text NOT NULL,
@@ -29,18 +44,18 @@ CREATE TABLE `forumzDev_bannedClients` (
 
 
 CREATE TABLE `forumzDev_bbCode` (
-  `orderNum` int(11) NOT NULL,
-  `before` text NOT NULL,
-  `after` text NOT NULL,
+  `idNum` text NOT NULL,
+  `bbCode` text NOT NULL,
+  `htmlCode` text NOT NULL,
   `useOption` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_bbCode` values('1','img','<img src=\"{param}\" alt=\"image\">',''),
+insert into `forumzDev_bbCode` values('1','img','<img src=\"{param}\" alt=\"image\" style=\"width: 480px;\">',''),
  ('2','code','<code>{param}</code>',''),
  ('3','pre','<pre>{param}</pre>',''),
- ('5','li','<li>{param}</li>',''),
- ('6','center','<p style=\"text-align: center;\">{param}</p>',''),
- ('4','b','<b>{param}</b>',''),
+ ('4','li','<li>{param}</li>',''),
+ ('5','center','<p style=\"text-align: center;\">{param}</p>',''),
+ ('6','b','<b>{param}</b>',''),
  ('7','i','<i>{param}</i>',''),
  ('8','u','<u>{param}</u>',''),
  ('9','s','<strike>{param}</strike>',''),
@@ -59,7 +74,40 @@ insert into `forumzDev_bbCode` values('1','img','<img src=\"{param}\" alt=\"imag
  ('22','tr','<tr>{param}</tr>',''),
  ('23','video','<video width=\"320\" height=\"240\" controls><source src=\"{param}\" type=\"video/mp4\">',''),
  ('24','left','<p style=\"text-align: left;\">{param}</p>',''),
- ('25','right','<p style=\"text-align: right;\">{param}</p>','');
+ ('25','right','<p style=\"text-align: right;\">{param}</p>',''),
+ ('1',':)','<img src=\"/Resources/plugins/sceditor/emoticons/smile.png\" alt=\":)\">','emoticon'),
+ ('2',':angel:','<img src=\"/Resources/plugins/sceditor/emoticons/angel.png\" alt=\":angel:\">','emoticon'),
+ ('3',':angry:','<img src=\"/Resources/plugins/sceditor/emoticons/angry.png\" alt=\":angry:\">','emoticon'),
+ ('4','8-)','<img src=\"/Resources/plugins/sceditor/emoticons/cool.png\" alt=\"8-)\">','emoticon'),
+ ('5',':\'(','<img src=\"/Resources/plugins/sceditor/emoticons/cwy.png\" alt=\":\'(\">','emoticon'),
+ ('6',':ermm:','<img src=\"/Resources/plugins/sceditor/emoticons/ermm.png\" alt=\":ermm:\">','emoticon'),
+ ('7',':D','<img src=\"/Resources/plugins/sceditor/emoticons/grin.png\" alt=\":D\">','emoticon'),
+ ('8','<3','<img src=\"/Resources/plugins/sceditor/emoticons/heart.png\" alt=\"<3\">','emoticon'),
+ ('9',':(','<img src=\"/Resources/plugins/sceditor/emoticons/sad.png\" alt=\":<\">','emoticon'),
+ ('10',':O','<img src=\"/Resources/plugins/sceditor/emoticons/shocked.png\" alt=\":O\">','emoticon'),
+ ('11',':P','<img src=\"/Resources/plugins/sceditor/emoticons/tongue.png\" alt=\":P\">','emoticon'),
+ ('12',';)','<img src=\"/Resources/plugins/sceditor/emoticons/wink.png\" alt=\";)\">','emoticon'),
+ ('13',':alien:','<img src=\"/Resources/plugins/sceditor/emoticons/alien.png\" alt=\":alien:\">','emoticon'),
+ ('14',':blink:','<img src=\"/Resources/plugins/sceditor/emoticons/blink.png\" alt=\":blink:\">','emoticon'),
+ ('15',':blush:','<img src=\"/Resources/plugins/sceditor/emoticons/blush.png\" alt=\":blush:\">','emoticon'),
+ ('16',':cheerful:','<img src=\"/Resources/plugins/sceditor/emoticons/cheerful.png\" alt=\":cheerful:\">','emoticon'),
+ ('17',':devil:','<img src=\"/Resources/plugins/sceditor/emoticons/devil.png\" alt=\":devil:\">','emoticon'),
+ ('18',':dizzy:','<img src=\"/Resources/plugins/sceditor/emoticons/dizzy.png\" alt=\":dizzy:\">','emoticon'),
+ ('19',':getlost:','<img src=\"/Resources/plugins/sceditor/emoticons/getlost.png\" alt=\":getlost:\">','emoticon'),
+ ('20',':happy:','<img src=\"/Resources/plugins/sceditor/emoticons/happy.png\" alt=\":happy:\">','emoticon'),
+ ('21',':kissing:','<img src=\"/Resources/plugins/sceditor/emoticons/kissing.png\" alt=\":kissing:\">','emoticon'),
+ ('22',':ninja:','<img src=\"/Resources/plugins/sceditor/emoticons/ninja.png\" alt=\":ninja:\">','emoticon'),
+ ('23',':pinch:','<img src=\"/Resources/plugins/sceditor/emoticons/pinch.png\" alt=\":pinch:\">','emoticon'),
+ ('24',':pouty:','<img src=\"/Resources/plugins/sceditor/emoticons/pouty.png\" alt=\":pouty:\">','emoticon'),
+ ('25',':sick:','<img src=\"/Resources/plugins/sceditor/emoticons/sick.png\" alt=\":sick:\">','emoticon'),
+ ('26',':sideways:','<img src=\"/Resources/plugins/sceditor/emoticons/sideways.png\" alt=\":sideways:\">','emoticon'),
+ ('27',':silly:','<img src=\"/Resources/plugins/sceditor/emoticons/silly.png\" alt=\":silly:\">','emoticon'),
+ ('28',':sleeping:','<img src=\"/Resources/plugins/sceditor/emoticons/sleeping.png\" alt=\":sleeping:\">','emoticon'),
+ ('29',':unsure:','<img src=\"/Resources/plugins/sceditor/emoticons/unsure.png\" alt=\":unsure:\">','emoticon'),
+ ('30',':woot:','<img src=\"/Resources/plugins/sceditor/emoticons/woot.png\" alt=\":woot:\">','emoticon'),
+ ('31',':wassat:','<img src=\"/Resources/plugins/sceditor/emoticons/wassat.png\" alt=\":wassat:\">','emoticon'),
+ ('32',':whistling:','<img src=\"/Resources/plugins/sceditor/emoticons/whistling.png\" alt=\":whistling:\">','emoticon'),
+ ('33',':love:','<img src=\"/Resources/plugins/sceditor/emoticons/love.png\" alt=\":love:\">','emoticon');
 
 CREATE TABLE `forumzDev_blogComments` (
   `idNum` int(11) NOT NULL,
@@ -84,7 +132,7 @@ CREATE TABLE `forumzDev_blogs` (
   `updateDate` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_blogs` values('1','Forumz Development Version 0.5.5','0','2014-02-19','22:02:21','Forumz Development Site - Version 0.5.5<br>\r\n<br>\r\nFor more information on the ForumzBB project please visit <a href=\"http://www.forumzbb.com\" target=\"_blank\">forumzbb.com</a>.<br>\r\n<br>\r\nThe beta (latest version under testing) may be found at: <a href=\"http://beta.forumzbb.com\" target=\"_blank\">beta.forumzbb.com</a>.<br>\r\n<br>\r\nPublic Version will be released March 23, 2014.','Forumz Development Site - Version 0.5.5\r\n\r\nFor more information on the ForumzBB project please visit [url=http://www.forumzbb.com]forumzbb.com[/url].\r\n\r\nThe beta (latest version under testing) may be found at: [url=http://beta.forumzbb.com]beta.forumzbb.com[/url].\r\n\r\nPublic Version will be released March 23, 2014.','0','2014-02-19');
+insert into `forumzDev_blogs` values('1','Forumz Development Version 0.5.6','0','2014-02-19','22:02:21','Forumz Development Site - Version 0.5.6<br>\r\n<br>\r\nFor more information on the ForumzBB project please visit <a href=\"http://www.forumzbb.com\" target=\"_blank\">forumzbb.com</a>.<br>\r\n<br>\r\nThe beta (latest version under testing) may be found at: <a href=\"http://beta.forumzbb.com\" target=\"_blank\">beta.forumzbb.com</a>.<br>\r\n<br>\r\nPublic Version will be released March 30, 2014.<br>\r\n','Forumz Development Site - Version 0.5.6\r\n\r\nFor more information on the ForumzBB project please visit [url=http://www.forumzbb.com]forumzbb.com[/url].\r\n\r\nThe beta (latest version under testing) may be found at: [url=http://beta.forumzbb.com]beta.forumzbb.com[/url].\r\n\r\nPublic Version will be released March 30, 2014.\r\n','0','2014-03-22');
 
 CREATE TABLE `forumzDev_forumCats` (
   `id` int(11) NOT NULL,
@@ -146,7 +194,8 @@ insert into `forumzDev_navBar` values('Home','home','1',''),
  ('Forum','forums','3','viewForum'),
  ('Control Panel','controlPanel','10','loggedIn'),
  ('Logout','logout','12','loggedIn'),
- ('Blog','blogHome','2','');
+ ('Blog','blogHome','2',''),
+ ('Assignments','assignments','5','useAssignments');
 
 CREATE TABLE `forumzDev_pages` (
   `pageURL` text NOT NULL,
@@ -162,43 +211,51 @@ CREATE TABLE `forumzDev_pages` (
   `siteRequireLoginApplies` text NOT NULL,
   `requirePermission` text NOT NULL,
   `requireFormSubmitted` text NOT NULL,
-  `customPage` text NOT NULL
+  `customPage` text NOT NULL,
+  `requireTheme` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_pages` values('home','','viewHome','','','Home','','','','','true','','',''),
- ('login','','','','loginUser','Login','Login','','Please Login Using Form.<br>\nIf You Need To Reset Your Password <a href=\"/resetPassword\">Click Here</a>','','','','loginSubmitted',''),
- ('blog','','viewBlog','','checkBlogEntryExists','Blog Entry','Blog Post','','','','true','','',''),
- ('register','','','viewRegistration','registerUser','Register','Register','','','','','loggedOut','registerSubmitted',''),
- ('logout','','','','logoutUser','Logout','Logout','','','true','','loggedIn','',''),
- ('membersList','','viewMembersList','','','Members List','Members','','','','true','viewMembersList','',''),
- ('membersList','changeUserRank','viewMembersList','','setUserRank','Members List - Change Member Rank','Set Member Rank','','Action Denied','true','','editMemberRank','newRank',''),
- ('devOutput','','','','writeSessionData','Dev Output','Dev Output','','','','true','','',''),
- ('blog','reply','viewBlog','viewBlog','addBlogComment','Blog Entry - Add Blog Comment','Post Comment','','','','true','postBlogComments','commentSubmitted',''),
- ('controlPanel','','viewControlPanel','','','Control Panel','Control Panel','','','true','','','',''),
- ('controlPanel','changePassword','viewControlPanel','viewControlPanel','updateAccountPassword','Control Panel - Change Password','Control Panel->Change Password','','','true','','','cpFormSubmitted',''),
- ('controlPanel','editProfile','viewControlPanel','viewControlPanel','updateAccountProfile','Control Panel - Update Profile','Control Panel->Update Profile','','','true','','','cpFormSubmitted',''),
- ('controlPanel','changePreferences','viewControlPanel','viewControlPanel','updateAccountPreferences','Control Panel - Update Preferences','Control Panel->Update Preferences','','','true','','','cpFormSubmitted',''),
- ('controlPanel','editSiteSettings','viewControlPanel','viewControlPanel','updateSiteSettings','Control Panel - Update Site Settings','Control Panel->Update Site Settings','','','true','','editSiteSettings','cpFormSubmitted',''),
- ('controlPanel','addRank','viewControlPanel','viewControlPanel','addSiteRank','Control Panel - Add Rank','Control Panel->Add Rank','','','true','','editRanks','cpFormSubmitted',''),
- ('controlPanel','editRanks','viewControlPanel','viewControlPanel','updateRank','Control Panel - Edit Rank','Control Panel->Edit Rank','','','true','','editRanks','cpFormSubmitted',''),
- ('controlPanel','swapRanks','viewControlPanel','viewControlPanel','swapRanks','Control Panel - Edit Rank Order','Control Panel->Edit Rank Order','','','true','','editRanks','',''),
- ('composeEntry','','viewBlog','viewBlogCompose','addBlogEntry','Compose Blog Entry','New Entry','','','true','','postBlogEntries','blogComposeSubmitted',''),
- ('editBlog','','viewBlog','viewBlogCompose','editBlogPost','Edit Blog Entry','','','','true','','','blogUpdateSubmitted',''),
- ('deleteBlog','','viewBlogHome','','deleteBlogPost','Delete Blog Entry','Delete Blog','','','true','','','',''),
- ('forums','','viewForumHome','','','Forums Home','Forums','','','','true','viewForum','',''),
- ('forum','','viewForumThreads','','','Forums - forumTitle','','','','','true','viewForum','',''),
- ('confirmAccount','','','','confirmAccount','Confirm Account','Confirm Account','','','','','','',''),
- ('newForumThread','','viewForumThreads','viewThreadCompose','createForumThread','Forums - forumTitle - New Thread','','','','','true','createForumThreads','threadComposeSubmitted',''),
- ('thread','','viewForumThread','','updateThreadViewCount','Forums - threadTitle','','','','','true','viewForum','',''),
- ('resetPassword','','','viewPassReset','resetPassword','Reset Password ','Reset Password','','','','','','resetSubmitted',''),
- ('newForumPost','','viewForumThread','','addForumPost','Forums - threadTitle - Add Reply','Add Reply','','','','true','createForumPosts','replyComposeSubmitted',''),
- ('editBlogComment','','viewBlog','','editBlogComment','Edit Blog Comment','Edit Blog Comment','','','true','','','editBlogCommentSubmitted',''),
- ('deleteBlogComment','','viewBlog','','deleteBlogComment','Delete Blog Comment','Delete Blog Comment','','','true','','','',''),
- ('editForumPost','','viewForumThread','','editForumPost','Forums - threadTitle - Edit Post','Edit Forum Post','','','true','','viewForum','editForumPostSubmitted',''),
- ('deleteForumPost','','viewForumThread','','deleteForumPost','Forums - threadTitle - DeletePost','Delete Forum Post','','','true','','viewForum','',''),
- ('changeEmail','','','','changeEmail','Change Account Email','Change Account Email','','','','','','',''),
- ('blogHome','','viewBlogHome','','','Blog','Blog','','','','true','','',''),
- ('renameUser','','','','renameUser','Rename User','Rename User','','','','','','renameUserSubmitted','');
+insert into `forumzDev_pages` values('home','','viewHome','','','Home','','','','','true','','','',''),
+ ('login','','','','loginUser','Login','Login','','Please Login Using Form.<br>\nIf You Need To Reset Your Password <a href=\"/resetPassword\">Click Here</a>','','','','loginSubmitted','',''),
+ ('blog','','viewBlog','','checkBlogEntryExists','Blog Entry','Blog Post','','','','true','','','',''),
+ ('register','','','viewRegistration','registerUser','Register','Register','','','','','loggedOut','registerSubmitted','',''),
+ ('logout','','','','logoutUser','Logout','Logout','','','true','','loggedIn','','',''),
+ ('membersList','','viewMembersList','','','Members List','Members','','','','true','viewMembersList','','',''),
+ ('membersList','changeUserRank','viewMembersList','','setUserRank','Members List - Change Member Rank','Set Member Rank','','Action Denied','true','','editMemberRank','newRank','',''),
+ ('devOutput','','','','writeSessionData','Dev Output','Dev Output','','','','true','','','',''),
+ ('blog','reply','viewBlog','viewBlog','addBlogComment','Blog Entry - Add Blog Comment','Post Comment','','','','true','postBlogComments','commentSubmitted','',''),
+ ('controlPanel','','viewControlPanel','','','Control Panel','Control Panel','','','true','','','','',''),
+ ('controlPanel','changePassword','viewControlPanel','viewControlPanel','updateAccountPassword','Control Panel - Change Password','Control Panel->Change Password','','','true','','','cpFormSubmitted','',''),
+ ('controlPanel','editProfile','viewControlPanel','viewControlPanel','updateAccountProfile','Control Panel - Update Profile','Control Panel->Update Profile','','','true','','','cpFormSubmitted','',''),
+ ('controlPanel','changePreferences','viewControlPanel','viewControlPanel','updateAccountPreferences','Control Panel - Update Preferences','Control Panel->Update Preferences','','','true','','','cpFormSubmitted','',''),
+ ('controlPanel','editBBCode','viewControlPanel','viewControlPanel','updateBBCode','Control Panel - Edit BB Code','Control Panel->Edit BB Code','','','true','','editSiteSettings','cpFormSubmitted','',''),
+ ('controlPanel','addRank','viewControlPanel','viewControlPanel','addSiteRank','Control Panel - Add Rank','Control Panel->Add Rank','','','true','','editRanks','cpFormSubmitted','',''),
+ ('controlPanel','editRanks','viewControlPanel','viewControlPanel','updateRank','Control Panel - Edit Rank','Control Panel->Edit Rank','','','true','','editRanks','cpFormSubmitted','',''),
+ ('controlPanel','swapRanks','viewControlPanel','viewControlPanel','swapRanks','Control Panel - Edit Rank Order','Control Panel->Edit Rank Order','','','true','','editRanks','','',''),
+ ('composeEntry','','viewBlog','viewBlogCompose','addBlogEntry','Compose Blog Entry','New Entry','','','true','','postBlogEntries','blogComposeSubmitted','',''),
+ ('editBlog','','viewBlog','viewBlogCompose','editBlogPost','Edit Blog Entry','','','','true','','','blogUpdateSubmitted','',''),
+ ('deleteBlog','','viewBlogHome','','deleteBlogPost','Delete Blog Entry','Delete Blog','','','true','','','','',''),
+ ('forums','','viewForumHome','','','Forums Home','Forums','','','','true','viewForum','','',''),
+ ('forum','','viewForumThreads','','','Forums - forumTitle','','','','','true','viewForum','','',''),
+ ('confirmAccount','','','','confirmAccount','Confirm Account','Confirm Account','','','','','','','',''),
+ ('newForumThread','','viewForumThreads','viewThreadCompose','createForumThread','Forums - forumTitle - New Thread','','','','','true','createForumThreads','threadComposeSubmitted','',''),
+ ('thread','','viewForumThread','','updateThreadViewCount','Forums - threadTitle','','','','','true','viewForum','','',''),
+ ('resetPassword','','','viewPassReset','resetPassword','Reset Password ','Reset Password','','','','','','resetSubmitted','',''),
+ ('newForumPost','','viewForumThread','','addForumPost','Forums - threadTitle - Add Reply','Add Reply','','','','true','createForumPosts','replyComposeSubmitted','',''),
+ ('editBlogComment','','viewBlog','','editBlogComment','Edit Blog Comment','Edit Blog Comment','','','true','','','editBlogCommentSubmitted','',''),
+ ('deleteBlogComment','','viewBlog','','deleteBlogComment','Delete Blog Comment','Delete Blog Comment','','','true','','','','',''),
+ ('editForumPost','','viewForumThread','','editForumPost','Forums - threadTitle - Edit Post','Edit Forum Post','','','true','','viewForum','editForumPostSubmitted','',''),
+ ('deleteForumPost','','viewForumThread','','deleteForumPost','Forums - threadTitle - DeletePost','Delete Forum Post','','','true','','viewForum','','',''),
+ ('changeEmail','','','','changeEmail','Change Account Email','Change Account Email','','','','','','','',''),
+ ('blogHome','','viewBlogHome','','','Blog','Blog','','','','true','','','',''),
+ ('renameUser','','','','renameUser','Rename User','Rename User','','','','','','renameUserSubmitted','',''),
+ ('controlPanel','editSiteSettings','viewControlPanel','viewControlPanel','updateSiteSettings','Control Panel - Update Site Settings','Control Panel->Update Site Settings','','','true','','editSiteSettings','cpFormSubmitted','',''),
+ ('assignments','','viewAssignments','','','Assignments','Assignments','','','true','','useAssignments','','',''),
+ ('createAssignment','','viewAssignment','viewAssignments','createAssignment','Create Assignment','Create Assignment','','','true','','addAssignments','createAssignmentSubmitted','',''),
+ ('assignment','cancel','viewAssignment','viewAssignment','cancelAssignment','Cancel Assignment','Assignment->Cancel Assignment','','','true','','addAssignments','','',''),
+ ('assignment','','viewAssignment','','','Assignment','Assignment','','','true','','useAssignments','','',''),
+ ('assignment','claim','viewAssignment','','claimAssignment','Claim Assignment','Assignment->Claim Assignment','','','true','','useAssignments','','',''),
+ ('assignment','close','viewAssignment','viewAssignment','closeAssignment','Close Assignment','Assignment->Close Assignment','','','true','','useAssignments','closeAssignmentSubmitted','','');
 
 CREATE TABLE `forumzDev_permissions` (
   `internalName` text NOT NULL,
@@ -225,7 +282,9 @@ insert into `forumzDev_permissions` values('editSiteSettings','Edit Site Setting
  ('manageForums','Manage Forums','Forums','6'),
  ('useChat','Use Chat','Chat','1'),
  ('flagRenames','Flag Users For Rename','Admin','5'),
- ('banUsers','Ban Users','Admin','4');
+ ('banUsers','Ban Users','Admin','4'),
+ ('useAssignments','Use Assignments','Assignments','1'),
+ ('addAssignments','Add Assignments','Assignments','2');
 
 CREATE TABLE `forumzDev_ranks` (
   `rankID` int(11) NOT NULL,
@@ -236,16 +295,18 @@ CREATE TABLE `forumzDev_ranks` (
 
 insert into `forumzDev_ranks` values('0','0','Anonymous','a:15:{s:16:\"editSiteSettings\";s:0:\"\";s:14:\"editMemberRank\";s:0:\"\";s:9:\"editRanks\";s:0:\"\";s:15:\"viewMembersList\";s:0:\"\";s:15:\"postBlogEntries\";s:0:\"\";s:16:\"postBlogComments\";s:0:\"\";s:15:\"editBlogEntries\";s:0:\"\";s:17:\"deleteBlogEntries\";s:0:\"\";s:9:\"viewForum\";s:0:\"\";s:18:\"createForumThreads\";s:0:\"\";s:16:\"createForumPosts\";s:0:\"\";s:14:\"editForumPosts\";s:0:\"\";s:16:\"deleteForumPosts\";s:0:\"\";s:12:\"manageForums\";s:0:\"\";s:7:\"useChat\";s:0:\"\";}'),
  ('1','1','Member','a:15:{s:16:\"editSiteSettings\";s:0:\"\";s:14:\"editMemberRank\";s:0:\"\";s:9:\"editRanks\";s:0:\"\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:0:\"\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:0:\"\";s:17:\"deleteBlogEntries\";s:0:\"\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:0:\"\";s:16:\"deleteForumPosts\";s:0:\"\";s:12:\"manageForums\";s:0:\"\";s:7:\"useChat\";s:0:\"\";}'),
- ('2','3','Admin','a:19:{s:16:\"editSiteSettings\";s:4:\"true\";s:14:\"editMemberRank\";s:4:\"true\";s:9:\"editRanks\";s:4:\"true\";s:8:\"banUsers\";s:4:\"true\";s:11:\"flagRenames\";s:4:\"true\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:4:\"true\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:4:\"true\";s:17:\"deleteBlogEntries\";s:4:\"true\";s:16:\"editBlogComments\";s:4:\"true\";s:18:\"deleteBlogComments\";s:4:\"true\";s:7:\"useChat\";s:4:\"true\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:4:\"true\";s:16:\"deleteForumPosts\";s:4:\"true\";s:12:\"manageForums\";s:4:\"true\";}'),
+ ('2','3','Admin','a:21:{s:16:\"editSiteSettings\";s:4:\"true\";s:14:\"editMemberRank\";s:4:\"true\";s:9:\"editRanks\";s:4:\"true\";s:8:\"banUsers\";s:4:\"true\";s:11:\"flagRenames\";s:4:\"true\";s:15:\"viewMembersList\";s:4:\"true\";s:14:\"useAssignments\";s:4:\"true\";s:14:\"addAssignments\";s:4:\"true\";s:15:\"postBlogEntries\";s:4:\"true\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:4:\"true\";s:17:\"deleteBlogEntries\";s:4:\"true\";s:16:\"editBlogComments\";s:4:\"true\";s:18:\"deleteBlogComments\";s:4:\"true\";s:7:\"useChat\";s:4:\"true\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:4:\"true\";s:16:\"deleteForumPosts\";s:4:\"true\";s:12:\"manageForums\";s:4:\"true\";}'),
  ('3','2','Moderator','a:17:{s:16:\"editSiteSettings\";s:0:\"\";s:14:\"editMemberRank\";s:0:\"\";s:9:\"editRanks\";s:0:\"\";s:15:\"viewMembersList\";s:4:\"true\";s:15:\"postBlogEntries\";s:4:\"true\";s:16:\"postBlogComments\";s:4:\"true\";s:15:\"editBlogEntries\";s:0:\"\";s:17:\"deleteBlogEntries\";s:0:\"\";s:16:\"editBlogComments\";s:4:\"true\";s:18:\"deleteBlogComments\";s:0:\"\";s:7:\"useChat\";s:4:\"true\";s:9:\"viewForum\";s:4:\"true\";s:18:\"createForumThreads\";s:4:\"true\";s:16:\"createForumPosts\";s:4:\"true\";s:14:\"editForumPosts\";s:4:\"true\";s:16:\"deleteForumPosts\";s:0:\"\";s:12:\"manageForums\";s:0:\"\";}');
 
 CREATE TABLE `forumzDev_siteSettings` (
   `settingsProfile` text NOT NULL,
   `siteVersion` text NOT NULL,
+  `settings_bb` text NOT NULL,
   `siteName` text NOT NULL,
   `siteMotd` text NOT NULL,
   `siteSlogan` text NOT NULL,
   `defaultTheme` text NOT NULL,
+  `userTheme` text NOT NULL,
   `siteDisabled` text NOT NULL,
   `reqLogin` text NOT NULL,
   `verifyRegisterEmail` text NOT NULL,
@@ -260,9 +321,8 @@ CREATE TABLE `forumzDev_siteSettings` (
   `siteAbout` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into `forumzDev_siteSettings` values('1','0-5-5','Forumz','','Dev Version 0.5.5 © 2014 <a href=\"http://www.forumzbb.com/\" target=\"_blank\">ForumzBB</a> - All Rights Reserved','Rudimentary','','','true','','false','4','','','','Forumzbb Development Site.','Forumz, Forumzbb, Development',''),
- ('0','0-5-4','0.5.4','','','','','','','','','0','','','','','',''),
- ('0','0-5-5','0.5.5','','','','','','','','','0','','','','','','');
+insert into `forumzDev_siteSettings` values('1','0-6-0','a:4:{s:8:\"siteName\";s:6:\"Forumz\";s:8:\"siteMotd\";s:0:\"\";s:10:\"siteSlogan\";s:91:\"Dev Version 0.6.0 © 2014 [url=http://www.forumzbb.com]ForumzBB[/url] - All Rights Reserved\";s:15:\"disabledMessage\";s:0:\"\";}','Forumz','','Dev Version 0.6.0 © 2014 <a href=\"http://www.forumzbb.com\" target=\"_blank\">ForumzBB</a> - All Rights Reserved','Rudimentary','true','','','true','','false','4','','','','Forumzbb Development Version. Forumzbb is a simple, powerful, and social website hosting service.','Forumz, Forumzbb, Development',''),
+ ('0','0-6-0','','0.6.0','','','','','','','','','','0','','','','','','');
 
 CREATE TABLE `forumzDev_themes` (
   `themeName` text NOT NULL,

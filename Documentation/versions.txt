@@ -117,11 +117,21 @@ Version 0.5.5:
 -Ban Users
 -BB Code Editor
 
-Version 0.5.6: - Due March 23
--To Be Inserted Later
+Version 0.5.6:
+-In Browser BB Code Manager
+-BBCode Smilies
+-SiteSetting for if user can change personal siteTheme
+-Mobile Login/Chat Buttons
+-Footer Fixes
+-Assignment Organizer
+	-Create Tasks
+	-Claim Tasks
+	-Mark Tasks As Complete
+	-View Completed Tasks
+	-Cancel Tasks
+-File Uploader
 
 Version 0.6.0: - First Public Release, no activation code - Due March 30
--Solid Update System (When new version is released, upgrading is as easy as pressing a button, no downgrading)
 -Streamlined sign up (new site design?)
 	-Place for users to make suggestions (of new features, of bugs, etc)
 
