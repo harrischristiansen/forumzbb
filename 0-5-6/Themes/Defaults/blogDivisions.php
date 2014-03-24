@@ -94,7 +94,13 @@ function displayBlogComposeField($formLink, $updatingPost, $currentTitle, $curre
 	} else {
 		viewHTML('<input type="submit" name="blogComposeSubmitted" value="Post">');
 	}
-	viewHtml('</form>');
+	viewHTML('</form><br><br>');
+
+	// File Uploader
+	viewHTML('<form action="/Resources/uploads/fileUpload.php" method="POST" enctype="multipart/form-data" target="upload">');
+		viewHTML('File Upload: <input type="file" name="file"><input type="submit" value="Upload">');
+	viewHTML('</form>');
+	viewHTML('<iframe style="display: none; visibility: hidden; height: 0; width: 0;" id="upload" name="upload"></iframe>');
 }
 
 function displayAddCommentField() {

@@ -14,7 +14,4 @@ Completed:
 	-Mark Tasks As Complete
 	-View Completed Tasks
 	-Cancel Tasks
-
-To-Do:
--File Upload
-	-Media in Post management
+-File Uploader

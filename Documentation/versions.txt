@@ -134,6 +134,9 @@ Version 0.6.1: - New Themes!
 	-Match signup site design?
 
 Future:
+-File Uploader
+	-Limit Upload Types
+	-Resize Images
 -Display Dates in more friendly way
 	-Display date function ($date,$time)
 		-If date is today say today at ...

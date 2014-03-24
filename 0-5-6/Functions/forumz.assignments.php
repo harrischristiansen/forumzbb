@@ -37,9 +37,9 @@ function viewAssignmentsHome() {
 		if($assignment['taskPriority']==0) {
 			$taskPriority="Low";
 		}elseif($assignment['taskPriority']==1) {
-			$taskPriority="Medium";
+			$taskPriority='<span style="color: orange;">Medium</span>';
 		}elseif($assignment['taskPriority']==2) {
-			$taskPriority="High";
+			$taskPriority='<span style="color: red;">High</span>';
 		}
 		displayAssignmentsLine($assignLink,$assignment['taskName'],$taskStatus,$assignment['createDate'],$taskPriority);
 		$rowID++;
