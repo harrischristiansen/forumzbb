@@ -52,6 +52,7 @@ function viewAssignmentsHome() {
 	if(userCan('addAssignments')) {
 		displayCreateAssignmentForm();
 	}
+	displayCreateDevAssignmentForm();
 }
 
 function getAssignmentsOpen() {
@@ -142,9 +143,9 @@ function closeAssignment() {
 	$closeTime = returnTime();
 	$assignment = getAssignmentByID($pageID);
 	$taskOptions = unserialize($assignment['taskOptions']);
-	$taskOptions['taskNotes'] = $taskOptions['taskNotes'].'<br><b>'.$closeDate.':</b> '.cleanInput($pagePost['taskNotes']);
+	$taskOptions['taskNotes'] = $taskOptions['taskNotes'].'<br><b>'.$closeDate.':</b> '.formatPost($pagePost['taskNotes']);
 	if(!(!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name']))) {
-		$fileName = $closeDate.'.'.$closeTime.'.'.$_FILES["file"]["name"];
+		$fileName = returnUsername().'.'.$closeDate.'.'.$closeTime.'.'.$_FILES["file"]["name"];
     	move_uploaded_file($_FILES["file"]["tmp_name"],"Resources/uploads/".$fileName);
 		$taskOptions['taskFile'] = $taskOptions['taskFile'].$closeDate.': <a href="/Resources/uploads/'.cleanInput($fileName).'" target="_blank">'.cleanInput($fileName).'</a><br>';
 	}
@@ -163,12 +164,38 @@ function cancelAssignment() {
 
 ////////// Create Assignments //////////
 
+function createDevAssignment() {
+	global $pagePost, $pageID;
+	$taskID=getNumAssignments();
+	$taskName=cleanInput($pagePost['taskName']);
+	$createDate=returnDateOfficial();
+	$createTime=returnDateOfficial();
+	$createUser = returnUserID();
+	$taskDesc='<br><b>'.$createDate.':</b> '.formatPost($pagePost['taskDesc']);
+	$taskPriority="0";
+	$taskOptions['taskNotes']=$taskDesc;
+	$taskOptions['taskRequirement']="File";
+	if(!(!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name']))) {
+		$fileName = returnUsername().'.'.$createDate.'.'.$createTime.'.'.$_FILES["file"]["name"];
+    	move_uploaded_file($_FILES["file"]["tmp_name"],"Resources/uploads/".$fileName);
+		$taskOptions['taskFile'] = $taskOptions['taskFile'].$closeDate.': <a href="/Resources/uploads/'.cleanInput($fileName).'" target="_blank">'.cleanInput($fileName).'</a><br>';
+	}
+	$taskOptionsSerialized = serialize($taskOptions);
+	
+	$sql = "INSERT INTO assignments (taskID, taskStatus, taskPriority, taskName, taskDesc, taskOptions, createDate, claimUser, claimDate, closeUser, closeDate) VALUES ('$taskID', '1', '$taskPriority', '$taskName', '$taskDesc', '$taskOptionsSerialized', '$createDate', '$createUser', '$createDate', '$createUser', '$createDate')";
+	$result = dbQuery($sql) or die ("Query failed: createDevAssignment");
+	
+	$pageID=$taskID; // For Viewing Assignment After
+	
+	addSuccessNotice("Success");
+}
+
 function createAssignment() {
 	global $pagePost, $pageID;
 	$taskID=getNumAssignments();
 	$taskName=cleanInput($pagePost['taskName']);
 	$createDate=returnDateOfficial();
-	$taskDesc='<br><b>'.$createDate.':</b> '.cleanInput($pagePost['taskDesc']);
+	$taskDesc='<br><b>'.$createDate.':</b> '.formatPost($pagePost['taskDesc']);
 	$taskPriority=cleanInput($pagePost['taskPriority']);
 	$taskOptions['taskRequirement']=cleanInput($pagePost['taskRequirement']);
 	$taskOptionsSerialized = serialize($taskOptions);
@@ -187,7 +214,7 @@ function reopenAssignment() {
 	$assignment = getAssignmentByID($pageID);
 	
 	$createDate=returnDateOfficial();
-	$taskDesc=$assignment['taskDesc'].'<br><b>'.$createDate.':</b> '.cleanInput($pagePost['taskDesc']);
+	$taskDesc=$assignment['taskDesc'].'<br><b>'.$createDate.':</b> '.formatPost($pagePost['taskDesc']);
 	$taskPriority=cleanInput($pagePost['taskPriority']);
 	
 	$taskOptions = unserialize($assignment['taskOptions']);

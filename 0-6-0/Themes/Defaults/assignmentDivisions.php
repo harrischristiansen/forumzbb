@@ -131,4 +131,25 @@ function displayCreateAssignmentForm() {
 		viewHTML('</div>');
 	viewHTML('</div>');
 }
+
+// Create Dev Assignment
+function displayCreateDevAssignmentForm() {
+	global $siteSettings;
+	viewHTML('<div class="fullSite">');
+		viewHTML('<div class="panelHead">Add Miscellaneous Completed Assignment</div>');
+		viewHTML('<div class="siteContPanel whitePanel">');
+			viewHTML('<form action="'.$siteSettings['siteURLShort'].'createDevAssignment" method="POST" class="validateForm" enctype="multipart/form-data">');
+				viewHTML('<table class="centerTable">');
+					viewHTML('<tr><td>Assignment Name:</td> <td><input type="text" name="taskName" value="" data-bvalidator="required"></td></tr>');
+					
+					viewHTML('<tr><td>Assignment Description:</td> <td><textarea name="taskDesc" data-bvalidator="required" class="newBlogEntryTextArea sceditor"></textarea></td></tr>');
+					
+					viewHTML('<tr><td>File:</td><td><input type="file" name="file" data-bvalidator="required"></td></tr>');
+					
+					viewHTML('<tr><td colspan="2"><input type="submit" name="createAssignmentSubmitted" value="Create"></td></tr>');
+				viewHTML('</table>');
+			viewHtml('</form><br><br>');
+		viewHTML('</div>');
+	viewHTML('</div>');
+}
 ?>

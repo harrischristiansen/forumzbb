@@ -1,9 +1,11 @@
 Forumz Version 0.6.0
 Harris Christiansen
--Due -, 2014
+-Due April 19, 2014
 
 Completed:
--Assignment Manager Revisions System
+-Assignment Manager
+	-Revisions System
+	-User Upload System
 
 To-Do:
 -File Uploader
@@ -13,7 +15,13 @@ To-Do:
 	-Move Threads
 	-Create Categories/Forums
 	-Delete Categories/Forums
--Admin Verification of New Accounts
+	-Fix Editing Posts
+-Account Management System (global acts?)
+	-Admin Verification of New Accounts
+	-If Global
+		-Tie acts to email (only 1 act per email)
+		-Tie to full name
+		-Allow duplicate usernames?
 -Display Dates in more friendly way
 	-Display date function ($date,$time)
 		-If date is today say today at ...

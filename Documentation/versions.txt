@@ -131,7 +131,7 @@ Version 0.5.6:
 	-Cancel Tasks
 -File Uploader
 
-Version 0.6.0:
+Version 0.6.0: - Due April 19, 2014
 -File Uploader
 	-Limit Upload Types
 	-Resize Images
