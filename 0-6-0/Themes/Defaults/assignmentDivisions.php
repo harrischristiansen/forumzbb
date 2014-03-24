@@ -59,9 +59,39 @@ function displayAssignment($assignName, $assignInfo) {
 				viewHTML('<b>Notes:</b> '.$assignInfo['taskNotes'].'<br><br>');
 			}
 			if($assignInfo['taskFile']!="") {
-				viewHTML('<b>File:</b> <a href="/Resources/uploads/'.$assignInfo['taskFile'].'" target="_blank">'.$assignInfo['taskFile'].'</a><br><br>');
+				viewHTML('<b>File:</b> '.$assignInfo['taskFile'].'<br><br>');
 			}
 		viewHTML('</div><br>');
+		if($assignInfo['reopenAssign']=="yes") {
+			viewHTML('<div class="panelHead">Reopen Assignment</div>');
+		viewHTML('<div class="siteContPanel whitePanel">');
+			viewHTML('<form action="'.$assignInfo['reopenLink'].'" method="POST" class="validateForm">');
+				viewHTML('<table class="centerTable">');
+					viewHTML('<tr><td>Assignment Comment:</td> <td><textarea name="taskDesc" data-bvalidator="required" class="newBlogEntryTextArea sceditor"></textarea></td></tr>');
+					
+					viewHTML('<tr><td>Assignment Priority:</td> <td><select name="taskPriority" data-bvalidator="required">');
+						viewHTML('<option value="0" selected>Low</option>');
+						viewHTML('<option value="1">Medium</option>');
+						viewHTML('<option value="2">High</option>');
+					viewHTML('</select></td></tr>');
+					
+					viewHTML('<tr><td>Assignment Requirement:</td> <td><select name="taskRequirement" data-bvalidator="required">');
+						viewHTML('<option value="None" selected>None</option>');
+						viewHTML('<option value="File">File Upload</option>');
+						viewHTML('<option value="Text">Text Input</option>');
+					viewHTML('</select></td></tr>');
+					
+					viewHTML('<tr><td colspan="2"><input type="submit" name="openAssignmentSubmitted" value="Open"></td></tr>');
+				viewHTML('</table>');
+			viewHtml('</form><br><br>');
+
+			// File Uploader
+			viewHTML('<form action="/Resources/uploads/fileUpload.php" method="POST" enctype="multipart/form-data" target="upload">');
+				viewHTML('File Upload: <input type="file" name="file"><input type="submit" value="Upload">');
+			viewHTML('</form>');
+			viewHTML('<iframe style="display: none; visibility: hidden; height: 0; width: 0;" id="upload" name="upload"></iframe>');
+		viewHTML('</div>');
+		}
 	viewHTML('</div>');
 }
 
@@ -75,7 +105,7 @@ function displayCreateAssignmentForm() {
 				viewHTML('<table class="centerTable">');
 					viewHTML('<tr><td>Assignment Name:</td> <td><input type="text" name="taskName" value="" data-bvalidator="required"></td></tr>');
 					
-					viewHTML('<tr><td>Assignment Description:</td> <td><textarea name="taskDesc" data-bvalidator="required" style="width: 300px; height: 50px;"></textarea></td></tr>');
+					viewHTML('<tr><td>Assignment Description:</td> <td><textarea name="taskDesc" data-bvalidator="required" class="newBlogEntryTextArea sceditor"></textarea></td></tr>');
 					
 					viewHTML('<tr><td>Assignment Priority:</td> <td><select name="taskPriority" data-bvalidator="required">');
 						viewHTML('<option value="0" selected>Low</option>');
@@ -91,7 +121,13 @@ function displayCreateAssignmentForm() {
 					
 					viewHTML('<tr><td colspan="2"><input type="submit" name="createAssignmentSubmitted" value="Create"></td></tr>');
 				viewHTML('</table>');
-			viewHtml('</form>');
+			viewHtml('</form><br><br>');
+
+			// File Uploader
+			viewHTML('<form action="/Resources/uploads/fileUpload.php" method="POST" enctype="multipart/form-data" target="upload">');
+				viewHTML('File Upload: <input type="file" name="file"><input type="submit" value="Upload">');
+			viewHTML('</form>');
+			viewHTML('<iframe style="display: none; visibility: hidden; height: 0; width: 0;" id="upload" name="upload"></iframe>');
 		viewHTML('</div>');
 	viewHTML('</div>');
 }

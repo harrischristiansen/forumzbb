@@ -112,6 +112,10 @@ function viewAssignment() {
 	if(userCan("addAssignments")&&$assignment['taskStatus']!="1") {
 		$assignInfo['cancelLink'] = $siteSettings['siteURLShort'].'assignment/'.$pageID.'/cancel';
 	}
+	if(userCan("addAssignments")&&$assignment['taskStatus']=="1") {
+		$assignInfo['reopenAssign'] = "yes";
+		$assignInfo['reopenLink'] = $siteSettings['siteURLShort'].'assignment/'.$pageID.'/reopen';
+	}
 	
 	displayAssignment($assignName, $assignInfo);
 }
@@ -138,12 +142,11 @@ function closeAssignment() {
 	$closeTime = returnTime();
 	$assignment = getAssignmentByID($pageID);
 	$taskOptions = unserialize($assignment['taskOptions']);
-	$taskOptions['taskNotes'] = cleanInput($pagePost['taskNotes']);
+	$taskOptions['taskNotes'] = $taskOptions['taskNotes'].'<br><b>'.$closeDate.':</b> '.cleanInput($pagePost['taskNotes']);
 	if(!(!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name']))) {
 		$fileName = $closeDate.'.'.$closeTime.'.'.$_FILES["file"]["name"];
     	move_uploaded_file($_FILES["file"]["tmp_name"],"Resources/uploads/".$fileName);
-		$taskOptions['taskFile'] = cleanInput($fileName);
-		addSuccessNotice("File Uploaded");
+		$taskOptions['taskFile'] = $taskOptions['taskFile'].$closeDate.': <a href="/Resources/uploads/'.cleanInput($fileName).'" target="_blank">'.cleanInput($fileName).'</a><br>';
 	}
 	$taskOptionsSerialized = serialize($taskOptions);
 	$sql = "UPDATE assignments SET closeUser='$closeUser',closeDate='$closeDate',taskStatus='1',taskOptions='$taskOptionsSerialized' WHERE taskID='$pageID'";
@@ -164,11 +167,11 @@ function createAssignment() {
 	global $pagePost, $pageID;
 	$taskID=getNumAssignments();
 	$taskName=cleanInput($pagePost['taskName']);
-	$taskDesc=cleanInput($pagePost['taskDesc']);
+	$createDate=returnDateOfficial();
+	$taskDesc='<br><b>'.$createDate.':</b> '.cleanInput($pagePost['taskDesc']);
 	$taskPriority=cleanInput($pagePost['taskPriority']);
 	$taskOptions['taskRequirement']=cleanInput($pagePost['taskRequirement']);
 	$taskOptionsSerialized = serialize($taskOptions);
-	$createDate=returnDateOfficial();
 	
 	$sql = "INSERT INTO assignments (taskID, taskStatus, taskPriority, taskName, taskDesc, taskOptions, createDate) VALUES ('$taskID', '0', '$taskPriority', '$taskName', '$taskDesc', '$taskOptionsSerialized', '$createDate')";
 	$result = dbQuery($sql) or die ("Query failed: createAssignment");
@@ -176,6 +179,25 @@ function createAssignment() {
 	$pageID=$taskID; // For Viewing Assignment After
 	
 	addSuccessNotice("Assignment Created");
+}
+
+function reopenAssignment() {
+	global $pagePost, $pageID;
+	
+	$assignment = getAssignmentByID($pageID);
+	
+	$createDate=returnDateOfficial();
+	$taskDesc=$assignment['taskDesc'].'<br><b>'.$createDate.':</b> '.cleanInput($pagePost['taskDesc']);
+	$taskPriority=cleanInput($pagePost['taskPriority']);
+	
+	$taskOptions = unserialize($assignment['taskOptions']);
+	$taskOptions['taskRequirement']=cleanInput($pagePost['taskRequirement']);
+	$taskOptionsSerialized = serialize($taskOptions);
+	
+	$sql = "UPDATE assignments SET closeUser='',closeDate='',claimUser='',claimDate='',taskStatus='0', createDate='$createDate', taskDesc='$taskDesc', taskPriority='$taskPriority', taskOptions='$taskOptionsSerialized' WHERE taskID='$pageID'";
+	$result = dbQuery($sql) or die ("Query failed: reopenAssignment");
+	
+	addSuccessNotice("Assignment Opened");
 }
 
 ?>

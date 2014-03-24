@@ -1,8 +1,8 @@
 Forumz Version Release Notes
 Harris Christiansen
 Current Stable Released Version: 0.5.4
-Current Beta Version: 0.5.5
-Current Development Version: 0.5.6
+Current Beta Version: 0.5.6
+Current Development Version: 0.6.0
 
 Version 0.5.0:
 -Simple Reference Functions getDate(), getTime(), getUsername(), isSiteDisabled(), getDisabledMessage(), getSiteName(), getSiteMotd(), getSiteSlogan()
@@ -131,9 +131,20 @@ Version 0.5.6:
 	-Cancel Tasks
 -File Uploader
 
-Version 0.6.0: - First Public Release, no activation code - Due March 30
--Streamlined sign up (new site design?)
-	-Place for users to make suggestions (of new features, of bugs, etc)
+Version 0.6.0:
+-File Uploader
+	-Limit Upload Types
+	-Resize Images
+-Advanced Forum
+	-Move Threads
+	-Create Categories/Forums
+	-Delete Categories/Forums
+-Admin Verification of New Accounts
+-Display Dates in more friendly way
+	-Display date function ($date,$time)
+		-If date is today say today at ...
+		-If date is yesterday say yesterday at ...
+		-etc
 
 Version 0.6.1: - New Themes!
 - HarrisChristiansen.com Theme
@@ -144,30 +155,20 @@ Version 0.6.1: - New Themes!
 	-Match signup site design?
 
 Future:
--File Uploader
-	-Limit Upload Types
-	-Resize Images
--Display Dates in more friendly way
-	-Display date function ($date,$time)
-		-If date is today say today at ...
-		-If date is yesterday say yesterday at ...
-		-etc
 -Website Search
 -Assignment Organizer
 	-Search Completed Tasks
--Advanced Forum
-	-Move Threads
-	-Create Categories/Forums
-	-Delete Categories/Forums
 -Forum
 	-Pagination
 		-threads per forum page
+	-Nested Forums
+	-Forum Types
+		-Links
 -Spam Protection
 	-More lienient (DONT just check ip(may have used to be bad) and deny based on 3 spam markers)
 	-Flood Control
 -User/IP Suspensions (Not Bans)
 -Live username available checking
--Admin Verification of New Accounts
 -Member to Member PM/Chat System
 	-Include Security
 	-Only Log back so far (say 100 recent messages)

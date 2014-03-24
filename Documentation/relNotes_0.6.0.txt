@@ -1,9 +1,23 @@
 Forumz Version 0.6.0
 Harris Christiansen
--Due March 30, 2014
+-Due -, 2014
 
 Completed:
+-Assignment Manager Revisions System
 
 To-Do:
--Streamlined sign up (new site design?)
-	-Place for users to make suggestions (of new features, of bugs, etc)
+-File Uploader
+	-Limit Upload Types
+	-Resize Images
+-Advanced Forum
+	-Move Threads
+	-Create Categories/Forums
+	-Delete Categories/Forums
+-Admin Verification of New Accounts
+-Display Dates in more friendly way
+	-Display date function ($date,$time)
+		-If date is today say today at ...
+		-If date is yesterday say yesterday at ...
+		-etc
+-Cleanup Theme System
+	-Make it easier to keep all themes up to date (site functions become plugins)

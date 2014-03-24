@@ -7,7 +7,7 @@ if(!(!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['fil
 	$saveTime = date('H:i:s');
 	$fileName = $saveDate.'.'.$saveTime.'.'.$_FILES["file"]["name"];
     move_uploaded_file($_FILES["file"]["tmp_name"],$fileName);
-    $uploadInfo = '[img]/Resources/uploads/'.$fileName.'[/img]';
+    $uploadInfo = '[img width="480"]/Resources/uploads/'.$fileName.'[/img]';
 }
 
 ?>
