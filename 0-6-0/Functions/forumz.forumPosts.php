@@ -106,7 +106,7 @@ function editForumPost() {
 	}
 	if(userCan('editForumPosts')||returnUserID()==getForumPostAuthorID($pageID)) {
 		$newForumPost=formatPost($pagePost['forumPost']);
-		$newForumPost=cleanInput($pagePost['forumPost']);
+		$newForumPost_bb=cleanInput($pagePost['forumPost']);
 		$sql = "UPDATE forumPosts SET post='$newForumPost', post_bb='$newForumPost_bb' WHERE id='$pageID'";
 		$result = dbQuery($sql) or die ("Query failed: editForumPost");
 		addSuccessNotice("Post Updated");
@@ -129,9 +129,9 @@ function deleteForumPost() {
 	if($pageID==getThreadFirstPostID($threadID)) { // Delete Thread
 		if(userCan('deleteForumPosts')) {
 			$newThreadID = 0-$threadID;
-			$sql = "UPDATE forumThreads SET id='$newThreadID' WHERE id='$threadID'";
+			$sql = "UPDATE forumThreads SET id='$newThreadID' WHERE id='$threadID'"; // Delete Thread (Change ID to Negative)
 			$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thread");
-			$sql = "UPDATE forumPosts SET threadID='$newThreadID' WHERE threadID='$threadID'";
+			$sql = "UPDATE forumPosts SET threadID='$newThreadID' WHERE threadID='$threadID'"; // Update all posts threadIDs
 			$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thread-Posts");
 			// Update Latest Forum Post if set to thread
 			$forumID = getForumIDOfPost($pageID);
@@ -139,7 +139,7 @@ function deleteForumPost() {
 			$latestPost=unserialize($forum['latestPost']);
 			if($latestPost['threadID']==$threadID) {
 				$sql = "UPDATE forums SET latestPost='' WHERE id='$forumID'";
-				$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thead-Forum-LatestPost");
+				$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thead-Forum-LatestPost"); // Delete Post (Change ID to Negative)
 			}
 			addSuccessNotice("Thread Deleted");
 		} else {

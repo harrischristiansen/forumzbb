@@ -6,6 +6,8 @@ Completed:
 -Assignment Manager
 	-Revisions System
 	-User Upload System
+-Forum
+	-Fix Editing Posts
 
 To-Do:
 -File Uploader
@@ -15,8 +17,7 @@ To-Do:
 	-Move Threads
 	-Create Categories/Forums
 	-Delete Categories/Forums
-	-Fix Editing Posts
--Account Management System (global acts?)
+-Account Management System (global acts!?)
 	-Admin Verification of New Accounts
 	-If Global
 		-Tie acts to email (only 1 act per email)
