@@ -86,7 +86,7 @@ function addForumPost() {
 	$result = dbQuery($sql) or die ("Query failed: addForumPost-updateForumLatestThread");
 	
 	// Update Thread Latest Change
-	$sql = "UPDATE forumThreads SET latestChange='$latestChange' WHERE id='$threadID'";
+	$sql = "UPDATE forumThreads SET latestChange='$latestChange', latestPost='$latestPost' WHERE id='$threadID'";
 	$result = dbQuery($sql) or die ("Query failed: addForumPost-updateThreadLatestChange");
 	
 	// Add Post

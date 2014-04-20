@@ -30,3 +30,4 @@ To-Do:
 		-etc
 -Cleanup Theme System
 	-Make it easier to keep all themes up to date (site functions become plugins)
+-Game website report glitch (forumz glitch reporter)
