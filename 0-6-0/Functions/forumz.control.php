@@ -42,7 +42,7 @@ function displayCPContent() {
 			$sql = "SELECT * FROM siteSettings WHERE settingsProfile='1'";
 			$result = dbQuery($sql) or die ("Query failed: displayCPContent-getSiteSettings");
 			$resultArray = mysqli_fetch_array($result);
-			$settings = unserialize($resultArray['settings_bb']);
+			$settings = unserialize(base64_decode($resultArray['settings_bb']));
 			
 			// Display Form
 			editSiteSettingsForm($siteURL, $settings['siteName'], $userThemeChecked, $settings['siteMotd'], $settings['siteSlogan'], $settings['disabledMessage'], $reqLoginChecked, $verifyRegisterEmailChecked, $verifyRegisterAdminChecked, $siteSettings['blogEntriesPerPage'], $htmlAllowedChecked, $siteSettings['facebookLink'], $siteSettings['youtubeLink'], $siteSettings['googleAnalytics'], $siteSettings['metaDesc'], $siteSettings['metaKeywords'], $siteSettings['siteAbout']);
@@ -167,7 +167,7 @@ function updateSiteSettings() {
 	$settings['siteMotd']=cleanInput($pagePost['siteMotd']);
 	$settings['siteSlogan']=cleanInput($pagePost['siteSlogan']);
 	$settings['disabledMessage']=cleanInput($pagePost['siteDisabled']);
-	$settings = serialize($settings);
+	$settings = base64_encode(serialize($settings));
 	
 	$sql = "UPDATE siteSettings SET siteName='$siteName', settings_bb='$settings', defaultTheme='$siteTheme', userTheme='$userTheme', siteMotd='$siteMotd', siteSlogan='$siteSlogan', siteDisabled='$siteDisabled', reqLogin='$reqLogin', verifyRegisterEmail='$verifyRegisterEmail', verifyRegisterAdmin='$verifyRegisterAdmin', blogEntriesPerPage='$numBlogEntriesPerPage', facebookLink='$facebookLink', youtubeLink='$youtubeLink', googleAnalytics='$googleAnalytics', metaDesc='$metaDesc', metaKeywords='$metaKeywords', siteAbout='$siteAbout' WHERE settingsProfile='1'";
 	$result = dbQuery($sql) or die ("Query failed: updateSiteSettings");
@@ -228,7 +228,7 @@ function editRanksControlPanel() {
 	$sql = "SELECT * FROM ranks WHERE rankID='$pageID2'";
 	$result = dbQuery($sql) or die ("Query failed: editRanksControlPanel");
 	$rankArray = mysqli_fetch_array($result);
-	$permissionsArray = unserialize($rankArray['permissions']);
+	$permissionsArray = unserialize(base64_decode($rankArray['permissions']));
 	$permissionsTable = getPermissionsTable();
 	
 	// Get Checked Items
@@ -281,7 +281,7 @@ function addSiteRank() {
 	while($permission = mysqli_fetch_array($permissionsTable)) {
 		$newPermissions[$permission['internalName']] = cleanInput($pagePost[$permission['internalName']]);
 	}
-	$newPermissionsSave = serialize($newPermissions);
+	$newPermissionsSave = base64_encode(serialize($newPermissions));
 	
 	if(getHighestRankID()!=$userData['rankID']) {
 		addFailureNotice("Permission Denied");
@@ -312,7 +312,7 @@ function updateRank() {
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		addSuccessNotice("Success: Rank Updated");
 	} else {
-		$newPermissionsSave = serialize($newPermissions);
+		$newPermissionsSave = base64_encode(serialize($newPermissions));
 		$sql = "UPDATE ranks SET rankName='$rankName', permissions='$newPermissionsSave' WHERE rankID='$tarRank'";
 		$result = dbQuery($sql) or die ("Query failed: updateRank");
 		

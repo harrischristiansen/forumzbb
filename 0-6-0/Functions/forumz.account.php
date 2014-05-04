@@ -99,7 +99,7 @@ function checkLogin($user, $pass) {
 	
 	$userInfo=mysqli_fetch_array($result);
 	// Account Status
-	$actFlags = unserialize($userInfo['actFlags']);
+	$actFlags = unserialize(base64_decode($userInfo['actFlags']));
 	if($actFlags['status']!="1") { return 3; } // Act Banned
 	elseif($actFlags['emailConfirmed']!="1") { return 1; } // Needs Email Confirmation
 	elseif($actFlags['adminConfirmed']!="1") { return 2; } // Needs Admin Confirmation
@@ -206,7 +206,7 @@ function getAccountFlags($actID) {
 	$sql = "SELECT * FROM accounts WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: getAccountFlags");
 	$resultArray = mysqli_fetch_array($result);
-	$actFlags = unserialize($resultArray['actFlags']);
+	$actFlags = unserialize(base64_decode($resultArray['actFlags']));
 	return $actFlags;
 }
 
@@ -224,7 +224,7 @@ function confirmAccount() { // Fix to not work for banned acts and acts with adm
 function setAccountAsConfirmedByEmail($actID) {
 	$actFlags = getAccountFlags($actID);
 	$actFlags['emailConfirmed']="1";
-	$actFlags = serialize($actFlags);
+	$actFlags = base64_encode(serialize($actFlags));
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByEmail-set");
 	addSuccessNotice("Account Activated - You May Now Login");
@@ -232,21 +232,21 @@ function setAccountAsConfirmedByEmail($actID) {
 function setAccountAsConfirmedByAdmin($actID) {
 	$actFlags = getAccountFlags($actID);
 	$actFlags['adminConfirmed']="1";
-	$actFlags = serialize($actFlags);
+	$actFlags = base64_encode(serialize($actFlags));
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsConfirmedByAdmin-set");
 }
 function setAccountAsActive($actID) {
 	$actFlags = getAccountFlags($actID);
 	$actFlags['status']="1";
-	$actFlags = serialize($actFlags);
+	$actFlags = base64_encode(serialize($actFlags));
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsActive-set");
 }
 function setAccountAsLocked($actID) {
 	$actFlags = getAccountFlags($actID);
 	$actFlags['status']="0";
-	$actFlags = serialize($actFlags);
+	$actFlags = base64_encode(serialize($actFlags));
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
 	$result = dbQuery($sql) or die ("Query failed: setAccountAsLocked-set");
 }
@@ -324,7 +324,7 @@ function renameUser() {
 	// Update Account
 	$actFlags = getAccountFlags($tarActID);
 	$actFlags['userRename']="0";
-	$actFlags = serialize($actFlags);
+	$actFlags = base64_encode(serialize($actFlags));
 	$sql = "UPDATE accounts SET username='$newUsername', actFlags='$actFlags' WHERE actID='$tarActID'";
 	$result = dbQuery($sql) or die ("Query failed: renameUser");
 	
@@ -334,7 +334,7 @@ function renameUser() {
 function flagForRename($actID) {
 	$actFlags = getAccountFlags($actID);
 	$actFlags['userRename']="1";
-	$actFlags = serialize($actFlags);
+	$actFlags = base64_encode(serialize($actFlags));
 	
 	// Update Account
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";
@@ -343,7 +343,7 @@ function flagForRename($actID) {
 function unflagForRename($actID) {
 	$actFlags = getAccountFlags($actID);
 	$actFlags['userRename']="0";
-	$actFlags = serialize($actFlags);
+	$actFlags = base64_encode(serialize($actFlags));
 	
 	// Update Account
 	$sql = "UPDATE accounts SET actFlags='$actFlags' WHERE actID='$actID'";

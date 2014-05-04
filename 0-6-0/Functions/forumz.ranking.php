@@ -14,7 +14,7 @@ function setUserPrivileges() { // Sets a users permissions based on their rank -
 	$sql = "SELECT * FROM ranks WHERE rankID='$userRank'";
 	$result = dbQuery($sql) or die ("Query failed: setUserPrivileges");
 	$rankArray=mysqli_fetch_array($result);
-	$userData['permissions']=unserialize($rankArray['permissions']);
+	$userData['permissions']=unserialize(base64_decode($rankArray['permissions']));
 	$userData['permissions']['rankOrder']=$rankArray['rankOrder'];
 	$userData['permissions']['loggedIn']=isLoggedIn();
 	$userData['permissions']['loggedOut']=!isLoggedIn();

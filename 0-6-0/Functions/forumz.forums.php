@@ -10,7 +10,7 @@ function viewForumHome() {
 		$catForums = getForumsInCat($category['id']);
 		$rowID=0;
 		while($forum = mysqli_fetch_array($catForums)) {
-			$latestPost=unserialize($forum['latestPost']);
+			$latestPost=unserialize(base64_decode($forum['latestPost']));
 			$forumLink=$siteSettings['siteURLShort'].'forum/'.$forum['id'];
 			$latestPostLink=$siteSettings['siteURLShort'].'thread/'.$latestPost['threadID'];
 			displayForumLine($rowID, $forum['title'], $forum['desc'], getNumForumThreadsInForum($forum['id']), getNumForumPostsInForum($forum['id']), $latestPost['title'], getUsername($latestPost['author']), $latestPost['date'], $forumLink, $latestPostLink);

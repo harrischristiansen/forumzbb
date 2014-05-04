@@ -104,7 +104,7 @@ function viewAssignment() {
 	$assignInfo['claimDate'] = $assignment['claimDate'];
 	$assignInfo['closeUser'] = getUsername($assignment['closeUser']);
 	$assignInfo['closeDate'] = $assignment['closeDate'];
-	$taskOptions = unserialize($assignment['taskOptions']);
+	$taskOptions = unserialize(base64_decode($assignment['taskOptions']));
 	$assignInfo['taskRequirement'] = $taskOptions['taskRequirement'];
 	$assignInfo['taskNotes'] = $taskOptions['taskNotes'];
 	$assignInfo['taskFile'] = $taskOptions['taskFile'];
@@ -142,14 +142,14 @@ function closeAssignment() {
 	$closeDate = returnDateOfficial();
 	$closeTime = returnTime();
 	$assignment = getAssignmentByID($pageID);
-	$taskOptions = unserialize($assignment['taskOptions']);
+	$taskOptions = unserialize(base64_decode($assignment['taskOptions']));
 	$taskOptions['taskNotes'] = $taskOptions['taskNotes'].'<br><b>'.$closeDate.':</b> '.formatPost($pagePost['taskNotes']);
 	if(!(!file_exists($_FILES['file']['tmp_name']) || !is_uploaded_file($_FILES['file']['tmp_name']))) {
 		$fileName = returnUsername().'.'.$closeDate.'.'.$closeTime.'.'.$_FILES["file"]["name"];
     	move_uploaded_file($_FILES["file"]["tmp_name"],"Resources/uploads/".$fileName);
 		$taskOptions['taskFile'] = $taskOptions['taskFile'].$closeDate.': <a href="/Resources/uploads/'.cleanInput($fileName).'" target="_blank">'.cleanInput($fileName).'</a><br>';
 	}
-	$taskOptionsSerialized = serialize($taskOptions);
+	$taskOptionsSerialized = base64_encode(serialize($taskOptions));
 	$sql = "UPDATE assignments SET closeUser='$closeUser',closeDate='$closeDate',taskStatus='1',taskOptions='$taskOptionsSerialized' WHERE taskID='$pageID'";
 	$result = dbQuery($sql) or die ("Query failed: closeAssignment");
 	addSuccessNotice('Assignment Complete');
@@ -169,7 +169,7 @@ function createDevAssignment() {
 	$taskID=getNumAssignments();
 	$taskName=cleanInput($pagePost['taskName']);
 	$createDate=returnDateOfficial();
-	$createTime=returnDateOfficial();
+	$createTime=returnTime();
 	$createUser = returnUserID();
 	$taskDesc='<br><b>'.$createDate.':</b> '.formatPost($pagePost['taskDesc']);
 	$taskPriority="0";
@@ -180,7 +180,7 @@ function createDevAssignment() {
     	move_uploaded_file($_FILES["file"]["tmp_name"],"Resources/uploads/".$fileName);
 		$taskOptions['taskFile'] = $taskOptions['taskFile'].$closeDate.': <a href="/Resources/uploads/'.cleanInput($fileName).'" target="_blank">'.cleanInput($fileName).'</a><br>';
 	}
-	$taskOptionsSerialized = serialize($taskOptions);
+	$taskOptionsSerialized = base64_encode(serialize($taskOptions));
 	
 	$sql = "INSERT INTO assignments (taskID, taskStatus, taskPriority, taskName, taskDesc, taskOptions, createDate, claimUser, claimDate, closeUser, closeDate) VALUES ('$taskID', '1', '$taskPriority', '$taskName', '$taskDesc', '$taskOptionsSerialized', '$createDate', '$createUser', '$createDate', '$createUser', '$createDate')";
 	$result = dbQuery($sql) or die ("Query failed: createDevAssignment");
@@ -198,7 +198,7 @@ function createAssignment() {
 	$taskDesc='<br><b>'.$createDate.':</b> '.formatPost($pagePost['taskDesc']);
 	$taskPriority=cleanInput($pagePost['taskPriority']);
 	$taskOptions['taskRequirement']=cleanInput($pagePost['taskRequirement']);
-	$taskOptionsSerialized = serialize($taskOptions);
+	$taskOptionsSerialized = base64_encode(serialize($taskOptions));
 	
 	$sql = "INSERT INTO assignments (taskID, taskStatus, taskPriority, taskName, taskDesc, taskOptions, createDate) VALUES ('$taskID', '0', '$taskPriority', '$taskName', '$taskDesc', '$taskOptionsSerialized', '$createDate')";
 	$result = dbQuery($sql) or die ("Query failed: createAssignment");
@@ -217,9 +217,9 @@ function reopenAssignment() {
 	$taskDesc=$assignment['taskDesc'].'<br><b>'.$createDate.':</b> '.formatPost($pagePost['taskDesc']);
 	$taskPriority=cleanInput($pagePost['taskPriority']);
 	
-	$taskOptions = unserialize($assignment['taskOptions']);
+	$taskOptions = unserialize(base64_decode($assignment['taskOptions']));
 	$taskOptions['taskRequirement']=cleanInput($pagePost['taskRequirement']);
-	$taskOptionsSerialized = serialize($taskOptions);
+	$taskOptionsSerialized = base64_encode(serialize($taskOptions));
 	
 	$sql = "UPDATE assignments SET closeUser='',closeDate='',claimUser='',claimDate='',taskStatus='0', createDate='$createDate', taskDesc='$taskDesc', taskPriority='$taskPriority', taskOptions='$taskOptionsSerialized' WHERE taskID='$pageID'";
 	$result = dbQuery($sql) or die ("Query failed: reopenAssignment");

@@ -81,7 +81,7 @@ function addForumPost() {
 	$latestPostArray['author']=$threadAuthor;
 	$latestPostArray['date']=$latestChange;
 	$latestPostArray['threadID']=$threadID;
-	$latestPost = serialize($latestPostArray);
+	$latestPost = base64_encode(serialize($latestPostArray));
 	$sql = "UPDATE forums SET latestPost='$latestPost' WHERE id='$forumID'";
 	$result = dbQuery($sql) or die ("Query failed: addForumPost-updateForumLatestThread");
 	
@@ -136,7 +136,7 @@ function deleteForumPost() {
 			// Update Latest Forum Post if set to thread
 			$forumID = getForumIDOfPost($pageID);
 			$forum = getForumByID($forumID);
-			$latestPost=unserialize($forum['latestPost']);
+			$latestPost=unserialize(base64_decode($forum['latestPost']));
 			if($latestPost['threadID']==$threadID) {
 				$sql = "UPDATE forums SET latestPost='' WHERE id='$forumID'";
 				$result = dbQuery($sql) or die ("Query failed: deleteForumPost-Thead-Forum-LatestPost"); // Delete Post (Change ID to Negative)

@@ -9,7 +9,7 @@ function getDefaultAccountFlags() {
 	if($siteSettings['verifyRegisterEmail']) { $actFlags['emailConfirmed']="0"; } else { $actFlags['emailConfirmed']="1"; }
 	if($siteSettings['verifyRegisterAdmin']) { $actFlags['adminConfirmed']="0"; } else { $actFlags['adminConfirmed']="1"; }
 	$actFlags['userRename'] = "0";
-	return serialize($actFlags);
+	return base64_encode(serialize($actFlags));
 }
 function setupSiteURLs() {
 	global $siteSettings;

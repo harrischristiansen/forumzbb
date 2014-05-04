@@ -12,7 +12,7 @@ function viewForumThreads() {
 	}
 	displayForumHead();
 	while($thread=mysqli_fetch_array($threads)) {
-		$latestPost = unserialize($thread['latestPost']);
+		$latestPost = unserialize(base64_decode($thread['latestPost']));
 		$replies = getNumForumPostsInThread($thread['id'])-1;
 		$threadLink = $siteSettings['siteURLShort'].'thread/'.$thread['id'];
 		displayThreadLine($threadLink,$rowID,$thread['subject'],getUsername($thread['creator']),getUsername($latestPost['author']),$latestPost['date'],$replies,$thread['views']);
@@ -65,7 +65,7 @@ function createForumThread() {
 	$latestPostArray['author']=$threadAuthor;
 	$latestPostArray['date']=$latestChange;
 	$latestPostArray['threadID']=$threadID;
-	$latestPost = serialize($latestPostArray);
+	$latestPost = base64_encode(serialize($latestPostArray));
 	$views = 0;
 	
 	// Update Forum Latest Thread
