@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+/* Harris Christiansen */
+/* Created 2014-06-08 */
+
+html, body {
+	background: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #555555;
+	font-size: 14px;
+	padding-top: 85px;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: #555555;
+}
+
+a:hover {
+	color: #222222;
+}
+
+/* ----- Misc div styling ----- */
+
+p {
+	margin: 0px;
+	padding: 0px;
+}
+ul, ol {
+	margin: 0px;
+}
+
+/* ---------- Header ---------- */
+header {
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: #FFFFFF;
+	color: #555555;
+	border-bottom: 2px solid #CCCCCC;
+	text-align: left;
+}
+#headerCont{
+	width: 100%;
+	max-width: 1028px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#siteLogo img {
+	height: 80px;
+}
+
+/* ----- Nav Bar ----- */
+#navBar {
+	float: right;
+	line-height: 80px;
+}
+#navBar li {
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#navBar li.link:hover {
+	background-color: #0589C6;
+	color: #FFFFFF;
+}
+#navBar li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+#navBar li:hover a {
+	color: #FFFFFF;
+}
