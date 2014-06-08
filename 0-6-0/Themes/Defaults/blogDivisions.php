@@ -22,13 +22,13 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 	viewHTML('</div>');
 }
 
-function displayBlogEntry($authorName,$postDateShort,$postDate,$postTime,$entryTitle,$entry,$updateInfo,$editEntryLink,$deleteEntryLink) {
+function displayBlogEntry($authorName,$postDateShort,$postDate,$entryTitle,$entry,$updateInfo,$editEntryLink,$deleteEntryLink) {
 	viewHTML('<div class="FullWidthPostHead">'); // Blog Entry Head
 		viewHTML('<div class="floatLeft">');
 			viewHTML("By: ".$authorName);
 		viewHTML('</div>');
 		viewHTML('<div class="floatRight">');
-			viewHTML("Posted: ".$postDate." at ".$postTime);
+			viewHTML("Posted: ".$postDate);
 		viewHTML('</div>');
 	viewHTML('</div>');
 	viewHTML('<div class="FullWidthPostRow">'); // Blog Entry Content

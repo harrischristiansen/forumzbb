@@ -11,9 +11,11 @@ function viewForumHome() {
 		$rowID=0;
 		while($forum = mysqli_fetch_array($catForums)) {
 			$latestPost=unserialize(base64_decode($forum['latestPost']));
+			$latestPostDateTime = split(' ',$latestPost['date']);
+			$latestPostDate = returnDateTimeView($latestPostDateTime[0],$latestPostDateTime[1]);
 			$forumLink=$siteSettings['siteURLShort'].'forum/'.$forum['id'];
 			$latestPostLink=$siteSettings['siteURLShort'].'thread/'.$latestPost['threadID'];
-			displayForumLine($rowID, $forum['title'], $forum['desc'], getNumForumThreadsInForum($forum['id']), getNumForumPostsInForum($forum['id']), $latestPost['title'], getUsername($latestPost['author']), $latestPost['date'], $forumLink, $latestPostLink);
+			displayForumLine($rowID, $forum['title'], $forum['desc'], getNumForumThreadsInForum($forum['id']), getNumForumPostsInForum($forum['id']), $latestPost['title'], getUsername($latestPost['author']), $latestPostDate, $forumLink, $latestPostLink);
 			$rowID++;
 		}
 	}

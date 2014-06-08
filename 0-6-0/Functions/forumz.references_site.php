@@ -9,6 +9,9 @@ function returnDateShort() {
 function returnDateOfficial() {
 	return date('Y-m-d');
 }
+function returnYesterday() {
+	return date('Y-m-d', time() - 60 * 60 * 24);
+}
 function returnDateLong() {
 	// Return Date in form Month Day, Year
 	return date('F j, Y');
@@ -16,6 +19,15 @@ function returnDateLong() {
 function returnTime() {
 	// Returns Time in 24 Hour Time
 	return date('H:i:s');
+}
+function returnDateTimeView($theDate,$theTime) {
+	if($theDate==returnDateOfficial()) {
+		return 'Today at '.$theTime;
+	} elseif($theDate==returnYesterday()) {
+		return 'Yesterday at '.$theTime;
+	} else {
+		return $theDate.' at '.$theTime;
+	}
 }
 function isSiteDisabled() {
 	global $siteSettings;

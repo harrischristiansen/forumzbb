@@ -77,8 +77,9 @@ function viewBlogPageBlogEntry() {
 	if($canEdit) { $editEntryLink=$siteSettings['siteURLShort']."editBlog/".($pageID); }
 	if($canDelete) { $deleteEntryLink=$siteSettings['siteURLShort']."deleteBlog/".($pageID); }
 	$postDateShort = date("M\\<\\b\\r\\>j", strtotime($blogEntry['AuthorDate']));
+	$postDate = returnDateTimeView($blogEntry['AuthorDate'],$blogEntry['AuthorTime']);
 	if($blogEntry['updateAuthor']!="") { $updateInfo = "Updated by ".getUsername($blogEntry['updateAuthor'])." on ".$blogEntry['updateDate']."."; }
-	displayBlogEntry(getMemberName($blogEntry['Author']),$postDateShort,$blogEntry['AuthorDate'],$blogEntry['AuthorTime'],$blogEntry['Title'],$blogEntry['Post'],$updateInfo,$editEntryLink,$deleteEntryLink);
+	displayBlogEntry(getMemberName($blogEntry['Author']),$postDateShort,$postDate,$blogEntry['Title'],$blogEntry['Post'],$updateInfo,$editEntryLink,$deleteEntryLink);
 }
 function checkBlogEntryExists() { // Used in viewBlog.php
 	global $pageID;

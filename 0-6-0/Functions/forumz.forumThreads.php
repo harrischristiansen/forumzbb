@@ -15,6 +15,8 @@ function viewForumThreads() {
 		$latestPost = unserialize(base64_decode($thread['latestPost']));
 		$replies = getNumForumPostsInThread($thread['id'])-1;
 		$threadLink = $siteSettings['siteURLShort'].'thread/'.$thread['id'];
+		$postDate = split(' ',$latestPost['date']);
+		$latestPost['date'] = returnDateTimeView($postDate[0],$postDate[1]);
 		displayThreadLine($threadLink,$rowID,$thread['subject'],getUsername($thread['creator']),getUsername($latestPost['author']),$latestPost['date'],$replies,$thread['views']);
 		$rowID++;
 	}
