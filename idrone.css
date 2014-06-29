@@ -4,20 +4,26 @@
 
 html, body {
 	background: #FFFFFF;
-	font-family: Arial, Helvetica, sans-serif;
-	color: #555555;
+	font-family: 'open sans', sans-serif;
+	color: #666666;
 	font-size: 14px;
-	padding-top: 85px;
 	text-align: center;
+	margin: 0px;
+	position: relative;
+}
+body {
+	padding-top: 70px;
+	padding-bottom: 60px;
 }
 
 a {
 	text-decoration: none;
-	color: #555555;
+	color: #0077d0;
 }
 
 a:hover {
-	color: #222222;
+	color: #0088ee;
+	text-decoration: underline;
 }
 
 /* ----- Misc div styling ----- */
@@ -29,38 +35,81 @@ p {
 ul, ol {
 	margin: 0px;
 }
+div {
+	box-sizing: border-box;
+}
+
+.siteCont {
+	width: 100%;
+	max-width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.siteSection {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.bordered {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: 1px solid #999999;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+h1 { /* Unused */
+	font-size: 36px;
+	font-weight: 300;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+h2 { /* Page Title */
+	font-size: 30px;
+	font-weight: 300;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+h3 { /* Section Title */
+	font-size: 26px;
+	font-weight: 300;
+	margin-top: 0px;
+	margin-bottom: 8px;
+}
+
+.clearBoth {
+	clear: both;
+}
 
 /* ---------- Header ---------- */
 header {
 	width: 100%;
-	height: 80px;
+	height: 70px;
 	position: fixed;
 	top: 0px;
 	left: 0px;
 	background-color: #FFFFFF;
 	color: #555555;
-	border-bottom: 2px solid #CCCCCC;
-	text-align: left;
-}
-#headerCont{
-	width: 100%;
-	max-width: 1028px;
-	margin-left: auto;
-	margin-right: auto;
+	border-bottom: 1px solid #2a3b55;
 }
 #siteLogo img {
-	height: 80px;
+	height: 70px;
 }
 
 /* ----- Nav Bar ----- */
 #navBar {
 	float: right;
-	line-height: 80px;
+	line-height: 70px;
 }
 #navBar li {
-	display: inline-block;
+	display: block;
+	float: left;
 	padding-left: 5px;
 	padding-right: 5px;
+	margin-left: 0px;
 }
 #navBar li.link:hover {
 	background-color: #0589C6;
@@ -70,7 +119,72 @@ header {
 	display: block;
 	width: 100%;
 	height: 100%;
+	color: #555555;
 }
 #navBar li:hover a {
 	color: #FFFFFF;
+	text-decoration: none;
+}
+
+/* ---------- Page Head ---------- */
+#pageHead {
+	height: 75px;
+	width: 100%;
+	background-color: #2a3b55;
+	color: #FFFFFF;
+	padding-top: 10px;
+	margin-bottom: 10px;
+}
+#breadcrumbs {
+	font-size: 14px;
+	color: #AAAAAA;
+}
+
+/* ---------- Main Body Containers ---------- */
+.leftPage {
+	float: left;
+	width: 65%;
+	padding-right: 10px;
+}
+.rightPage {
+	float: right;
+	width: 35%;
+	padding-left: 10px;
+}
+
+.dateDiv {
+	padding-left: 20px;
+	font-size: 15px;
+	background: url(/Resources/images/icons/navMenuIcon.png) left center no-repeat;
+	background-size: contain;
+}
+
+/* ---------- Tables ---------- */
+.fullWidthTable {
+	width: 100%;
+	text-align: center;
+}
+.tableHead {
+	background-color: #2a3b55;
+	color: #FFFFFF;
+	line-height: 25px;
+}
+.tableRow {
+	background-color: #0589C6;
+	color: #FFFFFF;
+	line-height: 35px;
+}
+
+/* ---------- Footer ---------- */
+footer {
+	width: 100%;
+	height: 40px;
+	background-color: rgb(42, 59, 85);
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	line-height: 40px;
+	color: #bababa;
+	font-size: 12px;
+	overflow: hidden;
 }

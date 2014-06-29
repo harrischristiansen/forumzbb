@@ -23,7 +23,6 @@ To-Do:
 		-Tie acts to email (only 1 act per email)
 		-Tie to full name
 		-Allow duplicate usernames?
--Display Dates in more friendly way
 -Cleanup Theme System
 	-Make it easier to keep all themes up to date (site functions become plugins)
 -Glitch Report System
@@ -31,4 +30,4 @@ To-Do:
 	-Website (To Forumz DB)
 -New Theme
 	-DJI.com
--Improve Chat Resource Draw
+-Improve Chat Resource Draw 

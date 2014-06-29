@@ -12,21 +12,41 @@ function returnDateOfficial() {
 function returnYesterday() {
 	return date('Y-m-d', time() - 60 * 60 * 24);
 }
-function returnDateLong() {
+function returnDateLong($theDate = null) {
 	// Return Date in form Month Day, Year
-	return date('F j, Y');
+	if($theDate==null) {
+		return date('F j, Y');
+	}
+	$theDate = strtotime($theDate);
+	if(date('Y') == date('Y', $theDate)) {
+		return date('F j', $theDate);
+	} else {
+		return date('F j, Y', $theDate);
+	}
 }
 function returnTime() {
 	// Returns Time in 24 Hour Time
 	return date('H:i:s');
 }
-function returnDateTimeView($theDate,$theTime) {
+function returnDateTimeView($theDate,$theTime=null) {
 	if($theDate==returnDateOfficial()) {
-		return 'Today at '.$theTime;
+		if($theTime=="") {
+			return 'Today';
+		} else {
+			return 'Today at '.$theTime;
+		}
 	} elseif($theDate==returnYesterday()) {
-		return 'Yesterday at '.$theTime;
+		if($theTime==""){
+			return 'Yesterday';
+		} else {
+			return 'Yesterday at '.$theTime;
+		}
 	} else {
-		return $theDate.' at '.$theTime;
+		if($theTime=="") {
+			return returnDateLong($theDate);
+		} else {
+			return returnDateLong($theDate).' at '.$theTime;
+		}
 	}
 }
 function isSiteDisabled() {

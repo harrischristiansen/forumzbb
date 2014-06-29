@@ -10,8 +10,7 @@ function viewForumThread() {
 		$author = getUsername($post['author']);
 		$authorInfo = getAuthorInformation($post['author']);
 		$subject = $post['subject'];
-		$postDate = $post['postDate'];
-		$postTime = $post['postTime'];
+		$postDate = returnDateTimeView($post['postDate'],$post['postTime']);
 		$postText = $post['post'];
 		$viewEdit = userCan('editForumPosts');
 		$viewDelete = userCan('deleteForumPosts');
@@ -19,7 +18,7 @@ function viewForumThread() {
 		$editLink = $siteSettings['siteURLShort']."editForumPost/".$post['id'];
 		$deleteLink  = $siteSettings['siteURLShort']."deleteForumPost/".$post['id'];
 		$editText = $post['post_bb'];
-		displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $postTime, $postText, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText);
+		displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $postText, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText);
 		$rowID++;
 	}
 }

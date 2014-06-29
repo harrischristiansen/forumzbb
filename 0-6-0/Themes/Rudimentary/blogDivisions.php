@@ -32,7 +32,7 @@ function displayBlogEntry($authorName,$postDateShort,$postDate,$entryTitle,$entr
 
 function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEdit,$viewDelete,$editLink,$deleteLink,$editText) {
 	viewHTML('<div class="siteContPanel whitePanel">');
-		viewHTML('<div class="blogCommentAuthor">By: '.$userName.'<br>'.$commentDate.' at '.$commentTime.'</div>');
+		viewHTML('<div class="blogCommentAuthor">By: '.$userName.'<br>'.returnDateTimeView($commentDate,$commentTime).'</div>');
 		viewHTML('<div class="blogCommentText">'.$comment.'</div>');
 		viewHTML('<div class="clearBoth"></div>');
 		if($viewEdit||$viewDelete) {

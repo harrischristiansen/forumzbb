@@ -38,7 +38,7 @@ function displayMembersList() {
 	while($member = mysqli_fetch_array($activeMembers)) {
 		$canChangeRank = hasPermissionToEditRank($member['rankID']);
 		if($member['actID']==returnUserID()) { $canChangeRank=false; }
-		displayMembersListRow($member['username'], getRankName($member['rankID']), $member['joinDate'], $member['lastLogin'], $member['actID'], $rowID, $canChangeRank);
+		displayMembersListRow($member['username'], getRankName($member['rankID']), returnDateTimeView($member['joinDate']), returnDateTimeView($member['lastLogin']), $member['actID'], $rowID, $canChangeRank);
 		$rowID++;
 	}
 }
