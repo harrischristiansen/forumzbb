@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+/* Harris Christiansen */
+/* Created 2014-07-01 */
+/* For Use On iDrone.com */
+
+html, body {
+	background: #000000 url(bg.jpg) no-repeat center center;
+	font-family: 'open sans', sans-serif;
+	color: #BBBBBB;
+	font-size: 16px;
+	text-align: center;
+	margin: 0px;
+	position: relative;
+	min-height: 570px;
+	height: 100%;
+}
+div {
+	box-sizing: border-box;
+}
+
+#siteContain{
+  	position: absolute;
+  	top: 50%;
+  	margin-top: -250px;
+  	left: 0;
+  	width: 100%;
+}
+#siteContent {
+	width: 99%;
+	max-width: 800px;
+   	margin-left: auto;
+   	margin-right: auto;
+   	height: 500px;
+   	text-align: left;
+   	position: relative;
+}
+#iDroneText {
+	color: #999999;
+	font-size: 60px;
+	font-weight: 100;
+	padding-top: 11%;
+	padding-left: 20%;
+}
+#advancingText {
+	color: #999999;
+	font-size: 22px;
+	font-weight: 100;
+	padding-left: 24%;
+}
+
+#footer {
+	padding-top: 10px;
+	font-size: 12px;
+}
