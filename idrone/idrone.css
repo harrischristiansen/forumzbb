@@ -47,6 +47,14 @@ div {
 	font-weight: 100;
 	padding-left: 24%;
 }
+@media only screen and (max-width : 640px) {
+	#iDroneText {
+		padding-left: 20px;
+	}
+	#advancingText {
+		padding-left: 60px;
+	}
+}
 
 #footer {
 	padding-top: 10px;
