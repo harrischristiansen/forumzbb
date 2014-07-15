@@ -77,16 +77,13 @@ function loadPage() {
 	if($numPages>=2) {
 		if($pageID!="") {
 			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID')";
+			if($pageID2!="") {
+				$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID' OR idDependant='$pageID2')";
+			}
+			$result = dbQuery($sql) or die ("Query failed: loadPageByNameAndID");
+			$numPages=mysqli_num_rows($result);
 		}
-		if($pageID2!="") {
-			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID2')";
-		}
-		if($pageID!=""&&$pageID2!="") {
-			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='$pageID' OR idDependant='$pageID2')";
-		}
-		$result = dbQuery($sql) or die ("Query failed: loadPageByNameAndID");
-		$numPages=mysqli_num_rows($result);
-		if($numPages==0) {
+		if($numPages==0||$pageID=="") {
 			$sql = "SELECT * FROM pages WHERE pageURL='$pageName' AND (idDependant='')";
 			$result = dbQuery($sql) or die ("Query failed: loadPageByNameAndBlankID");
 			$numPages=mysqli_num_rows($result);
