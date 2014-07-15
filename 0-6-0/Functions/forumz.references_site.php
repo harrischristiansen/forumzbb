@@ -29,6 +29,8 @@ function returnTime() {
 	return date('H:i:s');
 }
 function returnDateTimeView($theDate,$theTime=null) {
+	$fullDate = strtotime($theDate." ".$theTime);
+	$theTime = date('g:i a',$fullDate);
 	if($theDate==returnDateOfficial()) {
 		if($theTime=="") {
 			return 'Today';
