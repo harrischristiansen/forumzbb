@@ -17,6 +17,10 @@ html, body {
 div {
 	box-sizing: border-box;
 }
+a {
+	text-decoration: none;
+	color: #BBBBBB;
+}
 
 #siteContain{
   	position: absolute;
@@ -54,6 +58,17 @@ div {
 	#advancingText {
 		padding-left: 60px;
 	}
+}
+#emailAdr {
+	position: absolute;
+	bottom: 5px;
+	width: 100%;
+	text-align: center;
+	font-size: 14px;
+	display: block;
+}
+#emailAdr:hover {
+	color: #999999;
 }
 
 #footer {
