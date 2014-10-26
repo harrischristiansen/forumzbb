@@ -1,6 +1,5 @@
 Forumz Version 0.6.0
 Harris Christiansen
--Due April 19, 2014
 
 Completed:
 -Assignment Manager
@@ -30,4 +29,4 @@ To-Do:
 	-Website (To Forumz DB)
 -New Theme
 	-DJI.com
--Improve Chat Resource Draw 
+	-HarrisChristiansen.com

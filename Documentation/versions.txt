@@ -131,7 +131,7 @@ Version 0.5.6:
 	-Cancel Tasks
 -File Uploader
 
-Version 0.6.0: - Due April 19, 2014
+Version 0.6.0:
 -File Uploader
 	-Limit Upload Types
 	-Resize Images
@@ -147,8 +147,6 @@ Version 0.6.0: - Due April 19, 2014
 		-etc
 
 Version 0.6.1: - New Themes!
-- HarrisChristiansen.com Theme
-- Forumzbb.com Theme
 - Forum Theme like Instructure Canvas
 - Another new theme, from scratch, using latest web standards
 	-Challenge Self

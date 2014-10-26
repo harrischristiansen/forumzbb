@@ -6,7 +6,6 @@ global $userData, $siteSettings;
 themeInclude('siteNotices');
 themeInclude('loginWindow');
 defaultsInclude('navBar');
-defaultsInclude('chatSystem');
 //// HTML Head ////
 ?>
 <!DOCTYPE HTML>
@@ -48,9 +47,6 @@ defaultsInclude('chatSystem');
 		<? if(!isLoggedIn()) { ?>
 			<li id="menuBarLoginItem" class="loginWindButton"></li>
 		<? } ?>
-		<? if(userCan('useChat')) { ?>
-			<li id="menuBarChatItem"></li>
-		<? } ?>
 		<? displayNavBar(); ?>
 		<? if(!isLoggedIn()) { ?>
 			<li class="navItem loginWindButton navItem-hidden"><a href="#">Login</a></li>
@@ -60,7 +56,6 @@ defaultsInclude('chatSystem');
 		<? } ?>
 	</ul>
 	<? if(!isLoggedIn()) { viewLoginWindow(); } ?>
-	<? if(userCan('useChat')) { viewChatWindow(); } ?>
 </div>
 
 <div class="centerPanel" id="mainContainer">
