@@ -1,6 +1,6 @@
 <?php
-// Harris Christiansen
-// Created 9-15-12
+// Harris Christiansen (HarrisChristiansen.com)
+// Created 2014-10-26
 
 global $userData, $siteSettings;
 themeInclude('siteNotices');
@@ -15,7 +15,7 @@ defaultsInclude('navBar');
 	<meta name="viewport" content="width=device-width">
 	<? displayMetadata(); ?>
 	<title><?php echo getPageTitle(); ?></title>
-	<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Rudimentary/Rudimentary.css" type="text/css">
+	<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Clean/Clean.css" type="text/css">
 	<!-- Jquery imports -->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -23,7 +23,7 @@ defaultsInclude('navBar');
 	<!-- Site Scripts -->
 	<script>var phpSessionName="<? echo session_name(); ?>";</script>
 	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Defaults/siteScripts.js"></script>
-	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Rudimentary/themeScripts.js"></script>
+	<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Clean/themeScripts.js"></script>
 	<!-- bValidator -->
 	<link rel="stylesheet" href="/Resources/plugins/bvalidator/validator.css" />
 	<script src="/Resources/plugins/bvalidator/jquery.bvalidator.js"></script>
@@ -32,30 +32,22 @@ defaultsInclude('navBar');
 	<script type="text/javascript" src="/Resources/plugins/sceditor/minified/jquery.sceditor.bbcode.min.js"></script>
 </head><body><div id="siteContainer">
 
-<header>
+<header><div class="siteCont">
 	<a href="/home/" id="siteLogo" class="noSelect"><img src="/Resources/siteImages/logo.png" alt="<? echo getSiteName(); ?>"></a>
-	<? if($userData['loggedIn']) {
-		viewHTML('<div id="guestInfo">Welcome, <b>'.returnUsername().'</b>.</div>');
-	} else {
-		viewHTML('<div id="guestInfo">Welcome, <b>Guest</b>.<br>Please <a href="#" class="loginWindButton">Login</a> or <a href="'.$siteSettings['siteURLShort'].'register/">Register</a>.</div>');
-	} ?>
-</header>
-
-<div id="navBar">
-	<div id="navHandle">Navigation</div>
-	<ul id="navMenu">
-		<? if(!isLoggedIn()) { ?>
-			<li id="menuBarLoginItem" class="loginWindButton"></li>
-		<? } ?>
+	<ul id="navBar">
 		<? displayNavBar(); ?>
 		<? if(!isLoggedIn()) { ?>
 			<li class="navItem loginWindButton navItem-hidden"><a href="#">Login</a></li>
 		<? } ?>
+		<? if(!isLoggedIn()) { viewLoginWindow(); } ?>
 	</ul>
-	<? if(!isLoggedIn()) { viewLoginWindow(); } ?>
-</div>
+</div></header>
 
-<div class="centerPanel" id="mainContainer">
+<div id="pageHead"><div class="siteCont">
+	<div id="breadcrumbs">Home / Page</div>
+	<h2>Some Page</h2>
+</div></div>
+	
 <?php //// Page Notices (Site Notices, Successes, Failures) ////
 	displayAllNotices();
 ?>

@@ -22,8 +22,6 @@ To-Do:
 		-Tie acts to email (only 1 act per email)
 		-Tie to full name
 		-Allow duplicate usernames?
--Cleanup Theme System
-	-Make it easier to keep all themes up to date (site functions become plugins)
 -Glitch Report System
 	-Local (To Site Owner)
 	-Website (To Forumz DB)

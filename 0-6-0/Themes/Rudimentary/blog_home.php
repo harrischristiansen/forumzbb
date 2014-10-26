@@ -8,7 +8,7 @@ global $siteSettings;
 
 display('viewHeader');
 
-viewHTML('<div id="leftSite"><div class="panelHead">Blog</div>');
+viewHTML('<div id="fullSite"><div class="panelHead">Blog</div>');
 	viewBlogEntries();
 	if(!isLastBlogPage()) {
 		viewHTML('<a class="siteButton floatLeft" href="'.getNextPageLink().'">&larr; Older Entries</a>');
@@ -19,10 +19,6 @@ viewHTML('<div id="leftSite"><div class="panelHead">Blog</div>');
 	if(userCan('postBlogEntries')) {
 		viewHTML('<a class="newItemBtn" href="'.$siteSettings['siteURLShort'].'composeEntry/">Add Entry</a>');
 	}
-viewHTML('</div>');
-
-viewHTML('<div id="rightSite">');
-	viewHTML('<div class="panelHead">Something Here</div>');
 viewHTML('</div>');
 
 viewHTML('<div class="clearBoth"></div>');
