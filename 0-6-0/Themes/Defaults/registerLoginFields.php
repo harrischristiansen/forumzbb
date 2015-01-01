@@ -1,6 +1,6 @@
 <?php
 // Harris Christiansen
-// Created 10-1-12
+// Created 2012-10-01
 
 
 function viewSingleLineLoginField() {

@@ -1,6 +1,7 @@
 <?php
 // Harris Christiansen
-// Created 9-15-12
+// Created 2012-09-15
+// Theme: Rudimentary
 
 themeInclude('blogDivisions');
 defaultsInclude('registerLoginFields');

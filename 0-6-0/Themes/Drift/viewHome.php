@@ -1,8 +1,11 @@
 <?
 // Harris Christiansen
 // Created 2014-12-31
-	
-	display('viewHeader');
+// Theme: Drift
+
+themeInclude('blogDivisions');
+
+display('viewHeader');
 ?>
 
 		<!-- Banner -->
@@ -18,24 +21,23 @@
 					<h2>Recent Posts</h2>
 				</header>
 				
-				<div class="container">
-					<h3>Blog Title</h3>
-					<p>Blog Post</p>
-					<a href="#" class="button">Read More</a>
-				</div>
+				<? if(userCan('postBlogEntries')) {
+					viewHTML('<div class="align-center">');
+						viewHTML('<a class="button special" href="'.$siteSettings['siteURLShort'].'composeEntry/">Create New Entry</a>');
+					viewHTML('</div><br><br>');
+				} ?>
 				
-				<div class="container">
-					<h3>Blog Title</h3>
-					<p>Blog Post</p>
-					<a href="#" class="button">Read More</a>
-				</div>
+				<? viewBlogEntries(); ?>
 			</section>
 			
-		<!-- CTA -->
-			<section id="cta" class="wrapper style3">
+		<? if($siteSettings['siteAbout']!="") { ?>
+		<!-- About-->
+			
+			<section id="about" class="wrapper style3">
 				<h2>About</h2>
-				<p style="max-width: 600px; margin-left: auto; margin-right: auto;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p style="max-width: 600px; margin-left: auto; margin-right: auto;"><? echo $siteSettings['siteAbout']; ?></p>
 			</section>
+		<? } ?>
 
 <?
 	display('viewFooter');

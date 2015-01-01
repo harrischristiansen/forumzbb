@@ -1,13 +1,11 @@
 @import url(font-awesome.min.css);
 @import url("http://fonts.googleapis.com/css?family=Lato:300,700");
 
-/*
-	Drift by Pixelarity
-	pixelarity.com @pixelarity
-	License: pixelarity.com/license
-*/
-
 /* Basic */
+
+	html, body, #skel-layers-wrapper {
+		height: 100%;
+	}
 
 	body {
 		background: #fff;
@@ -164,6 +162,16 @@
 	}
 
 	.align-right {
+		text-align: right;
+	}
+	
+	.floatLeft {
+		float: left;
+		text-align: left;
+	}
+	
+	.floatRight {
+		float: right;
 		text-align: right;
 	}
 
@@ -1231,7 +1239,7 @@
 	#banner {
 		background-attachment: scroll,						fixed;
 		background-color: #494d53;
-		background-image: url("images/overlay.png"), url("../images/banner.jpg");
+		background-image: url("/Resources/images/bgs/Drift/overlay.png"), url("/Resources/images/bgs/lakeMtns.jpg");
 		background-position: top left,					center center;
 		background-repeat: repeat,						no-repeat;
 		background-size: auto,						cover;
@@ -1239,6 +1247,7 @@
 		padding: 16em 0;
 		position: relative;
 		text-align: center;
+		min-height: 100%;
 	}
 
 		#banner:after {

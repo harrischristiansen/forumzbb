@@ -14,23 +14,24 @@ defaultsInclude('navBar');
 		
 		<!--- Theme Items --->
 		
-		<!--[if lte IE 8]><script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/ie/html5shiv.js"></script><![endif]-->
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.min.js"></script>
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.dropotron.min.js"></script>
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.scrollgress.min.js"></script>
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.scrolly.min.js"></script>
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.slidertron.min.js"></script>
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/skel.min.js"></script>
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/skel-layers.min.js"></script>
-		<script src="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/init.js"></script>
+		<!--[if lte IE 8]><script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/ie/html5shiv.js"></script><![endif]-->
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.min.js"></script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.dropotron.min.js"></script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.scrollgress.min.js"></script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.scrolly.min.js"></script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/jquery.slidertron.min.js"></script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/skel.min.js"></script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/skel-layers.min.js"></script>
+		<script type="text/javascript">var base_url = "<? echo $siteSettings['siteVersionAddress'];?>";</script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/js/init.js"></script>
 		<noscript>
-			<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/skel.css" />
-			<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/style.css" />
-			<link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/style-xlarge.css" />
+			<link rel="stylesheet" href="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/skel.css" />
+			<link rel="stylesheet" href="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/style.css" />
+			<link rel="stylesheet" href="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/style-xlarge.css" />
 		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/ie/v9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="/<?php echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/ie/v8.css" /><![endif]-->
-		
+		<!--[if lte IE 9]><link rel="stylesheet" href="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/ie/v9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Drift/css/ie/v8.css" /><![endif]-->
+	
 		<!--- ForumzBB Items --->
 		
 		<!-- bValidator -->
