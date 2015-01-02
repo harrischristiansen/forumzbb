@@ -14,35 +14,31 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 }
 
 function displayBlogEntry($authorName,$postDateShort,$postDate,$entryTitle,$entry,$updateInfo,$editEntryLink,$deleteEntryLink) {
-	viewHTML('<div class="siteContPanel whitePanel">');
-		viewHTML('<div class="blogDate">'.$postDateShort.'</div>');
-		viewHTML('<div class="blogTitle">'.$entryTitle);
-			viewHTML('<div class="blogAuthor">');
-				viewHTML('By: '.$authorName.'<br>'.$postDate);
-				// Updated Entry Info
-				if($updateInfo!="") { viewHTML('<br>'.$updateInfo); }
-			viewHTMl('</div>');
-		viewHTML('</div>');
-		viewHTML('<div class="blogText">'.$entry.'</div>');
-		// Admin Functions
+	viewHTML('<div class="container">');
+		viewHTML('<h3>'.$entryTitle.'</h3>');
+		viewHTML('<h5>By '.$authorName.' on '.$postDate.' '.$updateInfo.'</h5>');
+		viewHTML('<p>'.$entry.'</p>');
+		viewHTML('<a href="'.$blogLink.'" class="button">Read More</a>');
 		if($editEntryLink!=""||$deleteEntryLink!="") {
 			viewHTML('<hr>');
-			if($editEntryLink!="") { viewHTML('<a href="'.$editEntryLink.'"><button>Edit</button></a>'); }
-			if($deleteEntryLink!="") { viewHTML('<a href="'.$deleteEntryLink.'"><button>Delete</button></a>'); }
+			if($editEntryLink!="") { viewHTML('<a href="'.$editEntryLink.'" style="button special small">Edit</a>'); }
+			if($deleteEntryLink!="") { viewHTML('<a href="'.$deleteEntryLink.'" style="button small">Delete</a>'); }
 		}
 	viewHTML('</div>');
 }
 
 function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEdit,$viewDelete,$editLink,$deleteLink,$editText) {
-	viewHTML('<div class="siteContPanel whitePanel">');
-		viewHTML('<div class="blogCommentAuthor">By: '.$userName.'<br>'.returnDateTimeView($commentDate,$commentTime).'</div>');
-		viewHTML('<div class="blogCommentText">'.$comment.'</div>');
-		viewHTML('<div class="clearBoth"></div>');
+	viewHTML('<div class="container">');
+		viewHTML('<h5>By '.$userName.' on '.returnDateTimeView($commentDate,$commentTime).'</h5>');
+		viewHTML('<p>'.$comment.'</p>');
+		viewHTML('<a href="'.$blogLink.'" class="button">Read More</a>');
 		if($viewEdit||$viewDelete) {
 			viewHTML('<br><hr>');
-			if($viewEdit) { viewHTML('<button class="editButton">Edit</button>'); }
-			if($viewDelete) { viewHTML('<a href="'.$deleteLink.'"><button>Delete</button></a>'); }
+			if($viewEdit) { viewHTML('<button class="button special small">Edit</button>'); }
+			if($viewDelete) { viewHTML('<a href="'.$deleteLink.'" class="button small">Delete</a>'); }
 		}
+	viewHTML('</div>');
+	/*
 		if($viewEdit) {
 			viewHTML('<div class="editCommentDiv"><hr><br>');
 			viewHTML('<form action="'.$editLink.'" method="POST" class="validateForm">');
@@ -52,34 +48,38 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEd
 			viewHTML('</div>');
 			
 		}
-	viewHTML('</div>');
+	*/
 }
 
 function displayBlogComposeField($formLink, $updatingPost, $currentTitle, $currentEntry) {
 	global $siteSettings, $pageID;
-	viewHTML('<form action="'.$formLink.'" method="POST" class="validateForm newBlogEntry">');
+	viewHTML('<div class="container">');
+	
+	viewHTML('<form action="'.$formLink.'" method="POST" class="validateForm">');
 		viewHTML('<input type="text" name="blogEntryTitle" value="'.$currentTitle.'" placeholder="Blog Entry Title" data-bvalidator="required"><br>');
-		viewHTML('Entry:<br><textarea name="blogEntryText" class="newBlogEntryTextArea sceditor" data-bvalidator="required">'.$currentEntry.'</textarea><br>');
+		viewHTML('Entry:<br><textarea name="blogEntryText" class="sceditor" data-bvalidator="required">'.$currentEntry.'</textarea><br>');
 		if($updatingPost) {
 			viewHTML('<input type="submit" name="blogUpdateSubmitted" value="Update">');
 		} else {
 			viewHTML('<input type="submit" name="blogComposeSubmitted" value="Post">');
 		}
-	viewHtml('</form><br><br>');
+	viewHtml('</form>');
 
 	// File Uploader
 	viewHTML('<form action="/Resources/uploads/fileUpload.php" method="POST" enctype="multipart/form-data" target="upload">');
 		viewHTML('File Upload: <input type="file" name="file"><input type="submit" value="Upload">');
 	viewHTML('</form>');
 	viewHTML('<iframe style="display: none; visibility: hidden; height: 0; width: 0;" id="upload" name="upload"></iframe>');
+	
+	viewHTML('</div>');
 }
 
 function displayAddCommentField() {
 	global $siteSettings, $pageID;
-	viewHTML('<div class="panelHead">Reply:</div>');
-	viewHTML('<div class="siteContPanel whitePanel">');
-		viewHTML('<form action="'.$siteSettings['siteURLShort'].'blog/'.$pageID.'/reply" method="POST" class="validateForm newBlogComment">');
-			viewHTML('<textarea class="blogCommentTextArea sceditor" name="blogCommentText" data-bvalidator="required"></textarea><br>');
+	viewHTML('<div class="container">');
+		viewHTML('<h3>Reply</h3>');
+		viewHTML('<form action="'.$siteSettings['siteURLShort'].'blog/'.$pageID.'/reply" method="POST" class="validateForm">');
+			viewHTML('<textarea class="sceditor" name="blogCommentText" data-bvalidator="required"></textarea><br>');
 			viewHTML('<input type="submit" name="commentSubmitted" value="Reply">');
 		viewHtml('</form>');
 	viewHTML('</div>');
