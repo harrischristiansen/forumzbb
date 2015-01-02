@@ -3,17 +3,20 @@
 // Created 2015-01-01
 // Theme: Drift
 
-defaultsInclude('assignmentDivisions');
+defaultsInclude('registerLoginFields');
 
 display('viewHeader');
 ?>
 
 <section id="main" class="wrapper style1">
 	<header class="major">
-		<h2><? echo getSiteName(); ?></h2>
+		<h2>Register</h2>
 	</header>
+	<div class="container">
+		<? viewRegisterField(); ?>
+	</div>
 </section>
 
-<?
+<?php
 display('viewFooter');
 ?>

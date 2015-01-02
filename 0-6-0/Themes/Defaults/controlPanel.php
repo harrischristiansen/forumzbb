@@ -1,6 +1,6 @@
 <?php
 // Harris Christiansen
-// Created 10-19-12
+// Created 2012-10-19
 
 function displayCPNavItem($navItem, $navLink) {
 	viewHTML('<a class="controlPanelNavItem" href="'.$navLink.'">'.$navItem.'</a>');
@@ -34,17 +34,17 @@ function editSiteSettingsForm($siteURL,$siteName,$userTheme,$siteMotd,$siteSloga
 	viewHTML('<form action="'.$siteURL.'controlPanel/editSiteSettings/" method="POST">');
 	viewHTML('Site Name: <input type="text" name="siteName" value="'.$siteName.'"><br>');
 	viewHTML('Default Theme: <select name="siteTheme">'.getSiteThemeOptions().'</select><br>');
-	viewHTML('User Can Change Personal Theme: <input type="checkbox" name="userTheme" value="true" '.$userTheme.'><br>');
+	viewHTML('<input type="checkbox" name="userTheme" id="userTheme" value="true" '.$userTheme.'><label for="userTheme">User Can Change Personal Theme</label><br>');
 	viewHTML('Site Banner: <input type="text" name="siteMotd" value="'.$siteMotd.'"><br>');
 	viewHTML('Site Slogan: <input type="text" name="siteSlogan" value="'.$siteSlogan.'"><br>');
 	viewHTML('Site Disabled (Enter Message To Disable): <input type="text" name="siteDisabled" value="'.$siteDisabled.'"><br>');
-	viewHTML('Require Login: <input type="checkbox" name="reqLogin" value="true" '.$reqLogin.'><br>');
-	viewHTML('Require Email Verification of New Accounts: <input type="checkbox" name="verifyRegisterEmail" value="true" '.$verifyRegisterEmail.'><br>');
-	viewHTML('Require Admin Verification of New Accounts: <input type="checkbox" name="verifyRegisterAdmin" value="true" '.$verifyRegisterAdmin.'><br>');
+	viewHTML('<input type="checkbox" name="reqLogin" id="reqLogin" value="true" '.$reqLogin.'><label for="reqLogin">Require Login</label><br>');
+	viewHTML('<input type="checkbox" name="verifyRegisterEmail" id="verifyRegisterEmail" value="true" '.$verifyRegisterEmail.'><label for="verifyRegisterEmail">Require Email Verification of New Accounts</label><br>');
+	viewHTML('<input type="checkbox" name="verifyRegisterAdmin" id="verifyRegisterAdmin" value="true" '.$verifyRegisterAdmin.'><label for="verifyRegisterAdmin">Require Admin Verification of New Accounts</label><br>');
 	viewHTML('<br>');
 	viewHTML('Number Blog Entries Per Page: <input type="text" name="numBlogEntriesPerPage" value="'.$numBlogEntriesPerPage.'"><br>');
 	viewHTML('<br>');
-	viewHTML('HTML Allowed in posts: <input type="checkbox" name="htmlAllowed" value="true" '.$htmlAllowed.'><br>');
+	viewHTML('<input type="checkbox" name="htmlAllowed" id="htmlAllowed" value="true" '.$htmlAllowed.'><label for="htmlAllowed">HTML Allowed in Posts</label><br>');
 	viewHTML('<br>');
 	viewHTML('Facebook Link: <input type="text" name="facebookLink" value="'.$facebookLink.'"><br>');
 	viewHTML('Youtube Link: <input type="text" name="youtubeLink" value="'.$youtubeLink.'"><br>');
@@ -67,7 +67,7 @@ function viewEditBBCodeTableRow($siteURL,$idNum,$bbCode,$replacement) {
 	viewHTML('<form action="'.$siteURL.'controlPanel/editBBCode/" method="POST"><tr class="FullWidthTableRow">');
 	viewHTML('<td class="TableRowColumn"><input type="hidden" name="bbCodeId" value="'.$idNum.'"><input type="text" name="bbCode" value="'.$bbCode.'" style="width: 90%;"></td>');
 	viewHTML('<td class="TableRowColumn"><input type="text" name="replacement" value="'.$replacement.'"style="width: 90%;"></td>');
-	viewHTML('<td class="TableRowColumn">Delete: <input type="checkbox" name="deleteBBCode" value="delete"><input type="submit" name="cpFormSubmitted" value="Update BBCode"></td>');
+	viewHTML('<td class="TableRowColumn"><input type="checkbox" name="deleteBBCode" id="deleteBBCode" value="delete"><label for="deleteBBCode">Delete</label><input type="submit" name="cpFormSubmitted" value="Update BBCode"></td>');
 	viewHTML('</tr></form>');
 	
 }
@@ -97,7 +97,7 @@ function editRanksForm($siteURL,$linkID,$rankName,$settingChecked) {
 			viewHTML('<br><u>'.$permission['category'].'</u><br>');
 			$currentCat=$permission['category'];
 		}
-		viewHTML($permission['itemDesc'].': <input type="checkbox" name="'.$permission['internalName'].'" value="true" '.$settingChecked[$permission['internalName']].'><br>');
+		viewHTML('<input type="checkbox" name="'.$permission['internalName'].'" id="'.$permission['internalName'].'" value="true" '.$settingChecked[$permission['internalName']].'><label for="'.$permission['internalName'].'">'.$permission['itemDesc'].'</label><br>');
 	}
 	viewHTML('<br>');
 	if($linkID!="") {

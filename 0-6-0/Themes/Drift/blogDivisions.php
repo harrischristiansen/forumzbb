@@ -16,13 +16,12 @@ function displayHomePageBlogEntry($authorName,$postDate,$entryTitle,$blogEntry,$
 function displayBlogEntry($authorName,$postDateShort,$postDate,$entryTitle,$entry,$updateInfo,$editEntryLink,$deleteEntryLink) {
 	viewHTML('<div class="container">');
 		viewHTML('<h3>'.$entryTitle.'</h3>');
-		viewHTML('<h5>By '.$authorName.' on '.$postDate.' '.$updateInfo.'</h5>');
+		viewHTML('<h5>By '.$authorName.' on '.$postDate.'<br>'.$updateInfo.'</h5>');
 		viewHTML('<p>'.$entry.'</p>');
-		viewHTML('<a href="'.$blogLink.'" class="button">Read More</a>');
 		if($editEntryLink!=""||$deleteEntryLink!="") {
 			viewHTML('<hr>');
-			if($editEntryLink!="") { viewHTML('<a href="'.$editEntryLink.'" style="button special small">Edit</a>'); }
-			if($deleteEntryLink!="") { viewHTML('<a href="'.$deleteEntryLink.'" style="button small">Delete</a>'); }
+			if($editEntryLink!="") { viewHTML('<a href="'.$editEntryLink.'" class="button special small">Edit</a>'); }
+			if($deleteEntryLink!="") { viewHTML('<a href="'.$deleteEntryLink.'" class="button small">Delete</a>'); }
 		}
 	viewHTML('</div>');
 }
@@ -31,7 +30,6 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEd
 	viewHTML('<div class="container">');
 		viewHTML('<h5>By '.$userName.' on '.returnDateTimeView($commentDate,$commentTime).'</h5>');
 		viewHTML('<p>'.$comment.'</p>');
-		viewHTML('<a href="'.$blogLink.'" class="button">Read More</a>');
 		if($viewEdit||$viewDelete) {
 			viewHTML('<br><hr>');
 			if($viewEdit) { viewHTML('<button class="button special small">Edit</button>'); }
@@ -53,15 +51,15 @@ function displayBlogComment($userName,$commentDate,$commentTime,$comment,$viewEd
 
 function displayBlogComposeField($formLink, $updatingPost, $currentTitle, $currentEntry) {
 	global $siteSettings, $pageID;
-	viewHTML('<div class="container">');
+	viewHTML('<div class="container align-center">');
 	
 	viewHTML('<form action="'.$formLink.'" method="POST" class="validateForm">');
 		viewHTML('<input type="text" name="blogEntryTitle" value="'.$currentTitle.'" placeholder="Blog Entry Title" data-bvalidator="required"><br>');
-		viewHTML('Entry:<br><textarea name="blogEntryText" class="sceditor" data-bvalidator="required">'.$currentEntry.'</textarea><br>');
+		viewHTML('Entry:<br><textarea name="blogEntryText" class="sceditor" data-bvalidator="required" style="height: 300px;">'.$currentEntry.'</textarea><br>');
 		if($updatingPost) {
-			viewHTML('<input type="submit" name="blogUpdateSubmitted" value="Update">');
+			viewHTML('<input type="submit" name="blogUpdateSubmitted" class="special" value="Update">');
 		} else {
-			viewHTML('<input type="submit" name="blogComposeSubmitted" value="Post">');
+			viewHTML('<input type="submit" name="blogComposeSubmitted" class="special" value="Post">');
 		}
 	viewHtml('</form>');
 
@@ -79,7 +77,7 @@ function displayAddCommentField() {
 	viewHTML('<div class="container">');
 		viewHTML('<h3>Reply</h3>');
 		viewHTML('<form action="'.$siteSettings['siteURLShort'].'blog/'.$pageID.'/reply" method="POST" class="validateForm">');
-			viewHTML('<textarea class="sceditor" name="blogCommentText" data-bvalidator="required"></textarea><br>');
+			viewHTML('<textarea class="sceditor" name="blogCommentText" data-bvalidator="required" style="height: 200px;"></textarea><br>');
 			viewHTML('<input type="submit" name="commentSubmitted" value="Reply">');
 		viewHtml('</form>');
 	viewHTML('</div>');

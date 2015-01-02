@@ -4,12 +4,12 @@
 
 // Home
 function displayForumCatHead($title) {
-	viewHTML('<tr class="FullWidthTableHead">');
-		viewHTML('<td class="TableHeadColumn forumHomeColumn1">'.$title.'</td>');
-		viewHTML('<td class="TableHeadColumn forumHomeColumn2">Threads</td>');
-		viewHTML('<td class="TableHeadColumn forumHomeColumn3">Posts</td>');
-		viewHTML('<td class="TableHeadColumn forumHomeColumn4">Latest Post</td>');
-	viewHTML('</tr>');
+	viewHTML('<thead><tr class="FullWidthTableHead">');
+		viewHTML('<th class="TableHeadColumn forumHomeColumn1">'.$title.'</th>');
+		viewHTML('<th class="TableHeadColumn forumHomeColumn2">Threads</th>');
+		viewHTML('<th class="TableHeadColumn forumHomeColumn3">Posts</th>');
+		viewHTML('<th class="TableHeadColumn forumHomeColumn4">Latest Post</th>');
+	viewHTML('</tr></thead>');
 }
 function displayForumLine($rowID, $title, $desc, $numThreads, $numPosts, $latestPostTitle, $latestPostAuthor, $latestPostDate, $forumLink, $latestPostLink) {
 	viewHTML('<tr class="FullWidthTableRow">');
@@ -28,13 +28,13 @@ function displayForumLine($rowID, $title, $desc, $numThreads, $numPosts, $latest
 
 // Threads
 function displayForumHead() {
-	viewHTML('<tr class="FullWidthTableHead">');
-		viewHTML('<td class="TableHeadColumn forumThreadsColumn1">Subject</td>');
-		viewHTML('<td class="TableHeadColumn forumThreadsColumn2">Started By</td>');
-		viewHTML('<td class="TableHeadColumn forumThreadsColumn3">Latest Post</td>');
-		viewHTML('<td class="TableHeadColumn forumThreadsColumn4">Replies</td>');
-		viewHTML('<td class="TableHeadColumn forumThreadsColumn5">Views</td>');
-	viewHTML('</tr>');
+	viewHTML('<thead><tr class="FullWidthTableHead">');
+		viewHTML('<th class="TableHeadColumn forumThreadsColumn1">Subject</th>');
+		viewHTML('<th class="TableHeadColumn forumThreadsColumn2">Started By</th>');
+		viewHTML('<th class="TableHeadColumn forumThreadsColumn3">Latest Post</th>');
+		viewHTML('<th class="TableHeadColumn forumThreadsColumn4">Replies</th>');
+		viewHTML('<th class="TableHeadColumn forumThreadsColumn5">Views</th>');
+	viewHTML('</tr></thead>');
 }
 function displayThreadLine($threadLink,$rowID,$subject,$startBy,$latestBy,$latestAt,$replies,$views) {
 	viewHTML('<tr class="FullWidthTableRow" onclick="parent.location=\''.$threadLink.'\';">');
@@ -52,17 +52,20 @@ function displayThreadLine($threadLink,$rowID,$subject,$startBy,$latestBy,$lates
 // Posts
 function displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $post, $viewEdit, $viewDelete, $editLink, $deleteLink, $editText) {
 	viewHTML('<table class="FullWidthTable">');
-	viewHTML('<tr class="FullWidthTableHead">');
-		viewHTML('<td class="TableHeadColumn forumPostColumn1">'.$author.'</td>');
-		viewHTML('<td class="TableHeadColumn forumPostColumn2">');
+	
+	viewHTML('<thead><tr class="FullWidthTableHead">');
+		viewHTML('<th class="TableHeadColumn forumPostColumn1">'.$author.'</th>');
+		viewHTML('<th class="TableHeadColumn forumPostColumn2">');
 			viewHTML('<div class="floatLeft">'.$subject.'</div>');
 			viewHTML('<div class="floatRight">Posted On '.$postDate.'</div>');
-		viewHTML('</td>');
-	viewHTML('</tr>');
+		viewHTML('</th>');
+	viewHTML('</tr></thead>');
+	
 	viewHTML('<tr class="FullWidthTableRow">');
 		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'">'.$authorInfo.'</td>');
 		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">'.$post.'</td>');
 	viewHTML('</tr>');
+	
 	if($viewEdit||$viewDelete) {
 	viewHTML('<tr class="FullWidthTableRow">');
 		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'"></td>');
@@ -72,6 +75,7 @@ function displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $po
 		viewHTML('</td>');
 	viewHTML('</tr>');
 	}
+	
 	if($viewEdit) {
 	viewHTML('<tr class="FullWidthTableRow editCommentDiv">');
 		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'"></td>');

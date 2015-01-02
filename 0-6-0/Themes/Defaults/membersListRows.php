@@ -3,12 +3,12 @@
 // Created 10-3-12
 
 function displayMembersListHead() {
-	viewHTML('<tr class="FullWidthTableHead">');
-		viewHTML('<td class="TableHeadColumn membersListColumn1">Username</td>');
-		viewHTML('<td class="TableHeadColumn membersListColumn2">Rank</td>');
-		viewHTML('<td class="TableHeadColumn membersListColumn3">Join Date</td>');
-		viewHTML('<td class="TableHeadColumn membersListColumn4">Last Login</td>');
-	viewHTML('</tr>');
+	viewHTML('<thead><tr class="FullWidthTableHead">');
+		viewHTML('<th class="TableHeadColumn membersListColumn1">Username</th>');
+		viewHTML('<th class="TableHeadColumn membersListColumn2">Rank</th>');
+		viewHTML('<th class="TableHeadColumn membersListColumn3">Join Date</th>');
+		viewHTML('<th class="TableHeadColumn membersListColumn4">Last Login</th>');
+	viewHTML('</tr></thead>');
 }
 function displayMembersListRow($userName, $userRank, $dateJoined, $lastLogin, $actID, $rowID, $cngRankFormDisplay) {
 	viewHTML('<tr class="FullWidthTableRow">');

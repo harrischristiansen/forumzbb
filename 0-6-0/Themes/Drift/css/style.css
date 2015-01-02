@@ -31,6 +31,8 @@
 		font-weight: 300;
 		line-height: 1.75em;
 	}
+	
+	sceditor
 
 	a {
 		-moz-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
@@ -270,6 +272,17 @@
 		textarea:focus {
 			border-color: #47cdd9;
 			box-shadow: 0 0 0 1px #47cdd9;
+		}
+		
+		.sceditor-group, .sceditor-button {
+			-moz-box-sizing: content-box !important;
+			-webkit-box-sizing: content-box !important;
+			box-sizing: content-box !important;
+		}
+		
+		table select {
+			width: auto;
+			display: inline;
 		}
 
 	.select-wrapper {
@@ -714,6 +727,12 @@
 			table tbody tr:nth-child(2n + 1) {
 				background-color: rgba(144, 144, 144, 0.075);
 			}
+			
+			.FullWidthTableRow:hover {
+				/*background-color: rgba(74, 74, 74, 0.075);*/
+				background-color: rgba(72, 205, 217, 0.33);
+				cursor: pointer;
+			}
 
 		table td {
 			padding: 0.75em 0.75em;
@@ -856,7 +875,7 @@
 		input[type="reset"].special,
 		input[type="button"].special,
 		.button.special {
-			background-color: #47cdd9;
+			background-color: #48cdd9;
 			color: #ffffff !important;
 		}
 

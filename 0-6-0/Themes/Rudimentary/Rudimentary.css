@@ -637,6 +637,10 @@ footer {
 
 /* ---------- Table System ---------- */
 
+thead, th {
+	font-weight: normal;
+}
+
 .FullWidthTable {
 	width: 98%;
 	margin-left: auto;

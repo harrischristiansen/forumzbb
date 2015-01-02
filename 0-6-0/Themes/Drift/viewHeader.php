@@ -1,8 +1,11 @@
 <?php
 // Harris Christiansen
 // Created 2014-12-31
+// Theme: Drift
 
 global $userData, $siteSettings;
+
+themeInclude('siteNotices');
 defaultsInclude('navBar');
 ?>
 <!DOCTYPE HTML>
@@ -34,6 +37,9 @@ defaultsInclude('navBar');
 	
 		<!--- ForumzBB Items --->
 		
+		<!-- Site Scripts -->
+		<script>var phpSessionName="<? echo session_name(); ?>";</script>
+		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Defaults/siteScripts.js"></script>
 		<!-- bValidator -->
 		<link rel="stylesheet" href="/Resources/plugins/bvalidator/validator.css" />
 		<script src="/Resources/plugins/bvalidator/jquery.bvalidator.js"></script>
@@ -41,7 +47,7 @@ defaultsInclude('navBar');
 		<link rel="stylesheet" href="/Resources/plugins/sceditor/minified/themes/monocons.min.css" type="text/css" media="all" />
 		<script type="text/javascript" src="/Resources/plugins/sceditor/minified/jquery.sceditor.bbcode.min.js"></script>
 	</head>
-	<body class="landing">
+	<body>
 
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
@@ -50,3 +56,9 @@ defaultsInclude('navBar');
 					<? displayNavBar(); ?>
 				</ul></nav>
 			</header>
+		
+		<? global $displayNotices; if ($displayNotices != "no") { ?>
+		<section id="notices" class="wrapper style1">
+			<? displayAllNotices(); ?>
+		</section>
+		<? } ?>

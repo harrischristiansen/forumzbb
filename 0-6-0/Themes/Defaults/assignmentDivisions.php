@@ -5,12 +5,12 @@
 // Assignments
 function displayAssignmentsHead() {
 	viewHTML('<table class="FullWidthTable">');
-	viewHTML('<tr class="FullWidthTableHead">');
-		viewHTML('<td class="TableHeadColumn assignmentsColumn1">Assignment</td>');
-		viewHTML('<td class="TableHeadColumn assignmentsColumn2">Status</td>');
-		viewHTML('<td class="TableHeadColumn assignmentsColumn3">Created</td>');
-		viewHTML('<td class="TableHeadColumn assignmentsColumn4">Priority</td>');
-	viewHTML('</tr>');
+	viewHTML('<thead><tr class="FullWidthTableHead">');
+		viewHTML('<th class="TableHeadColumn assignmentsColumn1">Assignment</th>');
+		viewHTML('<th class="TableHeadColumn assignmentsColumn2">Status</th>');
+		viewHTML('<th class="TableHeadColumn assignmentsColumn3">Created</th>');
+		viewHTML('<th class="TableHeadColumn assignmentsColumn4">Priority</th>');
+	viewHTML('</tr></thead>');
 }
 function displayAssignmentsLine($assignLink,$assignName,$assignStatus,$createdDate,$priority) {
 	viewHTML('<tr class="FullWidthTableRow" onclick="parent.location=\''.$assignLink.'\';">');
@@ -23,8 +23,8 @@ function displayAssignmentsLine($assignLink,$assignName,$assignStatus,$createdDa
 
 // Assignment
 function displayAssignment($assignName, $assignInfo) {
-	viewHTML('<div class="fullSite">');
-		viewHTML('<div class="panelHead">Assignment - '.$assignName.'</div>');
+	viewHTML('<div class="fullSite container">');
+		viewHTML('<div class="panelHead"><h3>Assignment - '.$assignName.'</h3></div>');
 		viewHTML('<div class="siteContPanel whitePanel">');
 			viewHTML('<b>Description:</b> '.$assignInfo['taskDesc'].'<br><br>');
 			viewHTML('<b>Status:</b> '.$assignInfo['taskStatus'].'<br>');
@@ -98,8 +98,8 @@ function displayAssignment($assignName, $assignInfo) {
 // Create Assignment
 function displayCreateAssignmentForm() {
 	global $siteSettings;
-	viewHTML('<div class="fullSite">');
-		viewHTML('<div class="panelHead">Create Assignment</div>');
+	viewHTML('<div class="fullSite container">');
+		viewHTML('<div class="panelHead"><h3>Create Assignment</h3></div>');
 		viewHTML('<div class="siteContPanel whitePanel">');
 			viewHTML('<form action="'.$siteSettings['siteURLShort'].'createAssignment" method="POST" class="validateForm">');
 				viewHTML('<table class="centerTable">');
@@ -119,7 +119,7 @@ function displayCreateAssignmentForm() {
 						viewHTML('<option value="Text">Text Input</option>');
 					viewHTML('</select></td></tr>');
 					
-					viewHTML('<tr><td colspan="2"><input type="submit" name="createAssignmentSubmitted" value="Create"></td></tr>');
+					viewHTML('<tr><td colspan="2"><input type="submit" name="createAssignmentSubmitted" value="Create" class="special"></td></tr>');
 				viewHTML('</table>');
 			viewHtml('</form><br><br>');
 
@@ -135,8 +135,8 @@ function displayCreateAssignmentForm() {
 // Create Dev Assignment
 function displayCreateDevAssignmentForm() {
 	global $siteSettings;
-	viewHTML('<div class="fullSite">');
-		viewHTML('<div class="panelHead">Add Miscellaneous Completed Assignment</div>');
+	viewHTML('<div class="fullSite container">');
+		viewHTML('<div class="panelHead"><h3>Add Miscellaneous Completed Assignment</h3></div>');
 		viewHTML('<div class="siteContPanel whitePanel">');
 			viewHTML('<form action="'.$siteSettings['siteURLShort'].'createDevAssignment" method="POST" class="validateForm" enctype="multipart/form-data">');
 				viewHTML('<table class="centerTable">');
@@ -146,7 +146,7 @@ function displayCreateDevAssignmentForm() {
 					
 					viewHTML('<tr><td>File:</td><td><input type="file" name="file" data-bvalidator="required"></td></tr>');
 					
-					viewHTML('<tr><td colspan="2"><input type="submit" name="createAssignmentSubmitted" value="Create"></td></tr>');
+					viewHTML('<tr><td colspan="2"><input type="submit" name="createAssignmentSubmitted" value="Create" class="special"></td></tr>');
 				viewHTML('</table>');
 			viewHtml('</form><br><br>');
 		viewHTML('</div>');

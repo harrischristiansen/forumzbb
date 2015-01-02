@@ -5,6 +5,8 @@
 
 themeInclude('blogDivisions');
 
+global $displayNotices;
+$displayNotices = "no"; // Don't Display Notices For Home Page ... Till Later
 display('viewHeader');
 ?>
 
@@ -13,6 +15,7 @@ display('viewHeader');
 				<div class="inner">
 					<h2><? echo getSiteName(); ?></h2>
 				</div>
+				<? displayAllNotices(); ?>
 			</section>
 			
 		<!-- Recent Blog Posts -->

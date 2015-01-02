@@ -26,5 +26,10 @@ To-Do:
 	-Local (To Site Owner)
 	-Website (To Forumz DB)
 -New Theme
-	-DJI.com
-	-HarrisChristiansen.com
+	-Clean
+	-Old HarrisChristiansen.com
+	-Drift
+		-Design Site Notices
+		-Needs Login System
+		-Edit Comments
+		-Finish Forum Pages
