@@ -8,12 +8,10 @@ defaultsInclude('assignmentDivisions');
 display('viewHeader');
 ?>
 
-<section id="main" class="wrapper style1">
 	<header class="major">
 		<h2>Assignments</h2>
 	</header>
 	<? viewAssignmentsHome(); ?>
-</section>
 
 <?
 display('viewFooter');

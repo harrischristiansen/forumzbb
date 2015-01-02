@@ -8,11 +8,9 @@ defaultsInclude('assignmentDivisions');
 display('viewHeader');
 ?>
 
-<section id="main" class="wrapper style1">
 	<header class="major">
 		<h2><? echo getSiteName(); ?></h2>
 	</header>
-</section>
 
 <?
 display('viewFooter');

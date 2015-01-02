@@ -8,14 +8,12 @@ defaultsInclude('registerLoginFields');
 display('viewHeader');
 ?>
 
-<section id="main" class="wrapper style1">
 	<header class="major">
 		<h2>Register</h2>
 	</header>
 	<div class="container">
 		<? viewRegisterField(); ?>
 	</div>
-</section>
 
 <?php
 display('viewFooter');

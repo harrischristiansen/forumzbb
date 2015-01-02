@@ -1,3 +1,7 @@
+		<? global $displayNotices; if ($displayNotices != "no") { ?>
+		</section>
+		<? } ?>
+		
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">

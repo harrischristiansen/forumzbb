@@ -58,7 +58,6 @@ defaultsInclude('navBar');
 			</header>
 		
 		<? global $displayNotices; if ($displayNotices != "no") { ?>
-		<section id="notices" class="wrapper style1">
+		<section id="main" class="wrapper style1">
 			<? displayAllNotices(); ?>
-		</section>
 		<? } ?>

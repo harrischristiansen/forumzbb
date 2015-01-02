@@ -15,8 +15,6 @@ if($pageID!="") {
 display('viewHeader');
 ?>
 
-<section id="main" class="wrapper style1">
-
 	<header class="major"><h2>
 		<? if($pageID!="") { ?>
 		Edit Blog Post:
@@ -26,7 +24,6 @@ display('viewHeader');
 	</h2></header>
 	
 	<? getBlogComposeField(); ?>
-</section>
 
 <?php
 display('viewFooter');

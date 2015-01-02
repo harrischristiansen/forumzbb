@@ -8,7 +8,6 @@ defaultsInclude('forumDivisions');
 display('viewHeader');
 ?>
 
-<section id="main" class="wrapper style1">
 	<header class="major">
 		<h2>Forum</h2>
 	</header>
@@ -16,7 +15,6 @@ display('viewHeader');
 	<table>
 		<? viewForumHome(); ?>
 	</table>
-</section>
 
 <?
 display('viewFooter');

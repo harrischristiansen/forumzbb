@@ -1,4 +1,4 @@
-<?php
+w<?php
 // Harris Christiansen
 // Created 2015-01-01
 // Theme: Drift

@@ -9,7 +9,6 @@ defaultsInclude('editRankFields');
 display('viewHeader');
 ?>
 
-<section id="main" class="wrapper style1">
 	<header class="major">
 		<h2>Members List</h2>
 	</header>
@@ -18,7 +17,6 @@ display('viewHeader');
 		<? displayMembersListHead(); ?>
 		<? displayMembersList(); ?>
 	</table>
-</section>
 
 <?
 display('viewFooter');

@@ -7,7 +7,7 @@ defaultsInclude('controlPanel');
 
 display('viewHeader');
 ?>
-<section id="main" class="wrapper style1">
+
 	<header class="major">
 		<h2>Control Panel</h2>
 	</header>
@@ -25,7 +25,6 @@ display('viewHeader');
 		<h3>Quick Stats</h3>
 		<? getSiteStats(); ?>
 	</div>
-</section>
 
 <?php
 display('viewFooter');
