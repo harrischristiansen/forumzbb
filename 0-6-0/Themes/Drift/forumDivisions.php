@@ -76,18 +76,6 @@ function displayForumPost($rowID, $author, $authorInfo, $subject, $postDate, $po
 		viewHTML('</td>');
 	viewHTML('</tr>');
 	}
-	
-	if($viewEdit) {
-	viewHTML('<tr class="FullWidthTableRow editCommentDiv">');
-		viewHTML('<td class="TableRowItem forumPostColumn1 forumThreadPost'.$rowID.'"></td>');
-		viewHTML('<td class="TableRowItem forumPostColumn2 forumThreadPost'.$rowID.'">');
-			viewHTML('<form action="'.$editLink.'" method="POST" class="validateForm">');
-				viewHTML('<textarea name="forumPost" data-bvalidator="required">'.$editText.'</textarea>');
-				viewHTML('<input type="submit" name="editForumPostSubmitted" value="Update">');
-			viewHtml('</form>');
-		viewHTML('</td>');
-	viewHTML('</tr>');
-	}
 	viewHTML('</table></div>');
 }
 ?>

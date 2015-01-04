@@ -7,6 +7,7 @@ Completed:
 	-User Upload System
 -Forum
 	-Fix Editing Posts
+-Display Dates in more friendly way
 
 To-Do:
 -File Uploader
@@ -25,10 +26,11 @@ To-Do:
 -Glitch Report System
 	-Local (To Site Owner)
 	-Website (To Forumz DB)
--New Theme
+-New Themes
 	-Clean
-	-Old HarrisChristiansen.com
+		-Needs To Be Implimented
 	-Drift
 		-Needs Login System
 		-Edit Comments
-		-Finish Forum Thread Page
+			-Blog Comments
+			-Forum Posts

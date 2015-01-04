@@ -15,18 +15,21 @@ addBreadcrumb(getThreadTitle($pageID),"thread/".$pageID); // Thread
 
 display('viewHeader');
 
-viewForumThread();
-
 ?>
+
+	<header class="major">
+		<h2><? echo getThreadTitle($pageID); ?></h2>
+	</header>
+
+<? viewForumThread(); ?>
+
+
 <? if(userCan("createForumPosts")) { ?>
-<div id="composeForumPostDiv" style="padding-left: 4px; padding-right: 4px;">
-<div class="FullWidthPostHead">
-	<div class="floatLeft">Reply:</div>
-</div>
-<div class="FullWidthPostRow" style="text-align: center;">
-<? displayReplyComposeField(); ?>
-</div>
-</div>
+	<hr>
+	<h3 class="align-center">Reply:</h3>
+	<div class="container">
+		<? displayReplyComposeField(); ?>
+	</div>
 <? } ?>
 
 <?

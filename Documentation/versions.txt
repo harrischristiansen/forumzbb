@@ -140,17 +140,6 @@ Version 0.6.0:
 	-Create Categories/Forums
 	-Delete Categories/Forums
 -Admin Verification of New Accounts
--Display Dates in more friendly way
-	-Display date function ($date,$time)
-		-If date is today say today at ...
-		-If date is yesterday say yesterday at ...
-		-etc
-
-Version 0.6.1: - New Themes!
-- Forum Theme like Instructure Canvas
-- Another new theme, from scratch, using latest web standards
-	-Challenge Self
-	-Match signup site design?
 
 Future:
 -Website Search
