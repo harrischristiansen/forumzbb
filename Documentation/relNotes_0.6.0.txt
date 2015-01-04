@@ -29,7 +29,6 @@ To-Do:
 	-Clean
 	-Old HarrisChristiansen.com
 	-Drift
-		-Design Site Notices
 		-Needs Login System
 		-Edit Comments
-		-Finish Forum Pages
+		-Finish Forum Thread Page

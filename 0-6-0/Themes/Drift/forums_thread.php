@@ -3,7 +3,7 @@
 // Created 2015-01-01
 // Theme: Drift
 
-defaultsInclude('forumDivisions');
+themeInclude('forumDivisions');
 defaultsInclude('forumComposeDivisions');
 global $siteSettings, $pageID;
 

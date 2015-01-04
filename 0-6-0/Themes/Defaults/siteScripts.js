@@ -27,6 +27,7 @@ $(document).ready(function(){
   	setInterval(loadSiteChat, 5000);
 });
 
+/*
 // Chat System
 $(function() {
 	$('#chatWindowTextarea').keyup(function(e) {
@@ -52,6 +53,7 @@ function loadSiteChat(){
         },
     });
 }
+*/
 
 // SCEditor
 $(function() {

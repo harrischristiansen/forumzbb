@@ -37,6 +37,9 @@ defaultsInclude('navBar');
 	
 		<!--- ForumzBB Items --->
 		
+		<!-- Jquery imports -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<!-- Site Scripts -->
 		<script>var phpSessionName="<? echo session_name(); ?>";</script>
 		<script src="/<? echo $siteSettings['siteVersionAddress'];?>Themes/Defaults/siteScripts.js"></script>

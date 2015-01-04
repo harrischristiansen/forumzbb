@@ -14,13 +14,10 @@ addBreadcrumb("New Thread","newForumThread/".$pageID);
 display('viewHeader');
 ?>
 
-<div id="composeForumThreadDiv">
-<div class="FullWidthPostHead">
-	<div class="floatLeft">Compose New Forum Thread:</div>
-</div>
-<div class="FullWidthPostRow" style="text-align: center;">
-<? displayThreadComposeField(); ?>
-</div>
+<header class="major"><h2>Compose New Forum Thread:</h2></header>
+
+<div class="container">
+	<? displayThreadComposeField(); ?>
 </div>
 
 <?php
